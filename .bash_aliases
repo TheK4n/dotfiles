@@ -18,7 +18,6 @@ alias path='echo -e ${PATH//:/\\n}'
 
 
 
-
 # shorts
 alias c='clear'
 alias q='exit'
