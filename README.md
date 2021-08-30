@@ -3,14 +3,14 @@
 ## SSH:
 
 Create ssh key on local device
-```bash
-ssh-keygen
-```
-1. Save to ~/.ssh
-2. Copy local "~/.ssh/id_rsa.pub" key to remote "~/.ssh/authorized_keys"
+
+`ssh-keygen`
+
+1. Save to `~/.ssh`
+2. Copy content of `~/.ssh/id_rsa.pub` key to remote `~/.ssh/authorized_keys`
 
 
-### ~/.ssh/config:
+**~/.ssh/config:**
 ```
 Host host_name
    HostName ip
@@ -19,6 +19,7 @@ Host host_name
    IdentityFile ~/.ssh/id_rsa
  ```
 
+*Examples:*
 ```bash
 ssh host_name
 sftp host_name
