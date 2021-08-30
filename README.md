@@ -21,4 +21,5 @@ Host host_name
 
 ```bash
 ssh host_name
+sftp host_name
 ```

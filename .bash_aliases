@@ -45,7 +45,6 @@ alias vis='vim "+set si"'
 # net
 alias ports='netstat -tulanp'
 
-alias sftp_hosting='sftp pendos@5.187.5.178'
 
 
 
