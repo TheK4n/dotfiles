@@ -1,7 +1,13 @@
 
 
 parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    branch="$(git branch --show-current 2> /dev/null)"
+
+    if [[ -n "$branch" ]]; then
+        echo "($branch)"
+    else
+        echo ''
+    fi
 }
 
 
@@ -39,5 +45,7 @@ fi
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 VENV="\$(virtualenv_info)";
 
+BRANCH="\$(parse_git_branch)";
+
 # last
-PS1="\n$prompt_color┌─${VENV}─($close_color$info_color\u$prompt_symbol\H$close_color$prompt_color)-[$close_color\w$prompt_color]$close_color $red_color\$(parse_git_branch)$close_color\n$prompt_color└─$close_color$info_color$end_symbol$close_color "
+PS1="\n$prompt_color┌─${VENV}─($close_color$info_color\u$prompt_symbol\H$close_color$prompt_color)-[$close_color\w$prompt_color]$close_color $red_color${BRANCH}$close_color\n$prompt_color└─$close_color$info_color$end_symbol$close_color "
