@@ -18,7 +18,7 @@ virtualenv_info() {
         echo "($(basename $VIRTUAL_ENV))"
     else
         # In case you don't have one activated
-        venv=''
+        echo ''
     fi
 }
 
