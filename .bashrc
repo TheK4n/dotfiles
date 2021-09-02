@@ -23,11 +23,13 @@ virtualenv_info() {
 }
 
 close_color='\[\e[m\]'
+red_color='\[\033[1;31m\]'
+
 prompt_color='\[\033[;32m\]'
 info_color='\[\033[1;34m\]'
 prompt_symbol='㉿'
 end_symbol='$'
-red_color='\[\033[1;31m\]'
+
 
 if [ "$EUID" -eq 0 ]; then  # Change prompt colors and symbols for root user
     prompt_color='\[\033[;94m\]'
