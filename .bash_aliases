@@ -5,6 +5,7 @@ alias fgrep='fgrep --color=auto'
 
 
 # navigate
+alias ls='ls --color=auto'
 alias l.='ls -dh .* --color=auto'
 alias ll='ls -lh --color=auto'
 alias la='ls -a --color=auto'
