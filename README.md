@@ -56,7 +56,7 @@ sftp host_name
 ```esc + .``` - last object\
 ```ctrl + r``` - bash_history search\
 ```history -d 130``` - delete 130 line\
-```history -c``` - delete all history\
+```history -c``` - delete all history
 
 ### Vim
-```d -> ctrl + end``` - delete from cursor to end of file\
+```d -> ctrl + end``` - delete from cursor to end of file
