@@ -11,9 +11,9 @@ if [ -x /usr/bin/dircolors ]; then
 
         # navigate
         alias ls='ls --color=auto'
-        alias l.='ls -dh .* --color=auto'
-        alias ll='ls -lh --color=auto'
-        alias la='ls -a --color=auto'
+        alias l.='ls -dhF .* --color=auto'
+        alias ll='ls -lhF --color=auto'
+        alias la='ls -aF --color=auto'
 else
     alias l.='ls -dh .*'
     alias ll='ls -lh'
