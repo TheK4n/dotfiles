@@ -57,8 +57,6 @@ sftp host_name
 |:------------------:  | :------------------ |
 |```Esc + .```         | Last object         |
 |```Ctrl + R```        | bash_history search |
-|```history -d 130```  | Delete 130 line     |
-|```history -c```      | Delete all history  |
 
 
 ### Vim
