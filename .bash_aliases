@@ -10,14 +10,15 @@ if [ -x /usr/bin/dircolors ]; then
         alias fgrep='fgrep --color=auto'
 
         # navigate
-        alias ls='ls --color=auto'
+        alias ls='ls -F --color=auto'
         alias l.='ls -dhF .* --color=auto'
         alias ll='ls -lhF --color=auto'
         alias la='ls -aF --color=auto'
 else
-    alias l.='ls -dh .*'
-    alias ll='ls -lh'
-    alias la='ls -a'
+    alias ls='ls -F'
+    alias l.='ls -dhF .*'
+    alias ll='ls -lhF'
+    alias la='ls -aF'
 fi
 
 
