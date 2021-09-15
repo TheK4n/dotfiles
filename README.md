@@ -53,10 +53,10 @@ sftp host_name
 ## Tips
 
 ### Bash
-|       Command        |   Description       |
-|:------------------:  | :------------------ |
-|```Esc + .```         | Last object         |
-|```Ctrl + R```        | bash_history search |
+|       Command        |   Description          |
+|:------------------:  | :------------------    |
+|```Esc + .```         | Last object            |
+|```Ctrl + R```        | Search by bash_history |
 
 
 ### Vim
@@ -64,9 +64,9 @@ sftp host_name
 |       Command        |   Description                           |
 |:------------------:  | :------------------------------------   |
 |```Ctrl + [```        |  Analog Esc                             |
-|```d -> ctrl + end``` |  Delete from cursor to end of file      |
+|```d -> Ctrl + End``` |  Delete from cursor to end of file      |
 | ```u```              |  Cancel last command                    |
-|   ```ctrl+r```       |  Cancel cancel                          |
+|   ```Ctrl + r```     |  Cancel cancel                          |
 |    ```22G```         |  Go to line 22                          |
 
 <h1 align="center"><a href="#top">▲</a></h1>
