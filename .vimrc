@@ -55,7 +55,3 @@ nnoremap <C-k> :tabnext<CR>
 
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
-
-
-
-
