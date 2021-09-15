@@ -53,10 +53,22 @@ sftp host_name
 ## Tips
 
 ### Bash
-```esc + .``` - last object\
-```ctrl + r``` - bash_history search\
-```history -d 130``` - delete 130 line\
-```history -c``` - delete all history
+|       Command        |   Description       |
+|:------------------:  | :------------------ |
+|```Esc + .```         | Last object         |
+|```Ctrl + R```        | bash_history search |
+|```history -d 130```  | Delete 130 line     |
+|```history -c```      | Delete all history  |
+
 
 ### Vim
-```d -> ctrl + end``` - delete from cursor to end of file
+
+|       Command        |   Description                           |
+|:------------------:  | :------------------------------------   |
+|```Ctrl + [```        |  Analog Esc                             |
+|```d -> ctrl + end``` |  Delete from cursor to end of file      |
+| ```u```              |  Cancel last command                    |
+|   ```ctrl+r```       |  Cancel cancel                          |
+|    ```22G```         |  Go to line 22                          |
+
+<h1 align="center"><a href="#top">▲</a></h1>
