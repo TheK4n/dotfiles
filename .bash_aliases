@@ -45,10 +45,3 @@ alias vis='vim "+set si"'
 
 # net
 alias ports='netstat -tulanp'
-
-
-
-
-
-
-

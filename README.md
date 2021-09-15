@@ -13,6 +13,7 @@
 ## Content
 * [Project description](#chapter-0)
 * [SSH](#chapter-1)
+* [Tips](#chapter-2)
 
 
 <a id="chapter-0"></a>
@@ -22,7 +23,7 @@ Bash config files
 
 
 <a id="chapter-1"></a>
-## SSH:
+## SSH
 
 Create ssh key on local device
 
@@ -47,3 +48,15 @@ Using aliases:
 ssh host_name
 sftp host_name
 ```
+
+<a id="chapter-2"></a>
+## Tips
+
+### Bash
+```esc + .``` - last object\
+```ctrl + r``` - bash_history search\
+```history -d 130``` - delete 130 line\
+```history -c``` - delete all history\
+
+### Vim
+```d -> ctrl + end``` - delete from cursor to end of file\
