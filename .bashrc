@@ -1,4 +1,17 @@
 
+if type shopt 2>/dev/null 1>&2; then
+
+    # corrections
+    shopt -s cdspell
+    shopt -s dirspell
+
+    shopt -s histappend
+    PROMPT_COMMAND='history -a'
+fi
+
+export HISTSIZE=10000
+export HISTIGNORE="&:l[lsa]:[bf]g:exit:q:clear:c:history:h"
+
 
 parse_git_branch() {
     branch="$(git branch --show-current 2> /dev/null)"

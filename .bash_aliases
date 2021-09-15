@@ -1,13 +1,27 @@
 
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+# colors
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
+        alias grep='grep --color=auto'
+        alias egrep='egrep --color=auto'
+        alias fgrep='fgrep --color=auto'
+
+        # navigate
+        alias ls='ls -F --color=auto'
+        alias l.='ls -dhF .* --color=auto'
+        alias ll='ls -lhF --color=auto'
+        alias la='ls -aF --color=auto'
+else
+    alias ls='ls -F'
+    alias l.='ls -dhF .*'
+    alias ll='ls -lhF'
+    alias la='ls -aF'
+fi
 
 
-# navigate
-alias l.='ls -dh .* --color=auto'
-alias ll='ls -lh --color=auto'
-alias la='ls -a --color=auto'
 alias mkdir='mkdir -pv'
 
 alias cd..='cd ..'
@@ -15,7 +29,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 alias path='echo -e ${PATH//:/\\n}'
-
 
 
 # shorts
@@ -44,10 +57,3 @@ alias vis='vim "+set si"'
 
 # net
 alias ports='netstat -tulanp'
-
-
-
-
-
-
-

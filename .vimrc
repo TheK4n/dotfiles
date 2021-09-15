@@ -28,7 +28,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
-
+set smartindent
 
 set noerrorbells
 set novisualbell
@@ -55,7 +55,3 @@ nnoremap <C-k> :tabnext<CR>
 
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
-
-
-
-
