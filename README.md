@@ -53,11 +53,11 @@ sftp host_name
 ## Tips
 
 ### Bash
-|       Command        |   Description            |
-|:------------------:  | :------------------      |
-|```Esc + .```         | Last object              |
-|```Ctrl + r```        | Search by bash_history   |
-|```Ctrl + l```        | Clear, like command clear |
+|       Command                       |   Description            |
+|:------------------:                 | :------------------      |
+|```Alt + . ``` ```Esc + .```         | Last object              |
+|```Ctrl + r```                       | Search by bash_history   |
+|```Ctrl + l```                       | Clear, like command clear |
 
 
 ### Vim
