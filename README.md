@@ -66,8 +66,42 @@ sftp host_name
 |:------------------:  | :------------------------------------   |
 |```Ctrl + [```        |  Analog Esc                             |
 |```d -> Ctrl + End``` |  Delete from cursor to end of file      |
-| ```u```              |  Cancel last command                    |
-|   ```Ctrl + r```     |  Cancel cancel                          |
-|    ```22G```         |  Go to line 22                          |
+| ```u```              |  Undo                                   |
+|   ```Ctrl + r```     |  Redo                                   |
+|    ```22G```         |  Go to line 22
+|
+
+
+### Autostart
+
+```bash
+sudo vim /etc/systemd/system/<your_bot_name>.service
+sudo systemctl daemon-reload
+sudo systemctl start <your_bot_name>.service
+sudo systemctl status <your_bot_name>.service
+sudo systemctl enable <your_bot_name>.service
+```
+
+**"/etc/systemd/system/<your_bot_name>.service"**
+```text
+[Unit]
+Description=<DESCRIPTION>
+After=network.target
+
+[Service]
+Type=simple
+User=<username>
+
+ExecStart=<full_path_to_executor> <full_path_to_script>
+ExecReload=<full_path_to_executor> <full_path_to_script>
+WorkingDirectory=<full_path_to_bot>
+KillMode=process
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+```
 
 <h1 align="center"><a href="#top">▲</a></h1>
