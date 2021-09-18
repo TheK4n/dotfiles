@@ -101,7 +101,6 @@ RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 <h1 align="center"><a href="#top">▲</a></h1>
