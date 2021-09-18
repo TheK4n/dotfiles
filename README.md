@@ -91,6 +91,7 @@ After=network.target
 [Service]
 Type=simple
 User=<username>
+Group=<user_group>
 
 ExecStart=<full_path_to_executor> <full_path_to_script>
 ExecReload=<full_path_to_executor> <full_path_to_script>
