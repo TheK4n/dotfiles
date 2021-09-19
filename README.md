@@ -1,11 +1,11 @@
 <h1 align="center">BashConfig</h1>
 
 <p align="center">
-  <a href="https://github.com/Pendosv">
-    <img src="https://img.shields.io/github/followers/Pendosv?label=Follow&style=social">
+  <a href="https://github.com/TheK4n">
+    <img src="https://img.shields.io/github/followers/TheK4n?label=Follow&style=social">
   </a>
-  <a href="https://github.com/Pendosv/BashConfig">
-    <img src="https://img.shields.io/github/stars/Pendosv/BashConfig?style=social">
+  <a href="https://github.com/TheK4n/BashConfig">
+    <img src="https://img.shields.io/github/stars/TheK4n/BashConfig?style=social">
   </a>
 </p>
 
