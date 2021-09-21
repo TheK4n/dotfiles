@@ -69,7 +69,7 @@ sftp host_name
 | ```u```              |  Undo                                   |
 |   ```Ctrl + r```     |  Redo                                   |
 |    ```22G```         |  Go to line 22
-|
+
 
 
 ### Autostart
