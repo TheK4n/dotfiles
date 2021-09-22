@@ -67,8 +67,7 @@ untar() {
         return 1  # exit code
     fi
 
-    mkdir $dir_name 1>/dev/null
-    tar -C $dir_name -xf $1 && return 0
+    mkdir $dir_name 1>/dev/null && tar -C $dir_name -xf $1 && return 0
 }
 
 
