@@ -27,6 +27,7 @@ alias mkdir='mkdir -pv'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias .3='cd ../../..'
 
 alias path='echo -e ${PATH//:/\\n}'
 
@@ -46,6 +47,7 @@ alias mount='mount | column -t'
 alias start_bt='sudo systemctl start bluetooth'
 alias upgrade_all='sudo apt update && sudo apt upgrade'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
+
 
 # extract tar archive in ./archive_name directory
 untar() {
@@ -80,13 +82,25 @@ alias nowdate='date +"%d-%m-%Y"'
 alias vi=vim
 alias svim='sudo vim'
 alias vis='vim "+set si"'
+alias edit=vim
 
 # net
 alias ports='netstat -tulanp'
 alias wget='wget -c'
 alias ping='ping -c 5'
+alias myip='curl ipinfo.io/ip'
 
 # starts web server
 alias www='python3 -m http.server 8000'
 
-alias myip='curl ipinfo.io/ip'
+# hard
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown'
+
+alias meminfo='free -mlth'
+alias psmem='ps auxf | sort -nr -k 4 | less -R'
+
+
+alias music='mplayer -shuffle ~/Music/*'
