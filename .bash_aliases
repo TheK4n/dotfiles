@@ -3,17 +3,17 @@
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias fgrep='fgrep --color=auto'
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
+        alias grep='grep --color=auto'
+        alias egrep='egrep --color=auto'
+        alias fgrep='fgrep --color=auto'
 
-    # navigate
-    alias ls='ls -F --color=auto'
-    alias l.='ls -dhF .* --color=auto'
-    alias ll='ls -lhF --color=auto'
-    alias la='ls -aF --color=auto'
+        # navigate
+        alias ls='ls -F --color=auto'
+        alias l.='ls -dhF .* --color=auto'
+        alias ll='ls -lhF --color=auto'
+        alias la='ls -aF --color=auto'
 else
     alias ls='ls -F'
     alias l.='ls -dhF .*'
