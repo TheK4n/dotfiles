@@ -1,6 +1,6 @@
 
 # colors
-if [ -x /usr/bin/dircolors ]; then
+if [ -x "$(which dircolors)" ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
     alias dir='dir --color=auto'
