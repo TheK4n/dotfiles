@@ -10,7 +10,7 @@ if type shopt 2>/dev/null 1>&2; then
 fi
 
 export HISTSIZE=10000
-export HISTIGNORE="&:l[lsa]:[bf]g:exit:q:clear:c:history:h"
+export HISTIGNORE="&:l[lsa\.]:[bf]g:exit:q:clear:c:history:h"
 
 
 parse_git_branch() {
