@@ -1,4 +1,5 @@
 
+
 # colors
 if [ -x "$(which dircolors)" ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -46,31 +47,6 @@ alias upgrade_all='sudo apt update && sudo apt upgrade'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
 
 
-# extract tar archive in ./archive_name directory
-untar() {
-
-    if ! [ -f $1 ]; then
-        echo "error: file '$1' not found" >&2
-        return 1  # exit code
-    fi
-    local dir_name
-    dir_name="$(basename $1 | cut -d. -f1)"
-
-    if [ -d $dir_name ]; then
-        echo "error: directory '$dir_name' exists" >&2
-        return 1  # exit code
-    fi
-
-    if [ -f $dir_name ]; then
-        echo "error: file '$dir_name' exists" >&2
-        return 1  # exit code
-    fi
-
-    mkdir $dir_name 1>/dev/null && tar -C $dir_name -xf $1 && return 0
-}
-
-
-
 # time
 alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
@@ -101,3 +77,32 @@ alias psmem='ps auxf | sort -nr -k 4 | less -R'
 
 
 alias music='mplayer -shuffle ~/Music/*'
+
+
+# extract tar archive in ./archive_name directory
+untar() {
+
+    if ! [ -f $1 ]; then
+        echo "error: file '$1' not found" >&2
+        return 1  # exit code
+    fi
+    local dir_name
+    dir_name="$(basename $1 | cut -d. -f1)"
+
+    if [ -d $dir_name ]; then
+        echo "error: directory '$dir_name' exists" >&2
+        return 1  # exit code
+    fi
+
+    if [ -f $dir_name ]; then
+        echo "error: file '$dir_name' exists" >&2
+        return 1  # exit code
+    fi
+
+    mkdir $dir_name 1>/dev/null && tar -C $dir_name -xf $1 && return 0
+}
+
+
+workon() {
+    . /opt/pythonenv/${1}/bin/activate
+}
