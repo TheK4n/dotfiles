@@ -9,15 +9,15 @@ if [ -x "$(which dircolors)" ]; then
     alias egrep='egrep --color=auto'
     alias fgrep='fgrep --color=auto'
 
-    alias ls='ls -Fh --color=auto'
+    alias ls='ls -Fh --color=auto '
 else
-    alias ls='ls -Fh'
+    alias ls='ls -Fh '
 fi
 
 # these aliases use the "ls" alias, which was defined earlier
 alias l.='ls -a --ignore="*" --ignore="\.\." --ignore="\."'
 alias ll='ls -l'
-alias la='ls -a'
+alias la='ls -a --ignore="\.\." --ignore="\."'
 
 alias mkdir='mkdir -pv'
 
