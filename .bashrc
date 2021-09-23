@@ -1,4 +1,3 @@
-. /etc/bash_completion.d/ssh
 
 if type shopt 2>/dev/null 1>&2; then
 
