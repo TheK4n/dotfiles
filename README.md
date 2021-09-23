@@ -79,7 +79,7 @@ ssh hosting 'rm -rf ~/BashConfig; git clone https://github.com/TheK4n/BashConfig
 
 
 ### Autostart
-* create /etc/systemd/system/<service>.service
+* ```create /etc/systemd/system/<service>.service```
 ```bash
 sudo vim /etc/systemd/system/<service>.service
 sudo systemctl daemon-reload
