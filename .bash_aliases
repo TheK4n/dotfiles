@@ -15,7 +15,7 @@ else
 fi
 
 # these aliases use the "ls" alias, which was defined earlier
-alias l.='ls -a --ignore="*"'
+alias l.='ls -a --ignore="*" --ignore="\.\." --ignore="\."'
 alias ll='ls -l'
 alias la='ls -a'
 
