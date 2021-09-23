@@ -70,6 +70,12 @@ sftp host_name
 |   ```Ctrl + r```     |  Redo                                   |
 |    ```22G```         |  Go to line 22
 
+<p></p>
+
+#### Update .bashrc .bash_aliases by ssh
+```bash
+ssh hosting 'rm -rf ~/BashConfig; git clone https://github.com/TheK4n/BashConfig && cp BashConfig/.bash* ~/BashConfig; rm -rf ~/BashConfig'
+```
 
 
 ### Autostart
@@ -105,3 +111,6 @@ WantedBy=multi-user.target
 ```
 
 <h1 align="center"><a href="#top">▲</a></h1>
+
+
+
