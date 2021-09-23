@@ -50,19 +50,19 @@ alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
 untar() {
 
     if ! [ -f $1 ]; then
-        echo "\033[0;31merror: file '$1' not found\e[m" >&2
+        echo "error: file '$1' not found" >&2
         return 1  # exit code
     fi
-
+    local dir_name
     dir_name="$(basename $1 | cut -d. -f1)"
 
     if [ -d $dir_name ]; then
-        echo "\033[0;31merror: directory '$dir_name' exists\e[m" >&2
+        echo "error: directory '$dir_name' exists" >&2
         return 1  # exit code
     fi
 
     if [ -f $dir_name ]; then
-        echo "\033[0;31merror: file '$dir_name' exists\e[m" >&2
+        echo "error: file '$dir_name' exists" >&2
         return 1  # exit code
     fi
 

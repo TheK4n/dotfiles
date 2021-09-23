@@ -19,7 +19,7 @@ parse_git_branch() {
         echo ''
         return
     fi
-
+    local branch
     branch="$(git branch --show-current 2> /dev/null)"
 
     if [[ -n "$branch" ]]; then
