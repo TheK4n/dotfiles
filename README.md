@@ -79,60 +79,13 @@ ssh hosting 'rm -rf ~/BashConfig; git clone https://github.com/TheK4n/BashConfig
 
 
 ### Autostart
-
+* create /etc/systemd/system/<service>.service
 ```bash
-sudo vim /etc/systemd/system/<your_bot_name>.service
+sudo vim /etc/systemd/system/<service>.service
 sudo systemctl daemon-reload
-sudo systemctl start <your_bot_name>.service
-sudo systemctl status <your_bot_name>.service
-sudo systemctl enable <your_bot_name>.service
+sudo systemctl start <service>.service
+sudo systemctl status <service>.service
+sudo systemctl enable <service>.service
 ```
-
-
-#### file "/etc/systemd/system/<your_bot_name>.service"
-```text
-[Unit]
-Description=<DESCRIPTION>
-After=network.target
-
-[Service]
-Type=simple
-User=<username>
-Group=<user_group>
-
-ExecStart=<full_path_to_executor> <full_path_to_script>
-ExecReload=<full_path_to_executor> <full_path_to_script>
-WorkingDirectory=<full_path_to_bot>
-KillMode=process
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-```
-
-
-
-### Autocomplete
-
-#### file "/etc/bash_completion.d/ssh"
-```bash
-_ssh() {
-    local cur prev opts
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts=$(grep '^Host' ~/.ssh/config ~/.ssh/config.d/* 2>/dev/null | grep -v '[?*]' | cut -d ' ' -f 2-)
-    COMPREPLY=( $(compgen -W "$opts" -- ${cur}) )
-    return 0
-}
-
-complete -F _ssh ssh
-
-```
-
 
 <h1 align="center"><a href="#top">▲</a></h1>
-
-
-
