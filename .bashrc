@@ -46,7 +46,7 @@ parse_git_branch() {
     # C = copied
     # U = updated but unmerged
 
-    status="$(git status -s 2>/dev/null | cut -c 1,2,3 | sort -u | tr -d " \n")"
+    status="$(git status -s 2>/dev/null | cut -c 1 | sort -u | tr -d " \n?")"
 
     if [ -n "$status" ]; then
         status="-[$status]"
