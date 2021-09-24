@@ -22,6 +22,8 @@
 Bash config files
 
 
+[![Prompt](prompt.jpg)]()
+
 <a id="chapter-1"></a>
 ## SSH
 
