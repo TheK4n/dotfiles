@@ -18,16 +18,14 @@ export HISTIGNORE="&:l[lsa\.]:[bf]g:exit:q:clear:c:history:h"
 parse_git_branch() {
 
     if ! [ -x "$(which git)" ]; then
-        echo ''
         return
     fi
+
     local branch
     branch="$(git branch --show-current 2> /dev/null)"
 
     if [[ -n "$branch" ]]; then
         echo "($branch)"
-    else
-        echo ''
     fi
 }
 
@@ -38,9 +36,6 @@ virtualenv_info() {
     if [[ -n "$VIRTUAL_ENV" ]]; then
         # Strip out the path and just leave the env name
         echo "($(basename $VIRTUAL_ENV))"
-    else
-        # In case you don't have one activated
-        echo ''
     fi
 }
 
