@@ -42,6 +42,12 @@ workon() {
 
 
 cl() {
+    local DIR
     DIR="$*"
+
+    if [ $# -lt 1 ]; then
+        DIR=$HOME
+    fi
+
     cd "${DIR}" && ls -F --color=auto
 }
