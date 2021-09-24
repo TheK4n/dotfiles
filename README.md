@@ -22,7 +22,7 @@
 Bash config files
 
 
-[![Prompt](prompt.jpg)]()
+[![Prompt](img/prompt.jpg)]()
 
 <a id="chapter-1"></a>
 ## SSH
