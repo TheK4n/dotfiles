@@ -14,9 +14,9 @@ if [ -x "$(which dircolors)" ]; then
 fi
 
 # these aliases use the "ls" alias, which was defined earlier
-alias l.='ls -aF --ignore="*" --ignore="\.\." --ignore="\."'
+alias l.='ls -AF --ignore="*"'
 alias ll='ls -lhF'
-alias la='ls -aF --ignore="\.\." --ignore="\."'
+alias la='ls -AF'
 
 alias mkdir='mkdir -pv'
 
