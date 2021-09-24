@@ -33,11 +33,27 @@ parse_git_branch() {
         return
     fi
 
-    local branch
+    local branch status
+
+    # current branch
     branch="$(git branch --show-current 2> /dev/null)"
 
+    # current status
+    # M = modified
+    # A = added
+    # D = deleted
+    # R = renamed
+    # C = copied
+    # U = updated but unmerged
+
+    status="$(git status -s 2>/dev/null | cut -c 1,2,3 | sort -u | tr -d " \n")"
+
+    if [ -n "$status" ]; then
+        status="-[$status]"
+    fi
+
     if [[ -n "$branch" ]]; then
-        echo "($branch)"
+        echo "($branch)$status"
     fi
 }
 
@@ -63,15 +79,20 @@ end_symbol='$'
 if [ "$EUID" -eq 0 ]; then  # Change prompt colors and symbols for root user
     prompt_color='\[\033[;94m\]'
     info_color='\[\033[1;31m\]'
-    prompt_symbol='💀'
     end_symbol='#'
 fi
 
 
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-VENV="\$(virtualenv_info)";
 
-BRANCH="\$(parse_git_branch)";
+if [[ -n "$SSH_CLIENT" || -n "$SSH2_CLIENT" ]]; then
+    prompt_symbol='📡'
+fi
+
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+VENV_="\$(virtualenv_info)";
+
+BRANCH_="\$(parse_git_branch)";
 
 # last
-PS1="\n$prompt_color┌─${VENV}─($close_color$info_color\u$prompt_symbol\H$close_color$prompt_color)-[$close_color\w$prompt_color]$close_color $red_color${BRANCH}$close_color\n$prompt_color└─$close_color$info_color$end_symbol$close_color "
+PS1="\n$prompt_color┌─${VENV_}─($close_color$info_color\u$prompt_symbol\H$close_color$prompt_color)-[$close_color\w$prompt_color]$close_color $red_color${BRANCH_}$close_color\n$prompt_color└─$close_color$info_color$end_symbol$close_color "
