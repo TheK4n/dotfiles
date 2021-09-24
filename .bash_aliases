@@ -82,12 +82,18 @@ alias music='mplayer -shuffle ~/Music/*'
 # extract tar archive in ./archive_name directory
 untar() {
 
+    if [ -z $1 ]; then
+        echo "error: enter filename" >&2
+        return 1  # exit code
+    fi
+
     if ! [ -f $1 ]; then
         echo "error: file '$1' not found" >&2
         return 1  # exit code
     fi
+
     local dir_name
-    dir_name="$(basename $1 | cut -d. -f1)"
+    dir_name="$(basename "${1%.*}")_untarred"
 
     if [ -d $dir_name ]; then
         echo "error: directory '$dir_name' exists" >&2
@@ -104,5 +110,11 @@ untar() {
 
 
 workon() {
+
+    if [ -z $1 ]; then
+        echo "error: enter filename" >&2
+        return 1  # exit code
+    fi
+
     . /opt/pythonenv/${1}/bin/activate
 }
