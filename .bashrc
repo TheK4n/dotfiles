@@ -1,4 +1,16 @@
-. /etc/bash_completion.d/all
+
+if [ -f $HOME/.bash_aliases ]; then
+    source $HOME/.bash_aliases
+fi
+
+if [ -f /etc/bash_completion.d/all ]; then
+    source /etc/bash_completion.d/all
+fi
+
+if [ -f $HOME/.bash_functions ]; then
+    source $HOME/.bash_functions
+fi
+
 
 
 if type shopt 2>/dev/null 1>&2; then
@@ -55,10 +67,6 @@ if [ "$EUID" -eq 0 ]; then  # Change prompt colors and symbols for root user
     end_symbol='#'
 fi
 
-
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases
-fi
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 VENV="\$(virtualenv_info)";
