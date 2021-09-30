@@ -37,7 +37,7 @@ workon() {
         return 1  # exit code
     fi
 
-    . /opt/pythonenv/"${1}"/bin/activate
+    source /opt/pythonenv/"${1}"/bin/activate
 }
 
 
@@ -46,8 +46,29 @@ cl() {
     DIR="$*"
 
     if [ $# -lt 1 ]; then
-        DIR=$HOME
+        DIR="$HOME"
     fi
 
     cd "${DIR}" && ls -F --color=auto
 }
+
+
+va() {
+    local activate_venv
+
+    if [ -f "./venv/bin/activate" ]; then
+        source "./venv/bin/activate"
+        return 0
+    fi
+
+    activate_venv="$(find -P . -maxdepth 3 -mindepth 3 -type f -name activate | sort | head -n 1)"
+
+    if [ -n "$activate_venv" ]; then
+        source "$activate_venv"
+        return 0
+    else
+        echo "error: virtual environment not found, use python3 -m virtualenv venv" >&2
+        return 1
+    fi
+}
+
