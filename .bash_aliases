@@ -18,6 +18,9 @@ alias l.='ls -AF --ignore="*"'
 alias ll='ls -lhF'
 alias la='ls -AF'
 
+alias lsl="ls -lhFA | less"
+alias lt='du -sh * | sort -h'
+
 alias mkdir='mkdir -pv'
 
 alias cd..='cd ..'
