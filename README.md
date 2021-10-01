@@ -68,6 +68,8 @@ sshd: ALL
 <a id="chapter-2"></a>
 ## Tips
 
+```/command``` - without using alias
+
 ### Bash
 |       Command                       |   Description            |
 |:------------------:                 | :------------------      |

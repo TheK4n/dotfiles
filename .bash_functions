@@ -61,7 +61,7 @@ va() {
         return 0
     fi
 
-    activate_venv="$(find -P . -maxdepth 3 -mindepth 3 -type f -name activate | sort | head -n 1)"
+    activate_venv="$(find -P . -maxdepth 3 -type f -name activate | sort | head -n 1)"
 
     if [ -n "$activate_venv" ]; then
         source "$activate_venv"
