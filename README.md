@@ -51,6 +51,20 @@ ssh host_name
 sftp host_name
 ```
 
+
+
+### White and black lists
+
+add white list to ```/etc/hosts.allow```:
+```text
+sshd: 10.83.33.77/32, 10.63.152.9/32, 10.12.100.11/28, 10.82.192.0/28
+```
+
+add black list to ```/etc/hosts.deny```:
+```text
+sshd: ALL
+```
+
 <a id="chapter-2"></a>
 ## Tips
 
