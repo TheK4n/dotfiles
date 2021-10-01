@@ -52,7 +52,6 @@ sftp host_name
 ```
 
 
-
 ### White and black lists
 
 add white list to ```/etc/hosts.allow```:
@@ -68,8 +67,6 @@ sshd: ALL
 <a id="chapter-2"></a>
 ## Tips
 
-```/command``` - without using alias
-
 ### Bash
 |       Command                       |   Description            |
 |:------------------:                 | :------------------      |
@@ -77,6 +74,13 @@ sshd: ALL
 |```Ctrl + r```                       | Search by bash_history   |
 |```Ctrl + l```                       | Clear, like command clear |
 
+```bash
+ssh hosting 'rm -rf ~/BashConfig; git clone https://github.com/TheK4n/BashConfig && cp BashConfig/.bash* ~; rm -rf ~/BashConfig'
+```
+
+```$RANDOM``` - Return random 0-32767\
+```/command``` - Without using alias\
+```df -h /``` - Size 
 
 ### Vim
 
@@ -86,14 +90,9 @@ sshd: ALL
 |```d -> Ctrl + End``` |  Delete from cursor to end of file      |
 | ```u```              |  Undo                                   |
 |   ```Ctrl + r```     |  Redo                                   |
-|    ```22G```         |  Go to line 22
+|    ```22G```         |  Go to line 22                          |
 
 <p></p>
-
-#### Update .bashrc .bash_aliases by ssh
-```bash
-ssh hosting 'rm -rf ~/BashConfig; git clone https://github.com/TheK4n/BashConfig && cp BashConfig/.bash* ~; rm -rf ~/BashConfig'
-```
 
 
 ### Autostart
