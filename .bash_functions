@@ -87,9 +87,10 @@ extract () {
             *.zip)     unzip "$1"      ;;
             *.Z)       uncompress "$1" ;;
             *.7z)      7z x "$1"       ;;
-            *)         echo "'$1' cannot be extracted via $0" ;;
+            *)         echo "'$1' cannot be extracted via $0" >&2; return 1;;
         esac
     else
-        echo "'$1' is not a valid file"
+        echo "'$1' is not a valid file" >&2
+        return 1
     fi
 }

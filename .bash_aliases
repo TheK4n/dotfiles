@@ -88,5 +88,4 @@ alias music='mplayer -shuffle ~/Music/*'
 alias ve='python3 -m virtualenv venv'
 alias vd='deactivate'
 
-
-alias myshs='ps aux | grep -E "$(basename $SHELL)$" | grep -E "$USER"'
+alias mysh='ps aux | grep "$(basename "$SHELL")$" | grep "pendos" | grep -o -E "pts/[0-9]+"'
