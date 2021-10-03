@@ -21,6 +21,7 @@ alias la='ls -AF'
 alias lsl="ls -lhFA | less"
 alias lt='du -sh * | sort -h'
 
+alias rm='rm -r'
 alias mkdir='mkdir -pv'
 
 alias cd..='cd ..'
@@ -75,7 +76,7 @@ alias shutdown='sudo /sbin/shutdown'
 
 alias meminfo='free -mlth'
 alias psmem='ps auxf | sort -nr -k 4 | less -R'
-
+alias wake="echo $'\a'"  # command; wake &
 
 alias music='mplayer -shuffle ~/Music/*'
 
@@ -88,4 +89,4 @@ alias ve='python3 -m virtualenv venv'
 alias vd='deactivate'
 
 
-
+alias myshs='ps aux | grep -E "$(basename $SHELL)$" | grep -E "$USER"'
