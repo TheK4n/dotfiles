@@ -30,7 +30,6 @@ alias ...='cd ../..'
 alias .3='cd ../../..'
 
 alias path='echo -e ${PATH//:/\\n}'
-alias aliases='alias | cut -d " " -f 1-'
 
 # shorts
 alias c='clear'
