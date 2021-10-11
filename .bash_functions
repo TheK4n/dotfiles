@@ -94,3 +94,10 @@ extract () {
         return 1
     fi
 }
+
+mcd () {
+
+  mkdir -p $1
+  cd $1
+
+}
