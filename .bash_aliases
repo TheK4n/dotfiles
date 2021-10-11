@@ -86,5 +86,3 @@ alias music='mplayer -shuffle ~/Music/*'
 # alias va='source "$(find -P . -maxdepth 3 -mindepth 3 -type f -name activate | sort | head -n 1)" &>/dev/null || echo "error: virtual env not found, use python3 -m virtualenv venv" >&2'
 alias ve='python3 -m virtualenv venv'
 alias vd='deactivate'
-
-alias mysh='ps aux | grep "$(basename "$SHELL")$" | grep "pendos" | grep -o -E "pts/[0-9]+"'
