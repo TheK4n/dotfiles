@@ -3,8 +3,8 @@
 workon() {
 
     if [ -z "$1" ]; then
-        echo "error: enter filename" >&2
-        return 1  # exit code
+        echo "workon: error: enter filename" >&2
+        return 2  # exit code
     fi
 
     source /opt/pythonenv/"${1}"/bin/activate
@@ -37,7 +37,7 @@ va() {
         source "$activate_venv"
         return 0
     else
-        echo "error: virtual environment not found, use python3 -m virtualenv venv" >&2
+        echo "va: error: virtual environment not found, use python3 -m virtualenv venv" >&2
         return 1
     fi
 }
@@ -46,12 +46,12 @@ va() {
 extract () {
     if [ -z "$1" ]; then  # if string non-zero
         # display usage if no parameters given
-        echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+        echo "extract: error: usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
         return 2
     fi
 
     if ! [ -f "$1" ]; then   # if file not exist
-        echo "error: extract: '$1' file does not exist" >&2
+        echo "extract: error: '$1' file does not exist" >&2
         return 1
     fi
 
@@ -60,7 +60,7 @@ extract () {
     NAME=${NAME%.*}
 
     if [ -e "$NAME" ]; then
-        echo "error: extract: '$NAME' exists" >&2
+        echo "extract: error: '$NAME' exists" >&2
         return 1
     fi
 
@@ -82,7 +82,7 @@ extract () {
         *.7z)       7z x         ../"$1" ;;
         *.xz)       unxz         ../"$1" ;;
         *.exe)      cabextract   ../"$1" ;;
-        *)          echo "error: extract: '$1' - unknown archive method" >&2 ;;
+        *)          echo "extract: error: '$1' - unknown archive method" >&2 ;;
     esac
     cd ..
 }
