@@ -51,7 +51,8 @@ extract () {
     else
         if [ -f "$1" ]; then   # if file exists
             local NAME
-            NAME=${1%.*.*}
+            NAME=${1%.*}
+            NAME=${NAME%.*}
 
             if [ -e "$NAME" ]; then
                 echo "error: extract: '$NAME' exists" >&2
