@@ -43,7 +43,6 @@ alias sha='shasum -a 256'
 alias getpass="openssl rand -base64 12"
 alias diff='colordiff'
 alias mount='mount | column -t'
-alias start_bt='sudo systemctl start bluetooth'
 alias upgrade_all='sudo apt update && sudo apt upgrade'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
 alias gh='history|grep'
@@ -79,8 +78,6 @@ alias wake="echo $'\a'"  # command; wake &
 
 alias music='mplayer -shuffle ~/Music/*'
 
-
-# python
 
 # initializes first ./*/*/activate
 # alias va='source "$(find -P . -maxdepth 3 -type f -name activate | sort | head -n 1)" &>/dev/null || echo "error: virtual env not found, use python3 -m virtualenv venv" >&2'
