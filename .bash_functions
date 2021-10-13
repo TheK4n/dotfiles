@@ -47,44 +47,44 @@ extract () {
     if [ -z "$1" ]; then  # if string non-zero
         # display usage if no parameters given
         echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-        return 100
-    else
-        if [ -f "$1" ]; then   # if file exists
-            local NAME
-            NAME=${1%.*}
-            NAME=${NAME%.*}
-
-            if [ -e "$NAME" ]; then
-                echo "error: extract: '$NAME' exists" >&2
-                return 1
-            fi
-
-            mkdir "$NAME" && cd "$NAME" || return 1
-
-            case $1 in
-                *.tar.bz2)  tar xjf      ../"$1" ;;
-                *.tar.gz)   tar xzf      ../"$1" ;;
-                *.tar.xz)   tar xJf      ../"$1" ;;
-                *.lzma)     unlzma       ../"$1" ;;
-                *.bz2)      bunzip2      ../"$1" ;;
-                *.rar)      unrar x -ad  ../"$1" ;;
-                *.gz)       gunzip       ../"$1" ;;
-                *.tar)      tar xf       ../"$1" ;;
-                *.tbz2)     tar xjf      ../"$1" ;;
-                *.tgz)      tar xzf      ../"$1" ;;
-                *.zip)      unzip        ../"$1" ;;
-                *.Z)        uncompress   ../"$1" ;;
-                *.7z)       7z x         ../"$1" ;;
-                *.xz)       unxz         ../"$1" ;;
-                *.exe)      cabextract   ../"$1" ;;
-                *)          echo "error: extract: '$1' - unknown archive method" >&2;;
-            esac
-            cd ..
-        else
-            echo "error: extract: '$1' file does not exist" >&2
-            return 1
-        fi
+        return 2
     fi
+
+    if ! [ -f "$1" ]; then   # if file not exist
+        echo "error: extract: '$1' file does not exist" >&2
+        return 1
+    fi
+
+    local NAME
+    NAME=${1%.*}
+    NAME=${NAME%.*}
+
+    if [ -e "$NAME" ]; then
+        echo "error: extract: '$NAME' exists" >&2
+        return 1
+    fi
+
+    mkdir "$NAME" && cd "$NAME" || return 1
+
+    case $1 in
+        *.tar.bz2)  tar xjf      ../"$1" ;;
+        *.tar.gz)   tar xzf      ../"$1" ;;
+        *.tar.xz)   tar xJf      ../"$1" ;;
+        *.lzma)     unlzma       ../"$1" ;;
+        *.bz2)      bunzip2      ../"$1" ;;
+        *.rar)      unrar x -ad  ../"$1" ;;
+        *.gz)       gunzip       ../"$1" ;;
+        *.tar)      tar xf       ../"$1" ;;
+        *.tbz2)     tar xjf      ../"$1" ;;
+        *.tgz)      tar xzf      ../"$1" ;;
+        *.zip)      unzip        ../"$1" ;;
+        *.Z)        uncompress   ../"$1" ;;
+        *.7z)       7z x         ../"$1" ;;
+        *.xz)       unxz         ../"$1" ;;
+        *.exe)      cabextract   ../"$1" ;;
+        *)          echo "error: extract: '$1' - unknown archive method" >&2 ;;
+    esac
+    cd ..
 }
 
 
