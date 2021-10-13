@@ -1,35 +1,5 @@
 
 
-# extract tar archive in ./archive_name directory
-untar() {
-
-    if [ -z "$1" ]; then
-        echo "error: enter filename" >&2
-        return 1  # exit code
-    fi
-
-    if ! [ -f "$1" ]; then
-        echo "error: file '$1' not found" >&2
-        return 1  # exit code
-    fi
-
-    local dir_name
-    dir_name="$(basename "${1%.*}")_untarred"
-
-    if [ -d "$dir_name" ]; then
-        echo "error: directory '$dir_name' exists" >&2
-        return 1  # exit code
-    fi
-
-    if [ -f "$dir_name" ]; then
-        echo "error: file '$dir_name' exists" >&2
-        return 1  # exit code
-    fi
-
-    mkdir "$dir_name" 1>/dev/null && tar -C "$dir_name" -xf "$1" && return 0
-}
-
-
 workon() {
 
     if [ -z "$1" ]; then
@@ -80,36 +50,37 @@ extract () {
         return 100
     else
         if [ -f "$1" ]; then   # if file exists
-            NAME=${1%.*}
+            local NAME
+            NAME=${1%.*.*}
 
             if [ -e "$NAME" ]; then
-                echo "$NAME - exists" >&2
+                echo "error: extract: '$NAME' exists" >&2
                 return 1
             fi
 
             mkdir "$NAME" && cd "$NAME" || return 1
 
             case $1 in
-                *.tar.bz2)  tar xvjf     ../"$1" ;;
-                *.tar.gz)   tar xvzf     ../"$1" ;;
-                *.tar.xz)   tar xvJf     ../"$1" ;;
+                *.tar.bz2)  tar xjf      ../"$1" ;;
+                *.tar.gz)   tar xzf      ../"$1" ;;
+                *.tar.xz)   tar xJf      ../"$1" ;;
                 *.lzma)     unlzma       ../"$1" ;;
                 *.bz2)      bunzip2      ../"$1" ;;
                 *.rar)      unrar x -ad  ../"$1" ;;
                 *.gz)       gunzip       ../"$1" ;;
-                *.tar)      tar xvf      ../"$1" ;;
-                *.tbz2)     tar xvjf     ../"$1" ;;
-                *.tgz)      tar xvzf     ../"$1" ;;
+                *.tar)      tar xf       ../"$1" ;;
+                *.tbz2)     tar xjf      ../"$1" ;;
+                *.tgz)      tar xzf      ../"$1" ;;
                 *.zip)      unzip        ../"$1" ;;
                 *.Z)        uncompress   ../"$1" ;;
                 *.7z)       7z x         ../"$1" ;;
                 *.xz)       unxz         ../"$1" ;;
                 *.exe)      cabextract   ../"$1" ;;
-                *)          echo "extract: '$1' - unknown archive method" >&2;;
+                *)          echo "error: extract: '$1' - unknown archive method" >&2;;
             esac
             cd ..
         else
-            echo "$1 - file does not exist" >&2
+            echo "error: extract: '$1' file does not exist" >&2
             return 1
         fi
     fi
