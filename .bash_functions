@@ -56,8 +56,8 @@ extract () {
     fi
 
     local NAME
-    NAME=${1%.*}
-    NAME=${NAME%.*}
+    NAME=${1%%.*}  # removes extension from filename
+
 
     if [ -e "$NAME" ]; then
         echo "extract: error: '$NAME' exists" >&2
@@ -89,5 +89,5 @@ extract () {
 
 
 mcd () {
-  mkdir -p "$1" && cd "$1" || return
+    mkdir -p "$1" && cd "$1" || return
 }

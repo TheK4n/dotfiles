@@ -85,7 +85,7 @@ rm -rf ~/BashConfig; git clone https://github.com/TheK4n/BashConfig && cp BashCo
 ### Vim
 
 |       Command        |   Description                           |
-|:------------------:  | :------------------------------------   |
+|:------------------   | :------------------------------------   |
 |```Ctrl + [```        |  Analog Esc                             |
 |```d -> Ctrl + End``` |  Delete from cursor to end of file      |
 | ```u```              |  Undo                                   |
