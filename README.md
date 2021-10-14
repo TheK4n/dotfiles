@@ -12,8 +12,9 @@
 
 ## Content
 * [Project description](#chapter-0)
-* [SSH](#chapter-1)
-* [Tips](#chapter-2)
+* [Installation](#chapter-1)
+* [SSH](#chapter-2)
+* [Tips](#chapter-3)
 
 
 <a id="chapter-0"></a>
@@ -24,7 +25,19 @@ Bash config files
 
 [![Prompt](img/prompt.jpg)]()
 
+
 <a id="chapter-1"></a>
+## Installation
+
+```bash
+rm -rf BashConfig
+git clone https://github.com/thek4n/BashConfig
+BashConfig/setup.sh
+rm -rf BashConfig
+```
+
+
+<a id="chapter-2"></a>
 ## SSH
 
 Create ssh key on local device
@@ -64,7 +77,7 @@ add black list to ```/etc/hosts.deny```:
 sshd: ALL
 ```
 
-<a id="chapter-2"></a>
+<a id="chapter-3"></a>
 ## Tips
 
 ### Bash
@@ -74,12 +87,6 @@ sshd: ALL
 |```Ctrl + r```                       | Search by bash_history   |
 |```Ctrl + l```                       | Clear, like command clear |
 
-```bash
-rm -rf BashConfig
-git clone https://github.com/thek4n/BashConfig
-BashConfig/setup.sh
-rm -rf BashConfig
-```
 
 ```$RANDOM``` - Return random 0-32767\
 ```/command``` - Without using alias\
