@@ -31,7 +31,8 @@ Bash config files
 
 ```bash
 rm -rf BashConfig
-git clone https://github.com/thek4n/BashConfig
+git clone https://github.com/thek4n/BashConfig &&
+chmod u+x BashConfig/setup.sh &&
 BashConfig/setup.sh
 rm -rf BashConfig
 ```
