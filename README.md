@@ -75,7 +75,10 @@ sshd: ALL
 |```Ctrl + l```                       | Clear, like command clear |
 
 ```bash
-rm -rf BashConfig; git clone https://github.com/thek4n/BashConfig && BashConfig/setup.sh && rm -rf BashConfig
+rm -rf BashConfig
+git clone https://github.com/thek4n/BashConfig
+BashConfig/setup.sh
+rm -rf BashConfig
 ```
 
 ```$RANDOM``` - Return random 0-32767\
