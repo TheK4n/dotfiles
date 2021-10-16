@@ -1,17 +1,16 @@
-
+# .bashrc by TheK4n
 
 if [ -f $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
-fi
-
-if [ -f /etc/bash_completion.d/all ]; then
-    source /etc/bash_completion.d/all
 fi
 
 if [ -f $HOME/.bash_functions ]; then
     source $HOME/.bash_functions
 fi
 
+if [ -f /etc/bash_completion.d/all ]; then
+    source /etc/bash_completion.d/all
+fi
 
 
 if type shopt 2>/dev/null 1>&2; then
