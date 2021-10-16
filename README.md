@@ -13,8 +13,7 @@
 ## Content
 * [Project description](#chapter-0)
 * [Installation](#chapter-1)
-* [SSH](#chapter-2)
-* [Tips](#chapter-3)
+* [Tips](#chapter-2)
 
 
 <a id="chapter-0"></a>
@@ -38,17 +37,6 @@ rm -rf BashConfig
 
 
 <a id="chapter-2"></a>
-## SSH
-
-Create ssh key on local device
-
-1. `ssh-keygen`
-2. Save to `~/.ssh`
-3. Enter passphrase 
-4. Copy content of `~/.ssh/id_rsa.pub` key to remote `~/.ssh/authorized_keys`
-
-
-<a id="chapter-3"></a>
 ## Tips
 
 
@@ -71,21 +59,21 @@ Create ssh key on local device
 ### Autostart
 * create ```/etc/systemd/system/<service>.service```
 ```bash
-sudo vim /etc/systemd/system/<service>.service
+sudo vim /etc/systemd/system/<service>.service  # create custom service
 sudo systemctl daemon-reload
-sudo systemctl start <service>.service
-sudo systemctl status <service>.service
-sudo systemctl enable <service>.service
+sudo systemctl start <service>.service  # start custom service
+sudo systemctl status <service>.service  # check status
+sudo systemctl enable <service>.service  # autostart custom service
 ```
 
 ### Cron
 
 ```crontab -e```
 
-```0 0 1 1 * command.sh``` - Every year in 1 January 00:00:00 \
-```*/1 * * * * command.sh``` - Every minute\
-```0 */3 * * 2,5 command.sh``` - One time per 3 hours in Tue and Fri\
-```0 0,12 1 */2 * command.sh``` - At minute 0 past hour 0 and 12 on day-of-month 1 in every 2nd month
+```0 0 1 1 * script.sh``` - Every year in 1 January 00:00:00 \
+```*/1 * * * * script.sh``` - Every minute\
+```0 */3 * * 2,5 script.sh``` - One time per 3 hours in Tue and Fri\
+```0 0,12 1 */2 * script.sh``` - At minute 0 past hour 0 and 12 on day-of-month 1 in every 2nd month
 
 
 <h1 align="center"><a href="#top">▲</a></h1>
