@@ -30,9 +30,8 @@ Bash config files
 ## Installation
 
 ```bash
-rm -rf BashConfig
-git clone https://github.com/thek4n/BashConfig &&
-chmod u+x BashConfig/setup.sh &&
+git clone https://github.com/thek4n/BashConfig
+chmod u+x BashConfig/setup.sh
 BashConfig/setup.sh
 rm -rf BashConfig
 ```
@@ -48,50 +47,13 @@ Create ssh key on local device
 3. Enter passphrase 
 4. Copy content of `~/.ssh/id_rsa.pub` key to remote `~/.ssh/authorized_keys`
 
-\
-Add aliases for ssh to `~/.ssh/config`:
-```
-Host host_name
-   HostName ip
-   Port 22
-   User root
-   IdentityFile ~/.ssh/id_rsa
- ```
-
-\
-Using aliases:
-```bash
-ssh host_name
-sftp host_name
-```
-
-
-### White and black lists
-
-add white list to ```/etc/hosts.allow```:
-```text
-sshd: 10.83.33.77/32, 10.63.152.9/32, 10.12.100.11/28, 10.82.192.0/28
-```
-
-add black list to ```/etc/hosts.deny```:
-```text
-sshd: ALL
-```
 
 <a id="chapter-3"></a>
 ## Tips
 
-### Bash
-|       Command                       |   Description            |
-|:------------------:                 | :------------------      |
-|```Alt + . ``` ```Esc + .```         | Last object              |
-|```Ctrl + r```                       | Search by bash_history   |
-|```Ctrl + l```                       | Clear, like command clear |
-
 
 ```$RANDOM``` - Return random 0-32767\
-```/command``` - Without using alias\
-```df -h /``` - Size 
+```\command``` - Without using alias
 
 ### Vim
 
