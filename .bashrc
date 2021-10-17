@@ -3,3 +3,4 @@
 
 if [ -f $HOME/.subbash/sourcer ]; then
     source $HOME/.subbash/sourcer
+fi
