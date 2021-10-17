@@ -1,5 +1,5 @@
 #!/usr/bin/bash
 
-cp -r .subbash ~
-cp .bashrc ~
+cp -r dotfiles/.subbash ~
+cp dotfiles/.bashrc ~
 . ~/.bashrc
