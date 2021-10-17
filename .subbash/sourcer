@@ -1,0 +1,23 @@
+if [ -f "$HOME"/.subbash/aliases ]; then
+    source "$HOME"/.subbash/aliases
+fi
+
+if [ -f "$HOME"/.subbash/functions ]; then
+    source "$HOME"/.subbash/functions
+fi
+
+if [ -f "$HOME"/.subbash/shopt ]; then
+    source "$HOME"/.subbash/shopt
+fi
+
+if [ -f "$HOME"/.subbash/prompt ]; then
+    source "$HOME"/.subbash/prompt
+fi
+
+if [ -f "$HOME"/.subbash/export ]; then
+    source "$HOME"/.subbash/export
+fi
+
+if [ -f /etc/bash_completion.d/all ]; then
+    source /etc/bash_completion.d/all
+fi

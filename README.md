@@ -1,4 +1,4 @@
-<h1 align="center">BashConfig</h1>
+<h1 align="center">dotfiles</h1>
 
 <p align="center">
   <a href="https://github.com/TheK4n">
@@ -29,10 +29,10 @@ Bash config files
 ## Installation
 
 ```bash
-git clone https://github.com/thek4n/BashConfig
-chmod u+x BashConfig/setup.sh
-BashConfig/setup.sh
-rm -rf BashConfig
+git clone https://github.com/TheK4n/dotfiles
+chmod u+x dotfiles/setup.sh
+dotfiles/setup.sh
+rm -rf dotfiles
 ```
 
 
