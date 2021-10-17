@@ -1,5 +1,7 @@
 
-so () { [ -f $1 ] && source $1 }
+so () {
+    [ -f "$1" ] && source "$1"
+}
 
 so "$HOME"/.subbash/export
 so "$HOME"/.subbash/shopt
