@@ -81,7 +81,7 @@ __prompt_command() {
     VENV_="\$(virtualenv_info)"
     BRANCH_="\$(parse_git_branch)"
 
-    TERMINAL_NAME="$(basename "$0")"
+    TERMINAL_NAME=${0%%/*}
     TERMINAL_NAME="\[\e]2;${TERMINAL_NAME^^}\a\]"
 
     if [ $EXIT != 0 ]; then
