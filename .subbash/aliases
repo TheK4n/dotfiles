@@ -53,7 +53,7 @@ alias nowdate='date +"%d-%m-%Y"'
 
 # vim
 alias vi=vim
-alias svim='sudo vim'
+alias svi="sudo -E vim"
 alias vis='vim "+set si"'
 alias edit=vim
 
