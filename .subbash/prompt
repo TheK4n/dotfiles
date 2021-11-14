@@ -84,7 +84,7 @@ __prompt_command() {
     TERMINAL_NAME=${0%%/*}
     TERMINAL_NAME="\[\e]2;${TERMINAL_NAME^^}\a\]"
 
-    if [ $EXIT != 0 ]; then
+    if [ "$EXIT" != 0 ]; then
         PS1="$TERMINAL_NAME\n$prompt_color┌─${VENV_}─($close_color$info_color\u$prompt_symbol\H$close_color$prompt_color)-[$close_color\w$prompt_color]$close_color $red_color${BRANCH_}$close_color\n\[$(tput sc; rightprompt $EXIT; tput rc)\]$prompt_color└─$close_color$info_color$end_symbol$close_color "
     else
         PS1="$TERMINAL_NAME\n$prompt_color┌─${VENV_}─($close_color$info_color\u$prompt_symbol\H$close_color$prompt_color)-[$close_color\w$prompt_color]$close_color $red_color${BRANCH_}$close_color\n$prompt_color└─$close_color$info_color$end_symbol$close_color "

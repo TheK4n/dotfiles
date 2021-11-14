@@ -1,4 +1,4 @@
-<h1 align="center">dotfiles</h1>
+<h1 align="center">Kan`s dotfiles</h1>
 
 <p align="center">
   <a href="https://github.com/TheK4n">
@@ -13,7 +13,7 @@
 ## Content
 * [Project description](#chapter-0)
 * [Installation](#chapter-1)
-* [Tips](#chapter-2)
+* [Docs](#chapter-2)
 
 
 <a id="chapter-0"></a>
@@ -35,25 +35,15 @@ dotfiles/setup.sh
 . ~/.bashrc
 ```
 
-
 <a id="chapter-2"></a>
-## Tips
+## Docs
 
+* [Tips](doc/tips.md)
+* [Cron](doc/cron.md)
+* [GPG](doc/gpg.md)
+* [SSH](doc/ssh.md)
+* [Vim](doc/vim.md)
 
-```$RANDOM``` - Return random 0-32767\
-```\command``` - Without using alias
-
-
-
-### Autostart
-* create ```/etc/systemd/system/<service>.service```
-```bash
-sudo vim /etc/systemd/system/<service>.service  # create custom service
-sudo systemctl daemon-reload
-sudo systemctl start <service>.service  # start custom service
-sudo systemctl status <service>.service  # check status
-sudo systemctl enable <service>.service  # autostart custom service
-```
 
 
 
