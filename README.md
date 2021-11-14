@@ -32,7 +32,6 @@ Bash config files
 git clone https://github.com/TheK4n/dotfiles
 chmod u+x dotfiles/setup.sh
 dotfiles/setup.sh
-rm -rf dotfiles
 . ~/.bashrc
 ```
 

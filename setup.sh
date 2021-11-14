@@ -1,5 +1,5 @@
 #!/usr/bin/bash
 
-cp -r dotfiles/.subbash ~
-cp dotfiles/.bashrc ~
-cp dotfiles/.vimrc ~
+ln -s "$PWD"/dotfiles/.subbash ~
+ln -s "$PWD"/dotfiles/.bashrc ~
+ln -s "$PWD"/dotfiles/.vimrc ~

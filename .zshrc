@@ -261,17 +261,11 @@ if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 fi
 
+so () {
+    [ -f "$1" ] && source "$1"
+}
 
-# enable command-not-found if installed
-if [ -f /etc/zsh_command_not_found ]; then
-    . /etc/zsh_command_not_found
-fi
-
-if [ -f $HOME/.bash_aliases ]; then
-    source $HOME/.bash_aliases
-fi
-
-if [ -f $HOME/.bash_functions ]; then
-    source $HOME/.bash_functions
-fi
-
+so /etc/zsh_command_not_found
+so "$HOME"/.subbash/aliases
+so "$HOME"/.subbash/functions
+so "$HOME"/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
