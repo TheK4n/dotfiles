@@ -10,11 +10,11 @@ while getopts ":c :o" opt; do
 
     case $opt in
       c)
-        sudo umount /mnt/Files &>/dev/null && sudo cryptsetup luksClose Files || echo "luks: Not mounted" >&2
+        sudo umount /mnt/Files &>/dev/null && sudo cryptsetup luksClose Files || echo "luks: Already unmounted" >&2
         exit 0
         ;;
       o)
-        sudo cryptsetup luksOpen /dev/sdb5 Files && sudo mount /dev/mapper/Files /mnt/Files
+        sudo cryptsetup luksOpen /dev/sdb5 Files && sudo mount /dev/mapper/Files /mnt/Files && echo "luks: Successfully decrypted"
         exit 0
         ;;
       \?)
@@ -25,3 +25,4 @@ while getopts ":c :o" opt; do
 done
 
 echo "luks: No option, -o to open, -c to close" >&2 && exit 3
+
