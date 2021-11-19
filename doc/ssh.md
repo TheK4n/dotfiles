@@ -6,8 +6,8 @@
 * Access for VPS:
      * ```
        PubkeyAuthentication yes
+       PasswordAuthentication no  # only ssh-key
        
-       PasswordAuthentication no
        Match User root
            PasswordAuthentication yes
        ```
@@ -15,8 +15,8 @@
 * For local server:
     * ```
       PermitRootLogin no  # only sudo and su
-      PubkeyAuthentication yes  # only ssh-key
-      PasswordAuthentication no
+      PubkeyAuthentication yes
+      PasswordAuthentication no  # only ssh-key
 
       Match Host 192.168.50.*,127.0.0.1
           PermitRootLogin yes  # root only local
