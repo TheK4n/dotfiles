@@ -14,15 +14,14 @@
 
 * For local server:
     * ```
-      PubkeyAuthentication yes  # only ssh-key
-      
       PermitRootLogin no  # only sudo and su
-      Match Host 192.168.5.*,127.0.0.1
-          PermitRootLogin yes  # root only local
-      
+      PubkeyAuthentication yes  # only ssh-key
       PasswordAuthentication no
-      Match User root
-          PasswordAuthentication yes  # root auth only password from local
+
+      Match Host 192.168.50.*,127.0.0.1
+          PermitRootLogin yes  # root only local
+          Match User root
+              PasswordAuthentication yes  # root auth only password from local   
       ```
 
 https://www.opennet.ru/base/sec/ssh_tips.txt.html
