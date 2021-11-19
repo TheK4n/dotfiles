@@ -34,9 +34,9 @@ alias path='echo -e ${PATH//:/\\n}'
 # shorts
 alias c='clear'
 alias q='exit'
-alias h='history'
+alias h='history | less'
 alias j='jobs -l'
-
+alias hg='history|grep'
 
 # utils
 alias sha='shasum -a 256'
@@ -45,7 +45,7 @@ alias diff='colordiff'
 alias mount='mount | column -t'
 alias upgrade_all='sudo apt update && sudo apt upgrade'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
-alias gh='history|grep'
+
 
 # time
 alias now='date +"%T"'
