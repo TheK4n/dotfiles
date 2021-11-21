@@ -3,9 +3,10 @@ so () {
     [ -f "$1" ] && source "$1"
 }
 
-so "$HOME"/.subbash/export
-so "$HOME"/.subbash/shopt
-
+if [[ $0 == *bash ]]; then
+    so "$HOME"/.subbash/export
+    so "$HOME"/.subbash/shopt
+fi
 
 if [[ $- == *i* ]]; then
     so "$HOME"/.subbash/prompt
