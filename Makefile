@@ -1,3 +1,4 @@
+
 all: install
 
 install:
@@ -8,6 +9,3 @@ install:
 
 clean:
 	rm -rf .ssh doc etc functions img .gitignore README.md setup.sh ssh_setup.sh git_setup.sh .git
-
-uninstall:
-	rm -r ~/.subbash
