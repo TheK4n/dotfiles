@@ -1,10 +1,10 @@
 all: install
 
 install:
-	ln -s $(PWD)/dotfiles/.subbash ~
-	ln -s $(PWD)/dotfiles/.bashrc ~
-	ln -s $(PWD)/dotfiles/.zshrc ~
-	ln -s $(PWD)/dotfiles/.vimrc ~
+	ln -s $(PWD)/.subbash ~
+	ln -s $(PWD)/.bashrc ~
+	ln -s $(PWD)/.zshrc ~
+	ln -s $(PWD)/.vimrc ~
 
 clean:
 	rm -rf .ssh doc etc functions img .gitignore README.md setup.sh ssh_setup.sh git_setup.sh .git
