@@ -30,7 +30,6 @@ Bash config files
 
 ```bash
 git clone https://github.com/TheK4n/dotfiles
-chmod u+x dotfiles/setup.sh
 make
 ```
 
