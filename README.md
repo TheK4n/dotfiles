@@ -31,8 +31,7 @@ Bash config files
 ```bash
 git clone https://github.com/TheK4n/dotfiles
 chmod u+x dotfiles/setup.sh
-dotfiles/setup.sh
-. ~/.bashrc
+make
 ```
 
 <a id="chapter-2"></a>
