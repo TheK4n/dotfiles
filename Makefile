@@ -12,5 +12,4 @@ clean:
 	rm -rf .ssh doc etc functions img .gitignore README.md setup.sh ssh_setup.sh git_setup.sh .git
 
 ssh:
-	touch ~/.ssh/config
 	cat .ssh/config >> ~/.ssh/config
