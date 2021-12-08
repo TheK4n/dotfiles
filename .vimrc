@@ -38,6 +38,14 @@ set smartcase
 set hlsearch
 set incsearch
 
+nmap о j
+nmap л k
+nmap р h
+nmap д l
+nmap ш i
+nmap ф a
+nmap в d
+
 
 inoremap <C-v> <ESC>"+pa
 vnoremap <C-c> "+y
@@ -55,3 +63,15 @@ nnoremap <C-k> :tabnext<CR>
 
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
+
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'iceberg',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
