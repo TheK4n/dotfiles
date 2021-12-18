@@ -4,7 +4,6 @@ set laststatus=2
 
 
 nnoremap <Leader>c :set cursorline!<CR>
-set cursorline
 
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
@@ -47,9 +46,6 @@ nmap ф a
 nmap в d
 
 
-inoremap <C-v> <ESC>"+pa
-vnoremap <C-c> "+y
-vnoremap <C-d> "+d
 nmap <F6> :NERDTreeToggle<CR>
 
 

@@ -265,6 +265,7 @@ so () {
     [ -f "$1" ] && source "$1"
 }
 
+export EDITOR=vim
 so /etc/zsh_command_not_found
 so "$HOME"/.subbash/aliases
 so "$HOME"/.subbash/functions
