@@ -7,6 +7,7 @@ install:
 	ln -s $(PWD)/.zshrc ~
 	ln -s $(PWD)/.vim ~
 	ln -s $(PWD)/.vim/.vimrc ~
+	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
 clean:
