@@ -89,3 +89,6 @@ alias drma='docker rm $(docker ps -a -q -f status=exited)'
 
 # python
 alias pipir='python3 -m pip install -r requirements.txt'
+
+# git
+alias watch-diff='watch --color "git diff --color=always"'
