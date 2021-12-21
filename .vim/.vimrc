@@ -19,7 +19,7 @@ let &t_EI.="\e[1 q" "EI = нормальный режим
 
 set encoding=utf-8 "Ставит кодировку UTF-8
 set nocompatible "Отключает обратную совместимость с Vi
-syntax enable "Включает подсветку синтаксиса
+syntax on "Включает подсветку синтаксиса
 
 set expandtab
 set smarttab
@@ -37,8 +37,12 @@ set smartcase
 set hlsearch
 set incsearch
 
+set mousehide
+set mouse=a
+
 set colorcolumn=120
 
+" navigation on russian
 nmap о j
 nmap л k
 nmap р h
@@ -48,18 +52,31 @@ nmap ф a
 nmap в d
 
 
-set rtp+=~/.vim/bundle/Vundle.vim
-nmap <F6> :NERDTreeToggle<CR>
-
-
 set ffs=unix,dos,mac
 set encoding=utf8
 
+" tabs
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 
+
+" Plugins
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'preservim/nerdtree'
+call vundle#end()
+filetype plugin indent on
+
+" Python
+let python_highlight_all = 1
+set t_Co=256
+
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,match,case
+" nerdtree
+nmap <F6> :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
 
@@ -74,12 +91,3 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-
-
-call vundle#begin()
-    Plugin 'VundleVim/Vundle.vim'
-    Plugin 'preservim/nerdtree'
-call vundle#end()
-filetype plugin indent on
-
-

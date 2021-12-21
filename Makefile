@@ -5,13 +5,15 @@ install:
 	ln -s $(PWD)/.subbash ~
 	ln -s $(PWD)/.bashrc ~
 	ln -s $(PWD)/.zshrc ~
+
+vim:
 	ln -s $(PWD)/.vim ~
 	ln -s $(PWD)/.vim/.vimrc ~
 	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
 clean:
-	rm -rf .ssh doc etc functions img .gitignore README.md setup.sh ssh_setup.sh git_setup.sh .git
+	rm -rf .ssh doc etc scripts img .gitignore README.md .git
 
 ssh:
 	cat .ssh/config >> ~/.ssh/config
