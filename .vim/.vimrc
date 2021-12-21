@@ -71,6 +71,7 @@ call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'preservim/nerdtree'
     Plugin 'vim-airline/vim-airline'
+    Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 
@@ -105,3 +106,9 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
+
+
+" Colorscheme
+colorscheme gruvbox
+set bg=dark
+
