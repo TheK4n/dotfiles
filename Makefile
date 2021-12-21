@@ -5,7 +5,9 @@ install:
 	ln -s $(PWD)/.subbash ~
 	ln -s $(PWD)/.bashrc ~
 	ln -s $(PWD)/.zshrc ~
-	ln -s $(PWD)/.vimrc ~
+	ln -s $(PWD)/.vim ~
+	ln -s $(PWD)/.vim/.vimrc ~
+	vim +PluginInstall +qall
 
 clean:
 	rm -rf .ssh doc etc functions img .gitignore README.md setup.sh ssh_setup.sh git_setup.sh .git
