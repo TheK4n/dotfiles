@@ -1,4 +1,15 @@
 
+lsl () {
+
+    local DIR
+    DIR="$*"
+
+    if [ $# -lt 1 ]; then
+        DIR="$HOME"
+    fi
+
+    ls -lhFA --color=always "${DIR}" | less -R
+}
 
 workon() {
 
