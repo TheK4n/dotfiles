@@ -5,7 +5,7 @@ lsl () {
     DIR="$*"
 
     if [ $# -lt 1 ]; then
-        DIR="$HOME"
+        DIR="$PWD"
     fi
 
     ls -lhFA --color=always "${DIR}" | less -R
