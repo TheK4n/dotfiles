@@ -75,10 +75,18 @@ let python_highlight_all = 1
 set t_Co=256
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,match,case
+
 " nerdtree
-nmap <F6> :NERDTreeToggle<CR>
+" Ctrl + w l|h - change window
+autocmd vimenter * NERDTree
+
+" autoclose if nerdtree is last tab
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+nmap <F3> :NERDTreeToggle<CR>
+
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
+let NERDTreeHidden = 1 " show hidden files .*
 
 set laststatus=2
 let g:lightline = {
