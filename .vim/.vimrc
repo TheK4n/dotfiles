@@ -41,6 +41,7 @@ set mousehide
 set mouse=a
 
 set colorcolumn=120
+set scrolloff=7
 
 " navigation on russian
 nmap о j
