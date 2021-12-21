@@ -38,3 +38,5 @@ sudo systemctl start service.service  # start custom service
 sudo systemctl status service.service  # check status
 sudo systemctl enable service.service  # autostart custom service
 ```
+
+set caps as ctrl for tmux prefix Ctrl+a

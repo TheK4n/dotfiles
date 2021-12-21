@@ -37,6 +37,8 @@ set smartcase
 set hlsearch
 set incsearch
 
+set colorcolumn=120
+
 nmap о j
 nmap л k
 nmap р h
