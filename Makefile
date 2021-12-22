@@ -5,12 +5,15 @@ backup:
 	mv ~/.bashrc ~/.bashrc.bak || true
 	mv ~/.zshrc ~/.zshrc.bak || true
 	mv ~/.vimrc ~/.vimrc.bak || true
+	mv ~/.vim ~/.vim.bak || true
 	mv ~/.subbash ~/.subbash.bak || true
+	mv ~/.tmux.conf ~/.tmux.conf.bak || true
 
 install:
 	ln -s $(PWD)/.subbash ~ || true
 	ln -s $(PWD)/.bashrc ~ || true
 	ln -s $(PWD)/.zshrc ~ || true
+	ln -s $(PWD)/.tmux.conf ~ || true
 
 vim:
 	ln -s $(PWD)/.vim ~

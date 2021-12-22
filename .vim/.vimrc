@@ -28,6 +28,7 @@ set softtabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
+set nowrap
 
 set noerrorbells
 set novisualbell
@@ -42,6 +43,11 @@ set mouse=a
 
 set colorcolumn=120
 set scrolloff=7
+
+set virtualedit=onemore  " allow for cursor beyond last character
+
+" f4 toggle hlsearch
+nnoremap <F4> :set invhlsearch<CR>
 
 " navigation on russian
 nmap о j
@@ -95,7 +101,8 @@ nnoremap <silent> <special> <F3> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtre
 
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
-let NERDTreeHidden = 1 " show hidden files .*
+let NERDTreeChDirMode=2
+let NERDTreeKeepTreeInNewTab=1
 
 set laststatus=2
 let g:lightline = {
