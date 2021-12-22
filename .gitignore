@@ -1,2 +1,5 @@
 .idea
 .vim/bundle/*
+encrypt
+decrypt
+
