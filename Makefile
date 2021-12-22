@@ -16,6 +16,7 @@ clean:
 	rm -rf .ssh doc etc scripts img .gitignore README.md .git
 
 ssh:
+	echo -e "\n" >> ~/.ssh/config
 	cat .ssh/config >> ~/.ssh/config
 
 git:
