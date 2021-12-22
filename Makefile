@@ -1,10 +1,16 @@
 
 all: install
 
+backup:
+	mv ~/.bashrc ~/.bashrc.bak || true
+	mv ~/.zshrc ~/.zshrc.bak || true
+	mv ~/.vimrc ~/.vimrc.bak || true
+	mv ~/.subbash ~/.subbash.bak || true
+
 install:
-	ln -s $(PWD)/.subbash ~
-	ln -s $(PWD)/.bashrc ~
-	ln -s $(PWD)/.zshrc ~
+	ln -s $(PWD)/.subbash ~ || true
+	ln -s $(PWD)/.bashrc ~ || true
+	ln -s $(PWD)/.zshrc ~ || true
 
 vim:
 	ln -s $(PWD)/.vim ~
