@@ -20,6 +20,8 @@ install:
 vim:
 	ln -s $(PWD)/.vim ~
 	ln -s $(PWD)/.vim/.vimrc ~
+	mkdir -p ~/.config/nvim
+	ln -s $(PWD)/.vim/.vimrc ~/.config/nvim/init.vim
 	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
