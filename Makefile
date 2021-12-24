@@ -9,6 +9,7 @@ backup:
 	mv ~/.subbash ~/.subbash.bak || true
 	mv ~/.tmux.conf ~/.tmux.conf.bak || true
 	mv ~/.gitconfig ~/.gitconfig.bak || true
+	mv ~/.gitignore ~/.gitignore.bak || true
 
 install:
 	ln -s $(PWD)/.subbash ~ || true
@@ -31,4 +32,5 @@ ssh:
 
 git:
 	ln -s $(PWD)/.gitconfig ~ || true
+	ln -s $(PWD)/.gitignore ~ || true
 

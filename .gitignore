@@ -1,5 +1,7 @@
 .idea
-.vim/bundle/*
-encrypt
-decrypt
+.vim/bundle/
+*.sw[op]
+.env
+*.log
 
+Session.vim

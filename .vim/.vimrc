@@ -33,6 +33,8 @@ set nowrap
 
 set noerrorbells
 set novisualbell
+set showcmd
+set showtabline=2
 
 set ignorecase
 set smartcase
