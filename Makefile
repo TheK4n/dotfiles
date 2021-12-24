@@ -8,6 +8,7 @@ backup:
 	mv ~/.vim ~/.vim.bak || true
 	mv ~/.subbash ~/.subbash.bak || true
 	mv ~/.tmux.conf ~/.tmux.conf.bak || true
+	mv ~/.gitconfig ~/.gitconfig.bak || true
 
 install:
 	ln -s $(PWD)/.subbash ~ || true

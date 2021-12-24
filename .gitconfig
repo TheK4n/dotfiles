@@ -21,8 +21,8 @@
     a = "!git status --short | peco | awk '{print $2}' | xargs git add"
     d = diff
     co = checkout
-    ci = commit
-    ca = commit -a
+    ci = commit -m
+    ca = commit -am
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
     st = status
@@ -47,3 +47,6 @@
 [github]
     user = "TheK4n"
     email = "djvlad967891@gmail.com"
+[user]
+	email = djvlad967891@gmail.com
+	name = TheK4n
