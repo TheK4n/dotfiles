@@ -91,18 +91,23 @@ autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,
 
 " nerdtree
 " Ctrl + w l|h - change window
-autocmd vimenter * NERDTree
-autocmd VimEnter * wincmd p
+
 
 " autoclose if nerdtree is last tab
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-nnoremap <silent> <special> <F3> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
+
+nnoremap <silent> <special> <F3> :NERDTreeToggle <CR>
+
 
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
 let NERDTreeChDirMode=2
 let NERDTreeKeepTreeInNewTab=1
+
+" Close tree tab when open file
+"let NERDTreeQuitOnOpen = 1
+
 
 set laststatus=2
 let g:lightline = {
