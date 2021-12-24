@@ -28,9 +28,3 @@ ssh:
 	echo -e "\n" >> ~/.ssh/config
 	cat .ssh/config >> ~/.ssh/config
 
-git:
-	git config --global user.email "djvlad967891@gmail.com"
-	git config --global user.name "TheK4n"
-	git config --global core.editor vim
-	git config --global init.defaultBranch main
-	git config --global core.autocrlf true

@@ -10,7 +10,8 @@ let g:airline_powerline_fonts = 1 "Включить поддержку Powerline
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
 let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
 let g:Powerline_symbols='unicode' "Поддержка unicode
-let g:airline#extensions#xkblayout#enabled = 0 
+let g:airline#extensions#xkblayout#enabled = 0
+let g:airline#extensions#branch#enabled=1
 
 set ttimeoutlen=10 "Понижаем задержку ввода escape последовательностей
 let &t_SI.="\e[5 q" "SI = режим вставки
