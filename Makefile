@@ -28,3 +28,6 @@ ssh:
 	echo -e "\n" >> ~/.ssh/config
 	cat .ssh/config >> ~/.ssh/config
 
+git:
+	ln -s $(PWD)/.gitconfig ~ || true
+
