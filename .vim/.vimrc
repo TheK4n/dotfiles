@@ -86,6 +86,7 @@ call vundle#begin()
     Plugin 'ap/vim-css-color'
     Plugin 'ryanoasis/vim-devicons'
     Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'preservim/tagbar'
 
 call vundle#end()
 
@@ -106,6 +107,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 nnoremap <silent> <special> <F3> :NERDTreeToggle <CR>
+nnoremap <silent> <special> <F8> :TagbarToggle <CR>
 
 
 let NERDTreeShowBookmarks = 1
