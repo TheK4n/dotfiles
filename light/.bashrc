@@ -1,6 +1,4 @@
 
-
-# colors
 if [ -x "$(which dircolors)" ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
@@ -51,10 +49,10 @@ alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
 
 # vim
-alias vi=nvim
-alias svi="sudo -E nvim"
-alias vis='nvim "+set si"'
-alias edit=nvim
+alias vi=vim
+alias svi="sudo -E vim"
+alias vis='vim "+set si"'
+alias edit=vim
 
 # net
 alias ports='netstat -tulanp'
@@ -92,3 +90,6 @@ alias pipir='python3 -m pip install -r requirements.txt'
 
 # git
 alias watch-diff='watch --color "git diff --color=always"'
+
+PS1="\n┌──(\u@\H)-[\w]\n└─\$ "
+

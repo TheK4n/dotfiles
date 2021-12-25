@@ -1,7 +1,13 @@
+
+# global
+
 .idea
-.vim/bundle/
 *.sw[op]
 .env
 *.log
-
 Session.vim
+
+
+# local
+
+.vim/bundle/
