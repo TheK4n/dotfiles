@@ -81,6 +81,11 @@ call vundle#begin()
     Plugin 'preservim/nerdtree'
     Plugin 'vim-airline/vim-airline'
     Plugin 'morhetz/gruvbox'
+    Plugin 'tpope/vim-surround'
+    Plugin 'tpope/vim-commentary'
+    Plugin 'ap/vim-css-color'
+    Plugin 'ryanoasis/vim-devicons'
+    Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 
