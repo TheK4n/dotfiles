@@ -1,7 +1,6 @@
 [core]
     excludesfile = ~/.gitignore
     editor = nvim
-    autocrlf = true
 
 [init]
     defaultBranch = master    

@@ -84,7 +84,6 @@ call vundle#begin()
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-commentary'
     Plugin 'ap/vim-css-color'
-    Plugin 'ryanoasis/vim-devicons'
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'preservim/tagbar'
 
