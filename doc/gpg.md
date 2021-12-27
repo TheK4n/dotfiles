@@ -17,9 +17,9 @@ echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > ~/.gnupg/gpg-agent.conf; echo R
 7. ```gpg -d --try-secret-key "john" file.asc > res.txt```
 
 ### Sign message (one file)
-1. ```gpg -u "thek4n" --clear-sign -s file``` -u secret key, --clear-sign message
-2. ```gpg -d file.asc```
+enc: ```gpg -u "thek4n" --clear-sign -s file``` -u secret key, --clear-sign ascii\
+dec: ```gpg -d file.asc```
 
 ### Sign binary (file and sign)
-3. ```gpg -u "thek4n" -b file``` -b detached sign
-4. ```gpg --verify file.sig file```
+enc: ```gpg -u "thek4n" -b file``` -b detached sign\
+dec: ```gpg --verify file.sig file```
