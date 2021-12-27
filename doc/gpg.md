@@ -7,14 +7,14 @@ echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > ~/.gnupg/gpg-agent.conf; echo R
 
 ### Encrypt
 1. ```gpg --full-generate-key```
-2. ```gpg —export -a "thek4n" > public.key``` -a ASCII
+2. ```gpg --export -a "thek4n" > public.key``` -a ASCII
 3. ```gpg --fingerprint "thek4n"``` (send fingerprint IRL)
-4. ```gpg -seaR "john" -u "thek4n" file``` -s sign, -e asymmetric, -a ASCII, -R ciphered receiver, -u key to sign
+4. ```gpg -seaR "john" -u "thek4n" file``` -s sign, -e asymmetric, -a ASCII, -R ciphered receiver, -u secret key
 
 ### Decrypt
-4. ```gpg —import public.key```
+4. ```gpg --import public.key```
 5. ```gpg --fingerprint "thek4n"``` (check fingerprint)
-7. ```gpg -d --try-secret-key "john" file.asc > file```
+7. ```gpg -d --try-secret-key "john" file.asc > res.txt```
 
 ### Sign message (one file)
 1. ```gpg -u "thek4n" --clear-sign -s file``` -u secret key, --clear-sign message
