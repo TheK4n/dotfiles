@@ -17,7 +17,7 @@ mkdir decrypted
 gpg -d "$ENCRYPTED_KEYFILE" > decrypted/key.keyfile
 
 sudo cryptsetup luksOpen encrypted/encrypted.img myEncryptedVolume --key-file decrypted/key.keyfile
-rm decrypted/key.keyfile
+shred -zun 2 decrypted/key.keyfile
 
 sudo mount /dev/mapper/myEncryptedVolume ./decrypted
 

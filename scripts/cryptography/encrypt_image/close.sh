@@ -1,3 +1,3 @@
 sudo umount ./decrypted
 sudo cryptsetup luksClose myEncryptedVolume
-rm -fr decrypted
+shred -zun 2 decrypted

@@ -19,7 +19,7 @@ echo "Enter passphrase( first half - your master key, last half - random passphr
 sudo cryptsetup luksOpen encrypted.img myEncryptedVolume --key-file key.keyfile
 
 gpg -c key.keyfile
-rm key.keyfile
+shred -zun 2 key.keyfile
 
 sudo mkfs.ext4 /dev/mapper/myEncryptedVolume
 sudo mount /dev/mapper/myEncryptedVolume ../decrypted
