@@ -42,7 +42,7 @@ make
 * [Cron](doc/cron.md)
 * [GPG](doc/gpg.md)
 * [SSH](doc/ssh.md)
-* [Vim](doc/vim.md)
+* [Tar](doc/tar.md)
 
 
 
