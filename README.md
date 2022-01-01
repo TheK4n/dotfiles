@@ -4,8 +4,8 @@
   <a href="https://github.com/TheK4n">
     <img src="https://img.shields.io/github/followers/TheK4n?label=Follow&style=social">
   </a>
-  <a href="https://github.com/TheK4n/BashConfig">
-    <img src="https://img.shields.io/github/stars/TheK4n/BashConfig?style=social">
+  <a href="https://github.com/TheK4n/dotfiles">
+    <img src="https://img.shields.io/github/stars/TheK4n/dotfiles?style=social">
   </a>
 </p>
 
