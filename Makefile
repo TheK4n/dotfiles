@@ -35,3 +35,6 @@ git:
 	ln -s $(PWD)/.gitconfig ~ || true
 	ln -s $(PWD)/.gitignore ~ || true
 
+completion:
+	sudo mkdir -p /etc/bash_completion.d && \
+	sudo ln -s $(PWD)/etc/bash_completion.d/all /etc/bash_completion.d
