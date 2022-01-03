@@ -12,9 +12,9 @@ echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > ~/.gnupg/gpg-agent.conf; echo R
 4. ```gpg -seaR "john" -u "thek4n" file``` -s sign, -e asymmetric, -a ASCII, -R ciphered receiver, -u secret key
 
 ### Decrypt
-4. ```gpg --import public.key```
-5. ```gpg --fingerprint "thek4n"``` (check fingerprint)
-7. ```gpg -d --try-secret-key "john" file.asc > res.txt```
+1. ```gpg --import public.key```
+2. ```gpg --fingerprint "thek4n"``` (check fingerprint)
+3. ```gpg -d --try-secret-key "john" file.asc > res.txt```
 
 ### Sign message (one file)
 enc: ```gpg -u "thek4n" --clear-sign -s file``` -u secret key, --clear-sign ascii\

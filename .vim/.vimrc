@@ -112,6 +112,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 nnoremap <silent> <special> <F3> :NERDTreeToggle <CR>
+
+" ctags required
 nnoremap <silent> <special> <F8> :TagbarToggle <CR>
 
 
