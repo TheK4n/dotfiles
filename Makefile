@@ -40,7 +40,7 @@ completion:
 	sudo ln -s $(PWD)/etc/bash_completion.d/all /etc/bash_completion.d
 
 links:
-	mkdir ~/.local/bin || true
+	mkdir -p ~/.local/bin || true
 	ln -s ~/.local/bin ~ || true
 	ln -s /media/$(USER) ~/Files || true
 
