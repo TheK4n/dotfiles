@@ -41,7 +41,6 @@ alias hg='history|grep'
 alias sha='shasum -a 256'
 alias getpass="openssl rand -base64 12"
 alias diff='colordiff'
-alias mount='mount | column -t'
 alias upgrade_all='sudo apt update && sudo apt upgrade'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
 
