@@ -12,13 +12,14 @@ lsl () {
 }
 
 workon() {
+    local ENV_NAME
+    ENV_NAME="$1"
 
     if [ -z "$1" ]; then
-        echo "workon: error: enter filename" >&2
-        return 2  # exit code
+        ENV_NAME=$(basename "$(pwd)")
     fi
 
-    source /opt/pythonenv/"${1}"/bin/activate
+    source /opt/pythonenv/"$ENV_NAME"/bin/activate
 }
 
 
