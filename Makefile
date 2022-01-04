@@ -26,7 +26,7 @@ vim:
 	vim +PluginInstall +qall
 
 clean:
-	rm -rf .ssh doc etc scripts img .gitignore README.md .git
+	rm -rf .ssh doc etc img README.md
 
 ssh:
 	echo -e "\n" >> ~/.ssh/config && cat .ssh/config >> ~/.ssh/config
