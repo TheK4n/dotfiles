@@ -2,10 +2,10 @@
 lsl () {
 
     local DIR
-    DIR="$*"
-
-    if [ $# -lt 1 ]; then
-        DIR="$PWD"
+    DIR="$1"
+    
+    if [ -z "$1" ]; then
+        DIR="$(pwd)"
     fi
 
     ls -lhFA --color=always "${DIR}" | less -R
