@@ -43,6 +43,7 @@ make
 * [GPG](doc/gpg.md)
 * [SSH](doc/ssh.md)
 * [Tar](doc/tar.md)
+* [Vim](doc/vim.md)
 
 
 
