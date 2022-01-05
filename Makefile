@@ -39,8 +39,3 @@ completion:
 	sudo mkdir -p /etc/bash_completion.d && \
 	sudo ln -s $(PWD)/etc/bash_completion.d/all /etc/bash_completion.d
 
-links:
-	mkdir -p ~/.local/bin || true
-	ln -s ~/.local/bin ~ || true
-	ln -s /media/$(USER) ~/Files || true
-
