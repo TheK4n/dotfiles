@@ -1,0 +1,13 @@
+
+so () {
+    [ -f "$1" ] && source "$1"
+}
+
+so /etc/zsh_command_not_found
+so "$HOME"/.subbash/aliases
+so "$HOME"/.subbash/functions
+so "$HOME"/.subzsh/export
+so "$HOME"/.subzsh/options
+so "$HOME"/.subzsh/completion
+so "$HOME"/.subzsh/prompt
+so "$HOME"/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
