@@ -92,6 +92,7 @@ call vundle#begin()
     Plugin 'ap/vim-css-color'
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'preservim/tagbar'
+    Plugin 'preservim/vimux'
 
 call vundle#end()
 
@@ -100,6 +101,8 @@ filetype plugin indent on
 " Python
 let python_highlight_all = 1
 set t_Co=256
+nnoremap <silent> <special> <F10> :!python3 % <CR>
+
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,match,case
 

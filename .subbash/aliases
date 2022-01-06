@@ -85,7 +85,8 @@ alias vd='deactivate'
 
 
 # docker
-alias drma='docker rm $(docker ps -a -q -f status=exited)'
+#alias drma='docker rm $(docker ps -a -q -f status=exited)'
+alias drma='docker container prune'
 
 # python
 alias pipir='python3 -m pip install -r requirements.txt'
