@@ -14,8 +14,8 @@ backup:
 
 install:
 	ln -s $(PWD)/.subbash ~ || true
+	ln -s $(PWD)/.subzsh ~ || true
 	ln -s $(PWD)/.bashrc ~ || true
-	ln -s $(PWD)/.zshrc ~ || true
 	ln -s $(PWD)/.zshrc ~ || true
 	ln -s $(PWD)/.tmux.conf ~ || true
 
