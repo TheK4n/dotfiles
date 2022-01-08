@@ -1,5 +1,5 @@
 
-all: install
+all: bash
 
 backup:
 	mv ~/.bashrc ~/.bashrc.bak || true
@@ -12,11 +12,15 @@ backup:
 	mv ~/.gitconfig ~/.gitconfig.bak || true
 	mv ~/.gitignore ~/.gitignore.bak || true
 
-install:
+bash:
 	ln -s $(PWD)/.subbash ~ || true
-	ln -s $(PWD)/.subzsh ~ || true
 	ln -s $(PWD)/.bashrc ~ || true
+
+zsh:
+	ln -s $(PWD)/.subzsh ~ || true
 	ln -s $(PWD)/.zshrc ~ || true
+
+tmux:
 	ln -s $(PWD)/.tmux.conf ~ || true
 
 vim:
@@ -26,9 +30,6 @@ vim:
 	ln -s $(PWD)/.vim/.vimrc ~/.config/nvim/init.vim && \
 	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/.vim/bundle/Vundle.vim && \
 	vim +PluginInstall +qall
-
-clean:
-	rm -rf .ssh doc etc img README.md
 
 ssh:
 	echo -e "\n" >> ~/.ssh/config && cat .ssh/config >> ~/.ssh/config
