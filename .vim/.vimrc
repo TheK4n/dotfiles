@@ -68,7 +68,7 @@ nmap ф a
 nmap в d
 
 
-set ffs=unix,dos,mac
+set ffs=unix,mac
 set encoding=utf8
 
 " tabs
