@@ -13,9 +13,9 @@ if [ -x "$(which dircolors)" ]; then
     alias ls='ls --color=auto'
 fi
 
-alias l.='ls -A --ignore="*"'
-alias ll='ls -lh'
-alias la='ls -A'
+alias l.='ls -AF --ignore="*"'
+alias ll='ls -lhF'
+alias la='ls -AF'
 
 alias lt='du -sh * | sort -h'
 
