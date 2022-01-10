@@ -8,7 +8,7 @@ lsl () {
         DIR="$(pwd)"
     fi
 
-    ls -lhFA --color=always "${DIR}" | less -R
+    ls -lhFA --color=always "${DIR}" | tail -n +2 | less -R
 }
 
 workon() {
@@ -113,4 +113,14 @@ json() {
 	else # pipe
 		python -m json.tool | pygmentize -l javascript
 	fi
+}
+
+backup-it() {
+    local cur_dir_name bkp_dir
+
+    bkp_dir=~/Backup/$(date +"%d-%m-%y")
+    cur_dir_name="$(basename "$PWD")"
+
+    mkdir -p "$bkp_dir"/"$cur_dir_name" || true
+    tar czf - * | gpg -c > "$bkp_dir"/"$cur_dir_name"/"$(date +"%H-%M-%S")".tar.gz.gpg
 }

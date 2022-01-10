@@ -13,7 +13,7 @@ _workon()
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    envs=`ls /opt/pythonenv/`
+    envs=$(ls /opt/pythonenv/)
 
     COMPREPLY=( $(compgen -W "${envs}" -- ${cur}) )
 }
