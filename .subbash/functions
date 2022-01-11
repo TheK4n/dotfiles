@@ -122,5 +122,5 @@ backup-it() {
     cur_dir_name="$(basename "$PWD")"
 
     mkdir -p "$bkp_dir"/"$cur_dir_name" || true
-    tar czf - * | gpg -c > "$bkp_dir"/"$cur_dir_name"/"$(date +"%H-%M-%S")".tar.gz.gpg
+    tar czf - * | gpg -e -R thek4n > "$bkp_dir"/"$cur_dir_name"/"$(date +"%H-%M-%S")".tar.gz.gpg
 }
