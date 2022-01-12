@@ -121,6 +121,6 @@ backup-it() {
     bkp_dir=~/Backup/$(date +"%d-%m-%y")
     cur_dir_name="$(basename "$PWD")"
 
-    mkdir -p "$bkp_dir"/"$cur_dir_name" || true
-    tar czf - * | gpg -e -R thek4n > "$bkp_dir"/"$cur_dir_name"/"$(date +"%H-%M-%S")".tar.gz.gpg
+    mkdir -p "$bkp_dir" || true
+    tar czf - * | gpg -e -R thek4n > "$bkp_dir"/"$cur_dir_name".tar.gz.gpg
 }
