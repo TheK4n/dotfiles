@@ -68,7 +68,7 @@ alias www='python3 -m http.server 8000'
 alias reboot='sudo /sbin/reboot'
 alias poweroff='sudo /sbin/poweroff'
 alias halt='sudo /sbin/halt'
-alias shutdown='sudo /sbin/shutdown'
+alias shutdown='sudo /sbin/shutdown now'
 
 alias meminfo='free -mlth'
 alias psmem='ps auxf | sort -nr -k 4 | less -R'
