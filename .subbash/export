@@ -1,4 +1,5 @@
 
+umask 0077
 
 export EDITOR="/usr/bin/env vim"
 
