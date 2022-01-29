@@ -44,5 +44,7 @@ completion:
 
 ranger:
 	mkdir -p ~/.config/ranger || true
-	ln -s $(PWD)/.ranger/rc.conf ~/.config/ranger
+	ln -s $(PWD)/.ranger/rc.conf ~/.config/ranger || true
+	mkdir -p ~/.config/ranger/plugins && \
+	git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 

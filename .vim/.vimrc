@@ -96,7 +96,7 @@ call vundle#begin()
     Plugin 'preservim/tagbar'
     Plugin 'preservim/vimux'
 
-    " requiered 
+    " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
