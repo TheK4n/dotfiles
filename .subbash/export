@@ -1,7 +1,7 @@
 
 umask 0077
 
-export EDITOR="/usr/bin/env vim"
+export EDITOR="/usr/bin/env nvim"
 
 export HISTSIZE=10000
 export HISTFILESIZE=10000
