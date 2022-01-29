@@ -43,5 +43,6 @@ completion:
 	sudo ln -s $(PWD)/etc/bash_completion.d/all /etc/bash_completion.d
 
 ranger:
-	ln -s $(PWD)/.config/ranger ~/.config
+	mkdir -p ~/.config/ranger || true
+	ln -s $(PWD)/.ranger/rc.conf ~/.config/ranger
 

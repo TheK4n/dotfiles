@@ -95,6 +95,8 @@ call vundle#begin()
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'preservim/tagbar'
     Plugin 'preservim/vimux'
+
+    " requiered 
     Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
