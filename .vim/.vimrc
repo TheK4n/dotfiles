@@ -8,6 +8,9 @@ set number "номер строки
 set ruler 
 set laststatus=2
 
+" xclip requiered
+set clipboard=unnamedplus
+
 
 nnoremap <Leader>c :set cursorline!<CR>
 
