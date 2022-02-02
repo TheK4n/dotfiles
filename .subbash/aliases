@@ -93,3 +93,6 @@ alias pipir='python3 -m pip install -r requirements.txt'
 
 # git
 alias watch-diff='watch --color "git diff --color=always"'
+
+
+alias open='xdg-open'
