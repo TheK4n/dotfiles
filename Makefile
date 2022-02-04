@@ -14,12 +14,12 @@ backup:
 
 bash:
 	test -e ~/.subbash || \
-	ln -s $(PWD)/subbash ~/.subbash
+	ln -s $(PWD)/sub/bash ~/.subbash
 	ln -s ~/.subbash/bashrc ~/.bashrc
 
 zsh:
 	test -e ~/.subzsh || \
-	ln -s $(PWD)/subzsh ~/.subzsh
+	ln -s $(PWD)/sub/zsh ~/.subzsh
 	ln -s ~/.subzsh/zshrc ~/.zshrc
 	mkdir ~/.subzsh/plugins
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions
@@ -27,28 +27,28 @@ zsh:
 
 
 tmux:
-	ln -s $(PWD)/subtmux/tmux.conf ~/.tmux.conf
+	ln -s $(PWD)/sub/tmux/tmux.conf ~/.tmux.conf
 
 vim:
 	test -e ~/.vim || \
-	ln -s $(PWD)/subvim ~/.vim
+	ln -s $(PWD)/sub/vim ~/.vim
 	ln -s ~/.vim/.vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim
 	ln -s ~/.vim/.vimrc ~/.config/nvim/init.vim
-	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/subvim/bundle/Vundle.vim
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
 ssh:
-	cat $(PWD)/subssh/config >> ~/.ssh/config
+	cat $(PWD)/sub/ssh/config >> ~/.ssh/config
 
 git:
-	ln -s $(PWD)/subgit/gitconfig ~/.gitconfig
-	ln -s $(PWD)/subgit/gitignore ~/.gitignore
+	ln -s $(PWD)/sub/git/gitconfig ~/.gitconfig
+	ln -s $(PWD)/sub/git/gitignore ~/.gitignore
 
 ranger:
 	test -e ~/.config/ranger || \
 	mkdir -p ~/.config/ranger
-	ln -s $(PWD)/subranger/rc.conf ~/.config/ranger
+	ln -s $(PWD)/sub/ranger/rc.conf ~/.config/ranger
 	mkdir -p ~/.config/ranger/plugins
 	git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 
