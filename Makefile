@@ -45,6 +45,6 @@ git:
 ranger:
 	mkdir -p ~/.config/ranger || true
 	ln -s $(PWD)/subranger/rc.conf ~/.config/ranger || true
-	mkdir -p ~/.config/ranger/plugins && \
+	mkdir -p ~/.config/ranger/plugins || true
 	git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 
