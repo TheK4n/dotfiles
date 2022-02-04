@@ -19,6 +19,10 @@ bash:
 zsh:
 	ln -s $(PWD)/.subzsh ~ || true
 	ln -s $(PWD)/.zshrc ~ || true
+	mkdir ~/.subzsh/plugins || true
+	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions || true
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.subzsh/plugins/zsh-syntax-highlighting
+
 
 tmux:
 	ln -s $(PWD)/.tmux.conf ~ || true
