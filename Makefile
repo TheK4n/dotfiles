@@ -32,9 +32,9 @@ tmux:
 vim:
 	test -e ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
-	ln -s ~/.vim/.vimrc ~/.vimrc
+	ln -s ~/.vim/vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim
-	ln -s ~/.vim/.vimrc ~/.config/nvim/init.vim
+	ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
