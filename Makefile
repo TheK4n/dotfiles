@@ -15,12 +15,12 @@ backup:
 bash:
 	test -e ~/.subbash || \
 	ln -s $(PWD)/subbash ~/.subbash
-	ln -s $(PWD)/bashrc ~/.bashrc
+	ln -s ~/.subbash/bashrc ~/.bashrc
 
 zsh:
 	test -e ~/.subzsh || \
 	ln -s $(PWD)/subzsh ~/.subzsh
-	ln -s $(PWD)/zshrc ~/.zshrc
+	ln -s ~/.subzsh/zshrc ~/.zshrc
 	mkdir ~/.subzsh/plugins
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.subzsh/plugins/zsh-syntax-highlighting
@@ -32,9 +32,9 @@ tmux:
 vim:
 	test -e ~/.vim || \
 	ln -s $(PWD)/subvim ~/.vim
-	ln -s $(PWD)/subvim/.vimrc ~/.vimrc
+	ln -s ~/.vim/.vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim
-	ln -s $(PWD)/subvim/.vimrc ~/.config/nvim/init.vim
+	ln -s ~/.vim/.vimrc ~/.config/nvim/init.vim
 	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/subvim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
