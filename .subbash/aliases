@@ -17,7 +17,7 @@ alias l.='ls -AF --ignore="*"'
 alias ll='ls -lhF'
 alias la='ls -AF'
 
-alias lt='du -sh * | sort -h | tac'
+alias lt='du -sh . && du -sh * .* 2>/dev/null | sort -h | tac'
 
 alias rm='rm -r'
 alias mkdir='mkdir -pv'

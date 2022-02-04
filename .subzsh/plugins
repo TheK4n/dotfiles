@@ -1,0 +1,7 @@
+so () {
+    [ -f "$1" ] && source "$1"
+}
+
+
+so /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+so /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
