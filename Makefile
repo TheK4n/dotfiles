@@ -27,7 +27,7 @@ zsh:
 
 
 tmux:
-	ln -s $(PWD)/tmux.conf ~/.tmux.conf
+	ln -s $(PWD)/subtmux/tmux.conf ~/.tmux.conf
 
 vim:
 	test -e ~/.vim || \
