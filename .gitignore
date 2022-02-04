@@ -10,5 +10,5 @@ Session.vim
 
 # local
 
-.vim/bundle/
-.subzsh/plugins/
+subvim/bundle/
+subzsh/plugins/

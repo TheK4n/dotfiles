@@ -12,6 +12,6 @@ if [[ $- == *i* ]]; then
     so "$HOME"/.subbash/prompt
     so "$HOME"/.subbash/aliases
     so "$HOME"/.subbash/functions
+    so "$HOME"/.subbash/completion/all
 fi
 
-so /etc/bash_completion.d/all

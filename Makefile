@@ -13,42 +13,38 @@ backup:
 	mv ~/.gitignore ~/.gitignore.bak || true
 
 bash:
-	ln -s $(PWD)/.subbash ~ || true
-	ln -s $(PWD)/.bashrc ~ || true
+	ln -s $(PWD)/subbash ~/.subbash || true
+	ln -s $(PWD)/bashrc ~/.bashrc || true
 
 zsh:
-	ln -s $(PWD)/.subzsh ~ || true
-	ln -s $(PWD)/.zshrc ~ || true
+	ln -s $(PWD)/subzsh ~/.subzsh || true
+	ln -s $(PWD)/zshrc ~/.zshrc || true
 	mkdir ~/.subzsh/plugins || true
-	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions || true
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.subzsh/plugins/zsh-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-autosuggestions $(PWD)/subzsh/plugins/zsh-autosuggestions || true
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting $(PWD)/subzsh/plugins/zsh-syntax-highlighting
 
 
 tmux:
-	ln -s $(PWD)/.tmux.conf ~ || true
+	ln -s $(PWD)/tmux.conf ~/.tmux.conf || true
 
 vim:
-	ln -s $(PWD)/.vim ~ && \
-	ln -s $(PWD)/.vim/.vimrc ~ && \
+	ln -s $(PWD)/subvim ~/.vim && \
+	ln -s $(PWD)/subvim/.vimrc ~/.vimrc && \
 	mkdir -p ~/.config/nvim && \
-	ln -s $(PWD)/.vim/.vimrc ~/.config/nvim/init.vim && \
-	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/.vim/bundle/Vundle.vim && \
+	ln -s $(PWD)/subvim/.vimrc ~/.config/nvim/init.vim && \
+	git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/subvim/bundle/Vundle.vim && \
 	vim +PluginInstall +qall
 
 ssh:
-	echo -e "\n" >> ~/.ssh/config && cat .ssh/config >> ~/.ssh/config
+	echo -e "\n" >> ~/.ssh/config && cat $(PWD)/subssh/config >> ~/.ssh/config
 
 git:
-	ln -s $(PWD)/.gitconfig ~ || true
+	ln -s $(PWD)/subgit/.gitconfig ~ || true
 	ln -s $(PWD)/.gitignore ~ || true
-
-completion:
-	sudo mkdir -p /etc/bash_completion.d && \
-	sudo ln -s $(PWD)/etc/bash_completion.d/all /etc/bash_completion.d
 
 ranger:
 	mkdir -p ~/.config/ranger || true
-	ln -s $(PWD)/.ranger/rc.conf ~/.config/ranger || true
+	ln -s $(PWD)/subranger/rc.conf ~/.config/ranger || true
 	mkdir -p ~/.config/ranger/plugins && \
 	git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 
