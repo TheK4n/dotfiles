@@ -13,12 +13,12 @@ backup:
 	mv ~/.gitignore ~/.gitignore.bak || true
 
 bash:
-	test -e ~/.subbash && false
+	test -e ~/.subbash || \
 	ln -s $(PWD)/subbash ~/.subbash
 	ln -s $(PWD)/bashrc ~/.bashrc
 
 zsh:
-	test -e ~/.subzsh && false
+	test -e ~/.subzsh || \
 	ln -s $(PWD)/subzsh ~/.subzsh
 	ln -s $(PWD)/zshrc ~/.zshrc
 	mkdir ~/.subzsh/plugins
@@ -30,7 +30,7 @@ tmux:
 	ln -s $(PWD)/tmux.conf ~/.tmux.conf
 
 vim:
-	test -e ~/.vim && false
+	test -e ~/.vim || \
 	ln -s $(PWD)/subvim ~/.vim
 	ln -s $(PWD)/subvim/.vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim
@@ -46,7 +46,7 @@ git:
 	ln -s $(PWD)/subgit/gitignore ~/.gitignore
 
 ranger:
-	test -e ~/.config/ranger && false
+	test -e ~/.config/ranger || \
 	mkdir -p ~/.config/ranger
 	ln -s $(PWD)/subranger/rc.conf ~/.config/ranger
 	mkdir -p ~/.config/ranger/plugins
