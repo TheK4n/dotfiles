@@ -39,8 +39,8 @@ ssh:
 	echo -e "\n" >> ~/.ssh/config && cat $(PWD)/subssh/config >> ~/.ssh/config
 
 git:
-	ln -s $(PWD)/subgit/.gitconfig ~ || true
-	ln -s $(PWD)/.gitignore ~ || true
+	ln -s $(PWD)/subgit/gitconfig ~/.gitconfig || true
+	ln -s $(PWD)/subgit/gitignore ~/.gitignore || true
 
 ranger:
 	mkdir -p ~/.config/ranger || true

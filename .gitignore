@@ -1,14 +1,2 @@
-
-# global
-
-.idea
-*.sw[op]
-.env
-*.log
-Session.vim
-
-
-# local
-
-subvim/bundle/
-subzsh/plugins/
+subvim/bundle
+subzsh/plugins
