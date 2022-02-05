@@ -4,8 +4,6 @@
 if [ -x "$(which dircolors)" ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias egrep='egrep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -52,7 +50,6 @@ alias nowdate='date +"%d-%m-%Y"'
 
 # vim
 alias svi="sudo -E nvim"
-alias vis='nvim "+set si"'
 alias edit=nvim
 
 # net
