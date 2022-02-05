@@ -30,6 +30,7 @@ tmux:
 	ln -s $(PWD)/sub/tmux/tmux.conf ~/.tmux.conf
 
 vim:
+	echo "set editing-mode vi" >> ~/.inputrc
 	test -e ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
 	ln -s ~/.vim/vimrc ~/.vimrc
