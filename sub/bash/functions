@@ -126,7 +126,7 @@ docker_ex() {
 # ips of docker containers
 docker_ips() {
     local DOC IP OUT NAME
-    for DOC in $(docker ps -aq | tr '\n' ' ')
+    for DOC in $(docker ps -q | tr '\n' ' ')
     do
         IP="$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}' "$DOC")"
         NAME="$(docker inspect --format='{{.Name}}' "$DOC")"
