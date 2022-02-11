@@ -115,3 +115,23 @@ json() {
 	fi
 }
 
+
+# docker
+
+# execute bash shell in running container
+docker_ex() {
+    docker exec -it $1 ${2:-bash}
+}
+
+# ips of docker containers
+docker_ips() {
+    local DOC IP OUT NAME
+    for DOC in $(docker ps -aq | tr '\n' ' ')
+    do
+        IP="$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}' "$DOC")"
+        NAME="$(docker inspect --format='{{.Name}}' "$DOC")"
+        OUT+="${NAME#"/"}"'\t'"$IP"'\n'
+    done
+    echo -e $OUT | column -t
+}
+

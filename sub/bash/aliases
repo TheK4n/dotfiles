@@ -80,16 +80,18 @@ alias ve='python3 -m virtualenv venv && . venv/bin/activate'
 alias vd='deactivate'
 
 
-# docker
-#alias drma='docker rm $(docker ps -a -q -f status=exited)'
-alias drma='docker container prune'
-alias drmi='docker image prune'
-
 # python
 alias pipir='python3 -m pip install -r requirements.txt'
 
 # git
 alias watch-diff='watch --color "git diff --color=always"'
+
+
+# docker
+alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
+alias drma='docker container prune'
+alias drmi='docker image prune'
 
 
 alias open='xdg-open'
