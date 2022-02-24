@@ -1,6 +1,4 @@
 `/etc/ssh/sshd_config`
-* Adding public key to remote machine :\
-     * ```ssh remotehost "umask 077; cat > .ssh/authorized_keys" < .ssh/id_rsa_backup.pub```
      
 
 * Access for VPS:
