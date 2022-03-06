@@ -1,6 +1,14 @@
+
+# Pycharm
 .idea
+
+# vim
 *.sw[op]
+Session.vim
+
+# python virtual env
+venv
+.venv
+
 .env
 *.log
-Session.vim
-venv
