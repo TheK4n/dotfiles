@@ -12,3 +12,5 @@ venv
 
 .env
 *.log
+
+*.db
