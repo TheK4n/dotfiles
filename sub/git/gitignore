@@ -9,8 +9,17 @@ Session.vim
 # python virtual env
 venv
 .venv
+__pycache__/
+*.py[cod]
+*$py.class
 
 .env
 *.log
+*.bak
 
+# db
 *.db
+db.sqlite3
+
+
+nohup.out
