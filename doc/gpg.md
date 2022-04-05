@@ -1,10 +1,5 @@
 ## GPG
 
-Caching passphrases disable:
-```bash
-echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > ~/.gnupg/gpg-agent.conf; echo RELOADAGENT | gpg-connect-agent
-```
-
 ### Encrypt
 1. ```gpg --full-generate-key```
 2. ```gpg --export -a "thek4n" > public.key``` -a ASCII
