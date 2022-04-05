@@ -13,25 +13,24 @@ backup:
 	mv ~/.gitignore ~/.gitignore.bak || true
 
 bash:
-	test -e ~/.subbash || \
+	test -d ~/.subbash || \
 	ln -s $(PWD)/sub/bash ~/.subbash
 	ln -s ~/.subbash/bashrc ~/.bashrc
 
 zsh:
-	test -e ~/.subzsh || \
+	test -d ~/.subzsh || \
 	ln -s $(PWD)/sub/zsh ~/.subzsh
 	ln -s ~/.subzsh/zshrc ~/.zshrc
 	mkdir ~/.subzsh/plugins
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.subzsh/plugins/zsh-syntax-highlighting
 
-
 tmux:
 	ln -s $(PWD)/sub/tmux/tmux.conf ~/.tmux.conf
 
 vim:
 	echo "set editing-mode vi" >> ~/.inputrc
-	test -e ~/.vim || \
+	test -d ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
 	ln -s ~/.vim/vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim
@@ -47,9 +46,15 @@ git:
 	ln -s $(PWD)/sub/git/gitignore ~/.gitignore
 
 ranger:
-	test -e ~/.config/ranger || \
+	test -d ~/.config/ranger || \
 	mkdir -p ~/.config/ranger
 	ln -s $(PWD)/sub/ranger/rc.conf ~/.config/ranger
 	mkdir -p ~/.config/ranger/plugins
 	git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+
+gpg:
+	test -d ~/.gnupg || \
+	mkdir -p ~/.gnupg
+	cat $(PWD)/sub/gpg/gpg.conf >> ~/.gnupg/gpg.conf
+	echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > ~/.gnupg/gpg-agent.conf; echo RELOADAGENT | gpg-connect-agent
 
