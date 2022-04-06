@@ -14,7 +14,6 @@
 
 * [Project description](#chapter-0)
 * [Installation](#chapter-1)
-* [Docs](#chapter-2)
 
 
 <a id="chapter-0"></a>
@@ -35,15 +34,6 @@ cd dotfiles
 make
 ```
 
-<a id="chapter-2"></a>
-## Docs
-
-* [Tips](doc/tips.md)
-* [Cron](doc/cron.md)
-* [GPG](doc/gpg.md)
-* [SSH](doc/ssh.md)
-* [Tar](doc/tar.md)
-* [Vim](doc/vim.md)
 
 
 
