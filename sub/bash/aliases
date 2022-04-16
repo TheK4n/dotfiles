@@ -41,7 +41,7 @@ alias hg='history|grep'
 # utils
 alias sha='shasum -a 256'
 alias genpass="openssl rand -base64 12"
-alisa gensalt="date +%s%N | sha256sum | head -c 64"
+alias gensalt="date +%s%N | sha256sum | head -c 64"
 alias diff='colordiff'
 alias upgrade_all='sudo apt update && sudo apt upgrade'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
