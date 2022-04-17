@@ -133,6 +133,8 @@ docker_ips() {
         NAME="$(docker inspect --format='{{.Name}}' "$DOC")"
         OUT+="${NAME#"/"}"'\t'"$IP":"$PORT"'\n'
     done
-    echo -e $OUT | column -t 2>/dev/null
+    echo -e $OUT | column -t
 }
+
+alias docker_ips='docker_ips 2>/dev/null'
 
