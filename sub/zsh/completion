@@ -18,3 +18,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # zstyle ':completion:*:*:workon:*' command 'ls -la /opt/pythonenv/' 
 zstyle ':completion:*:*:extract:*' file-patterns '*.tar* *.lzma *.bz2 *.zip *.7z'
+
+autoload bashcompinit
+bashcompinit
+

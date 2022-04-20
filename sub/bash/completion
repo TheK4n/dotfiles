@@ -7,8 +7,7 @@ _ssh() {
     return 0
 }
 
-_workon()
-{
+_workon() {
     local cur prev envs
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -21,3 +20,4 @@ _workon()
 complete -F _workon workon
 complete -F _ssh ssh
 complete -F _ssh sftp
+
