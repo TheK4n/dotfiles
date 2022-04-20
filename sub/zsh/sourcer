@@ -9,6 +9,7 @@ so "$HOME"/.subzsh/history
 so "$HOME"/.subzsh/prompt
 so "$HOME"/.subzsh/other
 so "$HOME"/.subzsh/plugin
+so "$HOME"/.subzsh/aliases
 
 so "$HOME"/.subbash/aliases
 so "$HOME"/.subbash/export

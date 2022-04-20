@@ -1,0 +1,3 @@
+alias -g l="| less"
+alias -g n=">/dev/null"
+alias -g n2="2>/dev/null"
