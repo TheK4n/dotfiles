@@ -1,4 +1,14 @@
 
+
+destroy() {
+    test -n "$1" || return 1
+    test -e "$1" || return 1
+
+    echo "Sure want to destroy file '$1' with size $(du -hs "$1" | awk '{printf $1}') [y/N] "
+    read -r response
+    [[ $response == [yY] ]] && shred -zun 25 "$1"
+}
+
 lsl () {
 
     local DIR
