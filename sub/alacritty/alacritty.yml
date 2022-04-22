@@ -1,0 +1,18 @@
+window:
+
+  vertical_chars: 50
+  horizontal_chars: 100
+  starting_x_offset: 100
+  starting_y_offset: 100
+
+  dimensions:
+     columns: 150
+     lines: 42
+  opacity: 0.83
+
+scrolling:
+  history: 100000
+  multiplier: 3
+
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }

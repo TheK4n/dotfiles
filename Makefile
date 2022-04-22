@@ -28,6 +28,11 @@ zsh:
 tmux:
 	ln -s $(PWD)/sub/tmux/tmux.conf ~/.tmux.conf
 
+alacritty:
+	test -d ~/.config/alacritty || \
+	mkdir -p ~/.config/alacritty
+	ln -s $(PWD)/sub/alacritty/alacritty.yml ~/.config/alacritty/
+
 vim:
 	echo "set editing-mode vi" >> ~/.inputrc
 	test -d ~/.vim || \
