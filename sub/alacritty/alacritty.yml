@@ -10,6 +10,9 @@ window:
      lines: 42
   opacity: 0.83
 
+mouse:
+  hide_when_typing: true
+
 scrolling:
   history: 100000
   multiplier: 3
