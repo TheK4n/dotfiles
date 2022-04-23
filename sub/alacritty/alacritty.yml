@@ -23,3 +23,4 @@ env:
 
 key_bindings:
   - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
+  - { key: F11, action: ToggleFullScreen }
