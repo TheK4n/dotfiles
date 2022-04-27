@@ -1,9 +1,6 @@
 window:
-
-  vertical_chars: 50
-  horizontal_chars: 100
-  starting_x_offset: 100
-  starting_y_offset: 100
+  dynamic_title: true
+  startup_mode: FullScreen
 
   dimensions:
      columns: 150
@@ -20,7 +17,8 @@ scrolling:
 env:
   TERM: xterm-256color
   WINIT_X11_SCALE_FACTOR: "1"
-
 key_bindings:
   - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
   - { key: F11, action: ToggleFullScreen }
+
+live_config_reload: true
