@@ -19,10 +19,17 @@
 <a id="chapter-0"></a>
 ## Project description
 
-Bash config files
+Config files for:
+* bash
+* zsh
+* alacritty
+* tmux
+* ssh
+* git
+* ranger
 
 
-[![Prompt](img/prompt.jpg)]()
+[![Prompt](assets/prompt.png)]()
 
 
 <a id="chapter-1"></a>
