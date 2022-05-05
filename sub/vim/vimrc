@@ -12,6 +12,9 @@ set laststatus=2
 set clipboard=unnamedplus
 
 
+set shell=zsh
+
+
 nnoremap <Leader>c :set cursorline!<CR>
 
 
@@ -89,7 +92,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'preservim/nerdtree'
     Plugin 'vim-airline/vim-airline'
     Plugin 'morhetz/gruvbox'
     Plugin 'tpope/vim-surround'
@@ -98,7 +100,8 @@ call vundle#begin()
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'preservim/tagbar'
     Plugin 'preservim/vimux'
-
+    Plugin 'francoiscabrol/ranger.vim'
+    Plugin 'rbgrouleff/bclose.vim'
     " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
 
@@ -118,23 +121,12 @@ autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,
 " Ctrl + w l|h - change window
 
 
-" autoclose if nerdtree is last tab
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-
-nnoremap <silent> <special> <F3> :NERDTreeToggle <CR>
+nnoremap <silent> <special> <F3> :Ranger <CR>
 
 " ctags required
 nnoremap <silent> <special> <F8> :TagbarToggle <CR>
 
-
-let NERDTreeShowBookmarks = 1
-let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
-let NERDTreeChDirMode=2
-let NERDTreeKeepTreeInNewTab=1
-
-" Close tree tab when open file
-"let NERDTreeQuitOnOpen = 1
 
 
 set laststatus=2
