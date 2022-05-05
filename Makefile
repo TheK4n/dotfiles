@@ -51,11 +51,13 @@ git:
 	ln -s $(PWD)/sub/git/gitignore ~/.gitignore
 
 ranger:
+	echo "sudo pacman -S highlight"
 	test -d ~/.config/ranger || \
 	mkdir -p ~/.config/ranger
 	ln -s $(PWD)/sub/ranger/rc.conf ~/.config/ranger
 	mkdir -p ~/.config/ranger/plugins
 	git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+	ranger --copy-config=all
 
 gpg:
 	test -d ~/.gnupg || \
