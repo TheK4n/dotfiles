@@ -34,6 +34,7 @@ alacritty:
 	ln -s $(PWD)/sub/alacritty/alacritty.yml ~/.config/alacritty/
 
 vim:
+	echo "sudo pacman -S npm; sudo npm install pyright"
 	echo "set editing-mode vi" >> ~/.inputrc
 	test -d ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
