@@ -125,6 +125,7 @@ autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,
 nnoremap <silent> <special> <F3> :Ranger <CR>
 
 let g:ranger_replace_netrw = 1  " open ranger when vim open a directory
+let g:ranger_map_keys = 0
 
 " ctags required
 nnoremap <silent> <special> <F8> :TagbarToggle <CR>
