@@ -19,7 +19,7 @@ alias ll.='ls -lhFA --ignore="*"'
 
 alias lt='du -sh . && du -sh * .* 2>/dev/null | sort -h | tac'
 
-alias _='sudo '
+alias _='sudo'
 
 alias rm='rm -r'
 alias mkdir='mkdir -pv'
