@@ -21,3 +21,11 @@ key_bindings:
   - { key: F11, action: ToggleFullScreen }
 
 live_config_reload: true
+
+font:
+  normal:
+    family: monospace
+    style: Regular
+
+  size: 11
+
