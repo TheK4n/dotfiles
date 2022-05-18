@@ -9,6 +9,9 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+
+for_window [tiling] border pixel 3
+exec --no-startup-id picom --inactive-dim 0.2 --no-fading-openclose --inactive-dim-fixed --config /dev/null
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
