@@ -24,8 +24,7 @@ live_config_reload: true
 
 font:
   normal:
-    family: monospace
-    style: Regular
+    family: FiraCode Nerd Font Mono
 
-  size: 12
+  size: 11
 

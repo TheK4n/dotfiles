@@ -62,7 +62,7 @@ vcs_info_wrapper() {
 
 
 configure_prompt() {
-    prompt_symbol=㉿
+    prompt_symbol=@
 
     [ "$EUID" -eq 0 ] && prompt_symbol=💀
     [[ -n "$SSH_CLIENT" || -n "$SSH2_CLIENT" ]] && prompt_symbol='📡'
