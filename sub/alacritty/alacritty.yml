@@ -1,6 +1,5 @@
 window:
   dynamic_title: true
-  startup_mode: FullScreen
 
   dimensions:
      columns: 150
