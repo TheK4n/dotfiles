@@ -71,3 +71,12 @@ i3:
 	mkdir -p ~/.config/i3
 	ln -s $(PWD)/sub/i3/config ~/.config/i3/config
 
+font:
+	mkdir -p ~/.local/share/fonts
+	cd ~/.local/share/fonts
+	wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'
+	unzip FiraCode.zip -d ~/.local/share/fonts
+	git clone 'https://github.com/powerline/fonts.git' --depth=1
+	cd fonts
+	./install.sh
+
