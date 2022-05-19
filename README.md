@@ -30,19 +30,21 @@ Config files for:
 * i3
 
 
-[![Prompt](assets/prompt.png)]()
-
+### Prompt
+<p align="center">
+    <img src="assets/prompt.png" alt="Prompt">
+</p>
 
 ### i3
 
 
-| Feature | Shortcut |
-| :----- | :------ |
-| Full Screen | PrtScrn |
-| Selection | Shift + PrtScrn |
-| Active Window | Super + PrtScrn |
-| Clipboard Full Screen | Ctrl + PrtScrn |
-| Clipboard Selection | Ctrl + Shift + PrtScrn |
+| Feature                 | Shortcut               |
+|:------------------------|:-----------------------|
+| Full Screen             | PrtScrn                |
+| Selection               | Shift + PrtScrn        |
+| Active Window           | Super + PrtScrn        |
+| Clipboard Full Screen   | Ctrl + PrtScrn         |
+| Clipboard Selection     | Ctrl + Shift + PrtScrn |
 | Clipboard Active Window | Ctrl + Super + PrtScrn |
 
 
