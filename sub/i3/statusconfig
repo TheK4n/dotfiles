@@ -59,7 +59,7 @@ cpu_usage {
 }
 
 cpu_temperature 0 {
-    format = " %degrees"
+    format = " %degrees°"
     max_threshold = "80"
     path = "/sys/class/thermal/thermal_zone0/temp"
 }
