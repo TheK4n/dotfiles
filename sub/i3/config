@@ -17,7 +17,7 @@ set $mod Mod4
 exec --no-startup-id xset s off
 exec --no-startup-id xset dpms 0 0 0
 exec --no-startup-id xset r rate 250 100
-
+exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle
 
 
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
