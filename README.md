@@ -38,12 +38,12 @@ Config files for:
 ### i3
 
 
-| Feature                 | Shortcut               |
-|:------------------------|:-----------------------|
-| Full Screen             | PrtScrn                |
-| Selection               | Shift + PrtScrn        |
-| Active Window           | Super + PrtScrn        |
-| Clipboard Full Screen   | Ctrl + PrtScrn         |
+| Feature                 |               Shortcut |
+|:------------------------|-----------------------:|
+| Full Screen             |                PrtScrn |
+| Selection               |        Shift + PrtScrn |
+| Active Window           |        Super + PrtScrn |
+| Clipboard Full Screen   |         Ctrl + PrtScrn |
 | Clipboard Selection     | Ctrl + Shift + PrtScrn |
 | Clipboard Active Window | Ctrl + Super + PrtScrn |
 
@@ -56,11 +56,6 @@ git clone https://github.com/TheK4n/dotfiles
 cd dotfiles
 make
 ```
-
-
-
-
-
 
 
 <h1 align="center"><a href="#top">▲</a></h1>
