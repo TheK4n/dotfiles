@@ -16,6 +16,7 @@ set $mod Mod4
 
 exec --no-startup-id xset s off
 exec --no-startup-id xset dpms 0 0 0
+exec --no-startup-id xset r rate 250 100
 
 
 

@@ -27,9 +27,23 @@ Config files for:
 * ssh
 * git
 * ranger
+* i3
 
 
 [![Prompt](assets/prompt.png)]()
+
+
+### i3
+
+
+| Feature | Shortcut |
+| :----- | :------ |
+| Full Screen | PrtScrn |
+| Selection | Shift + PrtScrn |
+| Active Window | Super + PrtScrn |
+| Clipboard Full Screen | Ctrl + PrtScrn |
+| Clipboard Selection | Ctrl + Shift + PrtScrn |
+| Clipboard Active Window | Ctrl + Super + PrtScrn |
 
 
 <a id="chapter-1"></a>
@@ -45,17 +59,6 @@ make
 
 
 
-## I3
-
-
-| Feature | Shortcut |
-| :----- | :------ |
-| Full Screen | PrtScrn |
-| Selection | Shift + PrtScrn |
-| Active Window | Super + PrtScrn |
-| Clipboard Full Screen | Ctrl + PrtScrn |
-| Clipboard Selection | Ctrl + Shift + PrtScrn |
-| Clipboard Active Window | Ctrl + Super + PrtScrn |
 
 
 <h1 align="center"><a href="#top">▲</a></h1>
