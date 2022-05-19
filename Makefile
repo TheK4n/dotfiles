@@ -67,9 +67,12 @@ gpg:
 	echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > ~/.gnupg/gpg-agent.conf; echo RELOADAGENT | gpg-connect-agent
 
 i3:
+	echo "sudo pacman -S nitrogen picom compton ttf-font-awesome"
 	test -d ~/.config/i3 || \
 	mkdir -p ~/.config/i3
+	mkdir -p ~/.config/i3status
 	ln -s $(PWD)/sub/i3/config ~/.config/i3/config
+	ln -s $(PWD)/sub/i3/statusconfig ~/.config/i3status/config
 
 font:
 	mkdir -p ~/.local/share/fonts
