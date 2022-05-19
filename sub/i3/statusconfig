@@ -16,8 +16,10 @@ order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery all"
 order += "disk /"
-order += "load"
+order += "disk /home"
 order += "memory"
+order += "cpu_usage"
+order += "cpu_temperature 0"
 order += "tztime local"
 
 wireless _first_ {
@@ -26,7 +28,7 @@ wireless _first_ {
 }
 
 ethernet _first_ {
-        format_up = " %ip (%speed)"
+        format_up = " %ip"
         format_down = " down"
 }
 
@@ -35,7 +37,11 @@ battery all {
 }
 
 disk "/" {
-        format = " %avail"
+        format = " %used/%total"
+}
+
+disk "/home" {
+        format = " %used/%total"
 }
 
 load {
@@ -43,9 +49,19 @@ load {
 }
 
 memory {
-        format = "%used | %available"
+        format = "%used/%available"
         threshold_degraded = "1G"
         format_degraded = "MEMORY < %available"
+}
+
+cpu_usage {
+    format = " %usage"
+}
+
+cpu_temperature 0 {
+    format = " %degrees"
+    max_threshold = "80"
+    path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 tztime local {
