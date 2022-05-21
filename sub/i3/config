@@ -12,9 +12,8 @@
 
 
 # monitors
-exec xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --primary
-exec xrandr --output HDMI-0 --mode 1366x768 --pos 1920x0 --right-of DP-0 --rotate right
-
+exec --no-startup-id xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --primary
+exec --no-startup-id xrandr --output HDMI-0 --mode 1366x768 --pos 1920x0 --right-of DP-0 --rotate right
 
 for_window [tiling] border pixel 3
 exec --no-startup-id picom --inactive-dim 0.2 --no-fading-openclose --inactive-dim-fixed --config /dev/null
@@ -114,10 +113,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+slash floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+slash focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -177,10 +176,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -214,3 +213,5 @@ bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t ima
 bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
+
+exec --no-startup-id xrandr --dpi 80
