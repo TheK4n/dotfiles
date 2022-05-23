@@ -153,9 +153,15 @@ py() {
 
 # toggle wireguard vpn with interface /etc/wireguard/wg0.conf
 vpn() {
-    local STATUS SERVICE
-    SERVICE="wg-quick@wg0.service"
-    STATUS=$(systemctl status $SERVICE | grep Active | awk -F ": " '{printf $2}' | awk -F " " '{printf $1}')
-    test $STATUS = "inactive" && sudo systemctl start $SERVICE || sudo systemctl stop $SERVICE
+    local STATUS SERVICE CONFIG CONFIGFILE
+    CONFIG="wg0"
+    CONFIGFILE="/etc/wireguard/$CONFIG.conf"
+
+    test -e "$CONFIGFILE" || (echo "Config '$CONFIGFILE' not exists" >&2; return 1)
+
+    SERVICE="wg-quick@$CONFIG.service"
+
+    STATUS=$(systemctl status "$SERVICE" | grep Active | awk -F ": " '{printf $2}' | awk -F " " '{printf $1}')
+    test "$STATUS" = "inactive" && sudo systemctl start "$SERVICE" || sudo systemctl stop "$SERVICE"
 }
 
