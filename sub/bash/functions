@@ -152,7 +152,7 @@ py() {
 }
 
 # toggle wireguard vpn with interface /etc/wireguard/wg0.conf
-wg-toggle() {
+vpn() {
     local STATUS SERVICE CONFIG CONFIGFILE
     CONFIG="wg0"
     CONFIGFILE="/etc/wireguard/$CONFIG.conf"
