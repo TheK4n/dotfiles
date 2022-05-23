@@ -151,6 +151,7 @@ py() {
     test -z "$@" && ipython -i -c "q = exit" || python3 $@
 }
 
+# toggle wireguard vpn with interface /etc/wireguard/wg0.conf
 vpn() {
     local STATUS SERVICE
     SERVICE="wg-quick@wg0.service"
