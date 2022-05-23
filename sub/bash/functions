@@ -146,3 +146,8 @@ docker_ips() {
     echo -e $OUT 2>/dev/null | column -t
 }
 
+
+py() {
+    test -z "$@" && ipython -i -c "q = exit" || ipython $@
+}
+

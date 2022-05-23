@@ -83,7 +83,6 @@ alias music='mplayer -shuffle ~/Music/*'
 
 
 # python
-alias py='python3'
 alias pipir='python3 -m pip install -r requirements.txt'
 
 # initializes first ./*/*/activate
