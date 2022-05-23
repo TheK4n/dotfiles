@@ -148,6 +148,6 @@ docker_ips() {
 
 
 py() {
-    test -z "$@" && ipython -i -c "q = exit" || ipython $@
+    test -z "$@" && ipython -i -c "q = exit" || python3 $@
 }
 
