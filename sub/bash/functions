@@ -162,6 +162,6 @@ wg-toggle() {
     SERVICE="wg-quick@$CONFIG.service"
 
     STATUS=$(systemctl status "$SERVICE" | grep Active | awk -F ": " '{printf $2}' | awk -F " " '{printf $1}')
-    test "$STATUS" = "inactive" && sudo systemctl start "$SERVICE" || sudo systemctl stop "$SERVICE"
+    test "$STATUS" != "active" && sudo systemctl start "$SERVICE" || sudo systemctl stop "$SERVICE"
 }
 
