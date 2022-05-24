@@ -19,7 +19,7 @@
 
 [alias]
     a = "!git status --short | peco | awk '{print $2}' | xargs git add"
-    d = diff
+    d = "!git diff --color=always | less -R"
     co = checkout
     ci = commit
     ca = commit -a

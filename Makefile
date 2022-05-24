@@ -74,6 +74,11 @@ i3:
 	ln -s $(PWD)/sub/i3/config ~/.config/i3/config
 	ln -s $(PWD)/sub/i3/statusconfig ~/.config/i3status/config
 
+bat:
+	test -d ~/.config/bat || \
+	mkdir -p ~/.config/bat
+	ln -s $(PWD)/sub/bat/config ~/.config/bat/config
+
 font:
 	mkdir -p ~/.local/share/fonts
 	cd ~/.local/share/fonts
