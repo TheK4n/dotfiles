@@ -32,7 +32,7 @@ Config files for:
 
 ### Prompt
 <p align="center">
-    <img src="assets/prompt.png" alt="Prompt">
+    <img src=".assets/prompt.png" alt="Prompt">
 </p>
 
 ### i3
