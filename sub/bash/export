@@ -17,3 +17,7 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
+
+if [ -d "$HOME/.npm-global/bin" ] ; then
+    export PATH="$PATH:$HOME/.npm-global/bin"
+fi
