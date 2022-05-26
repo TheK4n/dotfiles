@@ -24,6 +24,7 @@ zsh:
 	mkdir ~/.subzsh/plugins
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.subzsh/plugins/zsh-syntax-highlighting
+	git clone https://github.com/hlissner/zsh-autopair ~/.subzsh/plugins/hlissner/zsh-autopair
 
 tmux:
 	ln -s $(PWD)/sub/tmux/tmux.conf ~/.tmux.conf
