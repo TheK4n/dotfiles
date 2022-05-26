@@ -105,8 +105,6 @@ call vundle#begin()
     " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
     Plugin 'jiangmiao/auto-pairs'
-    " pip3 install pylint
-    Plugin 'neomake/neomake'
 
 call vundle#end()
 
@@ -164,33 +162,4 @@ let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
-
-
-
-" pylint
-call neomake#configure#automake('nrw', 50)
-
-let g:neomake_echo_current_error = 0
-let g:neomake_python_enabled_maker = ['pylint']
-let g:neomake_virtualtext_prefix = ''
-
-hi NeomakeVirtualtextError ctermfg=242
-hi NeomakeVirtualtextWarning ctermfg=242
-hi NeomakeVirtualtextInfo ctermfg=242
-hi NeomakeVirtualtextMessage ctermfg=242
-
-let g:neomake_python_pylint_maker = {
-  \ 'args': [
-      \ '-d', 'C0103, C0111',
-      \ '-f', 'text',
-      \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
-      \ '-r', 'n'
-  \ ],
-  \ 'errorformat':
-      \ '%A%f:%l:%c:%t: %m,' .
-      \ '%A%f:%l: %m,' .
-      \ '%A%f:(%l): %m,' .
-      \ '%-Z%p^%.%#,' .
-      \ '%-G%.%#',
-  \ }
 
