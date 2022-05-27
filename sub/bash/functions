@@ -168,3 +168,9 @@ vpn() {
     )
 }
 
+open() {
+    test -e $1 || return 1
+    nohup xdg-open $1 1>/dev/null 2>&1 &
+}
+
+

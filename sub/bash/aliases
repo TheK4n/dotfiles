@@ -102,5 +102,3 @@ alias dcd='docker-compose down'
 alias drma='docker container prune'
 alias drmi='docker image prune'
 
-
-alias open='xdg-open'
