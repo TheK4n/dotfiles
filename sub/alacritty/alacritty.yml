@@ -19,6 +19,9 @@ env:
 key_bindings:
   - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
   - { key: F11, action: ToggleFullScreen }
+  - { key: H, mods: Control, chars: "\x1bb" } # one word left
+  - { key: L, mods: Control, chars: "\x1bf" } # one word right
+
 
 live_config_reload: true
 
