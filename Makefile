@@ -80,6 +80,11 @@ bat:
 	mkdir -p ~/.config/bat
 	ln -s $(PWD)/sub/bat/config ~/.config/bat/config
 
+ipython:
+	test -d ~/.ipython || \
+	mkdir -p ~/.ipython/profile_default
+	ln -s $(PWD)/sub/ipython/ipython_config.py ~/.ipython/profile_default/ipython_config.py
+
 font:
 	mkdir -p ~/.local/share/fonts
 	cd ~/.local/share/fonts
