@@ -25,6 +25,16 @@ def get_venv():
         return ""
 
 
+def get_humanized_path():
+    current_path = Path.cwd()
+
+    if current_path == Path.home(): return "~"
+
+    if current_path.parts[:3] == Path.home().parts:
+        return "~/" + "/".join(current_path.parts[3:])
+    return str(current_path)
+
+
 class CustomPrompt(Prompts):
 
     def in_prompt_tokens(self, cli=None):
@@ -34,9 +44,9 @@ class CustomPrompt(Prompts):
             (Token, "("),
             (Token.Name.Class, os.getlogin()),
             (Token.Name.Class, "@"),
-            (Token.Name.Class, "v" + python_version()),
+            (Token.Name.Class, "ipython v" + python_version()),
             (Token, ")-["),
-            (Token.OutPrompt, os.getcwd()),
+            (Token.OutPrompt, get_humanized_path()),
             (Token, "]"),
             (Token.Generic.Subheading, get_branch()),
             (Token, "\n└─"),
@@ -62,3 +72,6 @@ c.TerminalInteractiveShell.separate_in = ''
 c.TerminalInteractiveShell.confirm_exit = False
 c.TerminalIPythonApp.display_banner = False
 
+c.AliasManager.user_aliases = [
+ ('la', 'ls -al')
+]
