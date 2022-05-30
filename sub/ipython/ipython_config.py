@@ -18,19 +18,27 @@ def get_branch():
         return ""
 
 
+def get_venv():
+    try:
+        return f"({os.path.basename(os.environ['VIRTUAL_ENV'])})─"
+    except:
+        return ""
+
+
 class CustomPrompt(Prompts):
 
     def in_prompt_tokens(self, cli=None):
         return [
-            (Token, "\n┌──("),
+            (Token, "\n┌──"),
+            (Token, get_venv()),
+            (Token, "("),
             (Token.Name.Class, os.getlogin()),
-            (Token.Prompt, "@"),
-            (Token.Name.Class, "ipython v" + python_version()),
+            (Token.Name.Class, "@"),
+            (Token.Name.Class, "v" + python_version()),
             (Token, ")-["),
             (Token.OutPrompt, os.getcwd()),
             (Token, "]"),
             (Token.Generic.Subheading, get_branch()),
-            (Token, " "),
             (Token, "\n└─"),
             (
                 Token.Prompt
