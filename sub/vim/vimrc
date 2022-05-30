@@ -80,8 +80,8 @@ set encoding=utf8
 " tabs
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
-nnoremap <C-h> :tabprevious<CR>
-nnoremap <C-l> :tabnext<CR>
+nnoremap <A-h> :tabprevious<CR>
+nnoremap <A-l> :tabnext<CR>
 
 
 
