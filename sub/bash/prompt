@@ -58,7 +58,7 @@ __prompt_command() {
 
     prompt_color='\[\033[;32m\]'
     info_color='\[\033[1;34m\]'
-    prompt_symbol='㉿'
+    prompt_symbol='@'
     end_symbol='$'
 
 
