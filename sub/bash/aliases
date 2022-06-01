@@ -99,6 +99,6 @@ alias watch-diff='watch --color "git diff --color=always"'
 # docker
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
-alias drma='docker container prune'
+alias drmc='docker container prune'
 alias drmi='docker image prune'
 
