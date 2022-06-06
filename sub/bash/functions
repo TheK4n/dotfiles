@@ -152,6 +152,13 @@ py() {
 }
 
 # toggle wireguard vpn with interface /etc/wireguard/wg0.conf
+# to allow sudo user toggle vpn without password:
+## sudo groupadd wireguard
+## sudo usermod -aG wireguard $USER
+## sudo vi /etc/sudoers.d/wireguard
+###  %wireguard ALL= NOPASSWD: /sbin/systemctl start wg-quick@wg0.service
+###  %wireguard ALL= NOPASSWD: /sbin/systemctl stop wg-quick@wg0.service
+
 vpn() {
     local STATUS SERVICE CONFIG CONFIGFILE
     CONFIG="$1"
