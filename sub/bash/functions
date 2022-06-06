@@ -175,6 +175,17 @@ vpn() {
     )
 }
 
+# setup ssh tunnel to $1 as proxy
+toggle-proxy() {
+    if [ -z "$http_proxy" ]; then
+        export {http,https,ftp,rsync}_proxy="socks5://127.0.0.1:8888"
+        export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+        ssh -vCTN -D 0.0.0.0:8888 "$1" 1>/dev/null 2>&1 &
+    else
+        unset {http,https,ftp,rsync,no}
+    fi
+}
+
 open() {
     test -e $1 || return 1
     nohup xdg-open $1 1>/dev/null 2>&1 &
