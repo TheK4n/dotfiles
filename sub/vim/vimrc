@@ -102,6 +102,7 @@ call vundle#begin()
     Plugin 'preservim/vimux'
     Plugin 'francoiscabrol/ranger.vim'
     Plugin 'rbgrouleff/bclose.vim'
+    Plugin 'frazrepo/vim-rainbow'
     " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
     Plugin 'jiangmiao/auto-pairs'
@@ -289,3 +290,6 @@ EOF
 
 " END pyright
 
+
+au FileType py,go,c,cpp,objc,js call rainbow#load()
+let g:rainbow_active = 1
