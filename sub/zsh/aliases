@@ -2,3 +2,4 @@ alias -g L="| less -R"
 alias -g NO="1>/dev/null"  # stdOut
 alias -g NE="2>/dev/null"  # stdErr
 alias -g NA="1>/dev/null 2>&1"  # All
+bindkey '`' autosuggest-accept
