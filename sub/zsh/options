@@ -25,3 +25,8 @@ bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[H' beginning-of-line                  # home
 bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo                               # shift + tab undo last action
+bindkey '`' autosuggest-accept
+bindkey '^K' up-line-or-history
+bindkey '^J' down-line-or-history
+bindkey '^E' vi-forward-word
+bindkey '^B' vi-backward-word

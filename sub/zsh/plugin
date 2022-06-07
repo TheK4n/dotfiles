@@ -7,4 +7,3 @@ so ~/.subzsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 so ~/.subzsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 so ~/.subzsh/plugins/hlissner/zsh-autopair/autopair.zsh
 
-bindkey '`' autosuggest-accept
