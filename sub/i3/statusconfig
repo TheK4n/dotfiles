@@ -37,7 +37,7 @@ battery all {
 }
 
 disk "/" {
-        format = " %used/%total"
+        format = "/ %used/%total"
 }
 
 disk "/home" {
