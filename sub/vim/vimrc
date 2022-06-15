@@ -98,6 +98,7 @@ call vundle#begin()
     Plugin 'tpope/vim-commentary'
     Plugin 'ap/vim-css-color'
     Plugin 'terryma/vim-multiple-cursors'
+    " pacman -S ctags
     Plugin 'preservim/tagbar'
     Plugin 'preservim/vimux'
     Plugin 'francoiscabrol/ranger.vim'
