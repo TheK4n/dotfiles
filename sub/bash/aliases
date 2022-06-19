@@ -37,7 +37,7 @@ alias history='history 0'
 
 # shorts
 alias c='clear'
-alias q='exit'
+alias q='exit 0'
 alias h='history | less'
 alias j='jobs -l'
 alias hg='history|grep'
