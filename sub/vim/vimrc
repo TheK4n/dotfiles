@@ -104,6 +104,7 @@ call vundle#begin()
     Plugin 'francoiscabrol/ranger.vim'
     Plugin 'rbgrouleff/bclose.vim'
     Plugin 'frazrepo/vim-rainbow'
+    Plugin 'Pocco81/AutoSave.nvim'
     " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
     Plugin 'jiangmiao/auto-pairs'
@@ -175,9 +176,33 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 
 
+lua << EOF
+
+local autosave = require("autosave")
+
+autosave.setup(
+    {
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"TextChanged", "InsertLeave"},
+        conditions = {
+            exists = true,
+            filename_is_not = {},
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 0,
+        debounce_delay = 1000
+    }
+)
+
+EOF
+
+
+
 " BEGIN pyright
-
-
 
 
 lua << EOF
@@ -287,7 +312,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
-
 
 " END pyright
 
