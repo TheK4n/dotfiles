@@ -40,8 +40,9 @@ vim:
 	test -d ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
 	ln -s ~/.vim/vimrc ~/.vimrc
-	mkdir -p ~/.config/nvim
+	mkdir -p ~/.config/nvim/lua
 	ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
+	ln -s $(PWD)/sub/vim/init.lua ~/.config/nvim/lua/init.lua
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
