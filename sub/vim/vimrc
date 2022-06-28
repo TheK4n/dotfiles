@@ -1,9 +1,4 @@
 
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
 set number "номер строки
 set ruler 
 set laststatus=2
@@ -64,15 +59,6 @@ set virtualedit=onemore  " allow for cursor beyond last character
 " f4 toggle hlsearch
 nnoremap <F4> :set invhlsearch<CR>
 
-" navigation on russian
-nmap о j
-nmap л k
-nmap р h
-nmap д l
-nmap ш i
-nmap ф a
-nmap в d
-
 
 set ffs=unix,mac
 set encoding=utf8
@@ -115,6 +101,8 @@ call vundle#begin()
     Plugin 'hrsh7th/cmp-nvim-lsp'
     Plugin 'saadparwaiz1/cmp_luasnip'
     Plugin 'L3MON4D3/LuaSnip'
+
+    Plugin 'powerman/vim-plugin-ruscmd'  " Russian navigation
 
 call vundle#end()
 
@@ -172,6 +160,7 @@ let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
+
 
 
 
