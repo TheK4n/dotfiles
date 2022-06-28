@@ -38,14 +38,14 @@ Config files for:
 ### i3
 
 
-| Feature                 |               Shortcut |
-|:------------------------|-----------------------:|
-| Full Screen             |                PrtScrn |
-| Selection               |        Shift + PrtScrn |
-| Active Window           |        Super + PrtScrn |
-| Clipboard Full Screen   |         Ctrl + PrtScrn |
-| Clipboard Selection     | Ctrl + Shift + PrtScrn |
-| Clipboard Active Window | Ctrl + Super + PrtScrn |
+| Feature                 |               Shortcut            |
+|:------------------------|----------------------------------:|
+| Full Screen             | <kbd>PrtScrn</kbd>                |
+| Selection               | <kbd>Shift + PrtScrn</kbd>        |
+| Active Window           | <kbd>Super + PrtScrn</kbd>        |
+| Clipboard Full Screen   | <kbd>Ctrl + PrtScrn</kbd>         |
+| Clipboard Selection     | <kbd>Ctrl + Shift + PrtScrn</kbd> |
+| Clipboard Active Window | <kbd>Ctrl + Super + PrtScrn</kbd> |
 
 
 <a id="chapter-1"></a>
