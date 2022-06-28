@@ -94,3 +94,6 @@ font:
 	cd fonts
 	./install.sh
 
+termux:
+	echo "apt install termux-api tsu"
+

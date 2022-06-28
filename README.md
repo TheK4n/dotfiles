@@ -2,10 +2,10 @@
 
 <p align="center">
   <a href="https://github.com/TheK4n">
-    <img src="https://img.shields.io/github/followers/TheK4n?label=Follow&style=social">
+    <img src="https://img.shields.io/github/followers/TheK4n?label=Follow&style=social" alt="TheK4n">
   </a>
   <a href="https://github.com/TheK4n/dotfiles">
-    <img src="https://img.shields.io/github/stars/TheK4n/dotfiles?style=social">
+    <img src="https://img.shields.io/github/stars/TheK4n/dotfiles?style=social" alt="project">
   </a>
 </p>
 
@@ -38,12 +38,12 @@ Config files for:
 ### i3
 
 
-| Feature                 |               Shortcut            |
+| Feature                 |                          Shortcut |
 |:------------------------|----------------------------------:|
-| Full Screen             | <kbd>PrtScrn</kbd>                |
-| Selection               | <kbd>Shift + PrtScrn</kbd>        |
-| Active Window           | <kbd>Super + PrtScrn</kbd>        |
-| Clipboard Full Screen   | <kbd>Ctrl + PrtScrn</kbd>         |
+| Full Screen             |                <kbd>PrtScrn</kbd> |
+| Selection               |        <kbd>Shift + PrtScrn</kbd> |
+| Active Window           |        <kbd>Super + PrtScrn</kbd> |
+| Clipboard Full Screen   |         <kbd>Ctrl + PrtScrn</kbd> |
 | Clipboard Selection     | <kbd>Ctrl + Shift + PrtScrn</kbd> |
 | Clipboard Active Window | <kbd>Ctrl + Super + PrtScrn</kbd> |
 
