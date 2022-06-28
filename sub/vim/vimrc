@@ -84,7 +84,6 @@ call vundle#begin()
     Plugin 'tpope/vim-commentary'
     Plugin 'ap/vim-css-color'
     Plugin 'terryma/vim-multiple-cursors'
-    " pacman -S ctags
     Plugin 'preservim/tagbar'
     Plugin 'preservim/vimux'
     Plugin 'francoiscabrol/ranger.vim'
@@ -115,10 +114,6 @@ nnoremap <silent> <special> <F10> :!python3 % <CR>
 
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,match,case
-
-" nerdtree
-" Ctrl + w l|h - change window
-
 
 
 nnoremap <silent> <special> <F3> :Ranger <CR>

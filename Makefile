@@ -35,7 +35,7 @@ alacritty:
 	ln -s $(PWD)/sub/alacritty/alacritty.yml ~/.config/alacritty/
 
 vim:
-	echo "sudo pacman -S npm; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
+	echo "sudo pacman -S npm ctags; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
 	echo "set editing-mode vi" >> ~/.inputrc
 	test -d ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
