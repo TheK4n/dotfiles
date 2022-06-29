@@ -191,4 +191,14 @@ open() {
     nohup xdg-open $1 1>/dev/null 2>&1 &
 }
 
+split-file() {
+    local _size
+    test -z "$2" && _size=1G || _size="$2"
+    test -e "$1" || return 1
+
+    test -d "$1" && \
+        (mkdir "$1.tar.gz.splitted" && cd "$1.tar.gz.splitted" && tar -cz "../$1" | split -d -b "$_size") || \
+        (mkdir "$1.splitted" && cd "$1.splitted" && split -d -b "$_size" "../$1")
+}
+
 
