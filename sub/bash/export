@@ -23,3 +23,8 @@ fi
 if [ -d "$HOME/.npm-global/bin" ] ; then
     export PATH="$PATH:$HOME/.npm-global/bin"
 fi
+
+
+if [ -d "$HOME/.go" ] then
+    export PATH="$PATH:$HOME/.go"
+fi
