@@ -26,5 +26,5 @@ fi
 
 
 if [ -d "$HOME/.go" ] ; then
-    export PATH="$PATH:$HOME/.go"
+    export GOPATH="$HOME/.go"
 fi
