@@ -163,4 +163,12 @@ au FileType py,go,c,cpp,objc,js call rainbow#load()
 let g:rainbow_active = 1
 
 
+
+set termguicolors
+hi DiagnosticError guifg=White
+hi DiagnosticWarn guifg=White
+hi DiagnosticInfo guifg=White
+hi DiagnosticHint guifg=White
+
+
 luafile ~/.config/nvim/lua/init.lua
