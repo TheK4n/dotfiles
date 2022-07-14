@@ -44,7 +44,7 @@ vim:
 	ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
 	ln -s $(PWD)/sub/vim/init.lua ~/.config/nvim/lua/init.lua
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	vim +PluginInstall +qall
+	nvim +PluginInstall +qall
 
 ssh:
 	cat $(PWD)/sub/ssh/config >> ~/.ssh/config
