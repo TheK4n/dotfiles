@@ -39,7 +39,7 @@ vim:
 	echo "set editing-mode vi" >> ~/.inputrc
 	test -d ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
-	ln -s ~/.vim/vimrc ~/.vimrc
+	ln -s $(PWD)/light/.vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim/lua
 	ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
 	ln -s $(PWD)/sub/vim/init.lua ~/.config/nvim/lua/init.lua
