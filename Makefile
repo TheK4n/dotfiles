@@ -36,6 +36,7 @@ alacritty:
 
 vim:
 	echo "sudo pacman -S npm ctags; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
+	echo "go install golang.org/x/tools/gopls@latest"
 	echo "set editing-mode vi" >> ~/.inputrc
 	test -d ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim

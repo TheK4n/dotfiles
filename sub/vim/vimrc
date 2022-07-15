@@ -103,6 +103,10 @@ call vundle#begin()
 
     Plugin 'powerman/vim-plugin-ruscmd'  " Russian navigation
 
+    " golang
+    Plugin 'fatih/vim-go'
+
+
 call vundle#end()
 
 filetype plugin indent on
@@ -164,6 +168,9 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 
+" golang
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 
 au FileType py,go,c,cpp,objc,js call rainbow#load()
