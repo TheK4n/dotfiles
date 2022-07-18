@@ -60,7 +60,7 @@ alias svi="sudo -E nvim"
 alias edit=nvim
 
 # net
-alias ports='netstat -tulanp'
+alias ports='ss -tlnp'
 alias wget='wget -c'
 alias ping='ping -c 5'
 alias myip='curl ipinfo.io/ip'
