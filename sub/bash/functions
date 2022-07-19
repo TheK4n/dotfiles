@@ -169,9 +169,11 @@ vpn() {
 
     test -e "$CONFIGFILE" || (echo "Config '$CONFIGFILE' not exists" >&2; return 1) && (
 
-    SERVICE="wg-quick@$CONFIG.service"
+        SERVICE="wg-quick@$CONFIG.service"
 
-    systemctl --quiet is-active "$SERVICE" && sudo systemctl stop "$SERVICE" || sudo systemctl start "$SERVICE"
+        systemctl --quiet is-active "$SERVICE" && \
+            (sudo systemctl stop "$SERVICE" && echo DOWN) || \
+            (sudo systemctl start "$SERVICE" && ip -br a | grep wg0 | awk '{print $1":\t"$3}')
     )
 }
 
