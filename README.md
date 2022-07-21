@@ -48,6 +48,18 @@ Config files for:
 | Clipboard Active Window | <kbd>Ctrl</kbd> + <kbd>Super</kbd> + <kbd>PrtScr</kbd>  |
 
 
+### ZSH global aliases
+
+| Alias                   |                      Equals                      | Description                 |
+|:------------------------|:-------------------------------------------------|:----------------------------|
+| `git diff L`            | `git diff \| less -R`                            | View stdout                 |
+| `cat main.py S -S py`   | `cat main.py \| highlight -O ansi --syntax py`   | Highlight syntax            |
+| `redis-server BG`       | `redis-server &>/dev/null &`                     | Run command in background   |
+
+
+
+
+
 <a id="chapter-1"></a>
 ## Installation
 
