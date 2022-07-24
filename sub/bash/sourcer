@@ -15,3 +15,10 @@ if [[ $- == *i* ]]; then
     so "$HOME"/.subbash/completion
 fi
 
+
+if [ -d "$HOME"/.subbash/bashrc.d ] && [ -n $(ls "$HOME"/.subbash/bashrc.d/ 2>/dev/null) ]; then
+    for filename in $(ls "$HOME"/.subbash/bashrc.d/ | sort -n)
+    do
+        source "$HOME"/.subbash/bashrc.d/"$filname"
+    done
+fi
