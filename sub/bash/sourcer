@@ -1,24 +1,19 @@
 
-so () {
+_so () {
     [ -f "$1" ] && source "$1"
 }
 
 if [[ $0 == *bash ]]; then
-    so "$HOME"/.subbash/export
-    so "$HOME"/.subbash/shopt
+    _so "$HOME"/.subbash/export
+    _so "$HOME"/.subbash/shopt
 fi
 
 if [[ $- == *i* ]]; then
-    so "$HOME"/.subbash/prompt
-    so "$HOME"/.subbash/aliases
-    so "$HOME"/.subbash/functions
-    so "$HOME"/.subbash/completion
+    _so "$HOME"/.subbash/prompt
+    _so "$HOME"/.subbash/aliases
+    _so "$HOME"/.subbash/functions
+    _so "$HOME"/.subbash/completion
 fi
 
 
-if [ -d "$HOME"/.subbash/bashrc.d ] && [ -n "$(ls "$HOME"/.subbash/bashrc.d/ 2>/dev/null)" ]; then
-    for FILENAME in $(ls "$HOME"/.subbash/bashrc.d/ | sort -n)
-    do
-        source "$HOME"/.subbash/bashrc.d/"$FILENAME"
-    done
-fi
+_sod "$HOME"/.subbash/bashrc.d

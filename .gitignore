@@ -2,3 +2,5 @@ sub/vim/bundle
 sub/zsh/plugins
 sub/bash/bashrc.d/*
 !sub/bash/bashrc.d/00_test.sh
+sub/zsh/zshrc.d/*
+!sub/zsh/shrc.d/00_test.sh

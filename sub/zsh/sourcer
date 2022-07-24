@@ -1,26 +1,21 @@
-so () {
+
+_so () {
     [ -f "$1" ] && source "$1"
 }
+_so /etc/zsh_command_not_found
+_so "$HOME"/.subzsh/options
+_so "$HOME"/.subzsh/completion
+_so "$HOME"/.subzsh/history
+_so "$HOME"/.subzsh/prompt
+_so "$HOME"/.subzsh/other
+_so "$HOME"/.subzsh/plugin
+_so "$HOME"/.subzsh/aliases
 
-so /etc/zsh_command_not_found
-so "$HOME"/.subzsh/options
-so "$HOME"/.subzsh/completion
-so "$HOME"/.subzsh/history
-so "$HOME"/.subzsh/prompt
-so "$HOME"/.subzsh/other
-so "$HOME"/.subzsh/plugin
-so "$HOME"/.subzsh/aliases
-
-so "$HOME"/.subbash/aliases
-so "$HOME"/.subbash/completion
-so "$HOME"/.subbash/export
-so "$HOME"/.subbash/functions
-so "$HOME"/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+_so "$HOME"/.subbash/aliases
+_so "$HOME"/.subbash/completion
+_so "$HOME"/.subbash/export
+_so "$HOME"/.subbash/functions
+_so "$HOME"/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
-if [ -d "$HOME"/.subbash/bashrc.d ] && [ -n "$(ls "$HOME"/.subbash/bashrc.d/ 2>/dev/null)" ]; then
-    for FILENAME in $(ls "$HOME"/.subbash/bashrc.d/ | sort -n)
-    do
-        source "$HOME"/.subbash/bashrc.d/"$FILENAME"
-    done
-fi
+_sod "$HOME"/.subzsh/zshrc.d
