@@ -16,9 +16,9 @@ if [[ $- == *i* ]]; then
 fi
 
 
-if [ -d "$HOME"/.subbash/bashrc.d ] && [ -n $(ls "$HOME"/.subbash/bashrc.d/ 2>/dev/null) ]; then
-    for filename in $(ls "$HOME"/.subbash/bashrc.d/ | sort -n)
+if [ -d "$HOME"/.subbash/bashrc.d ] && [ -n "$(ls "$HOME"/.subbash/bashrc.d/ 2>/dev/null)" ]; then
+    for FILENAME in $(ls "$HOME"/.subbash/bashrc.d/ | sort -n)
     do
-        source "$HOME"/.subbash/bashrc.d/"$filname"
+        source "$HOME"/.subbash/bashrc.d/"$FILENAME"
     done
 fi
