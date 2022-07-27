@@ -108,6 +108,9 @@ call vundle#begin()
     " Plugin 'fatih/vim-go'
     Plugin 'nvim-telescope/telescope.nvim'
     Plugin 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
+    Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+
 
 call vundle#end()
 

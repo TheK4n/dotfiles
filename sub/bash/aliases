@@ -22,6 +22,7 @@ alias lt='(du -sh * .* 2>/dev/null | sort -h | tac; du -sh .)'
 
 alias _='sudo'
 alias root='sudo su - root'
+alias please='sudo !!'
 
 alias rm='rm -r'
 alias mkdir='mkdir -pv'
