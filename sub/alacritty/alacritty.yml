@@ -5,6 +5,7 @@ window:
      columns: 150
      lines: 42
   opacity: 0.83
+  transparent_background_colors: true
 
 mouse:
   hide_when_typing: true
