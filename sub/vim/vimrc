@@ -100,12 +100,14 @@ call vundle#begin()
     Plugin 'hrsh7th/cmp-nvim-lsp'
     Plugin 'saadparwaiz1/cmp_luasnip'
     Plugin 'L3MON4D3/LuaSnip'
+    Plugin 'nvim-lua/plenary.nvim'
 
     Plugin 'powerman/vim-plugin-ruscmd'  " Russian navigation
 
     " golang
     " Plugin 'fatih/vim-go'
-
+    Plugin 'nvim-telescope/telescope.nvim'
+    Plugin 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 
 call vundle#end()
 
@@ -131,6 +133,7 @@ nnoremap <silent> <special> <F3> :Ranger <CR>
 
 let g:ranger_replace_netrw = 1  " open ranger when vim open a directory
 let g:ranger_map_keys = 0
+let g:ranger_open_new_tab = 1
 
 " ctags required
 nnoremap <silent> <special> <F8> :TagbarToggle <CR>
@@ -183,6 +186,11 @@ hi DiagnosticError guifg=Grey
 hi DiagnosticWarn guifg=Grey
 hi DiagnosticInfo guifg=Grey
 hi DiagnosticHint guifg=Grey
+
+
+
+nnoremap ,ff <cmd>Telescope find_files<cr>
+nnoremap ,fg <cmd>Telescope live_grep<cr>
 
 
 luafile ~/.config/nvim/lua/init.lua

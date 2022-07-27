@@ -125,3 +125,6 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+
+require('telescope').load_extension('fzf')
