@@ -57,7 +57,7 @@ Config files for:
 | `redis-server BG`       | `redis-server &>/dev/null &`                     | Run command in background   |
 
 
-You can add your files to the `~/.subbash/bashrc.d` for bash or `~/.subzsh/zshrc.d` for zsh directory so that they automatically run in ascending order when you open a terminal.\
+You can add your files to the `~/.subbash/bashrc.d` directory for bash or `~/.subzsh/zshrc.d` directory for zsh so that they automatically run in ascending order when you open a terminal.\
 Example:\
 `~/.subbash/bashrc.d/01_hello.sh`
 ```bash
