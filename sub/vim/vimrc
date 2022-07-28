@@ -9,9 +9,8 @@ set clipboard=unnamedplus
 
 set shell=zsh
 
-
 nnoremap <Leader>c :set cursorline!<CR>
-
+inoremap jk <esc>
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
@@ -68,7 +67,6 @@ nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
-
 
 
 
