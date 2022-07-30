@@ -64,6 +64,17 @@ Example:\
 echo "Hello $USER!"
 ```
 
+### VIM shortcuts
+
+| Command                 |  Description                        |
+|:-----------------------:|:------------------------------------|
+| <kbd>,ff</kbd>          |  Project files search by Telescope  |
+| <kbd>,fg</kbd>          |  Search words in project            |
+| <kbd>,eh</kbd>          |  Show hiden symbols like tabs       |
+| <kbd>,l</kbd>           |  Line number styles                 |
+| <kbd>,c</kbd>           |  Highlight cursor line              |
+| <kbd>,/</kbd>           |  Toggle search hightlight           |
+
 
 <a id="chapter-1"></a>
 ## Installation
