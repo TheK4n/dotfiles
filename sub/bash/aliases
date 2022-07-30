@@ -65,7 +65,7 @@ alias ports='ss -tlnp'
 alias wget='wget -c'
 alias ping='ping -c 5'
 alias myip='curl ipinfo.io/ip'
-alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
+alias sprunge='curl -F "sprunge=<-" http://sprunge.us 2>/dev/null'
 
 # starts web server
 alias www='python3 -m http.server 8000'
