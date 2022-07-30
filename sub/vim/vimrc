@@ -120,11 +120,12 @@ set t_Co=256
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,match,case
 
 
+
 " run file by filetype
 if (&filetype=='python')
-    nnoremap <silent> <special> <F10> :!python3 % <CR>
+    nnoremap <silent> <special> <F10> :tabnew % <CR> :terminal python3 % <CR> G <CR>
 elseif (&filetype=='go')
-    nnoremap <silent> <special> <F10> :!go run % <CR>
+    nnoremap <silent> <special> <F10> :tabnew % <CR> :terminal go run % <CR> G <CR>
 endif
 
 
