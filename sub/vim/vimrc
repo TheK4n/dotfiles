@@ -239,3 +239,24 @@ nnoremap ,fg <cmd>Telescope live_grep<cr>
 
 
 luafile ~/.config/nvim/lua/init.lua
+
+
+
+function! ToggleRelativeAbsoluteNumber()
+  if !&number && !&relativenumber
+      set number
+      set norelativenumber
+  elseif &number && !&relativenumber
+      set nonumber
+      set relativenumber
+  elseif !&number && &relativenumber
+      set number
+      set relativenumber
+  elseif &number && &relativenumber
+      set nonumber
+      set norelativenumber
+  endif
+endfunction
+
+nnoremap <silent><Leader>v :call ToggleRelativeAbsoluteNumber()<CR>
+
