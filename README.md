@@ -73,7 +73,7 @@ echo "Hello $USER!"
 | <kbd>,eh</kbd>          |  Show hiden symbols like tabs       |
 | <kbd>,l</kbd>           |  Line number styles                 |
 | <kbd>,c</kbd>           |  Highlight cursor line              |
-| <kbd>,/</kbd>           |  Toggle search hightlight           |
+| <kbd>,/</kbd>           |  Toggle search highlight            |
 | <kbd>,``</kbd>          |  Close all without saving           |
 
 
