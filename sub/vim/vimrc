@@ -19,7 +19,7 @@ let g:Powerline_symbols='unicode' "Поддержка unicode
 let g:airline#extensions#xkblayout#enabled = 0
 let g:airline#extensions#branch#enabled=1
 
-set ttimeoutlen=10 "Понижаем задержку ввода escape последовательностей
+set ttimeoutlen=0 "Понижаем задержку ввода escape последовательностей
 let &t_SI.="\e[5 q" "SI = режим вставки
 let &t_SR.="\e[3 q" "SR = режим замены
 let &t_EI.="\e[1 q" "EI = нормальный режим
@@ -37,6 +37,13 @@ set autoindent
 set smartindent
 set nowrap
 
+set ttyfast
+set autoread
+
+set history=1000
+set undofile
+set undoreload=1000
+
 set noerrorbells
 set novisualbell
 set showcmd
@@ -44,7 +51,6 @@ set showtabline=2
 
 set ignorecase
 set smartcase
-set hlsearch
 set incsearch
 
 set mousehide
@@ -53,11 +59,39 @@ set mouse=a
 set colorcolumn=120
 set scrolloff=7
 
+set backup
+set noswapfile
+set backupdir=$HOME/.vim/tmp/backup/
+set undodir=$HOME/.vim/tmp/undo/
+set directory=$HOME/.vim/tmp/swap/
+set viminfo+=n$HOME/.vim/tmp/viminfo
+
+
+function! MakeDirIfNoExists(path)
+    if !isdirectory(expand(a:path))
+        call mkdir(expand(a:path), "p")
+    endif
+endfunction
+
+
+" make this dirs if no exists previously
+silent! call MakeDirIfNoExists(&undodir)
+silent! call MakeDirIfNoExists(&backupdir)
+silent! call MakeDirIfNoExists(&directory)
 set virtualedit=onemore  " allow for cursor beyond last character
 
 " f4 toggle hlsearch
 nnoremap <F4> :set invhlsearch<CR>
 
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 set ffs=unix,mac
 set encoding=utf8
@@ -68,6 +102,15 @@ nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 
+" hiden chars
+
+nmap <F6> :set list!<CR>
+set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
+
+
+" Autoload configuration when this file changes ($MYVIMRC)
+
+autocmd! BufWritePost init.vim source %
 
 
 " Plugins
