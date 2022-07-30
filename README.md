@@ -74,6 +74,7 @@ echo "Hello $USER!"
 | <kbd>,l</kbd>           |  Line number styles                 |
 | <kbd>,c</kbd>           |  Highlight cursor line              |
 | <kbd>,/</kbd>           |  Toggle search hightlight           |
+| <kbd>,``</kbd>          |  Close all without saving           |
 
 
 <a id="chapter-1"></a>
