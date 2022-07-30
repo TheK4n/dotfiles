@@ -1,5 +1,4 @@
 
-set number "номер строки
 set ruler 
 set laststatus=2
 
@@ -9,6 +8,10 @@ set clipboard=unnamedplus
 
 set shell=zsh
 
+" <Leader>
+let g:mapleader = ","
+
+set cursorline
 nnoremap <Leader>c :set cursorline!<CR>
 inoremap jk <esc>
 
@@ -56,7 +59,7 @@ set incsearch
 set mousehide
 set mouse=a
 
-set colorcolumn=120
+set colorcolumn=81
 set scrolloff=7
 
 set backup
@@ -169,6 +172,8 @@ if (&filetype=='python')
     nnoremap <silent> <special> <F10> :tabnew % <CR> :terminal python3 % <CR> G <CR>
 elseif (&filetype=='go')
     nnoremap <silent> <special> <F10> :tabnew % <CR> :terminal go run % <CR> G <CR>
+elseif (&filetype=='vim')
+    nnoremap <silent> <special> <F10> :so % <CR>
 endif
 
 
@@ -234,8 +239,8 @@ hi DiagnosticHint guifg=Grey
 
 
 
-nnoremap ,ff <cmd>Telescope find_files<cr>
-nnoremap ,fg <cmd>Telescope live_grep<cr>
+nnoremap <Leader>ff <cmd>Telescope find_files<cr>
+nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
 
 
 luafile ~/.config/nvim/lua/init.lua
