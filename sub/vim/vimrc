@@ -12,7 +12,7 @@ set shell=zsh
 let g:mapleader = ","
 
 set cursorline
-nnoremap <Leader>c :set cursorline!<CR>
+nnoremap <silent> <Leader>c :set cursorline!<CR>
 inoremap jk <esc>
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
@@ -84,7 +84,7 @@ silent! call MakeDirIfNoExists(&directory)
 set virtualedit=onemore  " allow for cursor beyond last character
 
 " f4 toggle hlsearch
-nnoremap <F4> :set invhlsearch<CR>
+nnoremap <silent> <Leader>/ :set invhlsearch<CR>
 
 
 nnoremap <up> <nop>
@@ -107,7 +107,7 @@ nnoremap <C-l> :tabnext<CR>
 
 " hiden chars
 
-nmap <F6> :set list!<CR>
+nmap <silent> <Leader>eh :set list!<CR>
 set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
 
 
@@ -266,5 +266,8 @@ function! ToggleRelativeAbsoluteNumber()
   endif
 endfunction
 
-nnoremap <silent><Leader>v :call ToggleRelativeAbsoluteNumber()<CR>
+nnoremap <silent><Leader>l :call ToggleRelativeAbsoluteNumber()<CR>
+
+" Quick exiting without save
+nnoremap <Leader>`` :qa!<CR>
 
