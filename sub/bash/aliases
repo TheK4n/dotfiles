@@ -17,8 +17,6 @@ alias la='ls -AF'
 alias lla='ls -lhFA'
 alias ll.='ls -lhFA --ignore="*"'
 
-alias lt='(du -sh * .* 2>/dev/null | sort -h | tac; du -sh .)'
-
 
 alias _='sudo'
 alias root='sudo su - root'
