@@ -100,10 +100,10 @@ set ffs=unix,mac
 set encoding=utf8
 
 " tabs
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
-nnoremap <C-h> :tabprevious<CR>
-nnoremap <C-l> :tabnext<CR>
+nnoremap <silent> <C-Left> :tabprevious<CR>
+nnoremap <silent> <C-Right> :tabnext<CR>
+nnoremap <silent> <C-h> :tabprevious<CR>
+nnoremap <silent> <C-l> :tabnext<CR>
 
 " hiden chars
 
