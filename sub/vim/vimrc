@@ -13,7 +13,7 @@ let g:mapleader = ","
 
 set cursorline
 
-
+" like tabdo but restore the current tab
 function! TabDo(command)
     let currTab=tabpagenr()
     execute 'tabdo ' . a:command
