@@ -92,7 +92,7 @@ silent! call MakeDirIfNoExists(&backupdir)
 silent! call MakeDirIfNoExists(&directory)
 set virtualedit=onemore  " allow for cursor beyond last character
 
-" f4 toggle hlsearch
+" toggle hlsearch
 nnoremap <silent> <Leader>/ :set invhlsearch<CR>
 
 
