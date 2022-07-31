@@ -1,4 +1,4 @@
-<h1 align="center">Kan`s dotfiles</h1>
+h1 align="center">Kan`s dotfiles</h1>
 
 <p align="center">
   <a href="https://github.com/TheK4n">

@@ -12,7 +12,16 @@ set shell=zsh
 let g:mapleader = ","
 
 set cursorline
-nnoremap <silent> <Leader>c :set cursorline!<CR>
+
+
+function! TabDo(command)
+    let currTab=tabpagenr()
+    execute 'tabdo ' . a:command
+    execute 'tabn ' . currTab
+endfunction
+
+
+nnoremap <silent> <Leader>c :call TabDo('set cursorline!') <CR>
 inoremap jk <esc>
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
@@ -266,8 +275,7 @@ function! ToggleRelativeAbsoluteNumber()
   endif
 endfunction
 
-nnoremap <silent><Leader>l :call ToggleRelativeAbsoluteNumber()<CR>
-
+nnoremap <silent> <Leader>l :call TabDo('call ToggleRelativeAbsoluteNumber()') <CR>
 " Quick exiting without save
 nnoremap <Leader>`` :qa!<CR>
 
