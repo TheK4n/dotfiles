@@ -195,7 +195,7 @@ let g:ranger_map_keys = 0
 let g:ranger_open_new_tab = 1
 
 " ctags required
-nnoremap <silent> <special> <F8> :TagbarToggle <CR>
+nnoremap <silent> <Leader>t :TagbarToggle <CR>
 
 
 
