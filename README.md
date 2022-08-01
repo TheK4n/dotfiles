@@ -75,6 +75,8 @@ echo "Hello $USER!"
 | <kbd>,c</kbd>           |  Highlight cursor line              |
 | <kbd>,/</kbd>           |  Toggle search highlight            |
 | <kbd>,``</kbd>          |  Close all without saving           |
+| <kbd>,t</kbd>           |  Tagbar                             |
+| <kbd>,r</kbd>           |  Run script in new tab (python, go) |
 
 
 <a id="chapter-1"></a>
