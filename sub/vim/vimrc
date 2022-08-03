@@ -44,6 +44,11 @@ let g:Powerline_symbols='unicode' "Поддержка unicode
 let g:airline#extensions#xkblayout#enabled = 0
 let g:airline#extensions#branch#enabled=1
 
+
+
+let ghregex='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide=ghregex
+
 let g:netrw_list_hide= '.*.swp$,
             \ *.pyc$,
             \ *.log$,
@@ -57,42 +62,31 @@ let g:netrw_list_hide= '.*.swp$,
             \ *.war$,
             \ *__pycache__*,
             \ .git$'
+let g:netrw_list_hide.=',' . ghregex
 
 let g:netrw_banner = 0  " hide banner
 let g:netrw_liststyle = 3  " tree instead of plain view
-let g:netrw_browse_split = 3  " open file in new tab
-let g:netrw_altv = 1
-set autochdir
-
-" unmap ctrl + l
-autocmd filetype netrw call UnMapNetrwRefrash()
-
-function! UnMapNetrwRefrash()
-    if mapcheck("<C-l>") == "<Plug>NetrwRefresh"
-         nunmap <buffer> <C-l>
-    endif
-endfunction
-
-
-let g:NetrwIsOpen=0
+let g:netrw_browse_split = 0
 let g:netrw_winsize = 15
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-    endif
+let g:netrw_keepdir = 0
+let g:netrw_hide = 1
+
+
+function! NetrwMapping()
+  nmap <buffer> H u
+  nmap <buffer> h -^
+  nmap <buffer> l <CR>
+
+  nmap <buffer> . gh
+  nmap <buffer> P <C-w>z
 endfunction
 
-noremap <silent> <Leader>z :call ToggleNetrw()<CR>
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+
+noremap <silent> <Leader>z :Texplore<CR>
 
 
 set ttimeoutlen=0 "Понижаем задержку ввода escape последовательностей
