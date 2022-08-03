@@ -36,7 +36,6 @@ endfunction
 
 nnoremap <silent> <Leader>c :call TabDo('set cursorline!') <CR>
 inoremap jk <esc>
-nnoremap <silent> <Leader>q :q <CR>
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
@@ -68,7 +67,15 @@ augroup netrw_mapping
   autocmd filetype netrw call NetrwMapping()
 augroup END
 
-noremap <silent> <Leader>z :Texplore<CR>
+function! ToggleTexplore()
+    if (&filetype=='netrw')
+        :q
+    else
+        :Texplore
+    endif
+endfunction
+
+noremap <silent> <Leader>z :call ToggleTexplore()<CR>
 
 
 set ttimeoutlen=0 "Понижаем задержку ввода escape последовательностей
