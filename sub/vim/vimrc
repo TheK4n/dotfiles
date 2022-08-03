@@ -36,6 +36,7 @@ endfunction
 
 nnoremap <silent> <Leader>c :call TabDo('set cursorline!') <CR>
 inoremap jk <esc>
+nnoremap <silent> <Leader>q :q <CR>
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
@@ -46,30 +47,11 @@ let g:airline#extensions#branch#enabled=1
 
 
 
-let ghregex='\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_list_hide=ghregex
-
-let g:netrw_list_hide= '.*.swp$,
-            \ *.pyc$,
-            \ *.log$,
-            \ *.o$,
-            \ *.xmi$,
-            \ *.swp$,
-            \ *.bak$,
-            \ *.pyc$,
-            \ *.class$,
-            \ *.jar$,
-            \ *.war$,
-            \ *__pycache__*,
-            \ .git$'
-let g:netrw_list_hide.=',' . ghregex
-
 let g:netrw_banner = 0  " hide banner
 let g:netrw_liststyle = 3  " tree instead of plain view
 let g:netrw_browse_split = 0
 let g:netrw_winsize = 15
 let g:netrw_keepdir = 0
-let g:netrw_hide = 1
 
 
 function! NetrwMapping()
