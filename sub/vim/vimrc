@@ -20,6 +20,19 @@ function! TabDo(command)
     execute 'tabn ' . currTab
 endfunction
 
+" like bufdo but restore the current buffer
+function! BufDo(command)
+  let currBuff=bufnr("%")
+  execute 'bufdo ' . a:command
+  execute 'buffer ' . currBuff
+endfunction
+
+" like windo but restore the current window
+function! WinDo(command)
+  let currwin=winnr()
+  execute 'windo ' . a:command
+  execute currwin . 'wincmd w'
+endfunction
 
 nnoremap <silent> <Leader>c :call TabDo('set cursorline!') <CR>
 inoremap jk <esc>
