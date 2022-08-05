@@ -1,5 +1,4 @@
 
-
 local autosave = require("autosave")
 
 autosave.setup(
@@ -128,3 +127,10 @@ end
 
 
 require('telescope').load_extension('fzf')
+
+vim.opt.termguicolors = true
+require("bufferline").setup{
+    options = {
+        mode = "tabs",
+    }
+}

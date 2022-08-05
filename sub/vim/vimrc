@@ -44,7 +44,8 @@ let g:Powerline_symbols='unicode' "Поддержка unicode
 let g:airline#extensions#xkblayout#enabled = 0
 let g:airline#extensions#branch#enabled=1
 
-
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
 
 let g:netrw_banner = 0  " hide banner
 let g:netrw_liststyle = 3  " tree instead of plain view
@@ -53,29 +54,24 @@ let g:netrw_winsize = 15
 let g:netrw_keepdir = 0
 
 
-function! NetrwMapping()
-  nmap <buffer> H u
-  nmap <buffer> h -^
-  nmap <buffer> l <CR>
 
-  nmap <buffer> . gh
-  nmap <buffer> P <C-w>z
-endfunction
 
-augroup netrw_mapping
-  autocmd!
-  autocmd filetype netrw call NetrwMapping()
-augroup END
 
-function! ToggleTexplore()
-    if (&filetype=='netrw')
-        :q
-    else
-        :Texplore
-    endif
-endfunction
 
-noremap <silent> <Leader>z :call ToggleTexplore()<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+let NERDTreeMapOpenInTab='<ENTER>'
 
 
 set ttimeoutlen=0 "Понижаем задержку ввода escape последовательностей
@@ -209,7 +205,12 @@ call vundle#begin()
     Plugin 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
     Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+    Plugin 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+    " Plug 'ryanoasis/vim-devicons' Icons without colours
+    Plugin 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
+
+    Plugin 'preservim/nerdtree'
 
 call vundle#end()
 
