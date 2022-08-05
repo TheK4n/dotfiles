@@ -149,17 +149,16 @@ set ffs=unix,mac
 set encoding=utf8
 
 " tabs
-nnoremap <silent> <C-l> :BufferLineCycleNext<CR>
-nnoremap <silent> <C-h> :BufferLineCyclePrev<CR>
+nnoremap <silent> <C-l> :tabnext<CR>
+nnoremap <silent> <C-h> :tabprev<CR>
+
 
 " hiden chars
-
 nmap <silent> <Leader>eh :set list!<CR>
 set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
 
 
 " Autoload configuration when this file changes ($MYVIMRC)
-
 autocmd! BufWritePost init.vim source %
 
 
@@ -200,11 +199,6 @@ call vundle#begin()
     Plugin 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
     Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-    Plugin 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-    " Plug 'ryanoasis/vim-devicons' Icons without colours
-    Plugin 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-
-
     Plugin 'preservim/nerdtree'
 
 call vundle#end()
@@ -217,15 +211,10 @@ set t_Co=256
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,match,case
 
 
-
 " run file by filetype
-if (&filetype=='python')
-    nnoremap <silent> <Leader>r :tabnew % <CR> :terminal python3 % <CR> :set nocursorline number norelativenumber <CR> G <CR>
-elseif (&filetype=='go')
-    nnoremap <silent> <Leader>r :tabnew % <CR> :terminal go run % <CR> :set nocursorline number norelativenumber <CR> G <CR>
-elseif (&filetype=='vim')
-    nnoremap <silent> <Leader>r :so % <CR>
-endif
+autocmd BufEnter,BufRead,BufNewFile * if (&filetype=='python') | nnoremap <silent> <Leader>r :tabnew % <CR> :terminal python3 % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
+autocmd BufEnter,BufRead,BufNewFile * if (&filetype=='go') | nnoremap <silent> <Leader>r :tabnew % <CR> :terminal go run % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
+autocmd BufEnter,BufRead,BufNewFile * if (&filetype=='vim') | nnoremap <silent> <Leader>r :so % <CR>
 
 
 
