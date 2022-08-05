@@ -149,8 +149,8 @@ set ffs=unix,mac
 set encoding=utf8
 
 " tabs
-nnoremap <silent> <C-l> :tabprevious<CR>
-nnoremap <silent> <C-h> :tabnext<CR>
+nnoremap <silent> <C-l> :BufferLineCycleNext<CR>
+nnoremap <silent> <C-h> :BufferLineCyclePrev<CR>
 
 " hiden chars
 
@@ -231,6 +231,8 @@ endif
 
 " ctags required
 nnoremap <silent> <Leader>t :TagbarToggle <CR>
+
+nnoremap <silent> <Leader>ve :tabnew $MYVIMRC<CR>
 
 
 
