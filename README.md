@@ -66,17 +66,20 @@ echo "Hello $USER!"
 
 ### VIM shortcuts
 
-| Command                 |  Description                        |
-|:-----------------------:|:------------------------------------|
-| <kbd>,ff</kbd>          |  Project files search by Telescope  |
-| <kbd>,fg</kbd>          |  Search words in project            |
-| <kbd>,eh</kbd>          |  Show hiden symbols like tabs       |
-| <kbd>,l</kbd>           |  Line number styles                 |
-| <kbd>,c</kbd>           |  Highlight cursor line              |
-| <kbd>,/</kbd>           |  Toggle search highlight            |
-| <kbd>,``</kbd>          |  Close all without saving           |
-| <kbd>,t</kbd>           |  Tagbar                             |
-| <kbd>,r</kbd>           |  Run script in new tab (python, go) |
+| Command                 |  Description                                        |
+|:-----------------------:|:----------------------------------------------------|
+| <kbd>,ff</kbd>          | Project files search by Telescope                   |
+| <kbd>,fg</kbd>          | Search words in project                             |
+| <kbd>,eh</kbd>          | Show hiden symbols like tabs                        |
+| <kbd>,l</kbd>           | Line number styles                                  |
+| <kbd>,c</kbd>           | Highlight cursor line                               |
+| <kbd>,/</kbd>           | Toggle search highlight                             |
+| <kbd>,``</kbd>          | Close all without saving                            |
+| <kbd>,t</kbd>           | Tagbar                                              |
+| <kbd>,r</kbd>           | Run script in new tab (python, go)                  |
+| <kbd>,nn</kbd>          | Toggle NerdTree                                     |
+| <kbd>,nf</kbd>          | Toggle NerdTree focus                               |
+| <kbd>,ve</kbd>          | Open ~/.vimrc or ~/.config/nvim/init.vim in new tab |
 
 
 <a id="chapter-1"></a>
