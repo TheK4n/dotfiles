@@ -55,8 +55,8 @@ let g:netrw_keepdir = 0
 
 
 
-
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+" Mirror the NERDTree before showing it. This makes it the same on all tabs.
+nnoremap <silent> <leader>n :NERDTreeMirror<CR>:NERDTreeToggle<CR>
 
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
@@ -68,8 +68,8 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-let NERDTreeCustomOpenArgs={'file':{'where': 't'}}
-
+let g:NERDTreeCustomOpenArgs={'file':{'where': 't'}}
+let g:NERDTreeMapActivateNode='l'
 
 set ttimeoutlen=0 "Понижаем задержку ввода escape последовательностей
 let &t_SI.="\e[5 q" "SI = режим вставки
