@@ -42,11 +42,10 @@ alias j='jobs -l'
 alias hg='history|grep'
 
 # utils
-alias sha='shasum -a 256'
+alias sha='shasum -a 256 | head -c 64'
 alias genpass="openssl rand -base64 12"
-alias gensalt="date +%s%N | sha256sum | head -c 64"
+alias gensalt="dd if=/dev/urandom count=16 2>/dev/null | sha256sum | head -c 64"
 alias diff='colordiff'
-alias upgrade_all='sudo apt update && sudo apt upgrade'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
 
 
