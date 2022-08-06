@@ -299,6 +299,7 @@ function! ToggleRelativeAbsoluteNumber()
 endfunction
 
 nnoremap <silent> <Leader>l :call TabDo('call ToggleRelativeAbsoluteNumber()') <CR>
+
 " Quick exiting without save
-nnoremap <Leader>`` :qa!<CR>
+nnoremap <silent> <Leader>`` :qa!<CR>
 
