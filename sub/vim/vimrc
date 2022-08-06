@@ -56,7 +56,7 @@ let g:netrw_keepdir = 0
 
 
 " Mirror the NERDTree before showing it. This makes it the same on all tabs.
-nnoremap <silent> <leader>nn :NERDTreeMirror<CR>:NERDTreeToggle<CR>
+nnoremap <silent> <leader>nn :silent NERDTreeMirror<CR>:silent NERDTreeToggle<CR>
 
 " Toggle focus
 nnoremap <silent> <leader>nf :wincmd p<CR>
