@@ -219,12 +219,16 @@ split-file() {
 
 # returns url to code previewer
 rayso() {
-    test -z "$1" && return 1
-    local CODE FILENAME
+    local CODE TITLE
 
-    CODE="$(cat "$1" | base64)"
-    FILENAME="$(basename "$1")"
+    if [[ -n "$1" ]]; then
+        CODE="$(cat "$1" | base64)"
+        TITLE="$(basename "$1")"
+    else
+        CODE="$(cat | base64)"
+        TITLE="Code"
+    fi
 
-    echo "https://ray.so/?colors=candy&background=true&darkMode=true&padding=64&title=${FILENAME}&code=${CODE}&language=auto"
+    echo "https://ray.so/?colors=candy&background=true&darkMode=true&padding=64&title=${TITLE}&code=${CODE}&language=auto"
 }
 
