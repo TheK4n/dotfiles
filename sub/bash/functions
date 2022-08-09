@@ -217,4 +217,14 @@ split-file() {
         (mkdir "$1.splitted" && cd "$1.splitted" && split -d -b "$_size" "../$1")
 }
 
+# returns url to code previewer
+rayso() {
+    test -z "$1" && return 1
+    local CODE FILENAME
+
+    CODE="$(cat "$1" | base64)"
+    FILENAME="$(basename "$1")"
+
+    echo "https://ray.so/?colors=candy&background=true&darkMode=true&padding=64&title=${FILENAME}&code=${CODE}&language=auto"
+}
 
