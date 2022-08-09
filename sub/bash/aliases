@@ -102,3 +102,12 @@ alias dcd='docker-compose down'
 alias drmc='docker container prune'
 alias drmi='docker image prune'
 
+
+# clipboard
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    alias ctc='xclip -selection clipboard -i'
+    alias ctv='xclip -selection clipboard -o'
+elif [[ "$OSTYPE" == "linux-android"* ]]; then
+    alias ctc='termux-clipboard-set'
+    alias ctv='termux-clipboard-get'
+fi
