@@ -105,9 +105,17 @@ alias drmi='docker image prune'
 
 # clipboard
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    alias ctc='xclip -selection clipboard -i'
-    alias ctv='xclip -selection clipboard -o'
+    if [[ -n "$DISPLAY" ]]; then
+        alias ctc='xclip -selection clipboard -i'
+        alias ctv='xclip -selection clipboard -o'
+    else
+        alias ctc='read -rd "EOF" TTYCLIPBOARD'
+        alias ctv='echo "$TTYCLIPBOARD"'
+    fi
 elif [[ "$OSTYPE" == "linux-android"* ]]; then
     alias ctc='termux-clipboard-set'
     alias ctv='termux-clipboard-get'
+elif [[ "$OSTYPE" == "darwin" ]]; then
+    alias ctc='pbcopy'
+    alias ctv='pbpaste'
 fi
