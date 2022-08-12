@@ -1,8 +1,8 @@
 alias -g L="| less -R"
-alias -g S='| highlight -O ansi'
+alias -g HL='| highlight -O ansi -S auto'
 alias -g CL=" --color=always | less -R"
-alias -g NO="1>/dev/null"  # stdOut
-alias -g NE="2>/dev/null"  # stdErr
-alias -g NA="1>/dev/null 2>&1"  # All
+alias -g OUT="1>/dev/null"  # stdOUT
+alias -g ERR="2>/dev/null"  # stdERR
+alias -g ALL="1>/dev/null 2>&1"
 alias -g BG="&>/dev/null &"
 bindkey '`' autosuggest-accept

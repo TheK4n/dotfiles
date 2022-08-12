@@ -129,17 +129,6 @@ mcd () {
 }
 
 
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-json() {
-	if [ -t 0 ]; then # argument
-		python -m json.tool <<< "$*" | pygmentize -l javascript
-	else # pipe
-		python -m json.tool | pygmentize -l javascript
-	fi
-}
-
-
 # docker
 
 # execute bash shell in running container
@@ -165,6 +154,7 @@ py() {
     test -z "$@" && ipython -i -c "q = exit" || python3 $@
 }
 
+
 # toggle wireguard vpn with interface /etc/wireguard/wg0.conf
 # to allow sudo user toggle vpn without password:
 ## sudo groupadd wireguard
@@ -172,7 +162,6 @@ py() {
 ## sudo vi /etc/sudoers.d/wireguard
 ###  %wireguard ALL= NOPASSWD: /sbin/systemctl start wg-quick@wg0.service
 ###  %wireguard ALL= NOPASSWD: /sbin/systemctl stop wg-quick@wg0.service
-
 vpn() {
     local STATUS SERVICE CONFIG CONFIGFILE
     CONFIG="$1"
