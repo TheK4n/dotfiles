@@ -85,6 +85,7 @@ alias music='mplayer -shuffle ~/Music/*'
 
 # python
 alias pipir='python3 -m pip install -r requirements.txt'
+alias pipar='python3 -m pip freeze > requirements.txt'
 
 # initializes first ./*/*/activate
 # alias va='source "$(find -P . -maxdepth 3 -type f -name activate | sort | head -n 1)" &>/dev/null || echo "error: virtual env not found, use python3 -m virtualenv venv" >&2'
