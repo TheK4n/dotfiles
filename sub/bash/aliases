@@ -79,7 +79,7 @@ alias meminfo='free -mlth'
 alias psmem='ps auxf | sort -nr -k 4 | less -R'
 alias wake="echo $'\a'"  # command; wake &
 
-alias music='mplayer -shuffle ~/Music/*'
+alias music='mplayer -shuffle ~/Music/*.mp3'
 
 
 
