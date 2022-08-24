@@ -77,8 +77,7 @@ alias shutdown='sudo /sbin/shutdown now'
 
 alias meminfo='free -mlth'
 alias psmem='ps auxf | sort -nr -k 4 | less -R'
-alias wake="echo $'\a'"  # command; wake &
-
+alias wake='((speaker-test -t sine -f 400 &>/dev/null)& local pid=$! ;sleep 0.2s; kill -9 $pid) &>/dev/null'
 alias music='mplayer -shuffle ~/Music/*.mp3'
 
 
