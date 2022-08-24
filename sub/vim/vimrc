@@ -213,11 +213,12 @@ set t_Co=256
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,match,case
 
 
+nnoremap <silent> <Leader>rm :tabnew % <CR> :terminal make run <CR>
 " run file by filetype
-autocmd BufEnter * if (&filetype=='python') | nnoremap <silent> <Leader>r :tabnew % <CR> :terminal python3 % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
-autocmd BufEnter * if (&filetype=='go') | nnoremap <silent> <Leader>r :tabnew % <CR> :terminal go run % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
-autocmd BufEnter * if (&filetype=='markdown') | nnoremap <silent> <Leader>r :let g:buf_curline=line(".") <CR> :tabnew % <CR> :terminal glow % <CR> :set nocursorline number norelativenumber <CR> :exe buf_curline <CR> | endif
-autocmd BufEnter * if (&filetype=='vim') | nnoremap <silent> <Leader>r :so % <CR>
+autocmd BufEnter * if (&filetype=='python') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal python3 % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
+autocmd BufEnter * if (&filetype=='go') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal go run % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
+autocmd BufEnter * if (&filetype=='markdown') | nnoremap <silent> <Leader>rr :let g:buf_curline=line(".") <CR> :tabnew % <CR> :terminal glow % <CR> :set nocursorline number norelativenumber <CR> :exe buf_curline <CR> | endif
+autocmd BufEnter * if (&filetype=='vim') | nnoremap <silent> <Leader>rr :so % <CR>
 
 
 
