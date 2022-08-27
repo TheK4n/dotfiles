@@ -76,7 +76,9 @@ echo "Hello $USER!"
 | <kbd>,/</kbd>           | Toggle search highlight                             |
 | <kbd>,``</kbd>          | Close all without saving                            |
 | <kbd>,t</kbd>           | Tagbar                                              |
-| <kbd>,r</kbd>           | Run script in new tab (python, go)                  |
+| <kbd>,rr</kbd>          | Run script in new tab (python, go, preview markdown)|
+| <kbd>,rm</kbd>          | Run script (make run)                               |
+| <kbd>,rf</kbd>          | Format file (go)                                    |
 | <kbd>,nn</kbd>          | Toggle NerdTree                                     |
 | <kbd>,nf</kbd>          | Toggle NerdTree focus                               |
 | <kbd>,ve</kbd>          | Open ~/.vimrc or ~/.config/nvim/init.vim in new tab |
