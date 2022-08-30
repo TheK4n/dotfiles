@@ -11,7 +11,7 @@ _sod () {
 lt () {
     local DIR
     test -z "$1" && DIR="." || DIR="$1"
-    du -sh "$DIR"/* "$DIR"/.* 2>/dev/null | sort -h | tac; du -sh "$DIR"/.
+    du -h 2>/dev/null | sort -h | tac
 }
 
 destroy() {
