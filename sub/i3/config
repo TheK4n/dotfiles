@@ -214,3 +214,6 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 
 
 exec --no-startup-id xrandr --dpi 80
+
+# Wallpapers
+exec --no-startup-id feh --no-fehbg --bg-scale ~/Pictures/Wallpaper/wallpaper.jpg
