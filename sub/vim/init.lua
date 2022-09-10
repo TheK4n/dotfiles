@@ -127,3 +127,5 @@ end
 
 
 require('telescope').load_extension('fzf')
+
+require("nvim-autopairs").setup {}

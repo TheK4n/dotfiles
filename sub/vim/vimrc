@@ -183,7 +183,7 @@ call vundle#begin()
     Plugin 'Pocco81/AutoSave.nvim'
     " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
-    Plugin 'jiangmiao/auto-pairs'
+    Plugin 'windwp/nvim-autopairs'
 
     " pyright
     Plugin 'neovim/nvim-lspconfig'
