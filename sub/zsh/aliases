@@ -1,5 +1,5 @@
 alias -g L="| less -R"
-alias -g HL='| highlight -O ansi -S auto'
+alias -g HL='| highlight -O ansi -S '
 alias -g CL=" --color=always | less -R"
 alias -g OUT="1>/dev/null"  # stdOUT
 alias -g ERR="2>/dev/null"  # stdERR
