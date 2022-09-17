@@ -36,6 +36,7 @@ endfunction
 
 nnoremap <silent> <Leader>c :call TabDo('set cursorline!') <CR>
 inoremap jk <esc>
+inoremap ол <esc>
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг

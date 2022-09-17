@@ -22,7 +22,7 @@ alias _='sudo'
 alias root='sudo su - root'
 alias please='sudo !!'
 
-alias rm='rm -r'
+alias rm='rm -ir'
 alias mkdir='mkdir -pv'
 
 alias cd..='cd ..'
