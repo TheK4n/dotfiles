@@ -25,6 +25,8 @@ zsh:
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.subzsh/plugins/zsh-syntax-highlighting
 	git clone https://github.com/hlissner/zsh-autopair ~/.subzsh/plugins/hlissner/zsh-autopair
+	git clone https://github.com/unixorn/fzf-zsh-plugin.git ~/.subzsh/plugins/unixorn/fzf-zsh-plugin && \
+	ln -s ~/.subzsh/plugins/unixorn/fzf-zsh-plugin/bin/* ~/.local/bin/
 
 tmux:
 	ln -s $(PWD)/sub/tmux/tmux.conf ~/.tmux.conf
