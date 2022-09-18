@@ -1,0 +1,2 @@
+localectl set-x11-keymap us
+exec i3
