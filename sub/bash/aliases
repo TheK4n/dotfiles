@@ -8,14 +8,14 @@ if [ -x "$(which dircolors)" ]; then
     alias egrep='egrep --color=auto'
     alias fgrep='fgrep --color=auto'
 
-    alias ls='ls --color=auto'
+    alias ls='ls -v --color=auto'
 fi
 
-alias l.='ls -AF --ignore="*"'
-alias ll='ls -lhF'
-alias la='ls -AF'
-alias lla='ls -lhFA'
-alias ll.='ls -lhFA --ignore="*"'
+alias l.='ls -AFv --ignore="*"'
+alias ll='ls -lhFv'
+alias la='ls -AFv'
+alias lla='ls -lhFAv'
+alias ll.='ls -lhFAv --ignore="*"'
 
 
 alias _='sudo'

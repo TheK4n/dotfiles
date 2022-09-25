@@ -100,3 +100,6 @@ font:
 termux:
 	echo "apt install termux-api tsu"
 
+arch:
+	echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
+
