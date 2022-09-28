@@ -19,8 +19,7 @@ alias ll.='ls -lhFAv --ignore="*"'
 
 
 alias _='sudo'
-alias root='sudo su - root'
-alias please='sudo !!'
+alias root='sudo -i'
 
 alias rm='rm -ir'
 alias mkdir='mkdir -pv'
