@@ -6,3 +6,6 @@ Host docker
    UserKnownHostsFile=/dev/null
    StrictHostKeyChecking no
 
+Host aur.archlinux.org
+  IdentityFile ~/.ssh/aur
+  User aur
