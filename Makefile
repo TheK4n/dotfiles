@@ -54,6 +54,7 @@ ssh:
 git:
 	ln -s $(PWD)/sub/git/gitconfig ~/.gitconfig
 	ln -s $(PWD)/sub/git/gitignore ~/.gitignore
+	ln -s $(PWD)/sub/git/hooks ~/.githooks
 
 ranger:
 	echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
