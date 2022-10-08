@@ -222,3 +222,12 @@ rayso() {
     echo "https://ray.so/?colors=candy&background=true&darkMode=true&padding=64&title=${TITLE}&code=${CODE}&language=auto"
 }
 
+# json prettyfier
+json() {
+    if [ -t 0 ]; then # argument
+       python -m json.tool <<< "$*"
+    else # pipe
+       python -m json.tool
+    fi
+}
+
