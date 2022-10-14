@@ -231,3 +231,26 @@ json() {
     fi
 }
 
+_get_full_file_extension() {
+    local filename
+    filename=$(basename "$1")
+    if [ "${filename:0:1}" = "." ]; then
+        filename="${filename:1}"
+    fi
+    echo ${filename#*.}
+}
+
+rmt() {
+    local filename TRASH
+    TRASH=~/.trash
+
+    if [ ! -d "$TRASH" ]; then
+        mkdir "$TRASH"
+    fi
+
+    for filename in $*
+    do
+        mv "$filename" "$TRASH"/"$(basename "$filename")-$(date +%s)"
+    done
+}
+
