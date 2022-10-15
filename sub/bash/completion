@@ -16,15 +16,6 @@ _bkp() {
     return 0
 }
 
-_tip() {
-    local cur opts
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    opts=$(ls ~/.tips)
-    COMPREPLY=( $(compgen -W "$opts" -- ${cur}) )
-    return 0
-}
-
 _workon() {
     local cur prev envs
     COMPREPLY=()
@@ -39,5 +30,4 @@ complete -F _workon workon
 complete -F _ssh ssh
 complete -F _ssh sftp
 complete -F _bkp bkp
-complete -F _tip tip
 
