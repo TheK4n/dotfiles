@@ -7,15 +7,6 @@ _ssh() {
     return 0
 }
 
-_bkp() {
-    local cur opts
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    opts=$(ls ~/.backup/1)
-    COMPREPLY=( $(compgen -W "$opts" -- ${cur}) )
-    return 0
-}
-
 _workon() {
     local cur prev envs
     COMPREPLY=()
@@ -29,5 +20,4 @@ _workon() {
 complete -F _workon workon
 complete -F _ssh ssh
 complete -F _ssh sftp
-complete -F _bkp bkp
 
