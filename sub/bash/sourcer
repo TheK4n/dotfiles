@@ -1,6 +1,6 @@
 
 _so () {
-    [ -f "$1" ] && source "$1"
+    [ -r "$1" ] && source "$1"
 }
 
 if [[ $0 == *bash ]]; then
