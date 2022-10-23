@@ -176,7 +176,7 @@ call vundle#begin()
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-commentary'
     Plugin 'ap/vim-css-color'
-    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
     Plugin 'preservim/tagbar'
     Plugin 'preservim/vimux'
     Plugin 'rbgrouleff/bclose.vim'
