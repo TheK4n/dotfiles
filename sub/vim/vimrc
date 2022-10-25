@@ -216,6 +216,7 @@ autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,
 
 nnoremap <silent> <Leader>rm :tabnew % <CR> :terminal make run <CR>
 " run file by filetype
+autocmd BufEnter * if (expand('%:t')=='manpage') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal man -P cat -l % <CR> :set nocursorline number norelativenumber <CR> | endif
 autocmd BufEnter * if (&filetype=='python') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal python3 % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
 autocmd BufEnter * if (&filetype=='go') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal go run % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
 autocmd BufEnter * if (&filetype=='go') | nnoremap <silent> <Leader>rf :!go fmt % <CR> | endif
