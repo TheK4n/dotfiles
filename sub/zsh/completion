@@ -1,5 +1,6 @@
 
 # enable completion features
+fpath+=~/.zfunc
 autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
 zstyle ':completion:*:*:*:*:*' menu select
