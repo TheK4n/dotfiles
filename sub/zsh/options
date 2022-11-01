@@ -19,13 +19,12 @@ bindkey -M viins 'jk' vi-cmd-mode
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^[[3;5~' kill-word                       # ctrl + Supr
 bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
 bindkey '^[[5~' beginning-of-buffer-or-history    # page up
 bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[H' beginning-of-line                  # home
 bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo                               # shift + tab undo last action
-bindkey '^K' up-line-or-history
-bindkey '^J' down-line-or-history
+bindkey '^U' kill-whole-line
+bindkey -M vicmd '^U' kill-whole-line
+bindkey -M viins '^U' kill-whole-line
 bindkey -M viins '\e.' insert-last-word
