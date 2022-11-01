@@ -14,7 +14,8 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 PROMPT_EOL_MARK=""
 
 # configure key keybindings
-bindkey -e                                        # emacs key bindings
+bindkey -v
+bindkey -M viins 'jk' vi-cmd-mode
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^[[3;5~' kill-word                       # ctrl + Supr
 bindkey '^[[3~' delete-char                       # delete
@@ -27,5 +28,4 @@ bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo                               # shift + tab undo last action
 bindkey '^K' up-line-or-history
 bindkey '^J' down-line-or-history
-bindkey '^E' vi-forward-word
-bindkey '^B' vi-backward-word
+bindkey -M viins '\e.' insert-last-word
