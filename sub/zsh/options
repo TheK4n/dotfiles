@@ -24,6 +24,8 @@ bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[H' beginning-of-line                  # home
 bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo                               # shift + tab undo last action
+bindkey '^K' up-line-or-history
+bindkey '^J' down-line-or-history
 bindkey '^U' kill-whole-line
 bindkey -M vicmd '^U' kill-whole-line
 bindkey -M viins '^U' kill-whole-line

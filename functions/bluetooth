@@ -1,0 +1,4 @@
+#!/bin/sh
+
+bssid="$(bluetoothctl devices | dmenu -p "Devices: " -l 20 | cut -d' ' -f2)"
+bluetoothctl connect "$bssid"
