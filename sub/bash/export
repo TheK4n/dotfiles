@@ -2,6 +2,7 @@
 umask 0077
 
 export EDITOR="nvim"
+export VISUAL="nvim"
 export PAGER="less -R"
 
 export HISTSIZE=10000
