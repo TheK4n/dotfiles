@@ -204,6 +204,9 @@ call vundle#begin()
 
     Plugin 'preservim/nerdtree'
 
+    Plugin 'lewis6991/gitsigns.nvim'
+    Plugin 'jose-elias-alvarez/null-ls.nvim'
+
 call vundle#end()
 
 filetype plugin indent on
