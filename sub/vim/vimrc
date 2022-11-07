@@ -181,7 +181,7 @@ call vundle#begin()
     Plugin 'preservim/vimux'
     Plugin 'rbgrouleff/bclose.vim'
     Plugin 'frazrepo/vim-rainbow'
-    Plugin 'Pocco81/AutoSave.nvim'
+    Plugin 'Pocco81/auto-save.nvim'
     " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
     Plugin 'windwp/nvim-autopairs'
@@ -205,7 +205,6 @@ call vundle#begin()
     Plugin 'preservim/nerdtree'
 
     Plugin 'lewis6991/gitsigns.nvim'
-    Plugin 'jose-elias-alvarez/null-ls.nvim'
 
 call vundle#end()
 
@@ -310,4 +309,3 @@ nnoremap <silent> <Leader>l :call TabDo('call ToggleRelativeAbsoluteNumber()') <
 
 " Quick exiting without save
 nnoremap <silent> <Leader>qq :qa!<CR>
-
