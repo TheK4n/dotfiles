@@ -258,3 +258,8 @@ rmt() {
     done
 }
 
+# shows text from ~/.inittips
+showtips() {
+    cat ~/.inittips 2>/dev/null
+}
+
