@@ -37,7 +37,7 @@ alacritty:
 	ln -s $(PWD)/sub/alacritty/alacritty.yml ~/.config/alacritty/
 
 vim:
-	echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
+	@echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
 	echo "set editing-mode vi" >> ~/.inputrc
 	test -d ~/.vim || \
 	ln -s $(PWD)/sub/vim ~/.vim
@@ -57,7 +57,7 @@ git:
 	ln -s $(PWD)/sub/git/hooks ~/.githooks
 
 ranger:
-	echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
+	@echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
 	test -d ~/.config/ranger || \
 	mkdir -p ~/.config/ranger
 	ln -s $(PWD)/sub/ranger/rc.conf ~/.config/ranger
@@ -72,7 +72,7 @@ gpg:
 	echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > ~/.gnupg/gpg-agent.conf; echo RELOADAGENT | gpg-connect-agent
 
 i3:
-	echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
+	@echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
 	test -d ~/.config/i3 || \
 	mkdir -p ~/.config/i3
 	mkdir -p ~/.config/i3status
@@ -99,8 +99,8 @@ font:
 	./install.sh
 
 termux:
-	echo "apt install termux-api tsu"
+	@echo "apt install termux-api tsu"
 
 arch:
-	echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
+	@echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
 
