@@ -74,7 +74,8 @@ echo "Hello $USER!"
 | <kbd>,l</kbd>           | Line number styles                                  |
 | <kbd>,c</kbd>           | Highlight cursor line                               |
 | <kbd>,/</kbd>           | Toggle search highlight                             |
-| <kbd>,``</kbd>          | Close all without saving                            |
+| <kbd>,qq</kbd>          | Delete current buffer
+| <kbd>,qa</kbd>          | Close all without saving                            |
 | <kbd>,t</kbd>           | Tagbar                                              |
 | <kbd>,rr</kbd>          | Run script in new tab (python, go, preview markdown)|
 | <kbd>,rm</kbd>          | Run script (make run)                               |
