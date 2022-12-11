@@ -43,6 +43,7 @@
     find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
     unstage = 'reset HEAD --'
     last = log -1 HEAD
+    branches = branch -avv --list
 
 
 

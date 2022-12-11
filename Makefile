@@ -104,3 +104,5 @@ termux:
 arch:
 	@echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
 
+psql:
+	ln -s $(PWD)/sub/psql/psqlrc ~/.psqlrc
