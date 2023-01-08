@@ -4,6 +4,7 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=2000
 setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
