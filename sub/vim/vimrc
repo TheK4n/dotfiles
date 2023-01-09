@@ -282,3 +282,8 @@ nnoremap <silent> <Leader>qa :qa!<CR>
 
 " expand %% to dirname of cur file in commandline
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+
+
+# :Sw to save file by root
+command Sw execute 'silent! write !SUDO_ASKPASS=$(which vim_askpass_helper) sudo -A tee % >/dev/null'

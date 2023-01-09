@@ -44,6 +44,7 @@ vim:
 	ln -s $(PWD)/light/.vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim/lua
 	ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
+	ln -s $(PWD)/functions/vim_askpass_helper ~/.local/bin
 	ln -s $(PWD)/sub/vim/init.lua ~/.config/nvim/lua/init.lua
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	nvim +PluginInstall +qall
