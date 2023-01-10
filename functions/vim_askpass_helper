@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-echo -e "OPTION title=vim\nOPTION default-prompt=[sudo] password for $USER:\nGETPIN" | pinentry-qt --display :0 2>/dev/null | grep ^D | cut -d" " -f2
+echo -e "SETTITLE vim\nOPTION default-prompt=[sudo] password for $USER:\nGETPIN" | pinentry-qt --display :0 2>/dev/null | grep ^D | cut -d" " -f2

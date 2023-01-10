@@ -285,5 +285,5 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 
 
-# :Sw to save file by root
+" :Sw to save file by root
 command Sw execute 'silent! write !SUDO_ASKPASS=$(which vim_askpass_helper) sudo -A tee % >/dev/null'
