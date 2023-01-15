@@ -6,7 +6,7 @@ vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard:append { 'unnamedplus' }
 vim.opt.shell = 'bash'
 
 vim.opt.ttimeoutlen = 0
@@ -41,6 +41,10 @@ vim.opt.mouse = 'a'
 
 vim.opt.colorcolumn = '81'
 vim.opt.scrolloff = 7
+
+
+vim.opt.termguicolors = true
+vim.opt.background = 'dark'
 
 vim.opt.backup = true
 vim.opt.swapfile = false
