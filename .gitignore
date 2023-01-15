@@ -5,3 +5,5 @@ sub/bash/bashrc.d/*
 sub/zsh/zshrc.d/*
 !sub/zsh/zshrc.d/00_test.sh
 sub/vim/tmp/
+
+sub/nvim/plugin

@@ -36,18 +36,14 @@ alacritty:
 	mkdir -p ~/.config/alacritty
 	ln -s $(PWD)/sub/alacritty/alacritty.yml ~/.config/alacritty/
 
-vim:
+nvim:
 	@echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
 	echo "set editing-mode vi" >> ~/.inputrc
-	test -d ~/.vim || \
-	ln -s $(PWD)/sub/vim ~/.vim
-	ln -s $(PWD)/light/.vimrc ~/.vimrc
-	mkdir -p ~/.config/nvim/lua
-	ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
+	test -d ~/.config/nvim || \
+	ln -s $(PWD)/sub/nvim ~/.config/nvim
 	ln -s $(PWD)/functions/vim_askpass_helper ~/.local/bin
-	ln -s $(PWD)/sub/vim/init.lua ~/.config/nvim/lua/init.lua
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	nvim +PluginInstall +qall
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	nvim +PackerCompile +PackerClean +PackerInstall +PackerUpdate +qall
 
 ssh:
 	cat $(PWD)/sub/ssh/config >> ~/.ssh/config
