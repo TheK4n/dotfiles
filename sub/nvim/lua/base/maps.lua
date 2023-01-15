@@ -92,7 +92,7 @@ function create_func(ft, cmd)
     return function()
         if vim.bo.filetype == ft then
             cmd_string = string.format([[:tabnew %% <CR> :terminal %s %% <CR> :set nocursorline number norelativenumber <CR> G <CR>]], cmd)
-            keymap.set("n", "<Leader>rr", cmd_string)
+            keymap.set("n", "<Leader>rr", cmd_string, {silent = true})
         end
     end
 end
