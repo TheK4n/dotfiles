@@ -89,3 +89,12 @@ vim.cmd([[let g:netrw_liststyle = 3]]) -- tree instead of plain view
 vim.cmd([[let g:netrw_browse_split = 0]])
 vim.cmd([[let g:netrw_winsize = 15]])
 vim.cmd([[let g:netrw_keepdir = 0]])
+
+
+-- Highlight yanked text for a while
+vim.api.nvim_create_autocmd("TextYankPost", {
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})

@@ -43,6 +43,10 @@ keymap.set('n', 'x', '"_x', {silent = true})
 keymap.set('n', '+', '<C-a>', {silent = true})
 keymap.set('n', '-', '<C-x>', {silent = true})
 
+-- map \ to prev finding
+keymap.set('n', [[\]], ',', {silent = true})
+keymap.set('v', [[\]], ',', {silent = true})
+
 -- Select all
 keymap.set('n', '<C-a>', 'gg<S-v>G', {silent = true})
 
@@ -126,4 +130,5 @@ function! ToggleRelativeAbsoluteNumber()
 endfunction
 ]], true)
 
+-- Toggle line number style
 keymap.set('n', '<Leader>l', [[:call TabDo('call ToggleRelativeAbsoluteNumber()') <CR>]], {silent = true})
