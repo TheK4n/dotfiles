@@ -31,48 +31,48 @@ keymap.set('n', '<Leader>c', [[:call TabDo('set cursorline!')<CR>]], {silent = t
 
 keymap.set('n', '<Leader>/', [[:set invhlsearch<CR>]], {silent = true})
 
-keymap.set('i', 'jk', '<ESC>')
-keymap.set('i', 'ол', '<ESC>')
+keymap.set('i', 'jk', '<ESC>', {silent = true})
+keymap.set('i', 'ол', '<ESC>', {silent = true})
 
 
 
 -- x to blackhole
-keymap.set('n', 'x', '"_x')
+keymap.set('n', 'x', '"_x', {silent = true})
 
 -- Increment/decrement
-keymap.set('n', '+', '<C-a>')
-keymap.set('n', '-', '<C-x>')
+keymap.set('n', '+', '<C-a>', {silent = true})
+keymap.set('n', '-', '<C-x>', {silent = true})
 
 -- Select all
-keymap.set('n', '<C-a>', 'gg<S-v>G')
+keymap.set('n', '<C-a>', 'gg<S-v>G', {silent = true})
 
 
 -- Scroll tabs
-keymap.set("n", '<C-l>', ':tabnext<CR>')
-keymap.set("n", '<C-h>', ':tabprev<CR>')
+keymap.set("n", '<C-l>', ':tabnext<CR>', {silent = true})
+keymap.set("n", '<C-h>', ':tabprev<CR>', {silent = true})
 
 
 -- Kill current buffer
-keymap.set("n", '<Leader>qq', ':bd!<CR>')
+keymap.set("n", '<Leader>qq', ':bd!<CR>', {silent = true})
 -- Quick exit without saving
-keymap.set("n", '<Leader>qa', ':qa!<CR>')
+keymap.set("n", '<Leader>qa', ':qa!<CR>', {silent = true})
 
 
-keymap.set("n", '<Leader>eh', ':set list!<CR>')
+keymap.set("n", '<Leader>eh', ':set list!<CR>', {silent = true})
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
--- Tags panes (ctags required)
-keymap.set("n", '<Leader>t', ':TagbarToggle<CR>')
+-- Tags panel (ctags required)
+keymap.set("n", '<Leader>t', ':TagbarToggle<CR>', {silent = true})
 
 
 -- Telescope
-keymap.set("n", '<Leader>ff', '<cmd>Telescope find_files<CR>')
-keymap.set("n", '<Leader>fg', '<cmd>Telescope live_grep<CR>')
+keymap.set("n", '<Leader>ff', '<cmd>Telescope find_files<CR>', {silent = true})
+keymap.set("n", '<Leader>fg', '<cmd>Telescope live_grep<CR>', {silent = true})
 
 
 -- Expand %% to dirname of current file in command line
-keymap.set("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true})
+keymap.set("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true, silent = true})
 
 
 -- Save from root
@@ -88,14 +88,18 @@ function create_autocmd_filetype(func)
     )
 end
 
-function set_keymap_run_script()
-    if vim.bo.filetype == 'python' then
-        cmd_string = string.format([[:tabnew %% <CR> :terminal %s %% <CR> :set nocursorline number norelativenumber <CR> G <CR>]], 'python3')
-        keymap.set("n", "<Leader>rr", cmd_string)
+function create_func(ft, cmd)
+    return function()
+        if vim.bo.filetype == ft then
+            cmd_string = string.format([[:tabnew %% <CR> :terminal %s %% <CR> :set nocursorline number norelativenumber <CR> G <CR>]], cmd)
+            keymap.set("n", "<Leader>rr", cmd_string)
+        end
     end
 end
 
-create_autocmd_filetype(set_keymap_run_script)
+create_autocmd_filetype(create_func('python', 'python3'))
+create_autocmd_filetype(create_func('go', 'go run'))
+create_autocmd_filetype(create_func('rust', 'cargo run'))
 
 
 
