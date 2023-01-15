@@ -11,7 +11,9 @@ vim.opt.shell = 'bash'
 
 vim.opt.ttimeoutlen = 0
 
--- vim.opt.compatible = false 
+vim.opt.compatible = false
+
+vim.opt.hidden = true
 
 vim.opt.expandtab = true
 vim.opt.smarttab = true
