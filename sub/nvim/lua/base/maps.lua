@@ -72,7 +72,7 @@ keymap.set("n", '<Leader>fg', '<cmd>Telescope live_grep<CR>', {silent = true})
 
 
 -- Expand %% to dirname of current file in command line
-keymap.set("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true, silent = true})
+keymap.set("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true})
 
 
 -- Save from root
