@@ -43,7 +43,7 @@ nvim:
 	ln -s $(PWD)/sub/nvim ~/.config/nvim
 	ln -s $(PWD)/functions/vim_askpass_helper ~/.local/bin
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-	nvim +PackerCompile +PackerClean +PackerInstall +PackerUpdate +qall
+	nvim +PackerCompile +PackerClean +PackerInstall +PackerUpdate +PackerUpdate +qall
 
 ssh:
 	cat $(PWD)/sub/ssh/config >> ~/.ssh/config

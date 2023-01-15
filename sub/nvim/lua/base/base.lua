@@ -47,22 +47,24 @@ vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.history = 1000
 vim.opt.undoreload = 1000
-vim.opt.backupdir = '~/.vim/tmp/backup/'
-vim.opt.undodir = '~/.vim/tmp/undo/'
-vim.opt.directory = '~/.vim/tmp/swap/'
+
+local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
+
+vim.opt.undodir = { prefix .. "/nvim/tmp/.undo//"}
+vim.opt.backupdir = {prefix .. "/nvim/tmp/.backup//"}
+vim.opt.directory = { prefix .. "/nvim/tmp/.swp//"}
 
 vim.api.nvim_exec([[
-function! MakeDirIfNoExists(path)
-    if !isdirectory(expand(a:path))
-        call mkdir(expand(a:path), "p")
-    endif
-endfunction
+    function! MakeDirIfNoExists(path)
+        if !isdirectory(expand(a:path))
+            call mkdir(expand(a:path), "p")
+        endif
+    endfunction
 
-
-" make this dirs if no exists previously
-silent! call MakeDirIfNoExists(&undodir)
-silent! call MakeDirIfNoExists(&backupdir)
-silent! call MakeDirIfNoExists(&directory)
+    " make this dirs if no exists previously
+    silent! call MakeDirIfNoExists(&undodir)
+    silent! call MakeDirIfNoExists(&backupdir)
+    silent! call MakeDirIfNoExists(&directory)
 ]], true)
 
 vim.opt.ffs = 'unix,mac'

@@ -7,3 +7,4 @@ sub/zsh/zshrc.d/*
 sub/vim/tmp/
 
 sub/nvim/plugin
+sub/nvim/tmp/
