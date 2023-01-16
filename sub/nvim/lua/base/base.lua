@@ -35,7 +35,7 @@ vim.opt.visualbell = false
 vim.opt.showcmd = true
 vim.opt.showtabline = 2
 
-vim.opt.smartcase = true
+vim.opt.smartcase = true -- if search line hasn`t Upper case chars - ignore case search, else case-sensivity search
 vim.opt.incsearch = true
 
 vim.opt.mousehide = true
@@ -54,24 +54,24 @@ vim.opt.undofile = true
 vim.opt.history = 1000
 vim.opt.undoreload = 1000
 
-local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
+local prefix = vim.fn.expand("~/.cache/nvim/tmp")
 
-vim.opt.undodir = { prefix .. "/nvim/tmp/.undo//"}
-vim.opt.backupdir = {prefix .. "/nvim/tmp/.backup//"}
-vim.opt.directory = { prefix .. "/nvim/tmp/.swp//"}
+vim.opt.undodir = { prefix .. "/undo//" }
+vim.opt.backupdir = { prefix .. "/backup//" }
+vim.opt.directory = { prefix .. "/swp//" }
 
-vim.api.nvim_exec([[
-    function! MakeDirIfNoExists(path)
-        if !isdirectory(expand(a:path))
-            call mkdir(expand(a:path), "p")
-        endif
-    endfunction
 
-    " make this dirs if no exists previously
-    silent! call MakeDirIfNoExists(&undodir)
-    silent! call MakeDirIfNoExists(&backupdir)
-    silent! call MakeDirIfNoExists(&directory)
-]], true)
+function makeDirIfNoExists(path)
+    local path = path["_value"]
+    if (vim.fn.isdirectory(path) == 0) then
+        vim.fn.mkdir(path, "p")
+    end
+end
+
+-- make this dirs if no exists previously
+makeDirIfNoExists(vim.opt.undodir)
+makeDirIfNoExists(vim.opt.backupdir)
+makeDirIfNoExists(vim.opt.directory)
 
 vim.opt.ffs = 'unix,mac'
 

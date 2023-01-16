@@ -38,8 +38,6 @@ alacritty:
 
 nvim:
 	@echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
-	echo "set editing-mode vi" >> ~/.inputrc
-	test -d ~/.config/nvim || \
 	ln -s $(PWD)/sub/nvim ~/.config/nvim
 	ln -s $(PWD)/functions/vim_askpass_helper ~/.local/bin
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
