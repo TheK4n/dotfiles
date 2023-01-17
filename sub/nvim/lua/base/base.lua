@@ -81,16 +81,16 @@ vim.opt.cursorline = true
 
 
 
-vim.cmd([[let &t_SI.="\e[5 q"]])
-vim.cmd([[let &t_SR.="\e[3 q"]])
-vim.cmd([[let &t_EI.="\e[1 q"]])
+vim.t_SI = [[\e[5 q]]
+vim.t_SR = [[\e[3 q]]
+vim.t_EI = [[\e[1 q]]
 
 
-vim.cmd([[let g:netrw_banner = 0]]) -- hide banner
-vim.cmd([[let g:netrw_liststyle = 3]]) -- tree instead of plain view
-vim.cmd([[let g:netrw_browse_split = 0]])
-vim.cmd([[let g:netrw_winsize = 15]])
-vim.cmd([[let g:netrw_keepdir = 0]])
+vim.g.netrw_banner = 0 -- hide banner
+vim.g.netrw_liststyle = 3 -- tree instead of plain view
+vim.g.netrw_browse_split = 0
+vim.g.netrw_winsize = 15
+vim.g.netrw_keepdir = 0
 
 
 -- Highlight yanked text for a while
@@ -100,3 +100,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
+vim.cmd.highlight({ "DiagnosticError", "guifg=Grey" })
+vim.cmd.highlight({ "DiagnosticWarn", "guifg=Grey" })
+vim.cmd.highlight({ "DiagnosticInfo", "guifg=Grey" })
+vim.cmd.highlight({ "DiagnosticHint", "guifg=Grey" })

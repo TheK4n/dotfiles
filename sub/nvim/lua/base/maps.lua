@@ -6,19 +6,21 @@ vim.g.mapleader = ','
 
 function create_function_tabdo(command)
     return function()
-        local currTab = vim.fn.tabpagenr()
-        vim.cmd(string.format([[tabdo %s]], command))
-        vim.cmd(string.format([[tabn %s]], currTab))
+        local curr_tab = vim.fn.tabpagenr()
+        vim.cmd.tabdo(command)
+        vim.cmd.tabn(curr_tab)
     end
 end
 
+-- Toggle line highlighting
 keymap.set('n', '<Leader>c', create_function_tabdo('set cursorline!'), {silent = true})
 
-keymap.set('n', '<Leader>/', [[:set invhlsearch<CR>]], {silent = true})
+keymap.set('n', '<Leader>/',
+    function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
+    {silent = true})
 
 keymap.set('i', 'jk', '<ESC>', {silent = true})
 keymap.set('i', 'ол', '<ESC>', {silent = true})
-
 
 
 -- x to blackhole
@@ -29,16 +31,15 @@ keymap.set('n', '+', '<C-a>', {silent = true})
 keymap.set('n', '-', '<C-x>', {silent = true})
 
 -- map \ to prev finding
-keymap.set('n', [[\]], ',', {silent = true})
-keymap.set('v', [[\]], ',', {silent = true})
+keymap.set({"n", "v"}, [[\]], ',', {silent = true})
 
 -- Select all
 keymap.set('n', '<C-a>', 'gg<S-v>G', {silent = true})
 
 
 -- Scroll tabs
-keymap.set("n", '<C-l>', ':tabnext<CR>', {silent = true})
-keymap.set("n", '<C-h>', ':tabprev<CR>', {silent = true})
+keymap.set("n", '<C-l>', vim.cmd.tabnext, {silent = true})
+keymap.set("n", '<C-h>', vim.cmd.tabprev, {silent = true})
 
 
 -- Kill current buffer
@@ -70,7 +71,7 @@ vim.api.nvim_create_user_command('Sw', [[execute 'silent! write !SUDO_ASKPASS=$(
 
 
 function create_autocmd_filetype(func) 
-    create_autocmd = vim.api.nvim_create_autocmd
+    local create_autocmd = vim.api.nvim_create_autocmd
 
     create_autocmd("BufEnter", 
         { pattern = '*', callback = func}
@@ -78,7 +79,7 @@ function create_autocmd_filetype(func)
 end
 
 function set_keymap_run_script(cmd)
-    cmd_string = string.format([[:tabnew %% <CR> :terminal %s %% <CR> :set nocursorline number norelativenumber <CR> G <CR>]], cmd)
+    local cmd_string = string.format([[:tabnew %% <CR> :terminal %s %% <CR> :set nocursorline number norelativenumber <CR> G <CR>]], cmd)
     keymap.set("n", "<Leader>rr", cmd_string, {silent = true})
 end
 
@@ -99,13 +100,13 @@ function create_function_create_autocmd_filename(fn, cmd)
 end
 
 
+-- Run current file by type
 create_autocmd_filetype(create_function_create_autocmd_filetype('python', 'python3'))
 create_autocmd_filetype(create_function_create_autocmd_filetype('go', 'go run'))
 create_autocmd_filetype(create_function_create_autocmd_filetype('rust', 'cargo run'))
 create_autocmd_filetype(create_function_create_autocmd_filetype('markdown', 'glow'))
 
 create_autocmd_filetype(create_function_create_autocmd_filename('manpage', 'man -P cat -l'))
-
 
 
 
