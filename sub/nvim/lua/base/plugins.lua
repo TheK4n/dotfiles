@@ -1,5 +1,4 @@
 return require('packer').startup(function(use)
-  -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
     use {
@@ -28,9 +27,6 @@ return require('packer').startup(function(use)
     use { 'numToStr/Comment.nvim',
         config = function() require('Comment').setup() end
     }
-
-    -- requiered patch your font
-    use 'ryanoasis/vim-devicons'
 
     -- pyright
     use 'neovim/nvim-lspconfig'
