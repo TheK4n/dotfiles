@@ -3,6 +3,7 @@ local keymap = vim.keymap
 
 vim.g.mapleader = ','
 
+local opts = { noremap = true, silent = true }
 
 function create_function_tabdo(command)
     return function()
@@ -14,52 +15,52 @@ end
 
 -- Toggle line highlighting
 vim.opt.cursorline = true
-keymap.set('n', '<Leader>c', create_function_tabdo('set cursorline!'), {silent = true})
+keymap.set('n', '<Leader>c', create_function_tabdo('set cursorline!'), opts)
 
 keymap.set('n', '<Leader>/',
     function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
-    {silent = true})
+    opts)
 
-keymap.set('i', 'jk', '<ESC>', {silent = true})
-keymap.set('i', 'ол', '<ESC>', {silent = true})
+keymap.set('i', 'jk', '<ESC>', opts)
+keymap.set('i', 'ол', '<ESC>', opts)
 
 
 -- x to blackhole
-keymap.set('n', 'x', '"_x', {silent = true})
+keymap.set('n', 'x', '"_x', opts)
 
 -- Increment/decrement
-keymap.set('n', '+', '<C-a>', {silent = true})
-keymap.set('n', '-', '<C-x>', {silent = true})
+keymap.set('n', '+', '<C-a>', opts)
+keymap.set('n', '-', '<C-x>', opts)
 
 -- map \ to prev finding
-keymap.set({"n", "v"}, [[\]], ',', {silent = true})
+keymap.set({"n", "v"}, [[\]], ',', opts)
 
 -- Select all
-keymap.set('n', '<C-a>', 'gg<S-v>G', {silent = true})
+keymap.set('n', '<C-a>', 'gg<S-v>G', opts)
 
 
 -- Scroll tabs
-keymap.set("n", '<C-l>', vim.cmd.tabnext, {silent = true})
-keymap.set("n", '<C-h>', vim.cmd.tabprev, {silent = true})
+keymap.set("n", '<C-l>', vim.cmd.tabnext, opts)
+keymap.set("n", '<C-h>', vim.cmd.tabprev, opts)
 
 
 -- Kill current buffer
-keymap.set("n", '<Leader>qq', ':bd!<CR>', {silent = true})
+keymap.set("n", '<Leader>qq', ':bd!<CR>', opts)
 -- Quick exit without saving
-keymap.set("n", '<Leader>qa', ':qa!<CR>', {silent = true})
+keymap.set("n", '<Leader>qa', ':qa!<CR>', opts)
 
 
-keymap.set("n", '<Leader>eh', ':set list!<CR>', {silent = true})
+keymap.set("n", '<Leader>eh', ':set list!<CR>', opts)
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
 -- Tags panel (ctags required)
-keymap.set("n", '<Leader>t', ':TagbarToggle<CR>', {silent = true})
+keymap.set("n", '<Leader>t', ':TagbarToggle<CR>', opts)
 
 
 -- Telescope
-keymap.set("n", '<Leader>ff', '<cmd>Telescope find_files<CR>', {silent = true})
-keymap.set("n", '<Leader>fg', '<cmd>Telescope live_grep<CR>', {silent = true})
+keymap.set("n", '<Leader>ff', '<cmd>Telescope find_files<CR>', opts)
+keymap.set("n", '<Leader>fg', '<cmd>Telescope live_grep<CR>', opts)
 
 
 -- Expand %% to dirname of current file in command line
@@ -81,7 +82,7 @@ end
 
 function set_keymap_run_script(cmd)
     local cmd_string = string.format([[:tabnew %% <CR> :terminal %s %% <CR> :set nocursorline number norelativenumber <CR> G <CR>]], cmd)
-    keymap.set("n", "<Leader>rr", cmd_string, {silent = true})
+    keymap.set("n", "<Leader>rr", cmd_string, opts)
 end
 
 function create_function_create_autocmd_filetype(ft, cmd)
@@ -137,4 +138,4 @@ function toggle_number_style()
 end
 
 -- Toggle line number style
-keymap.set('n', '<Leader>l', create_function_tabdo('lua toggle_number_style()'), {silent = true})
+keymap.set('n', '<Leader>l', create_function_tabdo('lua toggle_number_style()'), opts)
