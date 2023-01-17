@@ -9,6 +9,8 @@ return require('packer').startup(function(use)
 
     use 'ellisonleao/gruvbox.nvim'
     use 'tpope/vim-surround'
+    use 'tpope/vim-repeat'
+    use 'google/vim-searchindex'
     use 'tpope/vim-commentary'
     use 'ap/vim-css-color'
     use 'preservim/tagbar'
@@ -22,6 +24,10 @@ return require('packer').startup(function(use)
     use 'lewis6991/gitsigns.nvim'
     use 'windwp/nvim-ts-autotag'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+    use { 'numToStr/Comment.nvim',
+        config = function() require('Comment').setup() end
+    }
 
     -- requiered patch your font
     use 'ryanoasis/vim-devicons'

@@ -13,6 +13,7 @@ function create_function_tabdo(command)
 end
 
 -- Toggle line highlighting
+vim.opt.cursorline = true
 keymap.set('n', '<Leader>c', create_function_tabdo('set cursorline!'), {silent = true})
 
 keymap.set('n', '<Leader>/',

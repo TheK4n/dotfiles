@@ -77,13 +77,12 @@ vim.opt.ffs = 'unix,mac'
 
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
 
-vim.opt.cursorline = true
 
-
-
-vim.t_SI = [[\e[5 q]]
-vim.t_SR = [[\e[3 q]]
-vim.t_EI = [[\e[1 q]]
+vim.cmd([[
+    let &t_SI.="\e[5 q" "SI = режим вставки
+    let &t_SR.="\e[3 q" "SR = режим замены
+    let &t_EI.="\e[1 q" "EI = нормальный режим
+]])
 
 
 vim.g.netrw_banner = 0 -- hide banner
@@ -100,6 +99,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
+-- dont auto commenting new lines
+vim.api.nvim_create_autocmd("BufEnter", {pattern = "*", command = [[set fo-=c fo-=r fo-=o]]})
 
 vim.cmd.highlight({ "DiagnosticError", "guifg=Grey" })
 vim.cmd.highlight({ "DiagnosticWarn", "guifg=Grey" })
