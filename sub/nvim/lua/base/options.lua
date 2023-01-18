@@ -1,64 +1,74 @@
+local opt = vim.opt
 
-vim.opt.ruler = true
+opt.ruler = true
+opt.encoding = 'utf-8'
+opt.fileencoding = 'utf-8'
 
+opt.number = true
+opt.relativenumber = true
 
-vim.scriptencoding = 'utf-8'
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
+opt.clipboard:append { 'unnamedplus' }
+opt.shell = 'bash'
 
-vim.opt.clipboard:append { 'unnamedplus' }
-vim.opt.shell = 'bash'
+opt.ttimeoutlen = 0
 
-vim.opt.ttimeoutlen = 0
+vim.cmd([[
+    filetype plugin indent on
+]])
 
-vim.opt.compatible = false
+vim.cmd([[
+    syntax enable
+]])
 
-vim.opt.hidden = true
+opt.compatible = false
 
-vim.opt.expandtab = true
-vim.opt.smarttab = true
-vim.opt.tabstop = 4
+opt.hidden = true
 
-
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.wrap = false
-
-vim.opt.ttyfast = true
-vim.opt.autoread = true
-
-
-vim.opt.errorbells = false
-vim.opt.visualbell = false
-vim.opt.showcmd = true
-vim.opt.showtabline = 2
-
-vim.opt.smartcase = true -- if search line hasn`t Upper case chars - ignore case search, else case-sensivity search
-vim.opt.incsearch = true
-
-vim.opt.mousehide = true
-vim.opt.mouse = 'a'
-
-vim.opt.colorcolumn = '81'
-vim.opt.scrolloff = 7
+opt.expandtab = true
+opt.smarttab = true
+opt.tabstop = 4
 
 
-vim.opt.termguicolors = true
-vim.opt.background = 'dark'
+opt.cursorline = true
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.autoindent = true
+opt.smartindent = true
+opt.wrap = false
 
-vim.opt.backup = true
-vim.opt.swapfile = false
-vim.opt.undofile = true
-vim.opt.history = 1000
-vim.opt.undoreload = 1000
+opt.ttyfast = true
+opt.autoread = true
+
+
+opt.errorbells = false
+opt.visualbell = false
+opt.showcmd = true
+opt.showtabline = 2
+
+opt.smartcase = true -- if search line hasn`t Upper case chars - ignore case search, else case-sensivity search
+opt.incsearch = true
+
+opt.mousehide = true
+opt.mouse = 'a'
+
+opt.colorcolumn = '81'
+opt.scrolloff = 7
+
+
+opt.termguicolors = true
+opt.background = 'dark'
+
+opt.backup = true
+opt.swapfile = false
+opt.undofile = true
+opt.history = 1000
+opt.undoreload = 1000
 
 local prefix = vim.fn.expand("~/.cache/nvim/tmp")
 
-vim.opt.undodir = { prefix .. "/undo//" }
-vim.opt.backupdir = { prefix .. "/backup//" }
-vim.opt.directory = { prefix .. "/swp//" }
+opt.undodir = { prefix .. "/undo//" }
+opt.backupdir = { prefix .. "/backup//" }
+opt.directory = { prefix .. "/swp//" }
 
 
 function makeDirIfNoExists(path)
@@ -69,13 +79,13 @@ function makeDirIfNoExists(path)
 end
 
 -- make this dirs if no exists previously
-makeDirIfNoExists(vim.opt.undodir)
-makeDirIfNoExists(vim.opt.backupdir)
-makeDirIfNoExists(vim.opt.directory)
+makeDirIfNoExists(opt.undodir)
+makeDirIfNoExists(opt.backupdir)
+makeDirIfNoExists(opt.directory)
 
-vim.opt.ffs = 'unix,mac'
+opt.ffs = 'unix,mac'
 
-vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
+opt.path:append { '**' } -- Finding files - Search down into subfolders
 
 
 vim.cmd([[

@@ -1,0 +1,97 @@
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+
+vim.g.mapleader = ','
+
+
+function create_function_tabdo(command)
+    return function()
+        local curr_tab = vim.fn.tabpagenr()
+        vim.cmd.tabdo(command)
+        vim.cmd.tabn(curr_tab)
+    end
+end
+
+-- Toggle line highlighting
+map('n', '<Leader>c', create_function_tabdo('set cursorline!'), opts)
+
+map('n', '<Leader>/',
+    function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
+    opts)
+
+map('i', 'jk', '<ESC>', opts)
+map('i', 'ол', '<ESC>', opts)
+
+
+-- x to blackhole
+map('n', 'x', '"_x', opts)
+
+-- Increment/decrement
+map('n', '+', '<C-a>', opts)
+map('n', '-', '<C-x>', opts)
+
+-- map \ to prev finding
+map({"n", "v"}, [[\]], ',', opts)
+
+-- Select all
+map('n', '<C-a>', 'gg<S-v>G', opts)
+
+
+-- Scroll tabs
+map("n", '<C-l>', vim.cmd.tabnext, opts)
+map("n", '<C-h>', vim.cmd.tabprev, opts)
+
+
+-- Kill current buffer
+map("n", '<Leader>qq', ':bd!<CR>', opts)
+-- Quick exit without saving
+map("n", '<Leader>qa', ':qa!<CR>', opts)
+
+
+map("n", '<Leader>eh', ':set list!<CR>', opts)
+vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
+
+
+-- Tags panel (ctags required)
+map("n", '<Leader>t', ':TagbarToggle<CR>', opts)
+
+
+-- Telescope
+map("n", '<Leader>ff', '<cmd>Telescope find_files<CR>', opts)
+map("n", '<Leader>fg', '<cmd>Telescope live_grep<CR>', opts)
+
+
+-- Expand %% to dirname of current file in command line
+map("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true})
+
+
+-- Save from root
+vim.api.nvim_create_user_command('Sw', [[execute 'silent! write !SUDO_ASKPASS=$(which vim_askpass_helper) sudo -A tee % >/dev/null']], {})
+
+
+
+-- Toggle line number style
+function toggle_number_style()
+
+    local opt = vim.opt
+    local number = opt.number["_value"]
+    local relativenumber = opt.relativenumber["_value"]
+
+    if (not number) and (not relativenumber) then
+        opt.number = true
+        opt.relativenumber = false
+    elseif (number) and (not relativenumber) then
+        opt.number = false
+        opt.relativenumber = true
+    elseif (not number) and (relativenumber) then
+        opt.number = true
+        opt.relativenumber = true
+    elseif (number) and (relativenumber) then
+        opt.number = false
+        opt.relativenumber = false
+    end
+end
+
+-- Toggle line number style
+map('n', '<Leader>l', create_function_tabdo('lua toggle_number_style()'), opts)

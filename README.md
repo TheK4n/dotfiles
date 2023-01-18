@@ -80,9 +80,6 @@ echo "Hello $USER!"
 | <kbd>,rr</kbd>          | Run script in new tab (python, go, preview markdown)|
 | <kbd>,rm</kbd>          | Run script (make run)                               |
 | <kbd>,rf</kbd>          | Format file (go)                                    |
-| <kbd>,nn</kbd>          | Toggle NerdTree                                     |
-| <kbd>,nf</kbd>          | Toggle NerdTree focus                               |
-| <kbd>,ve</kbd>          | Open ~/.vimrc or ~/.config/nvim/init.vim in new tab |
 
 
 <a id="chapter-1"></a>
