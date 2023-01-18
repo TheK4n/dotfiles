@@ -22,6 +22,11 @@ return require('packer').startup(function(use)
     use 'powerman/vim-plugin-ruscmd'  -- Russian navigation
     use 'lewis6991/gitsigns.nvim'
     use 'windwp/nvim-ts-autotag'
+    use 'lervag/vimtex'
+    use {
+        'shime/vim-livedown',  -- Markdown previewer :LivedownPreview
+        run = '/usr/bin/npm install -g livedown'
+    }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     use { 'numToStr/Comment.nvim',
@@ -37,6 +42,9 @@ return require('packer').startup(function(use)
 
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/plenary.nvim'}, { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = false }}
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = false }
+        }
     }
 end)
