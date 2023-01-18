@@ -5,7 +5,7 @@ local opts = { noremap = true, silent = true }
 vim.g.mapleader = ','
 
 
-function create_function_tabdo(command)
+local function create_function_tabdo(command)
     return function()
         local curr_tab = vim.fn.tabpagenr()
         vim.cmd.tabdo(command)

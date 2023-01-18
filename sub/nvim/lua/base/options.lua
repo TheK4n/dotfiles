@@ -71,7 +71,7 @@ opt.backupdir = { prefix .. "/backup//" }
 opt.directory = { prefix .. "/swp//" }
 
 
-function makeDirIfNoExists(path)
+local function makeDirIfNoExists(path)
     local path = path["_value"]
     if (vim.fn.isdirectory(path) == 0) then
         vim.fn.mkdir(path, "p")
