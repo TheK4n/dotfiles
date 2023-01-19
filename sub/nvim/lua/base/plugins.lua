@@ -19,7 +19,6 @@ return require('packer').startup(function(use)
     use 'mattn/emmet-vim'
     use 'Pocco81/auto-save.nvim'
     use 'windwp/nvim-autopairs'
-    use 'powerman/vim-plugin-ruscmd'  -- Russian navigation
     use 'lewis6991/gitsigns.nvim'
     use 'windwp/nvim-ts-autotag'
     use 'lervag/vimtex'

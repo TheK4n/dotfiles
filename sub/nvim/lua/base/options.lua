@@ -117,3 +117,6 @@ vim.cmd.highlight({ "DiagnosticError", "guifg=Grey" })
 vim.cmd.highlight({ "DiagnosticWarn", "guifg=Grey" })
 vim.cmd.highlight({ "DiagnosticInfo", "guifg=Grey" })
 vim.cmd.highlight({ "DiagnosticHint", "guifg=Grey" })
+
+-- Russian commands
+opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
