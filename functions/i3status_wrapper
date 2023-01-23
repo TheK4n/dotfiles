@@ -39,7 +39,7 @@ function remove_holder {
 
 function headphones {
 
-  battery_status="$(bluetoothctl info 14:0A:29:0A:6A:2F | grep "Battery Percentage" | awk -F '[()]' '{ print "🎧"$2"%" }')"
+  battery_status="$(bluetoothctl info 14:0A:29:0A:6A:2F | grep "Battery Percentage" | awk -F '[()]' '{ print "🎧🔋"$2"%" }')"
 
   local json="{ \"full_text\": \"$battery_status\", \"color\": \"#FFFFFF\"}"
 

@@ -73,7 +73,7 @@ i3:
 	mkdir -p ~/.config/i3status
 	ln -s $(PWD)/sub/i3/config ~/.config/i3/config
 	ln -s $(PWD)/sub/i3/statusconfig ~/.config/i3status/config
-	ln -s $(PWD)/functions/i3status_wrapper.sh ~/.local/bin/i3status_wrapper.sh
+	ln -s $(PWD)/functions/i3status_wrapper ~/.local/bin/i3status_wrapper
 
 bat:
 	test -d ~/.config/bat || \
