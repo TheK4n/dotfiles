@@ -28,6 +28,8 @@ Config files for:
 * git
 * ranger
 * i3
+* vim
+* neovim
 
 
 ### Prompt

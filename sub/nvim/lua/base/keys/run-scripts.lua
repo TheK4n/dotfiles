@@ -9,6 +9,7 @@ end
 
 local function set_keymap_base(key, cmd)
     local map = vim.keymap.set
+    local opts = { noremap = true, silent = true }
     keymap_keys = string.format([[<Leader>r%s]], key)
     map("n", keymap_keys, cmd, opts)
 end
@@ -23,7 +24,7 @@ local function set_keymap_run_script(cmd)
     set_keymap_base("r", cmd_string)
 end
 
-local function create_function_autocmd_filetype(set_keymap_func, ft, cmd)
+local function create_function_autocmd_by_filetype(set_keymap_func, ft, cmd)
     return function()
         if vim.bo.filetype == ft then
             set_keymap_func(cmd)
@@ -31,7 +32,7 @@ local function create_function_autocmd_filetype(set_keymap_func, ft, cmd)
     end
 end
 
-local function create_function_autocmd_filename(set_keymap_func, fn, cmd)
+local function create_function_autocmd_by_filename(set_keymap_func, fn, cmd)
     return function()
         if vim.fn.expand('%:t') == fn then
             set_keymap_func(cmd)
@@ -39,21 +40,21 @@ local function create_function_autocmd_filename(set_keymap_func, fn, cmd)
     end
 end
 
-local function autocmd_run_script_filetype(ft, cmd)
-    autocmd(create_function_autocmd_filetype(set_keymap_run_script, ft, cmd))
+local function autocmd_run_script_by_filetype(ft, cmd)
+    autocmd(create_function_autocmd_by_filetype(set_keymap_run_script, ft, cmd))
 end
 
 local function autocmd_format_file_by_filetype(ft, cmd)
-    autocmd(create_function_autocmd_filetype(set_keymap_format_file, ft, cmd))
+    autocmd(create_function_autocmd_by_filetype(set_keymap_format_file, ft, cmd))
 end
 
 
-autocmd_run_script_filetype('python', 'python3')
-autocmd_run_script_filetype('go', 'go run')
-autocmd_run_script_filetype('rust', 'cargo run')
-autocmd_run_script_filetype('markdown', 'glow')
+autocmd_run_script_by_filetype('python', 'python3')
+autocmd_run_script_by_filetype('go', 'go run')
+autocmd_run_script_by_filetype('rust', 'cargo run')
+autocmd_run_script_by_filetype('markdown', 'glow')
 
-autocmd(create_function_autocmd_filename(set_keymap_run_script, 'manpage', 'man -P cat -l'))
+autocmd(create_function_autocmd_by_filename(set_keymap_run_script, 'manpage', 'man -P cat -l'))
 
 autocmd_format_file_by_filetype('rust', 'cargo fmt -p')
 autocmd_format_file_by_filetype('go', 'go fmt')
