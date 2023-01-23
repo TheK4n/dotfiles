@@ -10,7 +10,7 @@ end
 local function set_keymap_base(key, cmd)
     local map = vim.keymap.set
     local opts = { noremap = true, silent = true }
-    keymap_keys = string.format([[<Leader>r%s]], key)
+    local keymap_keys = string.format([[<Leader>r%s]], key)
     map("n", keymap_keys, cmd, opts)
 end
 
