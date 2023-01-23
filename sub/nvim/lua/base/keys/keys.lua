@@ -44,17 +44,17 @@ map("n", '<C-h>', vim.cmd.tabprev, opts)
 
 
 -- Kill current buffer
-map("n", '<Leader>qq', ':bd!<CR>', opts)
+map("n", '<Leader>qq', '<cmd>bd!<CR>', opts)
 -- Quick exit without saving
-map("n", '<Leader>qa', ':qa!<CR>', opts)
+map("n", '<Leader>qa', '<cmd>qa!<CR>', opts)
 
 
-map("n", '<Leader>eh', ':set list!<CR>', opts)
+map("n", '<Leader>eh', '<cmd>set list!<CR>', opts)
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
 -- Tags panel (ctags required)
-map("n", '<Leader>t', ':TagbarToggle<CR>', opts)
+map("n", '<Leader>t', '<cmd>TagbarToggle<CR>', opts)
 
 
 -- Telescope
