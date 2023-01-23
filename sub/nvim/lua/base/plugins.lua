@@ -1,9 +1,12 @@
+vim.cmd([[packadd packer.nvim]])
+
+
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use {
       'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+      requires = { 'kyazdani42/nvim-web-devicons' }
     }
 
     use 'ellisonleao/gruvbox.nvim'
@@ -32,12 +35,21 @@ return require('packer').startup(function(use)
         config = function() require('Comment').setup() end
     }
 
-    -- pyright
+    use { 'folke/trouble.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' }
+    }
+
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'saadparwaiz1/cmp_luasnip'
     use 'L3MON4D3/LuaSnip'
+    use {
+        'williamboman/mason.nvim',
+        requires = {
+            "williamboman/mason-lspconfig.nvim"
+        },
+    }
 
     use {
         'nvim-telescope/telescope.nvim',
