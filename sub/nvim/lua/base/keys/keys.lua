@@ -95,3 +95,24 @@ end
 
 -- Toggle line number style
 map('n', '<Leader>l', create_function_tabdo('lua toggle_number_style()'), opts)
+
+
+
+local function set_trouble_keymap(key, cmd)
+    map("n", string.format("<Leader>x%s", key), string.format("<cmd>TroubleToggle %s<CR>", cmd), opts)
+end
+
+set_trouble_keymap("x", "")
+set_trouble_keymap("w", "workspace_diagnostics")
+set_trouble_keymap("d", "document_diagnostics")
+set_trouble_keymap("l", "loclist")
+set_trouble_keymap("q", "quickfix")
+
+
+local function set_gitsigns_keymap(key, cmd)
+    map("n", string.format("<Leader>g%s", key), string.format("<cmd>Gitsigns %s<CR>", cmd), opts)
+end
+
+set_gitsigns_keymap('p', 'preview_hunk')
+set_gitsigns_keymap('b', 'blame_line')
+set_gitsigns_keymap('n', 'next_hunk')
