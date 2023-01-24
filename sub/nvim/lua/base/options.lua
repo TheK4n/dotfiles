@@ -45,6 +45,7 @@ opt.visualbell = false
 opt.showcmd = true
 opt.showtabline = 2
 
+opt.ignorecase = true
 opt.smartcase = true -- if search line hasn`t Upper case chars - ignore case search, else case-sensivity search
 opt.incsearch = true
 

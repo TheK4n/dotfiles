@@ -5,8 +5,13 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use {
-      'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons' }
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' }
+    }
+
+    use {
+        'kana/vim-textobj-lastpat', -- text-object i/, operate under finding
+        requires = { 'kana/vim-textobj-user' }
     }
 
     use 'ellisonleao/gruvbox.nvim'
@@ -55,7 +60,7 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = {
             { 'nvim-lua/plenary.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = false }
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         }
     }
 end)
