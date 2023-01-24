@@ -103,16 +103,14 @@ local function set_trouble_keymap(key, cmd)
 end
 
 set_trouble_keymap("x", "")
-set_trouble_keymap("w", "workspace_diagnostics")
-set_trouble_keymap("d", "document_diagnostics")
-set_trouble_keymap("l", "loclist")
-set_trouble_keymap("q", "quickfix")
+set_trouble_keymap("w", "workspace_diagnostics") -- lsp diagnostic of workspace
+set_trouble_keymap("d", "document_diagnostics") -- diagnostic of current file
 
 
 local function set_gitsigns_keymap(key, cmd)
     map("n", string.format("<Leader>g%s", key), string.format("<cmd>Gitsigns %s<CR>", cmd), opts)
 end
 
-set_gitsigns_keymap('p', 'preview_hunk')
-set_gitsigns_keymap('b', 'blame_line')
-set_gitsigns_keymap('n', 'next_hunk')
+set_gitsigns_keymap('p', 'preview_hunk') -- show diff
+set_gitsigns_keymap('b', 'blame_line') -- show author, hash, date and message of current line commit
+set_gitsigns_keymap('n', 'next_hunk') -- go to next unstaged changes
