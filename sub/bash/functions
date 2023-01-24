@@ -152,7 +152,7 @@ docker_ips() {
 
 
 py() {
-    if [ -z "$@" -a -n "$(which ipython)" ]; then
+    if [ -z "$@" -a -x "$(command -v ipython)" ]; then
         ipython -i -c "q = exit"
     else
         python3 $@

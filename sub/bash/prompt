@@ -1,7 +1,7 @@
 
 parse_git_branch() {
 
-    if ! [ -x "$(which git)" ]; then
+    if ! [ -x "$(command -v git)" ]; then
         return
     fi
 

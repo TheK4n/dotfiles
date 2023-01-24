@@ -1,7 +1,7 @@
 
 
 # colors
-if [ -x "$(which dircolors)" ]; then
+if [ -x "$(command -v dircolors)" ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
     alias grep='grep --color=auto'

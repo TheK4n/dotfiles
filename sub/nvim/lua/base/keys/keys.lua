@@ -67,7 +67,7 @@ map("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true}
 
 
 -- Save from root
-vim.api.nvim_create_user_command('Sw', [[execute 'silent! write !SUDO_ASKPASS=$(which vim_askpass_helper) sudo -A tee % >/dev/null']], {})
+vim.api.nvim_create_user_command('Sw', [[execute 'silent! write !SUDO_ASKPASS=$(command -v vim_askpass_helper) sudo -A tee % >/dev/null']], {})
 
 
 
