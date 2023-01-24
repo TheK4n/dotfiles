@@ -21,6 +21,7 @@ zsh:
 	test -d ~/.subzsh || \
 	ln -s $(PWD)/sub/zsh ~/.subzsh
 	ln -s ~/.subzsh/zshrc ~/.zshrc
+	ln -s ~/.subzsh/zfunc ~/.zfunc
 	mkdir ~/.subzsh/plugins
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.subzsh/plugins/zsh-autosuggestions
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.subzsh/plugins/zsh-syntax-highlighting

@@ -1,8 +1,9 @@
 
 # enable completion features
-fpath+=~/.zfunc
+fpath=(~/.zfunc $fpath)
 autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
+compdef _nvim nvim
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
