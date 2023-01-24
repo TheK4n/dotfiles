@@ -23,6 +23,8 @@ map('n', '<Leader>/',
 map('i', 'jk', '<ESC>', opts)
 map('i', 'ол', '<ESC>', opts)
 
+map('n', '<Enter>', 'o<ESC>', opts)
+map('n', '<Space>', 'O<ESC>', opts)
 
 -- x to blackhole
 map('n', 'x', '"_x', opts)
