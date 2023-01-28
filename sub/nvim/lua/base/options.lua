@@ -65,11 +65,11 @@ opt.undofile = true
 opt.history = 1000
 opt.undoreload = 1000
 
-local prefix = vim.fn.expand("~/.cache/nvim/tmp")
+local prefix = vim.fn.expand("~/.local/state/nvim")
 
 opt.undodir = { prefix .. "/undo//" }
 opt.backupdir = { prefix .. "/backup//" }
-opt.directory = { prefix .. "/swp//" }
+opt.directory = { prefix .. "/swap//" }
 
 
 local function makeDirIfNoExists(path)
