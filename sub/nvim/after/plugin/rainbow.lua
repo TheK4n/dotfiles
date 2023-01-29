@@ -1,12 +1,8 @@
-if (packer_plugins["vim-rainbow"] and packer_plugins["vim-rainbow"].loaded) then
+if not (packer_plugins["vim-rainbow"] and packer_plugins["vim-rainbow"].loaded) then
     return
 end
 
-vim.api.nvim_exec([[
-    let g:rainbow_active = 1
-]], true)
-
-vim.api.nvim_create_autocmd('FileType',
+vim.api.nvim_create_autocmd('BufEnter',
              {
                  pattern = {"*"},
                  command = 'RainbowToggle'
