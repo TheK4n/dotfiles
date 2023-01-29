@@ -80,6 +80,7 @@ echo "Hello $USER!"
 | <kbd>,qa</kbd>          | Close all without saving                            |
 | <kbd>,t</kbd>           | Tagbar                                              |
 | <kbd>,rr</kbd>          | Run script in new tab (python, go, preview markdown)|
+| <kbd>,rs</kbd>          | Run script in new tab by shebang                    |
 | <kbd>,rf</kbd>          | Format file (go, rust)                              |
 
 
