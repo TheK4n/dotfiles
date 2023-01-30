@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
     use 'preservim/vimux'
     use 'rbgrouleff/bclose.vim'
     use 'frazrepo/vim-rainbow'
-    use 'mattn/emmet-vim'
     use 'Pocco81/auto-save.nvim'
     use 'windwp/nvim-autopairs'
     use 'lewis6991/gitsigns.nvim'
