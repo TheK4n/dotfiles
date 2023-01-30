@@ -1,19 +1,8 @@
 
-local status, luasnip = pcall(require, "luasnip")
+local status, _ = pcall(require, "luasnip")
 if (not status) then return end
 
-luasnip.add_snippets(nil, {
-    all = {
-        luasnip.snippet({
-            trig = "ifmain",
-            namr = "ifmain",
-            dscr = "If python file run as main (not import)",
-        }, {
-            luasnip.text_node({
-                "if __name__ == '__main__':",
-                "\t"
-            })
-        })
-    }
-})
+local status_loader, luasnip_loaders = pcall(require, "luasnip.loaders.from_snipmate")
+if (not status_loader) then return end
 
+luasnip_loaders.lazy_load()

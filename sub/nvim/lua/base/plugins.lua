@@ -1,6 +1,4 @@
 vim.cmd([[packadd packer.nvim]])
-
-
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
@@ -51,6 +49,7 @@ return require('packer').startup(function(use)
         'L3MON4D3/LuaSnip',
         after = 'nvim-cmp',
     }
+    use 'honza/vim-snippets'
 
     use {
         'williamboman/mason.nvim',
