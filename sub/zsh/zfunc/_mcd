@@ -1,0 +1,9 @@
+#compdef mcd
+#autoload
+
+
+_mcd() {
+        _files
+}
+
+_mcd

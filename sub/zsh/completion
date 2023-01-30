@@ -4,6 +4,7 @@ fpath=(~/.zfunc $fpath)
 autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
 compdef _nvim nvim
+compdef _mcd mcd
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate

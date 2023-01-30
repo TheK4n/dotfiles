@@ -12,19 +12,19 @@ return require('packer').startup(function(use)
         requires = { 'kana/vim-textobj-user' }
     }
 
-    use 'ellisonleao/gruvbox.nvim'
+    use 'ellisonleao/gruvbox.nvim'  -- theme
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'google/vim-searchindex'
-    use 'tpope/vim-commentary'
-    use 'ap/vim-css-color'
+    use 'tpope/vim-commentary'  -- gcc to comment line
+    use 'ap/vim-css-color'  -- highlight hex
     use 'preservim/tagbar'
     use 'preservim/vimux'
     use 'rbgrouleff/bclose.vim'
-    use 'frazrepo/vim-rainbow'
-    use 'Pocco81/auto-save.nvim'
-    use 'windwp/nvim-autopairs'
-    use 'lewis6991/gitsigns.nvim'
+    use 'frazrepo/vim-rainbow'  -- rainbow brackets
+    use 'Pocco81/auto-save.nvim'  -- autosave files
+    use 'windwp/nvim-autopairs'  -- auto pair brackets and tags
+    use 'lewis6991/gitsigns.nvim'  -- git integration
     use 'windwp/nvim-ts-autotag'
     use 'lervag/vimtex'
     use {
@@ -44,6 +44,8 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
+
+    -- snippets
     use 'saadparwaiz1/cmp_luasnip'
     use {
         'L3MON4D3/LuaSnip',
@@ -51,6 +53,7 @@ return require('packer').startup(function(use)
     }
     use 'honza/vim-snippets'
 
+    -- lsp servers installer
     use {
         'williamboman/mason.nvim',
         requires = {
