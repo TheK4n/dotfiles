@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+
 opt.ruler = true
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
@@ -7,7 +8,11 @@ opt.fileencoding = 'utf-8'
 opt.number = true
 opt.relativenumber = true
 
+
 opt.clipboard:append { 'unnamedplus' }
+
+opt.shm = opt.shm["_value"] .. "I"  -- disable startup message
+
 opt.shell = 'bash'
 
 opt.ttimeoutlen = 0
