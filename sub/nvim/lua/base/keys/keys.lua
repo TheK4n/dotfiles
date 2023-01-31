@@ -45,6 +45,10 @@ map("n", '<C-l>', vim.cmd.tabnext, opts)
 map("n", '<C-h>', vim.cmd.tabprev, opts)
 
 
+-- Open file under cursor in new tab
+map("n", 'gf', '<C-w>gf')
+
+
 -- Kill current buffer
 map("n", '<Leader>qq', '<cmd>bd!<CR>', opts)
 -- Quick exit without saving
