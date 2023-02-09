@@ -33,9 +33,7 @@ return require('packer').startup(function(use)
     }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
-    use { 'numToStr/Comment.nvim',
-        config = function() require('Comment').setup() end
-    }
+    use 'numToStr/Comment.nvim'
 
     use { 'folke/trouble.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' }
