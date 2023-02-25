@@ -9,6 +9,7 @@ opt.number = true
 opt.relativenumber = true
 
 
+opt.clipboard:append { 'unnamed' }
 opt.clipboard:append { 'unnamedplus' }
 
 opt.shm = opt.shm["_value"] .. "I"  -- disable startup message

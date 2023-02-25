@@ -27,7 +27,12 @@ map('n', '<Enter>', 'o<ESC>', opts)
 map('n', '<Space>', 'O<ESC>', opts)
 
 -- x to blackhole
-map('n', 'x', '"_x', opts)
+map({'n', 'v'}, 'x', '"_x', opts)
+
+
+-- Put without overwrite yanked text
+map('x', 'p', 'P', opts)
+
 
 -- Increment/decrement
 map('n', '+', '<C-a>', opts)
