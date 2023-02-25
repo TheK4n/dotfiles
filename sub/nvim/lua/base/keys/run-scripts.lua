@@ -29,8 +29,8 @@ local function set_keymap_run_script(cmd)
     set_keymap_run_script_base("r", cmd)
 end
 
-local function set_keymap_run_script_by_shebang(cmd)
-    set_keymap_run_script_base("s", cmd)
+local function set_keymap_run_script_by_shebang()
+    set_keymap_run_script_base("s", [[$(head -1 % | cut -c 3-) %]])
 end
 
 local function create_function_autocmd_by_filetype(set_keymap_func, ft, cmd)
@@ -68,4 +68,4 @@ autocmd(create_function_autocmd_by_filename(set_keymap_run_script, 'manpage', 'm
 autocmd_format_file_by_filetype('rust', 'cargo fmt -p')
 autocmd_format_file_by_filetype('go', 'go fmt')
 
-autocmd(function() set_keymap_run_script_by_shebang([[$(head -1 % | cut -c 3-) %]]) end)
+autocmd(set_keymap_run_script_by_shebang)

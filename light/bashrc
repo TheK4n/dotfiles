@@ -82,9 +82,6 @@ alias ve='python3 -m virtualenv venv && . venv/bin/activate'
 alias vd='deactivate'
 
 
-# docker
-alias drma='docker rm $(docker ps -a -q -f status=exited)'
-
 # python
 alias pipir='python3 -m pip install -r requirements.txt'
 
