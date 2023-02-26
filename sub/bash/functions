@@ -258,8 +258,17 @@ rmt() {
     done
 }
 
-# shows text from ~/.inittips
+# shows text from ~/.tips/*
 showtips() {
-    cat ~/.inittips 2>/dev/null
+
+    TIPS_DIR="$HOME/.tips"
+
+    if [ ! -d "$TIPS_DIR" ]; then
+        mkdir "$TIPS_DIR" 2>/dev/null
+        git init "$TIPS_DIR"
+    fi
+
+    cat "$TIPS_DIR"/* 2>/dev/null
+    return 0
 }
 
