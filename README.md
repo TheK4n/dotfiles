@@ -90,7 +90,7 @@ echo "Hello $USER!"
 ```bash
 git clone https://github.com/TheK4n/dotfiles
 cd dotfiles
-make
+./install.sh
 ```
 
 

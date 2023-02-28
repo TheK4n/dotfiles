@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 SUB="$(pwd)/sub"
 
 
@@ -14,27 +17,27 @@ _die_if_installed() {
 }
 
 cmd_backup() {
-	mv ~/.bashrc ~/.bashrc.bak
-	mv ~/.zshrc ~/.zshrc.bak
-	mv ~/.vimrc ~/.vimrc.bak
-	mv ~/.vim ~/.vim.bak
-	mv ~/.subbash ~/.subbash.bak
-	mv ~/.subzsh ~/.subzsh.bak
-	mv ~/.tmux.conf ~/.tmux.conf.bak
-	mv ~/.gitconfig ~/.gitconfig.bak
-	mv ~/.gitignore ~/.gitignore.bak
+    mv ~/.bashrc ~/.bashrc.bak
+    mv ~/.zshrc ~/.zshrc.bak
+    mv ~/.vimrc ~/.vimrc.bak
+    mv ~/.vim ~/.vim.bak
+    mv ~/.subbash ~/.subbash.bak
+    mv ~/.subzsh ~/.subzsh.bak
+    mv ~/.tmux.conf ~/.tmux.conf.bak
+    mv ~/.gitconfig ~/.gitconfig.bak
+    mv ~/.gitignore ~/.gitignore.bak
 }
 
 cmd_bash() {
-    _die_if_installed "~/.subbash"
+    local subbash="$HOME/.subbash"
+    _die_if_installed "$subbash"
 
-    ln -s "$SUB"/bash ~/.subbash
-    ln -s ~/.subbash/bashrc ~/.bashrc
+    ln -s "$SUB"/bash "$subbash"
+    ln -s "$subbash"/bashrc ~/.bashrc
 }
 
 cmd_zsh() {
-    local subzsh
-    subzsh="$HOME/.subzsh"
+    local subzsh="$HOME/.subzsh"
     _die_if_installed "$subzsh"
 
     ln -s "$SUB"/zsh "$subzsh"
@@ -48,52 +51,41 @@ cmd_zsh() {
 }
 
 cmd_tmux() {
-	ln -s "$SUB"/tmux/tmux.conf ~/.tmux.conf
+    ln -s "$SUB"/tmux/tmux.conf ~/.tmux.conf
 }
 
 cmd_alacritty() {
-    _die_if_installed "~/.config/alacritty"
+    local subalacritty="$HOME/.config/alacritty"
+    _die_if_installed "$subalacritty"
 
-    mkdir -p ~/.config/alacritty
-    ln -s "$SUB"/alacritty/alacritty.yml ~/.config/alacritty/
+    mkdir -p "$subalacritty"
+    ln -s "$SUB"/alacritty/alacritty.yml "$subalacritty"
 }
 
-cmd_vim() {
-	echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; npm install -g pyright"
+cmd_nvim() {
+    echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'"
 
-    local subvim
-    subvim="$HOME/.vim"
-
-    _die_if_installed "$subvim"
-
-	echo "set editing-mode vi" >> ~/.inputrc
-    ln -s "$SUB"/vim "$subvim"
-    ln -s $(PWD)/light/.vimrc ~/.vimrc
-
-    mkdir -p ~/.config/nvim/lua
-    ln -s "$subvim"/vimrc     ~/.config/nvim/init.vim
-    ln -s "$SUB"/vim/init.lua ~/.config/nvim/lua/init.lua
-
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    nvim +PluginInstall +qall
+    ln -s "$SUB/nvim" "$HOME/.config/nvim"
+    ln -s "$(dirname "$SUB")/functions/vim_askpass_helper" "$HOME/.local/bin"
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    nvim +PackerCompile +PackerSync +PackerSync
 }
 
 cmd_ssh() {
-	cat "$SUB"/ssh/config >> ~/.ssh/config
+    cat "$SUB"/ssh/config >> ~/.ssh/config
 }
 
 cmd_git() {
-	ln -s "$SUB"/git/gitconfig ~/.gitconfig
-	ln -s "$SUB"/git/gitignore ~/.gitignore
-	ln -s "$SUB"/git/hooks ~/.githooks
+    ln -s "$SUB"/git/gitconfig ~/.gitconfig
+    ln -s "$SUB"/git/gitignore ~/.gitignore
+    ln -s "$SUB"/git/hooks ~/.githooks
 }
 
 cmd_ranger() {
-	echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
+    echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
 
-    local subranger
-    subranger="$HOME/.config/ranger"
-	_die_if_installed "$subranger"
+    local subranger="$HOME/.config/ranger"
+    _die_if_installed "$subranger"
 
     
     mkdir -p "$subranger"
@@ -104,10 +96,9 @@ cmd_ranger() {
 }
 
 cmd_gpg() {
-    local subgpg
-    subgpg="$HOME/.gnupg"
+    local subgpg="$HOME/.gnupg"
 
-	_die_if_installed "$subgpg"
+    _die_if_installed "$subgpg"
 
     mkdir -p "$subgpg"
     cat "$SUB"/gpg/gpg.conf >> "$subgpg"/gpg.conf
@@ -115,13 +106,11 @@ cmd_gpg() {
 }
 
 cmd_i3() {
-	echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
+    echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
 
-    local subi3 subi3status
-    subi3="$HOME/.config/i3"
-    subi3status="$HOME/.config/i3status"
-	_die_if_installed "$subi3"
-	_die_if_installed "$subi3status"
+    local subi3="$HOME/.config/i3" subi3status="$HOME/.config/i3status"
+    _die_if_installed "$subi3"
+    _die_if_installed "$subi3status"
 
     mkdir -p "$subi3"
     mkdir -p "$subi3status"
@@ -130,52 +119,54 @@ cmd_i3() {
 }
 
 cmd_bat() {
-    local subbat
-    subbat="$HOME/.config/bat"
+    local subbat="$HOME/.config/bat"
     
-	_die_if_installed "$subbat"
+    _die_if_installed "$subbat"
 
     mkdir -p "$subbat"
     ln -s "$SUB"/bat/config "$subbat"/config
 }
 
 cmd_ipython() {
-    local subipython
-    subipython="$HOME/.ipython"
+    local subipython="$HOME/.ipython"
 
-	_die_if_installed "$subipython"
+    _die_if_installed "$subipython"
 
     mkdir -p "$subipython"/profile_default
     ln -s "$SUB"/ipython/ipython_config.py "$subipython"/profile_default/ipython_config.py
 }
 
 cmd_font() {
-    local subfont
-    subfont="$HOME/.local/share/fonts"
+    local subfont="$HOME/.local/share/fonts"
 
-	mkdir -p "$subfont"
-	cd "$subfont"
-	wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'
-	unzip FiraCode.zip -d "$subfont"
-	git clone 'https://github.com/powerline/fonts.git' --depth=1
-	cd fonts
-	./install.sh
+    mkdir -p "$subfont"
+    cd "$subfont"
+    wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'
+    unzip FiraCode.zip -d "$subfont"
+    git clone 'https://github.com/powerline/fonts.git' --depth=1
+    cd fonts
+    ./install.sh
 }
 
 cmd_termux() {
-	echo "apt install termux-api tsu"
+    echo "apt install termux-api tsu"
 }
 
 cmd_arch() {
-	echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
+    echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
+}
+
+cmd_psql() {
+    ln -s "$SUB/psql/psqlrc" "$HOME/.psqlrc"
 }
 
 cmd_unlink() {
 #####################################################
+return 0
 }
 
 cmd_install_functions() {
-    for func in $(find functions -type f -maxdepth 1)
+    for func in $(find functions -maxdepth 1 -type f)
     do
         chmod 755 "$func"
         ln -s "$func" "$HOME/.local/bin"
@@ -188,7 +179,7 @@ cmd_install() {
         zsh) shift;            cmd_zsh    "$@" ;;
         tmux) shift;           cmd_tmux    "$@" ;;
         alacritty) shift;      cmd_alacritty    "$@" ;;
-        vim) shift;            cmd_vim    "$@" ;;
+        nvim) shift;           cmd_nvim    "$@" ;;
         ssh) shift;            cmd_ssh    "$@" ;;
         git) shift;            cmd_git    "$@" ;;
         ranger) shift;         cmd_ranger    "$@" ;;
@@ -198,13 +189,43 @@ cmd_install() {
         font) shift;           cmd_font    "$@" ;;
         termux) shift;         cmd_termux    "$@" ;;
         arch) shift;           cmd_arch    "$@" ;;
+        psql) shift;           cmd_psql    "$@" ;;
     esac
+}
+
+cmd_help() {
+
+    echo "Dotfiles installation script:
+Usage: ./install.sh install (target)
+Usage: ./install.sh unlink (target)
+Usage: ./install.sh install-functions
+
+targets:
+ - bash
+ - zsh
+ - tmux
+ - alacritty
+ - nvim
+ - ssh
+ - git
+ - ranger
+ - gpg
+ - i3
+ - bat
+ - font
+ - termux
+ - arch
+ - psql
+"
+
 }
 
 
 case "$1" in
-    install) shift;              cmd_install    "$@" ;;
-    unlink) shift;               cmd_unlink    "$@" ;;
+    help) shift;                 cmd_help              "$@" ;;
+    install) shift;              cmd_install           "$@" ;;
+    unlink) shift;               cmd_unlink            "$@" ;;
+    install-functions) shift;    cmd_install_functions "$@" ;;
 esac
 exit 0
 
