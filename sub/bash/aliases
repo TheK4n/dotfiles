@@ -1,7 +1,7 @@
 
 
 # colors
-if [ -x "$(which dircolors)" ]; then
+if [ -x "$(command -v dircolors)" ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
     alias grep='grep --color=auto'
@@ -76,10 +76,13 @@ alias shutdown='sudo /sbin/shutdown now'
 
 alias meminfo='free -mlth'
 alias psmem='ps auxf | sort -nr -k 4 | less -R'
-alias wake='((speaker-test -t sine -f 400 &>/dev/null)& local pid=$! ;sleep 0.2s; kill -9 $pid) &>/dev/null'
 alias music='mplayer -shuffle ~/Music/*.mp3'
 
-
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    alias wake='((speaker-test -t sine -f 400 &>/dev/null)& local pid=$! ;sleep 0.2s; kill -9 $pid) &>/dev/null'
+elif [[ "$OSTYPE" == "linux-android"* ]]; then
+    alias wake='termux-notification --sound --vibrate 500,1000,200'
+fi
 
 # python
 alias pipir='python3 -m pip install -r requirements.txt'
@@ -105,16 +108,16 @@ alias drmi='docker image prune'
 # clipboard
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [[ -n "$DISPLAY" ]]; then
-        alias ctc='xclip -selection clipboard -i'
-        alias ctv='xclip -selection clipboard -o'
+        alias copy='xclip -selection clipboard -i'
+        alias paste='xclip -selection clipboard -o'
     else
-        alias ctc='read -rd "EOF" TTYCLIPBOARD'
-        alias ctv='echo "$TTYCLIPBOARD"'
+        alias copy='read -rd "EOF" TTYCLIPBOARD'
+        alias paste='echo "$TTYCLIPBOARD"'
     fi
 elif [[ "$OSTYPE" == "linux-android"* ]]; then
-    alias ctc='termux-clipboard-set'
-    alias ctv='termux-clipboard-get'
+    alias copy='termux-clipboard-set'
+    alias paste='termux-clipboard-get'
 elif [[ "$OSTYPE" == "darwin" ]]; then
-    alias ctc='pbcopy'
-    alias ctv='pbpaste'
+    alias copy='pbcopy'
+    alias paste='pbpaste'
 fi

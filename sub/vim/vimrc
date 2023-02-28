@@ -55,25 +55,6 @@ let g:netrw_winsize = 15
 let g:netrw_keepdir = 0
 
 
-
-" Mirror the NERDTree before showing it. This makes it the same on all tabs.
-nnoremap <silent> <leader>nn :silent NERDTreeMirror<CR>:silent NERDTreeToggle<CR>
-
-" Toggle focus
-nnoremap <silent> <leader>nf :wincmd p<CR>
-
-" Start NERDTree when Vim is started without file arguments.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | wincmd p | endif
-
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-let g:NERDTreeMapActivateNode='l'
-
 set ttimeoutlen=0 "Понижаем задержку ввода escape последовательностей
 let &t_SI.="\e[5 q" "SI = режим вставки
 let &t_SR.="\e[3 q" "SR = режим замены
@@ -104,7 +85,6 @@ set novisualbell
 set showcmd
 set showtabline=2
 
-set ignorecase
 set smartcase
 set incsearch
 
@@ -138,6 +118,8 @@ set virtualedit=onemore  " allow for cursor beyond last character
 " toggle hlsearch
 nnoremap <silent> <Leader>/ :set invhlsearch<CR>
 
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -176,33 +158,16 @@ call vundle#begin()
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-commentary'
     Plugin 'ap/vim-css-color'
-    Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
     Plugin 'preservim/tagbar'
     Plugin 'preservim/vimux'
     Plugin 'rbgrouleff/bclose.vim'
     Plugin 'frazrepo/vim-rainbow'
-    Plugin 'Pocco81/AutoSave.nvim'
+    Plugin 'Pocco81/auto-save.nvim'
     " requiered patch your font
     Plugin 'ryanoasis/vim-devicons'
     Plugin 'windwp/nvim-autopairs'
 
-    " pyright
-    Plugin 'neovim/nvim-lspconfig'
-    Plugin 'hrsh7th/nvim-cmp'
-    Plugin 'hrsh7th/cmp-nvim-lsp'
-    Plugin 'saadparwaiz1/cmp_luasnip'
-    Plugin 'L3MON4D3/LuaSnip'
-    Plugin 'nvim-lua/plenary.nvim'
-
     Plugin 'powerman/vim-plugin-ruscmd'  " Russian navigation
-
-    " golang
-    " Plugin 'fatih/vim-go'
-    Plugin 'nvim-telescope/telescope.nvim'
-    Plugin 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
-    Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-    Plugin 'preservim/nerdtree'
 
 call vundle#end()
 
@@ -220,6 +185,8 @@ autocmd BufEnter * if (expand('%:t')=='manpage') | nnoremap <silent> <Leader>rr 
 autocmd BufEnter * if (&filetype=='python') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal python3 % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
 autocmd BufEnter * if (&filetype=='go') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal go run % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
 autocmd BufEnter * if (&filetype=='go') | nnoremap <silent> <Leader>rf :!go fmt % <CR> | endif
+autocmd BufEnter * if (&filetype=='rust') | nnoremap <silent> <Leader>rr :tabnew % <CR> :terminal cargo run % <CR> :set nocursorline number norelativenumber <CR> G <CR> | endif
+autocmd BufEnter * if (&filetype=='rust') | nnoremap <silent> <Leader>rf :!cargo fmt % <CR> | endif
 autocmd BufEnter * if (&filetype=='markdown') | nnoremap <silent> <Leader>rr :let g:buf_curline=line(".") <CR> :tabnew % <CR> :terminal glow % <CR> :set nocursorline number norelativenumber <CR> :exe buf_curline <CR> | endif
 autocmd BufEnter * if (&filetype=='vim') | nnoremap <silent> <Leader>rr :so % <CR>
 
@@ -250,20 +217,7 @@ colorscheme gruvbox
 set bg=dark
 
 
-let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-
-au FileType py,go,c,cpp,objc,js call rainbow#load()
+au FileType py,go,c,cpp,objc,js,rs call rainbow#load()
 let g:rainbow_active = 1
 
 
@@ -305,6 +259,14 @@ endfunction
 
 nnoremap <silent> <Leader>l :call TabDo('call ToggleRelativeAbsoluteNumber()') <CR>
 
+nnoremap <silent> <Leader>qq :bd!<CR>
 " Quick exiting without save
-nnoremap <silent> <Leader>qq :qa!<CR>
+nnoremap <silent> <Leader>qa :qa!<CR>
 
+" expand %% to dirname of cur file in commandline
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+
+
+" :Sw to save file by root
+command Sw execute 'silent! write !SUDO_ASKPASS=$(which vim_askpass_helper) sudo -A tee % >/dev/null'

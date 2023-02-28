@@ -25,6 +25,10 @@ set smartcase
 set hlsearch
 set incsearch
 
+let &t_SI.="\e[5 q" "SI = режим вставки
+let &t_SR.="\e[3 q" "SR = режим замены
+let &t_EI.="\e[1 q" "EI = нормальный режим
+
 set mousehide
 set mouse=a
 

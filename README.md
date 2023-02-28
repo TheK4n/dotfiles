@@ -28,6 +28,8 @@ Config files for:
 * git
 * ranger
 * i3
+* vim
+* neovim
 
 
 ### Prompt
@@ -74,14 +76,12 @@ echo "Hello $USER!"
 | <kbd>,l</kbd>           | Line number styles                                  |
 | <kbd>,c</kbd>           | Highlight cursor line                               |
 | <kbd>,/</kbd>           | Toggle search highlight                             |
-| <kbd>,``</kbd>          | Close all without saving                            |
+| <kbd>,qq</kbd>          | Delete current buffer                               |
+| <kbd>,qa</kbd>          | Close all without saving                            |
 | <kbd>,t</kbd>           | Tagbar                                              |
 | <kbd>,rr</kbd>          | Run script in new tab (python, go, preview markdown)|
-| <kbd>,rm</kbd>          | Run script (make run)                               |
-| <kbd>,rf</kbd>          | Format file (go)                                    |
-| <kbd>,nn</kbd>          | Toggle NerdTree                                     |
-| <kbd>,nf</kbd>          | Toggle NerdTree focus                               |
-| <kbd>,ve</kbd>          | Open ~/.vimrc or ~/.config/nvim/init.vim in new tab |
+| <kbd>,rs</kbd>          | Run script in new tab by shebang                    |
+| <kbd>,rf</kbd>          | Format file (go, rust)                              |
 
 
 <a id="chapter-1"></a>

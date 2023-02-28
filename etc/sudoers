@@ -1,0 +1,5 @@
+%wheel ALL=(ALL:ALL) ALL
+
+@includedir /etc/sudoers.d
+
+Defaults passwd_timeout=0

@@ -1,0 +1,1 @@
+%custompower ALL= NOPASSWD: /sbin/reboot,/sbin/shutdown now,/sbin/systemctl suspend

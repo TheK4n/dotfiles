@@ -1,0 +1,1 @@
+%wireguard ALL= NOPASSWD: /sbin/systemctl start wg-quick@wg0.service,/sbin/systemctl stop wg-quick@wg0.service

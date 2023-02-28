@@ -152,7 +152,7 @@ docker_ips() {
 
 
 py() {
-    if [ -z "$@" -a -n "$(which ipython)" ]; then
+    if [[ -z "$@" && -x "$(command -v ipython 2>/dev/null)" ]]; then
         ipython -i -c "q = exit"
     else
         python3 $@
@@ -256,5 +256,19 @@ rmt() {
     do
         mv "$filename" "$TRASH"/"$(basename "$filename")-$(date +%s)"
     done
+}
+
+# shows text from ~/.tips/*
+showtips() {
+
+    TIPS_DIR="$HOME/.tips"
+
+    if [ ! -d "$TIPS_DIR" ]; then
+        mkdir "$TIPS_DIR" 2>/dev/null
+        git init "$TIPS_DIR"
+    fi
+
+    cat "$TIPS_DIR"/* 2>/dev/null
+    return 0
 }
 

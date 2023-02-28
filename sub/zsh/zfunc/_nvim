@@ -1,0 +1,16 @@
+#compdef nvim
+#autoload
+
+
+_nvim() {
+    subcmds=($(git diff --name-only --relative 2>/dev/null))
+    if [[ -z "$subcmds" ]]; then
+        _files
+    else
+        _values -C 'modified files' $subcmds
+        _files
+    fi
+
+}
+
+_nvim

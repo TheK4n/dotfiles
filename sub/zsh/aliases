@@ -5,4 +5,9 @@ alias -g OUT="1>/dev/null"  # stdOUT
 alias -g ERR="2>/dev/null"  # stdERR
 alias -g ALL="1>/dev/null 2>&1"
 alias -g BG="&>/dev/null &"
+
+alias -s mp4='vlc'
+alias -s mp3='audacious'
+alias -s flac='audacious'
+
 bindkey '`' autosuggest-accept
