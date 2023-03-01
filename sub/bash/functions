@@ -272,3 +272,13 @@ showtips() {
     return 0
 }
 
+
+most-often-commands() {
+    history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn
+}
+
+
+# calculator
+= () {
+    echo "$*" | bc -l
+}
