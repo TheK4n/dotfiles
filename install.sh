@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-SUB="$(pwd)/sub"
+SUB="$(pwd)/home/user/"
 
 
 _die() {
@@ -29,120 +29,123 @@ cmd_backup() {
 }
 
 cmd_bash() {
-    local subbash="$HOME/.subbash"
-    _die_if_installed "$subbash"
+    local sub=".subbash"
+    _die_if_installed "$HOME/$sub"
 
-    ln -s "$SUB"/bash "$subbash"
-    ln -s "$subbash"/bashrc ~/.bashrc
+    ln -s "$SUB/$sub" "$HOME/$sub"
+    ln -s "$SUB/.bashrc" "$HOME/.bashrc"
 }
 
 cmd_zsh() {
-    local subzsh="$HOME/.subzsh"
-    _die_if_installed "$subzsh"
+    local sub=".subzsh"
+    _die_if_installed "$HOME/$sub"
 
-    ln -s "$SUB"/zsh "$subzsh"
-    ln -s "$subzsh"/zshrc ~/.zshrc
-    mkdir "$subzsh"/plugins
-    git clone https://github.com/zsh-users/zsh-autosuggestions     "$subzsh"/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting "$subzsh"/plugins/zsh-syntax-highlighting
-    git clone https://github.com/hlissner/zsh-autopair             "$subzsh"/plugins/hlissner/zsh-autopair
-    git clone https://github.com/unixorn/fzf-zsh-plugin.git        "$subzsh"/plugins/unixorn/fzf-zsh-plugin && \
+    ln -s "$SUB/$sub" "$HOME/$sub"
+    ln -s "$SUB/.zshrc" "$HOME/.zshrc"
+    ln -s "$SUB/.zfunc" "$HOME/.zfunc"
+    mkdir "$SUB/$sub/plugins"
+    git clone https://github.com/zsh-users/zsh-autosuggestions     "$SUB/$sub/plugins/zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting "$SUB/$sub/plugins/zsh-syntax-highlighting"
+    git clone https://github.com/hlissner/zsh-autopair             "$SUB/$sub/plugins/hlissner/zsh-autopair"
+    git clone https://github.com/unixorn/fzf-zsh-plugin.git        "$SUB/$sub/plugins/unixorn/fzf-zsh-plugin" && \
         ln -s ~/.subzsh/plugins/unixorn/fzf-zsh-plugin/bin/* ~/.local/bin/
 }
 
 cmd_tmux() {
-    ln -s "$SUB"/tmux/tmux.conf ~/.tmux.conf
+    ln -s "$SUB/.tmux.conf" "$HOME/.tmux.conf"
 }
 
 cmd_alacritty() {
-    local subalacritty="$HOME/.config/alacritty"
-    _die_if_installed "$subalacritty"
+    local sub=".config/alacritty"
+    _die_if_installed "$HOME/$sub"
 
-    mkdir -p "$subalacritty"
-    ln -s "$SUB"/alacritty/alacritty.yml "$subalacritty"
+    ln -s "$SUB/$sub" "$HOME/$sub"
 }
 
 cmd_nvim() {
     echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'"
 
-    ln -s "$SUB/nvim" "$HOME/.config/nvim"
-    ln -s "$(dirname "$SUB")/functions/vim_askpass_helper" "$HOME/.local/bin"
+    ln -s "$SUB/.config/nvim" "$HOME/.config/nvim"
+    mkdir -p "$HOME/.local/bin"
+    ln -s "$SUB"/.local/bin/* "$HOME/.local/bin"
     git clone --depth 1 https://github.com/wbthomason/packer.nvim "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
     nvim +PackerCompile +PackerSync +PackerSync
 }
 
 cmd_ssh() {
-    cat "$SUB"/ssh/config >> ~/.ssh/config
+    cat "$SUB/.ssh/config" >> "$HOME/.ssh/config"
 }
 
 cmd_git() {
-    ln -s "$SUB"/git/gitconfig ~/.gitconfig
-    ln -s "$SUB"/git/gitignore ~/.gitignore
-    ln -s "$SUB"/git/hooks ~/.githooks
+    ln -s "$SUB/.gitconfig" "$HOME/.gitconfig"
+    ln -s "$SUB/.gitignore" "$HOME/.gitignore"
+    ln -s "$SUB/.githooks" "$HOME/.githooks"
 }
 
 cmd_ranger() {
     echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
 
-    local subranger="$HOME/.config/ranger"
-    _die_if_installed "$subranger"
+    local sub=".config/ranger"
+    _die_if_installed "$HOME/$sub"
 
-    
-    mkdir -p "$subranger"
-    ln -s "$SUB"/ranger/rc.conf "$subranger"
-    mkdir -p "$subranger"/plugins
-    git clone https://github.com/alexanderjeurissen/ranger_devicons "$subranger"/plugins/ranger_devicons
+    ln -s "$SUB/$sub" "$HOME/$sub"
+    mkdir -p "$SUB/$sub/plugins"
+    git clone https://github.com/alexanderjeurissen/ranger_devicons "$SUB/$sub/plugins/ranger_devicons"
     ranger --copy-config=all
 }
 
 cmd_gpg() {
-    local subgpg="$HOME/.gnupg"
+    _die_if_installed "$HOME/.gnupg"
 
-    _die_if_installed "$subgpg"
+    cat "$SUB/.gnupg/gpg.conf" >> "$HOME/.gnupg/gpg.conf"
+    echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > "$HOME/.gnupg/gpg-agent.conf"; echo RELOADAGENT | gpg-connect-agent
+}
 
-    mkdir -p "$subgpg"
-    cat "$SUB"/gpg/gpg.conf >> "$subgpg"/gpg.conf
-    echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > "$subgpg"/gpg-agent.conf; echo RELOADAGENT | gpg-connect-agent
+_install_i3status() {
+    local sub=".config/i3status"
+    _die_if_installed "$HOME/$sub"
+
+    ln -s "$SUB/$sub" "$HOME/$sub"
+}
+
+_install_i3() {
+    local sub=".config/i3"
+    _die_if_installed "$HOME/$sub"
+
+    ln -s "$SUB/$sub" "$HOME/$sub"
 }
 
 cmd_i3() {
     echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
 
-    local subi3="$HOME/.config/i3" subi3status="$HOME/.config/i3status"
-    _die_if_installed "$subi3"
-    _die_if_installed "$subi3status"
-
-    mkdir -p "$subi3"
-    mkdir -p "$subi3status"
-    ln -s "$SUB"/i3/config "$subi3"/config
-    ln -s "$SUB"/i3/statusconfig "$subi3status"/config
+    _install_i3
+    _install_i3status
 }
 
 cmd_bat() {
-    local subbat="$HOME/.config/bat"
+    local sub=".config/bat"
     
-    _die_if_installed "$subbat"
+    _die_if_installed "$HOME/$sub"
 
-    mkdir -p "$subbat"
-    ln -s "$SUB"/bat/config "$subbat"/config
+    ln -s "$SUB/$sub" "$HOME/$sub"
 }
 
 cmd_ipython() {
-    local subipython="$HOME/.ipython"
+    local sub=".ipython"
 
-    _die_if_installed "$subipython"
+    _die_if_installed "$HOME/$sub"
 
-    mkdir -p "$subipython"/profile_default
-    ln -s "$SUB"/ipython/ipython_config.py "$subipython"/profile_default/ipython_config.py
+    mkdir -p "$HOME/$sub/profile_default"
+    ln -s "$SUB/$sub/profile_default/ipython_config.py" "$HOME/$sub/profile_default/ipython_config.py"
 }
 
 cmd_font() {
-    local subfont="$HOME/.local/share/fonts"
+    local sub="$HOME/.local/share/fonts"
 
-    mkdir -p "$subfont"
-    cd "$subfont"
+    mkdir -p "$sub"
+    cd "$sub"
     wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'
-    unzip FiraCode.zip -d "$subfont"
+    unzip FiraCode.zip -d "$sub"
     git clone 'https://github.com/powerline/fonts.git' --depth=1
     cd fonts
     ./install.sh
@@ -157,20 +160,16 @@ cmd_arch() {
 }
 
 cmd_psql() {
-    ln -s "$SUB/psql/psqlrc" "$HOME/.psqlrc"
+    local sub=".psqlrc"
+
+    _die_if_installed "$HOME/$sub"
+
+    ln -s "$SUB/$sub" "$HOME/$sub"
 }
 
 cmd_unlink() {
 #####################################################
 return 0
-}
-
-cmd_install_functions() {
-    for func in $(find functions -maxdepth 1 -type f)
-    do
-        chmod 755 "$func"
-        ln -s "$func" "$HOME/.local/bin"
-    done
 }
 
 cmd_install() {
@@ -225,7 +224,6 @@ case "$1" in
     help) shift;                 cmd_help              "$@" ;;
     install) shift;              cmd_install           "$@" ;;
     unlink) shift;               cmd_unlink            "$@" ;;
-    install-functions) shift;    cmd_install_functions "$@" ;;
 esac
 exit 0
 

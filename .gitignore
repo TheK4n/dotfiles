@@ -1,12 +1,19 @@
-sub/vim/bundle
-sub/zsh/plugins
-sub/bash/bashrc.d/*
-!sub/bash/bashrc.d/00_test.sh
-sub/zsh/zshrc.d/*
-!sub/zsh/zshrc.d/00_test.sh
-sub/vim/tmp/
+home/user/.subzsh/plugins
 
-sub/nvim/plugin
-sub/nvim/tmp/
+home/user/.config/nvim/plugin
+
+home/user/.subbash/bashrc.d/*
+!home/user/.subbash/bashrc.d/00_test.sh
+home/user/.subzsh/zshrc.d/*
+!home/user/.subzsh/zshrc.d/00_test.sh
 
 *.zwc
+
+home/user/.ssh/*
+!home/user/.ssh/config
+
+home/user/.ipython/profile_default/*
+!home/user/.ipython/profile_default/ipython_config.py
+
+home/user/.gnupg/*
+!home/user/.gnupg/gpg.conf

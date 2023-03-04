@@ -2,7 +2,7 @@
     excludesfile = ~/.gitignore
     editor = nvim
     fileMode = false
-    hooksPath = /home/kan/.githooks
+    hooksPath = ~/.githooks
 
 [init]
     defaultBranch = master    
