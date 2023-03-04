@@ -7,8 +7,8 @@ _nvim() {
     if [[ -z "$subcmds" ]]; then
         _files
     else
-        _values -C 'modified files' $subcmds
         _files
+        _values -C 'modified files' $subcmds
     fi
 
 }

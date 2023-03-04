@@ -24,6 +24,7 @@
 [alias]
     a = "!git status --short | peco | awk '{print $2}' | xargs git add"
     d = "!git diff --color=always | less -R"
+    ds = "!git diff --staged --color=always | less -R"
     co = checkout
     ci = commit
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"

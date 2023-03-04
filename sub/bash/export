@@ -4,7 +4,7 @@ umask 0077
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less -R"
-export CDPATH=:..:~:~/code
+export CDPATH=:~:~/code
 
 export HISTSIZE=10000
 export HISTFILESIZE=10000
