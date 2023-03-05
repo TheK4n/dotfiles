@@ -1,6 +1,7 @@
 local opt = vim.opt
 
 
+
 opt.ruler = true
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
@@ -96,10 +97,14 @@ opt.path:append { '**' } -- Finding files - Search down into subfolders
 
 
 vim.cmd([[
-    let &t_SI.="\e[5 q" "SI = режим вставки
-    let &t_SR.="\e[3 q" "SR = режим замены
-    let &t_EI.="\e[1 q" "EI = нормальный режим
+    let &t_SI.="\e[5 q"
+    let &t_SR.="\e[3 q"
+    let &t_EI.="\e[1 q"
 ]])
+
+-- SI - режим вставки
+-- SR - режим замены
+-- EI - нормальный режим
 
 
 vim.g.netrw_banner = 0 -- hide banner

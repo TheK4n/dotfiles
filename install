@@ -1,0 +1,218 @@
+#!/bin/bash
+
+SANDBOX_PATH="/tmp/.dotfiles-install-$(date +%H-%M-%s)"
+TARGET_PATH="$HOME"
+
+
+SUB="$(pwd)/home/user"
+
+
+_die() {
+    echo "$0: $1" >&2
+    exit $2
+}
+
+test "$0" = "./install" || _die "Error: Please, run this file from root of dotfiles, like this './install.sh install TARGET" 1
+
+
+_die_if_installed() {
+    if [ -e "$1" ]; then
+        _die "Already installed" 1
+    fi
+}
+
+_link_files_in_sandbox() {
+    mkdir "$SANDBOX_PATH"
+    for target in "$@"; do
+        echo "installing: $target"
+        if [ ! "$(dirname "$target")" = "." ]; then
+            mkdir -p "$SANDBOX_PATH/$(dirname "$target")"
+        fi
+        ln -sT "$SUB/$target" "$SANDBOX_PATH/$target"
+    done
+}
+
+_compare_sandbox_to_home() {
+    local comparisons="$(diff -rq "$SANDBOX_PATH" "$TARGET_PATH")"
+    echo "$comparisons" | grep -vE "^Only in .+"
+}
+
+_merge_sandbox_to_home() {
+    cp -RTnP "$SANDBOX_PATH" "$TARGET_PATH"
+}
+
+__install_from_sandbox() {
+
+    local comparisons="$(_compare_sandbox_to_home)"
+
+    if [ -n "$comparisons" ]; then
+        echo "$comparisons" >&2
+        echo "Reverting..."
+        rm -rf "$SANDBOX_PATH"
+        _die "Found conflicting files. Exiting" 1
+    fi
+
+    echo "Merging to home..."
+    _merge_sandbox_to_home
+    rm -rf "$SANDBOX_PATH"
+}
+
+cmd_bash() {
+    _link_files_in_sandbox ".subbash" ".bashrc" ".profile"
+    __install_from_sandbox
+}
+
+cmd_zsh() {
+
+    _link_files_in_sandbox ".subbash" ".subzsh" ".zshrc" ".zprofile" ".zfunc" ".zlogout"
+
+    mkdir "$SANDBOX_PATH/.subzsh/plugins"
+    git clone https://github.com/zsh-users/zsh-autosuggestions     "$SANDBOX_PATH/.subzsh/plugins/zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting "$SANDBOX_PATH/.subzsh/plugins/zsh-syntax-highlighting"
+    git clone https://github.com/hlissner/zsh-autopair             "$SANDBOX_PATH/.subzsh/plugins/hlissner/zsh-autopair"
+    git clone https://github.com/unixorn/fzf-zsh-plugin.git        "$SANDBOX_PATH/.subzsh/plugins/unixorn/fzf-zsh-plugin" && \
+        mkdir -p "$SANDBOX_PATH/.local/bin" && \
+        ln -s "$SANDBOX_PATH"/.subzsh/plugins/unixorn/fzf-zsh-plugin/bin/* "$SANDBOX_PATH/.local/bin"
+    __install_from_sandbox
+}
+
+
+cmd_tmux() {
+    _link_files_in_sandbox ".tmux.conf"
+    __install_from_sandbox
+}
+
+cmd_alacritty() {
+    _link_files_in_sandbox ".config/alacritty"
+    __install_from_sandbox
+}
+
+cmd_nvim() {
+    echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'"
+
+    _link_files_in_sandbox ".config/nvim" ".local/bin/vim_askpass_helper" ".local/bin/vim_askpass_helper_python"
+
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim "$SANDBOX_PATH/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    __install_from_sandbox
+    nvim +PackerCompile +PackerSync +PackerSync
+}
+
+cmd_ssh() {
+    cat "$SUB/.ssh/config" >> "$HOME/.ssh/config"
+}
+
+cmd_git() {
+    _link_files_in_sandbox ".gitconfig" ".githooks" ".gitignore"
+    __install_from_sandbox
+}
+
+cmd_ranger() {
+    echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
+
+    _link_files_in_sandbox ".config/ranger"
+
+    mkdir -p "$SANDBOX_PATH/.config/ranger/plugins"
+    git clone https://github.com/alexanderjeurissen/ranger_devicons "$SANDBOX_PATH/.config/ranger/plugins/ranger_devicons"
+    __install_from_sandbox
+    ranger --copy-config=all
+}
+
+cmd_gpg() {
+    _die_if_installed "$HOME/.gnupg"
+
+    cat "$SUB/.gnupg/gpg.conf" >> "$HOME/.gnupg/gpg.conf"
+    echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > "$HOME/.gnupg/gpg-agent.conf"; echo RELOADAGENT | gpg-connect-agent
+}
+
+cmd_i3() {
+    echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
+    _link_files_in_sandbox ".config/i3" ".config/i3status" ".local/bin/i3status_wrapper"
+    __install_from_sandbox
+}
+
+cmd_bat() {
+    _link_files_in_sandbox ".config/bat"
+    __install_from_sandbox
+}
+
+cmd_ipython() {
+    local sub=".ipython"
+
+    _die_if_installed "$HOME/$sub"
+
+    mkdir -p "$HOME/$sub/profile_default"
+    ln -s "$SUB/$sub/profile_default/ipython_config.py" "$HOME/$sub/profile_default/ipython_config.py"
+}
+
+cmd_font() {
+    local sub="$HOME/.local/share/fonts"
+
+    mkdir -p "$sub"
+    cd "$sub"
+    wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'
+    unzip FiraCode.zip -d "$sub"
+    git clone 'https://github.com/powerline/fonts.git' --depth=1
+    cd fonts
+    ./install.sh
+}
+
+cmd_termux() {
+    echo "apt install termux-api tsu"
+}
+
+cmd_arch() {
+    echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
+}
+
+cmd_psql() {
+    _link_files_in_sandbox ".psqlrc"
+    __install_from_sandbox
+}
+
+cmd_unlink() {
+    #####################################################
+    return 0
+}
+
+cmd_no_target() {
+    _die "TARGET not exists" 1
+}
+
+cmd_install() {
+    for target in "$@"; do
+        case "$target" in
+            bash) shift;       cmd_bash       "$@" ;;
+            zsh) shift;        cmd_zsh        "$@" ;;
+            tmux) shift;       cmd_tmux       "$@" ;;
+            alacritty) shift;  cmd_alacritty  "$@" ;;
+            nvim) shift;       cmd_nvim       "$@" ;;
+            ssh) shift;        cmd_ssh        "$@" ;;
+            git) shift;        cmd_git        "$@" ;;
+            ranger) shift;     cmd_ranger     "$@" ;;
+            gpg) shift;        cmd_gpg        "$@" ;;
+            i3) shift;         cmd_i3         "$@" ;;
+            bat) shift;        cmd_bat        "$@" ;;
+            font) shift;       cmd_font       "$@" ;;
+            termux) shift;     cmd_termux     "$@" ;;
+            arch) shift;       cmd_arch       "$@" ;;
+            psql) shift;       cmd_psql       "$@" ;;
+            *) shift;          cmd_no_target  "$@" ;;
+        esac
+    done
+}
+
+cmd_help() {
+    echo "Dotfiles installation script:
+Usage: ./install.sh install TARGET...
+Usage: ./install.sh unlink TARGET"
+}
+
+
+case "$1" in
+    install) shift;  cmd_install  "$@" ;;
+    unlink) shift;   cmd_unlink   "$@" ;;
+    help) shift;     cmd_help     "$@" ;;
+    *) shift;        cmd_help   "$@" ;;
+esac
+exit 0
+

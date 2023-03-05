@@ -29,7 +29,7 @@ Config files for:
 * ranger
 * i3
 * vim
-* neovim
+* nvim
 
 
 ### Prompt
@@ -90,7 +90,7 @@ echo "Hello $USER!"
 ```bash
 git clone https://github.com/TheK4n/dotfiles
 cd dotfiles
-./install.sh
+./install install bash zsh ...
 ```
 
 
