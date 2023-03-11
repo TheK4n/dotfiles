@@ -59,6 +59,15 @@ cl() {
 }
 
 
+py() {
+    if [[ -z "$@" && -x "$(command -v ipython 2>/dev/null)" ]]; then
+        ipython -i -c "q = exit"
+    else
+        python3 $@
+    fi
+}
+
+
 ve() {
     local venv_name
 
@@ -161,15 +170,6 @@ docker_ips() {
         OUT+="${NAME#"/"}"'\t'"$IP":"$PORT"'\n'
     done
     echo -e $OUT 2>/dev/null | column -t
-}
-
-
-py() {
-    if [[ -z "$@" && -x "$(command -v ipython 2>/dev/null)" ]]; then
-        ipython -i -c "q = exit"
-    else
-        python3 $@
-    fi
 }
 
 

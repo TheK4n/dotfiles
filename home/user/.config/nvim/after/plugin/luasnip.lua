@@ -8,8 +8,6 @@ vim.g.snips_email = 'thek4n@yandex.com'
 vim.g.snips_github = 'https://github.com/thek4n'
 
 
-local map = vim.keymap.set
-
 local function jump(val)
     return function()
         ls.jump(val)
@@ -17,6 +15,7 @@ local function jump(val)
 end
 
 
+local map = vim.keymap.set
 map({'i', 's'}, '<C-n>', jump(1))
 map({'i', 's'}, '<C-p>', jump(-1))
 
