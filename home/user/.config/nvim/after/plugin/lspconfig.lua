@@ -48,3 +48,9 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+nvim_lsp.clangd.setup {
+  capabilities = capabilities,
+}

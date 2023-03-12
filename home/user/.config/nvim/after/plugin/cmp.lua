@@ -8,11 +8,14 @@ local function has_words_before()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
--- nvim-cmp setup
-local cmp = require 'cmp'
+local border_opts = {
+  border = "single",
+  winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+}
+
 cmp.setup {
   completion = {
-    autocomplete = false
+    autocomplete = true
   },
   snippet = {
     expand = function(args)
@@ -24,7 +27,7 @@ cmp.setup {
           if cmp.visible() then
             cmp.select_next_item()
           elseif has_words_before() then
-              cmp.complete()
+            cmp.complete()
           else
             fallback()
           end
@@ -35,11 +38,34 @@ cmp.setup {
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
   },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+  window = {
+    completion = cmp.config.window.bordered(border_opts),
+    documentation = cmp.config.window.bordered(border_opts),
   },
+  sources = cmp.config.sources({
+      { name = 'nvim_lsp', priority = 1000 },
+      { name = 'luasnip', priority = 750 },
+      { name = 'buffer', priority = 500 },
+      { name = 'path', priority = 250 },
+    }, {
+    }),
 }
+
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
