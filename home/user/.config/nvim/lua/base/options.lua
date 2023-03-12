@@ -17,7 +17,8 @@ opt.shortmess:append { s = true, I = true}  -- disable startup message
 
 opt.shell = 'bash'
 
-opt.ttimeoutlen = 0
+opt.ttimeoutlen = 50
+opt.timeoutlen = 500
 
 vim.cmd([[
     filetype plugin indent on
@@ -64,6 +65,8 @@ opt.scrolloff = 7
 
 
 opt.termguicolors = true
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#4E5754 gui=nocombine]]
+
 opt.background = 'dark'
 
 opt.backup = true
@@ -108,10 +111,7 @@ vim.cmd([[
 
 
 vim.g.netrw_banner = 0 -- hide banner
-vim.g.netrw_liststyle = 3 -- tree instead of plain view
-vim.g.netrw_browse_split = 0
-vim.g.netrw_winsize = 15
-vim.g.netrw_keepdir = 0
+vim.g.highlighturl_enabled = true -- highlight URLs by default
 
 
 -- Highlight yanked text for a while

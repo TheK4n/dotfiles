@@ -140,6 +140,44 @@ local plugins = {
             { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
         }
     },
+    {
+        'nmac427/guess-indent.nvim',
+        config = function()
+            require('guess-indent').setup {}
+        end,
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require('indent_blankline').setup {
+                char = "▏",
+                char_highlight_list = { "IndentBlanklineIndent1" },
+                show_trailing_blankline_indent = false,
+                use_treesitter = true,
+            }
+        end,
+    },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+        },
+        config = function()
+            require("neo-tree").setup({
+                close_if_last_window = true,
+                filesystem = {
+                    hide_gitignored = true,
+                    hijack_netrw_behavior = "open_current",
+                },
+                window = {
+                    mappings = {
+                        ["l"] = "open",
+                    }
+                }
+            })
+        end
+    },
 }
 
 require("lazy").setup(
