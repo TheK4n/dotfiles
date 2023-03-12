@@ -63,15 +63,6 @@ map("n", '<Leader>eh', '<cmd>set list!<CR>', opts)
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
--- Tags panel (ctags required)
-map("n", '<Leader>t', '<cmd>TagbarToggle<CR>', opts)
-
-
--- Telescope
-map("n", '<Leader>ff', '<cmd>Telescope find_files<CR>', opts)
-map("n", '<Leader>fg', '<cmd>Telescope live_grep<CR>', opts)
-
-
 -- Expand %% to dirname of current file in command line
 map("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true})
 

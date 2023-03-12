@@ -92,9 +92,8 @@ cmd_nvim() {
 
     _link_files_in_sandbox ".config/nvim" ".local/bin/vim_askpass_helper" ".local/bin/vim_askpass_helper_python"
 
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim "$SANDBOX_PATH/.local/share/nvim/site/pack/packer/start/packer.nvim"
     __install_from_sandbox
-    nvim +PackerCompile +PackerSync +PackerSync
+    nvim +Lazy
 }
 
 cmd_ssh() {
