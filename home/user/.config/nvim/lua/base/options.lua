@@ -15,7 +15,7 @@ opt.clipboard:append { 'unnamedplus' }
 
 opt.shortmess:append { s = true, I = true}  -- disable startup message
 
-opt.shell = 'bash'
+opt.shell = 'zsh'
 
 opt.ttimeoutlen = 50
 opt.timeoutlen = 500
@@ -65,7 +65,7 @@ opt.scrolloff = 7
 
 
 opt.termguicolors = true
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#4E5754 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#464e60 gui=nocombine]]
 
 opt.background = 'dark'
 

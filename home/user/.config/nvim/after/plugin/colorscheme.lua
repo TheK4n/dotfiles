@@ -1,5 +1,9 @@
 
-local status, _ = pcall(require, "gruvbox")
+local status, colorscheme = pcall(require, "nightfox")
 if (not status) then return end
 
-vim.cmd.colorscheme("gruvbox")
+colorscheme.compile()
+
+colorscheme.setup()
+
+vim.cmd.colorscheme("nightfox")

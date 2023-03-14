@@ -22,6 +22,9 @@ local plugins = {
         dependencies = { 'kyazdani42/nvim-web-devicons' }
     },
     {
+        'EdenEast/nightfox.nvim'
+    },
+    {
         'ellisonleao/gruvbox.nvim'  -- colorscheme
     },
     {
