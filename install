@@ -47,7 +47,7 @@ __install_from_sandbox() {
 
     if [ -n "$comparisons" ]; then
         echo "$comparisons" >&2
-        echo "Reverting..."
+        echo "Reverting..." >&2
         rm -rf "$SANDBOX_PATH"
         _die "Found conflicting files. Exiting" 1
     fi
