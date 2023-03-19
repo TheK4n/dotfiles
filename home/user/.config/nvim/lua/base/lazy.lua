@@ -67,16 +67,6 @@ local plugins = {
         'rbgrouleff/bclose.vim'
     },
     {
-        'frazrepo/vim-rainbow',
-        config = function()
-            vim.api.nvim_create_autocmd('BufEnter',
-            {
-                pattern = {"*"},
-                command = 'RainbowToggle'
-            })
-        end
-    },
-    {
         'Pocco81/auto-save.nvim'  -- autosave files
     },
     {

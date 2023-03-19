@@ -13,7 +13,6 @@
 
 # monitors
 exec --no-startup-id xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --primary
-exec --no-startup-id xrandr --output HDMI-0 --mode 1366x768 --pos 1920x0 --right-of DP-0 --rotate right
 
 for_window [tiling] border pixel 3
 exec --no-startup-id picom --inactive-dim 0.2 --no-fading-openclose --inactive-dim-fixed --config /dev/null
