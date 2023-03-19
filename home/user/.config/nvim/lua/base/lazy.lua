@@ -22,6 +22,15 @@ local plugins = {
         dependencies = { 'kyazdani42/nvim-web-devicons' }
     },
     {
+        "max397574/better-escape.nvim",
+        config = function()
+            require("better_escape").setup({
+                mapping = {'jk'},
+                timeout = vim.o.timeoutlen,
+            })
+        end,
+    },
+    {
         'karb94/neoscroll.nvim',
         config = function()
             require('neoscroll').setup()
@@ -50,7 +59,10 @@ local plugins = {
         'tpope/vim-commentary'  -- gcc to comment line
     },
     {
-        'ap/vim-css-color'  -- highlight hex
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup()
+        end
     },
     {
         'preservim/tagbar',
@@ -101,9 +113,6 @@ local plugins = {
         dependencies = { 'kyazdani42/nvim-web-devicons' }
     },
     {
-        'neovim/nvim-lspconfig'
-    },
-    {
         'hrsh7th/nvim-cmp',
         dependencies = {
             "hrsh7th/cmp-buffer",
@@ -123,6 +132,12 @@ local plugins = {
     {
         'williamboman/mason.nvim',
         dependencies = "williamboman/mason-lspconfig.nvim"
+    },
+    {
+        'folke/which-key.nvim',
+        config = function()
+            require("which-key").setup()
+        end
     },
     {
         'nvim-telescope/telescope.nvim',
@@ -176,6 +191,15 @@ local plugins = {
                     }
                 }
             })
+        end
+    },
+    {
+        'folke/neodev.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig'
+        },
+        config = function()
+            require('neodev').setup()
         end
     },
 }
