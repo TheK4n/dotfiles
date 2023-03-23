@@ -31,6 +31,12 @@ local plugins = {
         end,
     },
     {
+        'chentoast/marks.nvim',
+        config = function()
+            require("marks").setup()
+        end
+    },
+    {
         'karb94/neoscroll.nvim',
         config = function()
             require('neoscroll').setup()

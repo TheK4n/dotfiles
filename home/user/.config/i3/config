@@ -11,11 +11,10 @@
 
 
 
-# monitors
-exec --no-startup-id xrandr --output DVI-D-0 --off --output HDMI-0 --mode 1920x1080 --pos 0x-1080 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off
+# screen layout
+exec --no-startup-id ~/.screenlayout/default.sh
 
 for_window [tiling] border pixel 3
-exec --no-startup-id picom --inactive-dim 0.2 --no-fading-openclose --inactive-dim-fixed --config /dev/null
 set $mod Mod4
 
 exec --no-startup-id xset s off
