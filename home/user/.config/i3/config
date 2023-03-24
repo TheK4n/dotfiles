@@ -23,7 +23,7 @@ exec --no-startup-id xset r rate 250 100
 exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle
 exec --no-startup-id xdg-mime default firefox.desktop x-scheme-handler/https x-scheme-handler/http
 
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id hsetroot
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.

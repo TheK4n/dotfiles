@@ -125,7 +125,7 @@ cmd_gpg() {
 
 cmd_i3() {
     echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
-    _link_files_in_sandbox ".config/i3" ".config/i3status" ".local/bin/i3status_wrapper"
+    _link_files_in_sandbox ".config/i3" ".config/i3status" ".local/bin/i3status_wrapper" ".config/picom"
     __install_from_sandbox
 }
 
