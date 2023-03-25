@@ -7,6 +7,19 @@ TARGET_PATH="$HOME"
 SUB="$(pwd)/home/user"
 
 
+declare -A TARGETS=(
+    ["bash"]=".subbash .bashrc .profile"
+    ["zsh"]=".subbash .subzsh .zshrc .zprofile .zfunc .zlogout"
+    ["tmux"]=".tmux.conf"
+    ["alacritty"]=".config/alacritty"
+    ["nvim"]=".config/nvim .local/bin/vim_askpass_helper .local/bin/vim_askpass_helper_python"
+    ["git"]=".gitconfig .githooks .gitignore"
+    ["ranger"]=".config/ranger"
+    ["i3"]=".config/i3 .config/i3status .local/bin/i3status_wrapper .config/picom"
+    ["bat"]=".config/bat"
+    ["psql"]=".psqlrc"
+)
+
 _die() {
     echo "$0: $1" >&2
     exit $2
@@ -58,13 +71,13 @@ __install_from_sandbox() {
 }
 
 cmd_bash() {
-    _link_files_in_sandbox ".subbash" ".bashrc" ".profile"
+    _link_files_in_sandbox ${TARGETS["bash"]}
     __install_from_sandbox
 }
 
 cmd_zsh() {
 
-    _link_files_in_sandbox ".subbash" ".subzsh" ".zshrc" ".zprofile" ".zfunc" ".zlogout"
+    _link_files_in_sandbox ${TARGETS["zsh"]}
 
     mkdir "$SANDBOX_PATH/.subzsh/plugins"
     git clone https://github.com/zsh-users/zsh-autosuggestions     "$SANDBOX_PATH/.subzsh/plugins/zsh-autosuggestions"
@@ -78,19 +91,19 @@ cmd_zsh() {
 
 
 cmd_tmux() {
-    _link_files_in_sandbox ".tmux.conf"
+    _link_files_in_sandbox ${TARGETS["tmux"]}
     __install_from_sandbox
 }
 
 cmd_alacritty() {
-    _link_files_in_sandbox ".config/alacritty"
+    _link_files_in_sandbox ${TARGETS["alacritty"]}
     __install_from_sandbox
 }
 
 cmd_nvim() {
     echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'"
 
-    _link_files_in_sandbox ".config/nvim" ".local/bin/vim_askpass_helper" ".local/bin/vim_askpass_helper_python"
+    _link_files_in_sandbox ${TARGETS["nvim"]}
 
     __install_from_sandbox
     nvim +Lazy
@@ -101,14 +114,14 @@ cmd_ssh() {
 }
 
 cmd_git() {
-    _link_files_in_sandbox ".gitconfig" ".githooks" ".gitignore"
+    _link_files_in_sandbox ${TARGETS["git"]}
     __install_from_sandbox
 }
 
 cmd_ranger() {
     echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
 
-    _link_files_in_sandbox ".config/ranger"
+    _link_files_in_sandbox ${TARGETS["ranger"]}
 
     mkdir -p "$SANDBOX_PATH/.config/ranger/plugins"
     git clone https://github.com/alexanderjeurissen/ranger_devicons "$SANDBOX_PATH/.config/ranger/plugins/ranger_devicons"
@@ -125,12 +138,12 @@ cmd_gpg() {
 
 cmd_i3() {
     echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
-    _link_files_in_sandbox ".config/i3" ".config/i3status" ".local/bin/i3status_wrapper" ".config/picom"
+    _link_files_in_sandbox ${TARGETS["i3"]}
     __install_from_sandbox
 }
 
 cmd_bat() {
-    _link_files_in_sandbox ".config/bat"
+    _link_files_in_sandbox ${TARGETS["bat"]}
     __install_from_sandbox
 }
 
@@ -164,13 +177,24 @@ cmd_arch() {
 }
 
 cmd_psql() {
-    _link_files_in_sandbox ".psqlrc"
+    _link_files_in_sandbox ${TARGETS["psql"]}
     __install_from_sandbox
 }
 
+is_target_exists() {
+    test " ${!TARGETS[@]} " =~ " $1 "
+}
+
 cmd_unlink() {
-    #####################################################
-    return 0
+    is_target_exists "$1" || _die "target not exists" 1
+
+    local target
+    for target in ${TARGETS["$1"]}
+    do
+        if [ -e "$TARGET_PATH/$target" ]; then
+            unlink "$TARGET_PATH/$target"
+        fi
+    done
 }
 
 cmd_no_target() {
@@ -203,7 +227,8 @@ cmd_install() {
 cmd_help() {
     echo "Dotfiles installation script:
 Usage: ./install.sh install TARGET...
-Usage: ./install.sh unlink TARGET"
+Usage: ./install.sh unlink TARGET
+Usage: ./install.sh check TARGET"
 }
 
 

@@ -23,8 +23,8 @@
 
 [alias]
     a = "!git status --short | peco | awk '{print $2}' | xargs git add"
-    d = "!git diff --color=always | less -R"
-    ds = "!git diff --staged --color=always | less -R"
+    d = "!git diff --color=always | $PAGER"
+    ds = "!git diff --staged --color=always | $PAGER"
     dno = diff --name-only
     co = checkout
     ci = commit
