@@ -27,6 +27,7 @@ map('n', '<Space>', 'O<ESC>', opts)
 
 -- x to blackhole
 map({'n', 'v'}, 'x', '"_x', opts)
+map('n', '<bs>', '"_X', opts)
 
 
 -- Put without overwrite yanked text
