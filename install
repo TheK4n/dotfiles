@@ -18,6 +18,7 @@ declare -A TARGETS=(
     ["i3"]=".config/i3 .config/i3status .local/bin/i3status_wrapper .config/picom"
     ["bat"]=".config/bat"
     ["psql"]=".psqlrc"
+    ["docker"]=".docker/cli-plugins"
 )
 
 _die() {
@@ -181,6 +182,11 @@ cmd_psql() {
     __install_from_sandbox
 }
 
+cmd_docker() {
+    _link_files_in_sandbox ${TARGETS["docker"]}
+    __install_from_sandbox
+}
+
 is_target_exists() {
     test " ${!TARGETS[@]} " =~ " $1 "
 }
@@ -219,6 +225,7 @@ cmd_install() {
             termux) shift;     cmd_termux     "$@" ;;
             arch) shift;       cmd_arch       "$@" ;;
             psql) shift;       cmd_psql       "$@" ;;
+            docker) shift;     cmd_docker       "$@" ;;
             *) shift;          cmd_no_target  "$@" ;;
         esac
     done

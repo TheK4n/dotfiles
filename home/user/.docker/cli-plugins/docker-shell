@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ "$1" == "docker-cli-plugin-metadata" ]]; then
+cat << HERE
+{
+     "SchemaVersion": "0.1.0",
+     "Vendor": "example.com",
+     "Version": "v0.1.0",
+     "ShortDescription": "Bash based Docker cli-plugin"
+}
+HERE
+exit
+fi
+
+docker exec -it $2 bash
+
