@@ -49,6 +49,8 @@ function headphones {
       break
     fi
   done
+  local json="{ \"full_text\": \"No headphones\", \"color\": \"#FFFFFF\"}"
+  json_array=$(update_holder holder__headphones "$json")
 }
 
 i3status | (read line; echo "$line"; read line ; echo "$line" ; read line ; echo "$line" ; while true
