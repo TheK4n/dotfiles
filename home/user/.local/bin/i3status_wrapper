@@ -38,13 +38,17 @@ function remove_holder {
 }
 
 function headphones {
+  for uuid in $(bluetoothctl devices | cut -f2 -d' ')
+  do
+    local device_info="$(bluetoothctl info "$uuid")"
 
-  battery_status="$(bluetoothctl info 14:0A:29:0A:6A:2F | grep "Battery Percentage" | awk -F '[()]' '{ print "🎧🔋"$2"%" }')"
-
-  local json="{ \"full_text\": \"$battery_status\", \"color\": \"#FFFFFF\"}"
-
-  json_array=$(update_holder holder__headphones "$json")
-
+    if [ -n "$(echo $device_info | grep 'Connected: yes\|Battery Percentage')" ]; then
+      battery_status="$(echo "$device_info" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }')"
+      local json="{ \"full_text\": \"$battery_status\", \"color\": \"#FFFFFF\"}"
+      json_array=$(update_holder holder__headphones "$json")
+      break
+    fi
+  done
 }
 
 i3status | (read line; echo "$line"; read line ; echo "$line" ; read line ; echo "$line" ; while true
