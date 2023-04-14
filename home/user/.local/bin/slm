@@ -1,0 +1,62 @@
+#!/bin/bash
+
+LAYOUTS_DIR="$HOME/.screenlayout"
+
+
+_die() {
+    echo "$0: $1" >&2
+    exit $2
+}
+
+test -d "$LAYOUTS_DIR" || (mkdir "$LAYOUTS_DIR" && touch "$LAYOUTS_DIR/default.sh")
+
+
+die_if_invalid_path() {
+    if [[ "$1" =~ ".." ]]; then
+        die "Path can\`t contains '..'" 3
+    fi
+
+    if [[ "$1" = /* ]]; then
+        die "Path can\`t start from '/'" 3
+    fi
+}
+
+
+cmd_list() {
+    ls "$LAYOUTS_DIR"
+}
+
+cmd_edit() {
+    die_if_invalid_path "$1"
+    $EDITOR "$LAYOUTS_DIR/$1.sh"
+    chmod u+x "$LAYOUTS_DIR/$1.sh"
+}
+
+cmd_load() {
+    if [ -z "$1" ]; then
+        "$LAYOUTS_DIR/default.sh"
+        return 0
+    fi
+
+    "$LAYOUTS_DIR/$1.sh"
+}
+
+cmd_wallpaper() {
+    local wallpapers="$HOME/.wallpaper"
+    feh --no-fehbg --bg-scale "$wallpapers/$(ls "$wallpapers" | shuf -n 1)"
+}
+
+cmd_help () {
+    echo "slm (ls|add|load|wallpaper)" >&2
+}
+
+
+case "$1" in
+    ls) shift;         cmd_list  "$@" ;;
+    add|edit) shift;   cmd_edit   "$@" ;;
+    load) shift;       cmd_load     "$@" ;;
+    wallpaper) shift;  cmd_wallpaper     "$@" ;;
+    *) shift;          cmd_help   "$@" ;;
+esac
+exit 0
+
