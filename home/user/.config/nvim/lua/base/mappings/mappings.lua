@@ -20,7 +20,8 @@ map('n', '<Leader>/',
     function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
     opts)
 
-map('i', 'jk', '<ESC>', opts)
+map('i', 'jf', '<ESC>', opts)
+map('i', 'оа', '<ESC>', opts)
 
 map('n', '<Enter>', 'o<ESC>', opts)
 map('n', '<Space>', 'O<ESC>', opts)

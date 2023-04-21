@@ -25,7 +25,7 @@ local plugins = {
         "max397574/better-escape.nvim",
         config = function()
             require("better_escape").setup({
-                mapping = {'jk'},
+                mapping = {'jf', 'оа'},
                 timeout = vim.o.timeoutlen,
             })
         end,

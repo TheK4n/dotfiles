@@ -56,7 +56,7 @@ precmd_functions+=(_fix_cursor)
 
 
 
-bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins 'jf' vi-cmd-mode
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^[[3;5~' kill-word                       # ctrl + Supr
 bindkey '^[[3~' delete-char                       # delete
