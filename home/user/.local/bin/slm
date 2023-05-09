@@ -32,18 +32,18 @@ cmd_edit() {
     chmod u+x "$LAYOUTS_DIR/$1.sh"
 }
 
-cmd_load() {
-    if [ -z "$1" ]; then
-        "$LAYOUTS_DIR/default.sh"
-        return 0
-    fi
-
-    "$LAYOUTS_DIR/$1.sh"
-}
-
 cmd_wallpaper() {
     local wallpapers="$HOME/.wallpaper"
     feh --no-fehbg --bg-scale "$wallpapers/$(ls "$wallpapers" | shuf -n 1)"
+}
+
+cmd_load() {
+    if [ -z "$1" ]; then
+        "$LAYOUTS_DIR/default.sh"
+    else
+        "$LAYOUTS_DIR/$1.sh"
+    fi
+    cmd_wallpaper
 }
 
 cmd_help () {
@@ -52,11 +52,11 @@ cmd_help () {
 
 
 case "$1" in
-    ls) shift;         cmd_list  "$@" ;;
-    add|edit) shift;   cmd_edit   "$@" ;;
-    load) shift;       cmd_load     "$@" ;;
-    wallpaper) shift;  cmd_wallpaper     "$@" ;;
-    *) shift;          cmd_help   "$@" ;;
+    ls) shift;         cmd_list       "$@" ;;
+    add|edit) shift;   cmd_edit       "$@" ;;
+    load) shift;       cmd_load       "$@" ;;
+    wallpaper) shift;  cmd_wallpaper  "$@" ;;
+    *) shift;          cmd_help       "$@" ;;
 esac
 exit 0
 

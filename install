@@ -225,7 +225,7 @@ cmd_install() {
             termux) shift;     cmd_termux     "$@" ;;
             arch) shift;       cmd_arch       "$@" ;;
             psql) shift;       cmd_psql       "$@" ;;
-            docker) shift;     cmd_docker       "$@" ;;
+            docker) shift;     cmd_docker     "$@" ;;
             *) shift;          cmd_no_target  "$@" ;;
         esac
     done
@@ -243,7 +243,7 @@ case "$1" in
     install) shift;  cmd_install  "$@" ;;
     unlink) shift;   cmd_unlink   "$@" ;;
     help) shift;     cmd_help     "$@" ;;
-    *) shift;        cmd_help   "$@" ;;
+    *) shift;        cmd_help     "$@" ;;
 esac
 exit 0
 
