@@ -224,3 +224,6 @@ workspace $ws2 output primary
 workspace $ws9 output $SecMon
 workspace $ws10 output $SecMon
 exec --no-startup-id i3-msg 'workspace $ws1; exec firefox'
+
+
+no_focus [title="^Peek preview$"]

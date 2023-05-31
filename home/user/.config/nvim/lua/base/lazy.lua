@@ -43,7 +43,7 @@ local plugins = {
         end
     },
     {
-        'EdenEast/nightfox.nvim'
+        'EdenEast/nightfox.nvim'  -- colorscheme
     },
     {
         'ellisonleao/gruvbox.nvim'  -- colorscheme
@@ -95,14 +95,6 @@ local plugins = {
     },
     {
         'windwp/nvim-ts-autotag'
-    },
-    {
-        'lervag/vimtex'
-    },
-    {
-        'shime/vim-livedown',
-        enabled = vim.fn.executable "npm" == 1,
-        build = '/usr/bin/npm install -g livedown'
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -201,12 +193,33 @@ local plugins = {
     },
     {
         'folke/neodev.nvim',
+        ft = {'lua'},
         dependencies = {
             'neovim/nvim-lspconfig'
         },
         config = function()
             require('neodev').setup()
         end
+    },
+    {
+        'toppair/peek.nvim',
+        enabled = vim.fn.executable "deno" == 1,
+        ft = {'markdown'},
+        build = 'deno task --quiet build:fast',
+        config = function()
+            require('peek').setup({
+                auto_load = true,
+                close_on_bdelete = true,
+                syntax = true,
+                theme = 'dark',
+                update_on_change = true,
+                app = 'webview',
+                filetype = {'markdown'},
+            })
+        end,
+        keys = {
+            { '<Leader>rr', "<cmd>lua require('peek').open()<CR>" },
+        }
     },
 }
 

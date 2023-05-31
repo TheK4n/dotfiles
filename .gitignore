@@ -2,6 +2,7 @@ home/user/.subzsh/plugins/*
 !home/user/.subzsh/plugins/dirhistory.zsh
 
 home/user/.config/nvim/plugin
+home/user/.config/nvim/spell
 
 home/user/.subbash/bashrc.d/*
 !home/user/.subbash/bashrc.d/00_test.sh

@@ -75,7 +75,6 @@ end
 autocmd_run_script_by_filetype('python', 'python3')
 autocmd_run_script_by_filetype('go', 'go run')
 autocmd_run_script_by_filetype('rust', 'cargo run')
-autocmd_run_script_by_filetype('markdown', 'glow')
 
 autocmd_run_tests_by_filetype('python', 'pytest')
 
