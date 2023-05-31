@@ -65,7 +65,6 @@ opt.scrolloff = 7
 
 
 opt.termguicolors = true
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#464e60 gui=nocombine]]
 
 opt.background = 'dark'
 

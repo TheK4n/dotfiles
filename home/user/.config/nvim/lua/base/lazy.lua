@@ -162,12 +162,7 @@ local plugins = {
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require('indent_blankline').setup {
-                char = "▏",
-                char_highlight_list = { "IndentBlanklineIndent1" },
-                show_trailing_blankline_indent = false,
-                use_treesitter = true,
-            }
+            require('indent_blankline').setup()
         end,
     },
     {
@@ -215,11 +210,9 @@ local plugins = {
                 update_on_change = true,
                 app = 'webview',
                 filetype = {'markdown'},
+                vim.keymap.set('n', '<Leader>rr', "<cmd>lua require('peek').open()<CR>", {noremap=true, silent=true})
             })
         end,
-        keys = {
-            { '<Leader>rr', "<cmd>lua require('peek').open()<CR>" },
-        }
     },
 }
 

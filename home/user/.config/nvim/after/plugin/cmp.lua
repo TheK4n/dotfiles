@@ -1,4 +1,3 @@
-
 local status, cmp = pcall(require, "cmp")
 if (not status) then return end
 
@@ -15,7 +14,7 @@ local border_opts = {
 
 cmp.setup {
   completion = {
-    autocomplete = true
+    autocomplete = false
   },
   snippet = {
     expand = function(args)
