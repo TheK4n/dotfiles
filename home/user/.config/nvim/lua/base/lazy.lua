@@ -210,6 +210,8 @@ local plugins = {
                 update_on_change = true,
                 app = 'webview',
                 filetype = {'markdown'},
+                throttle_at = 200000,
+                throttle_time = 'auto',
                 vim.keymap.set('n', '<Leader>rr', "<cmd>lua require('peek').open()<CR>", {noremap=true, silent=true})
             })
         end,

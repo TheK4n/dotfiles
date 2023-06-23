@@ -9,7 +9,7 @@ SUB="$(pwd)/home/user"
 
 declare -A TARGETS=(
     ["bash"]=".subbash .bashrc .profile"
-    ["zsh"]=".subbash .subzsh .zshrc .zprofile .zfunc .zlogout"
+    ["zsh"]=".subbash .subzsh .zshrc .zprofile .zfunc .zlogout .inputrc"
     ["tmux"]=".tmux.conf"
     ["alacritty"]=".config/alacritty"
     ["nvim"]=".config/nvim .local/bin/vim_askpass_helper .local/bin/vim_askpass_helper_python"
