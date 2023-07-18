@@ -225,5 +225,8 @@ workspace $ws9 output $SecMon
 workspace $ws10 output $SecMon
 exec --no-startup-id i3-msg 'workspace $ws1; exec firefox'
 
+workspace hide1 output primary
+workspace hide2 output $SecMon
+bindsym $mod+q exec --no-startup-id i3-msg workspace hide1; workspace hide2
 
 no_focus [title="^Peek preview$"]
