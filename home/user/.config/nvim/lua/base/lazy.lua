@@ -197,6 +197,9 @@ local plugins = {
         end
     },
     {
+        'chaoren/vim-wordmotion',
+    },
+    {
         'toppair/peek.nvim',
         enabled = vim.fn.executable "deno" == 1,
         ft = {'markdown'},

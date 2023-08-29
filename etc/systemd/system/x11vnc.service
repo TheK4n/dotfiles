@@ -1,0 +1,13 @@
+[Unit]
+Description=VNC Server for X11
+Requires=graphical.target
+After=graphical.target
+
+[Service]
+Type=simple
+User=kan
+ExecStart=/usr/bin/x11vnc -noxdamage -rfbauth /home/kan/.vnc/passwd -display :0 -forever
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target
