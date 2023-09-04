@@ -1,9 +1,14 @@
 #!/bin/bash
 
+set -u
+
+readonly SANDBOX_PATH
 SANDBOX_PATH="/tmp/.dotfiles-install-$(date +%H-%M-%s)"
+
+readonly TARGET_PATH
 TARGET_PATH="$HOME"
 
-
+readonly SUB
 SUB="$(pwd)/home/user"
 
 
@@ -47,7 +52,8 @@ _link_files_in_sandbox() {
 }
 
 _compare_sandbox_to_home() {
-    local comparisons="$(diff -rq "$SANDBOX_PATH" "$TARGET_PATH")"
+    local comparisons
+    comparisons="$(diff -rq "$SANDBOX_PATH" "$TARGET_PATH")"
     echo "$comparisons" | grep -vE "^Only in .+"
 }
 
@@ -149,7 +155,8 @@ cmd_bat() {
 }
 
 cmd_ipython() {
-    local sub=".ipython"
+    local sub
+    sub=".ipython"
 
     _die_if_installed "$HOME/$sub"
 
@@ -158,7 +165,8 @@ cmd_ipython() {
 }
 
 cmd_font() {
-    local sub="$HOME/.local/share/fonts"
+    local sub
+    sub="$HOME/.local/share/fonts"
 
     mkdir -p "$sub"
     cd "$sub"
