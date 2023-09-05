@@ -1,15 +1,12 @@
 #!/bin/bash
 
-set -u
+set -ue
 
-readonly SANDBOX_PATH
-SANDBOX_PATH="/tmp/.dotfiles-install-$(date +%H-%M-%s)"
+readonly SANDBOX_PATH="/tmp/.dotfiles-install-$(date +%H-%M-%s)"
 
-readonly TARGET_PATH
-TARGET_PATH="$HOME"
+readonly TARGET_PATH="$HOME"
 
-readonly SUB
-SUB="$(pwd)/home/user"
+readonly SUB="$(pwd)/home/user"
 
 
 declare -A TARGETS=(
