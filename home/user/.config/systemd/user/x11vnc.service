@@ -1,0 +1,13 @@
+[Unit]
+Description=VNC Server for X11
+Requires=default.target
+After=default.target
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sleep 30
+ExecStart=/usr/bin/x11vnc -noxdamage -rfbauth ~/.vnc/passwd -display :0 -forever
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
