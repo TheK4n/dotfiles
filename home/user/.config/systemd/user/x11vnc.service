@@ -5,8 +5,8 @@ After=default.target
 
 [Service]
 Type=simple
-ExecStartPre=/bin/sleep 30
-ExecStart=/usr/bin/x11vnc -noxdamage -rfbauth ~/.vnc/passwd -display :0 -forever
+ExecStartPre=/bin/sleep 10
+ExecStart=/usr/bin/x11vnc -noxdamage -rfbauth %h/.vnc/passwd -display :0 -forever
 Restart=on-failure
 
 [Install]

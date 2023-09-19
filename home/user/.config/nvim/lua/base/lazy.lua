@@ -200,6 +200,13 @@ local plugins = {
         'chaoren/vim-wordmotion',
     },
     {
+        'ggandor/leap.nvim',
+        keys = {
+            { 'gs', '<Plug>(leap-forward-to)' },
+            { 'gS', '<Plug>(leap-backward-to)' },
+        }
+    },
+    {
         'toppair/peek.nvim',
         enabled = vim.fn.executable "deno" == 1,
         ft = {'markdown'},
