@@ -83,7 +83,6 @@ cmd_zsh() {
 
     _link_files_in_sandbox ${TARGETS["zsh"]}
 
-    mkdir "$SANDBOX_PATH/.subzsh/plugins"
     git clone https://github.com/zsh-users/zsh-autosuggestions     "$SANDBOX_PATH/.subzsh/plugins/zsh-autosuggestions"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting "$SANDBOX_PATH/.subzsh/plugins/zsh-syntax-highlighting"
     git clone https://github.com/hlissner/zsh-autopair             "$SANDBOX_PATH/.subzsh/plugins/hlissner/zsh-autopair"
