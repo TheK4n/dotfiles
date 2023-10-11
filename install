@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 set -ueo pipefail
 
@@ -193,12 +193,14 @@ cmd_docker() {
 }
 
 cmd_unlink() {
-    local target
-    for target in ${TARGETS["$1"]}
-    do
-        if [ -e "$TARGET_PATH/$target" ]; then
-            unlink "$TARGET_PATH/$target"
-        fi
+    local target targetfile
+    for target in "$@"; do
+        for targetfile in ${TARGETS["$target"]}
+        do
+            if [ -e "$TARGET_PATH/$targetfile" ]; then
+                unlink "$TARGET_PATH/$targetfile"
+            fi
+        done
     done
 }
 
@@ -207,11 +209,11 @@ cmd_no_target() {
 }
 
 cmd_check() {
-    local target
-    for target in ${TARGETS["$1"]}
+    local targetfile
+    for targetfile in ${TARGETS["$1"]}
     do
-        if [ ! -e "$TARGET_PATH/$target" ]; then
-            echo "$target not linked"
+        if [ ! -e "$TARGET_PATH/$targetfile" ]; then
+            echo "$targetfile not linked"
         fi
     done
 }
@@ -221,6 +223,7 @@ cmd_list() {
 }
 
 cmd_install() {
+    local target
     for target in "$@"; do
         SANDBOX_PATH="$(mktemp -d)"
         case "$target" in
@@ -249,7 +252,7 @@ cmd_install() {
 cmd_help() {
     echo "Dotfiles installation script:
 Usage: ./install TARGET...
-Usage: ./install unlink TARGET
+Usage: ./install unlink TARGET...
 Usage: ./install check TARGET
 Usage: ./install list"
 }
