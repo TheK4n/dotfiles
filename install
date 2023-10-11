@@ -2,7 +2,7 @@
 
 set -ue
 
-readonly SANDBOX_PATH="/tmp/.dotfiles-install-$(date +%H-%M-%s)"
+readonly SANDBOX_PATH="$(mktemp -d)"
 
 readonly TARGET_PATH="$HOME"
 
@@ -38,7 +38,6 @@ _die_if_installed() {
 }
 
 _link_files_in_sandbox() {
-    mkdir "$SANDBOX_PATH"
     for target in "$@"; do
         echo "installing: $target"
         if [ ! "$(dirname "$target")" = "." ]; then
@@ -109,7 +108,6 @@ cmd_nvim() {
     _link_files_in_sandbox ${TARGETS["nvim"]}
 
     __install_from_sandbox
-    nvim +Lazy
 }
 
 cmd_ssh() {
@@ -191,13 +189,7 @@ cmd_docker() {
     __install_from_sandbox
 }
 
-is_target_exists() {
-    test " ${!TARGETS[@]} " =~ " $1 "
-}
-
 cmd_unlink() {
-    is_target_exists "$1" || _die "target not exists" 1
-
     local target
     for target in ${TARGETS["$1"]}
     do
@@ -209,6 +201,16 @@ cmd_unlink() {
 
 cmd_no_target() {
     _die "TARGET not exists" 1
+}
+
+cmd_check() {
+    local target
+    for target in ${TARGETS["$1"]}
+    do
+        if [ ! -e "$TARGET_PATH/$target" ]; then
+            echo "$target not linked"
+        fi
+    done
 }
 
 cmd_install() {
@@ -246,6 +248,7 @@ Usage: ./install.sh check TARGET"
 case "$1" in
     install) shift;  cmd_install  "$@" ;;
     unlink) shift;   cmd_unlink   "$@" ;;
+    check) shift;    cmd_check    "$@" ;;
     help) shift;     cmd_help     "$@" ;;
     *) shift;        cmd_help     "$@" ;;
 esac
