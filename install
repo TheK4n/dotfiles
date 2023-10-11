@@ -1,8 +1,6 @@
-#!/bin/bash
+!/bin/bash
 
-set -ue
-
-readonly SANDBOX_PATH="$(mktemp -d)"
+set -ueo pipefail
 
 readonly TARGET_PATH="$HOME"
 
@@ -15,10 +13,15 @@ declare -A TARGETS=(
     ["tmux"]=".tmux.conf"
     ["alacritty"]=".config/alacritty"
     ["nvim"]=".config/nvim .local/bin/vim_askpass_helper .local/bin/vim_askpass_helper_python"
+    ["ssh"]=""
     ["git"]=".gitconfig .githooks .gitignore"
     ["ranger"]=".config/ranger"
+    ["gpg"]=""
     ["i3"]=".config/i3 .config/i3status .local/bin/i3status_wrapper .config/picom .local/bin/slm"
     ["bat"]=".config/bat"
+    ["font"]=""
+    ["termux"]=""
+    ["arch"]=""
     ["psql"]=".psqlrc"
     ["docker"]=".docker/cli-plugins"
 )
@@ -54,7 +57,9 @@ _compare_sandbox_to_home() {
 }
 
 _merge_sandbox_to_home() {
+    set +e
     cp -RTnP "$SANDBOX_PATH" "$TARGET_PATH"
+    set -e
 }
 
 __install_from_sandbox() {
@@ -64,13 +69,11 @@ __install_from_sandbox() {
     if [ -n "$comparisons" ]; then
         echo "$comparisons" >&2
         echo "Reverting..." >&2
-        rm -rf "$SANDBOX_PATH"
         _die "Found conflicting files. Exiting" 1
     fi
 
     echo "Merging to home..."
     _merge_sandbox_to_home
-    rm -rf "$SANDBOX_PATH"
 }
 
 cmd_bash() {
@@ -219,6 +222,7 @@ cmd_list() {
 
 cmd_install() {
     for target in "$@"; do
+        SANDBOX_PATH="$(mktemp -d)"
         case "$target" in
             bash) shift;       cmd_bash       "$@" ;;
             zsh) shift;        cmd_zsh        "$@" ;;
@@ -238,24 +242,27 @@ cmd_install() {
             docker) shift;     cmd_docker     "$@" ;;
             *) shift;          cmd_no_target  "$@" ;;
         esac
+        rm -rf "$SANDBOX_PATH"
     done
 }
 
 cmd_help() {
     echo "Dotfiles installation script:
-Usage: ./install.sh install TARGET...
-Usage: ./install.sh unlink TARGET
-Usage: ./install.sh check TARGET"
+Usage: ./install TARGET...
+Usage: ./install unlink TARGET
+Usage: ./install check TARGET
+Usage: ./install list"
 }
 
+unset executed_command
+readonly executed_command="$1"
 
-case "$1" in
-    install) shift;  cmd_install  "$@" ;;
+case "$executed_command" in
     unlink) shift;   cmd_unlink   "$@" ;;
     check) shift;    cmd_check    "$@" ;;
-    list) shift;     cmd_list      "$@" ;;
+    list) shift;     cmd_list     "$@" ;;
     help) shift;     cmd_help     "$@" ;;
-    *) shift;        cmd_help     "$@" ;;
+    *) shift;        cmd_install "$executed_command" "$@" ;;
 esac
 exit 0
 
