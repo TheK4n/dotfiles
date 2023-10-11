@@ -156,14 +156,17 @@ local plugins = {
     {
         'nmac427/guess-indent.nvim',
         config = function()
-            require('guess-indent').setup {}
+            require('guess-indent').setup()
         end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require('indent_blankline').setup()
+            require("ibl").setup({
+                scope = { enabled = false },
+            })
         end,
+        main = "ibl"
     },
     {
         "nvim-neo-tree/neo-tree.nvim",
