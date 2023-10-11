@@ -213,6 +213,10 @@ cmd_check() {
     done
 }
 
+cmd_list() {
+    echo "${!TARGETS[@]}"
+}
+
 cmd_install() {
     for target in "$@"; do
         case "$target" in
@@ -249,6 +253,7 @@ case "$1" in
     install) shift;  cmd_install  "$@" ;;
     unlink) shift;   cmd_unlink   "$@" ;;
     check) shift;    cmd_check    "$@" ;;
+    list) shift;     cmd_list      "$@" ;;
     help) shift;     cmd_help     "$@" ;;
     *) shift;        cmd_help     "$@" ;;
 esac
