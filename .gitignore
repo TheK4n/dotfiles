@@ -19,4 +19,7 @@ home/user/.ipython/profile_default/*
 
 home/user/.gnupg/*
 !home/user/.gnupg/gpg.conf
+
 lazy-lock.json
+
+home/user/.config/ranger/plugins
