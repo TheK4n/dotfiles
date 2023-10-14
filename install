@@ -31,7 +31,7 @@ _die() {
     exit $2
 }
 
-test "$0" = "./install" || _die "Error: Please, run this file from root of dotfiles, like this './install.sh install TARGET" 1
+test "$0" = "./install" || _die "Error: Please, run this file from root of dotfiles, like this './install.sh TARGET" 1
 
 
 _die_if_installed() {
