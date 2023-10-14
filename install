@@ -225,7 +225,7 @@ cmd_list() {
 cmd_install() {
     local target
     for target in "$@"; do
-        SANDBOX_PATH="$(mktemp -d)"
+        SANDBOX_PATH="$(mktemp -td "$USER.dotfiles_XXXXXXX")"
         case "$target" in
             bash) shift;       cmd_bash       "$@" ;;
             zsh) shift;        cmd_zsh        "$@" ;;
