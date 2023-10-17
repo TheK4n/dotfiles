@@ -90,8 +90,27 @@ echo "Hello $USER!"
 ```bash
 git clone https://github.com/TheK4n/dotfiles
 cd dotfiles
-./install bash zsh ...
+./install zsh nvim ...
 ```
+
+
+## Installation script
+
+### Features
+1. Installing files from dotfiles/home/user to $HOME
+2. Uninstalling installed files
+
+### Dependencies
+* bash
+* coreutils
+* diffutils
+* grep
+
+
+### Optional dependencies
+* git
+* wget
+* unzip
 
 
 <h1 align="center"><a href="#top">▲</a></h1>
