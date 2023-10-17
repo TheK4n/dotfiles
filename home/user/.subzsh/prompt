@@ -1,9 +1,4 @@
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -42,7 +37,49 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 
-precmd() { vcs_info }
+get_current_time() {
+    date +%s
+}
+
+
+preexec() {
+  timer=$(get_current_time)
+}
+
+precmd() {
+    unset formatted_elapsed_time
+    vcs_info
+
+    # Print the previously configured title
+    print -Pnr -- "$TERM_TITLE"
+
+    # Print a new line before the prompt, but only if it is not the first line
+    if [ "$NEWLINE_BEFORE_PROMPT" = yes ]; then
+        if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
+            _NEW_LINE_BEFORE_PROMPT=1
+        else
+            print ""
+        fi
+    fi
+
+    if [ $timer ]; then
+        now=$(get_current_time)
+        elapsed_seconds=$(($now-$timer))
+        local seconds_in_minute=60
+
+        if ((elapsed_seconds >= 1)); then
+            if ((elapsed_seconds >= seconds_in_minute)); then
+                local minuts="$((elapsed_seconds / seconds_in_minute))"
+                local seconds="$((elapsed_seconds % seconds_in_minute))"
+                export formatted_elapsed_time="${minuts}m${seconds}s"
+            else
+                export formatted_elapsed_time="${elapsed_seconds}s"
+            fi
+        fi
+
+        unset timer
+    fi
+}
 
 zstyle ':vcs_info:*' actionformats \
     '-%F{5}(%F{2}%b%F{3}|%F{1}%a%F{5})-%F{5}]%F{3}%u%c%F{5}]%F{3}%f '
@@ -70,15 +107,15 @@ configure_prompt() {
 
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n$prompt_symbol%M%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}] $(vcs_info_wrapper)%b%F{%(#.blue.green)}\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
-            RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+            PROMPT=$'%F{%(#.blue.green)}┌──${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n$prompt_symbol%M%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}] $(vcs_info_wrapper)%b%F{%(#.blue.green)}\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+            RPROMPT=$'%F{cyan}${formatted_elapsed_time}%F{reset}%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset}%(#.#.$) '
+            PROMPT=$'${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset}%(#.#.$) '
             RPROMPT=
             ;;
         backtrack)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{red}%n@%m%b%F{reset}:%B%F{blue}%~%b%F{reset}%(#.#.$) '
+            PROMPT=$'${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{red}%n@%m%b%F{reset}:%B%F{blue}%~%b%F{reset}%(#.#.$) '
             RPROMPT=
             ;;
     esac
@@ -86,10 +123,8 @@ configure_prompt() {
 
 # The following block is surrounded by two delimiters.
 # These delimiters must not be modified. Thanks.
-# START KALI CONFIG VARIABLES
 PROMPT_ALTERNATIVE=twoline
 NEWLINE_BEFORE_PROMPT=yes
-# STOP KALI CONFIG VARIABLES
 
 if [ "$color_prompt" = yes ]; then
     # override default virtualenv indicator in prompt
@@ -144,7 +179,7 @@ if [ "$color_prompt" = yes ]; then
         ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
     fi
 else
-    PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%# '
+    PROMPT='%n@%m:%~%# '
 fi
 unset color_prompt force_color_prompt
 
@@ -163,25 +198,12 @@ bindkey ^P toggle_oneline_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
-    TERM_TITLE=$'\e]0;${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%n@%m: %~\a'
+    TERM_TITLE=$'\e]0;${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%n@%m: %~\a'
     ;;
 *)
     ;;
 esac
 
-precmd() {
-    # Print the previously configured title
-    print -Pnr -- "$TERM_TITLE"
-
-    # Print a new line before the prompt, but only if it is not the first line
-    if [ "$NEWLINE_BEFORE_PROMPT" = yes ]; then
-        if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
-            _NEW_LINE_BEFORE_PROMPT=1
-        else
-            print ""
-        fi
-    fi
-}
 
 
 PS2="> "
