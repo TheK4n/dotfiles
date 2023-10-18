@@ -5,9 +5,9 @@ home/user/.config/nvim/plugin
 home/user/.config/nvim/spell
 
 home/user/.subbash/bashrc.d/*
-!home/user/.subbash/bashrc.d/00_test.sh
+!home/user/.subbash/bashrc.d/.gitkeep
 home/user/.subzsh/zshrc.d/*
-!home/user/.subzsh/zshrc.d/00_test.sh
+!home/user/.subzsh/zshrc.d/.gitkeep
 
 *.zwc
 
