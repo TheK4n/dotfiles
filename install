@@ -25,11 +25,12 @@ declare -A TARGETS=(
     ["arch"]=""
     ["psql"]=".psqlrc"
     ["docker"]=".docker/cli-plugins"
+    ["ipython"]=".ipython/profile_default/ipython_config.py"
 )
 
 _die() {
     echo "$0: $1" >&2
-    exit $2
+    exit "$2"
 }
 
 test "$0" = "./install" || _die "Error: Please, run this file from root of dotfiles, like this './install.sh TARGET" 1
@@ -160,13 +161,8 @@ cmd_bat() {
 }
 
 cmd_ipython() {
-    local sub
-    sub=".ipython"
-
-    _die_if_installed "$HOME/$sub"
-
-    mkdir -p "$HOME/$sub/profile_default"
-    ln -s "$SUB/$sub/profile_default/ipython_config.py" "$HOME/$sub/profile_default/ipython_config.py"
+    _link_files_in_sandbox ${TARGETS["ipython"]}
+    __install_from_sandbox
 }
 
 cmd_font() {
@@ -227,7 +223,7 @@ find_targets_that_depend_on() {
     local target
     for target in "${!TARGETS[@]}"
     do
-        if [[ " ${TARGETS["$target"]} " =~ " %$1 " ]]; then
+        if [[ " ${TARGETS["$target"]} " =~ %$1 ]]; then
             echo "$target"
         fi
     done
@@ -276,23 +272,24 @@ cmd_install() {
     do
         SANDBOX_PATH="$(mktemp -td "${USER:=user}.dotfiles_XXXXXXX")"
         case "$target" in
-            bash) shift;       cmd_bash       "$@" ;;
-            zsh) shift;        cmd_zsh        "$@" ;;
-            tmux) shift;       cmd_tmux       "$@" ;;
-            alacritty) shift;  cmd_alacritty  "$@" ;;
-            nvim) shift;       cmd_nvim       "$@" ;;
-            ssh) shift;        cmd_ssh        "$@" ;;
-            git) shift;        cmd_git        "$@" ;;
-            ranger) shift;     cmd_ranger     "$@" ;;
-            gpg) shift;        cmd_gpg        "$@" ;;
-            i3) shift;         cmd_i3         "$@" ;;
-            bat) shift;        cmd_bat        "$@" ;;
-            font) shift;       cmd_font       "$@" ;;
-            termux) shift;     cmd_termux     "$@" ;;
-            arch) shift;       cmd_arch       "$@" ;;
-            psql) shift;       cmd_psql       "$@" ;;
-            docker) shift;     cmd_docker     "$@" ;;
-            *) shift;          cmd_no_target  "$@" ;;
+            bash) shift;       cmd_bash        "$@" ;;
+            zsh) shift;        cmd_zsh         "$@" ;;
+            tmux) shift;       cmd_tmux        "$@" ;;
+            alacritty) shift;  cmd_alacritty   "$@" ;;
+            nvim) shift;       cmd_nvim        "$@" ;;
+            ssh) shift;        cmd_ssh         "$@" ;;
+            git) shift;        cmd_git         "$@" ;;
+            ranger) shift;     cmd_ranger      "$@" ;;
+            gpg) shift;        cmd_gpg         "$@" ;;
+            i3) shift;         cmd_i3          "$@" ;;
+            bat) shift;        cmd_bat         "$@" ;;
+            font) shift;       cmd_font        "$@" ;;
+            termux) shift;     cmd_termux      "$@" ;;
+            arch) shift;       cmd_arch        "$@" ;;
+            psql) shift;       cmd_psql        "$@" ;;
+            docker) shift;     cmd_docker      "$@" ;;
+            ipython) shift;    cmd_ipython     "$@" ;;
+            *) shift;          cmd_no_target   "$@" ;;
         esac
         rm -rf "$SANDBOX_PATH"
     done
