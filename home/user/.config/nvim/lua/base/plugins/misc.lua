@@ -3,12 +3,33 @@ return {
     'tpope/vim-repeat',
     'google/vim-searchindex',
     'rbgrouleff/bclose.vim',
-    'Pocco81/auto-save.nvim',  -- autosave files
-    'windwp/nvim-autopairs',  -- auto pair brackets and tags
-    'lewis6991/gitsigns.nvim',  -- git integration
-    'windwp/nvim-ts-autotag',
     'chaoren/vim-wordmotion',
-    'numToStr/Comment.nvim',
+    {
+        'windwp/nvim-autopairs',
+        desc = "Auto pair brackets and tags",
+        config = function()
+            require("nvim-autopairs").setup()
+        end
+    },
+    {
+        'windwp/nvim-ts-autotag',
+        config = function()
+            require("nvim-ts-autotag").setup()
+        end
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        enabled = vim.fn.executable "git" == 1,
+        config = function()
+            require("gitsigns").setup()
+        end
+    },
+    {
+        'numToStr/Comment.nvim',
+        config = function()
+            require("Comment").setup()
+        end
+    },
     {
         'norcalli/nvim-colorizer.lua',
         config = function()
@@ -28,10 +49,22 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate'
+        build = ':TSUpdate',
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = {"python", "lua", "vim", "html", "rust", "markdown"},
+                auto_install = true,
+                highlight = {
+                    enable = true,
+                }
+            })
+        end
     },
     {
         'folke/trouble.nvim',
-        dependencies = { 'kyazdani42/nvim-web-devicons' }
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        config = function()
+            require("trouble").setup()
+        end
     },
 }
