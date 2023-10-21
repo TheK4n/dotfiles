@@ -118,7 +118,6 @@ cmd_nvim() {
     echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'"
 
     _link_files_in_sandbox ${TARGETS["nvim"]}
-
     __install_from_sandbox
 }
 

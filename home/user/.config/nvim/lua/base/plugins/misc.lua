@@ -18,13 +18,6 @@ return {
         end
     },
     {
-        'lewis6991/gitsigns.nvim',
-        enabled = vim.fn.executable "git" == 1,
-        config = function()
-            require("gitsigns").setup()
-        end
-    },
-    {
         'numToStr/Comment.nvim',
         config = function()
             require("Comment").setup()
