@@ -1,8 +1,8 @@
 [core]
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.config/git/ignore
     editor = nvim
     fileMode = false
-    hooksPath = ~/.githooks
+    hooksPath = ~/.config/git/hooks
 
 [init]
     defaultBranch = master    
