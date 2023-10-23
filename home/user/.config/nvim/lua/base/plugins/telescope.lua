@@ -12,6 +12,8 @@ return {
     keys = {
         { '<Leader>ff', '<cmd>Telescope find_files<CR>' },
         { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
+        { '<Leader>fc', '<cmd>Telescope git_commits<CR>' },
+        { '<Leader>fd', '<cmd>Telescope diagnostics<CR>' },
     },
     config = function()
         local telescope = require("telescope")
@@ -19,6 +21,11 @@ return {
         telescope.load_extension("fzf")
 
         telescope.setup({
+            pickers = {
+                find_files = {
+                    hidden = true
+                },
+            },
             defaults = {
                 selection_caret = " ",
                 path_display = { "smart" },
