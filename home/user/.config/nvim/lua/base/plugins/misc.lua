@@ -30,13 +30,6 @@ return {
         end
     },
     {
-        'preservim/tagbar',
-        keys = {
-            { '<Leader>t', '<cmd>TagbarToggle<CR>' }
-        },
-        enabled = vim.fn.executable "ctags" == 1
-    },
-    {
         'preservim/vimux',
         enabled = vim.fn.executable "tmux" == 1
     },

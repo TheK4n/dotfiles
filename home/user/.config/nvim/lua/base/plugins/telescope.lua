@@ -14,7 +14,7 @@ return {
         { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
     },
     config = function()
-        telescope = require("telescope")
+        local telescope = require("telescope")
 
         telescope.load_extension("fzf")
 
