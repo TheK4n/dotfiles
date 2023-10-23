@@ -23,12 +23,12 @@ return {
         telescope.setup({
             pickers = {
                 find_files = {
-                    hidden = true
+                    hidden = true,
                 },
             },
             defaults = {
                 selection_caret = " ",
-                path_display = { "smart" },
+                path_display = { "truncate" },
                 file_ignore_patterns = {
                     ".git/",
                     "target/",
