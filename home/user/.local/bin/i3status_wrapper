@@ -12,39 +12,40 @@
 [ -x "/usr/bin/jq" ] || exec i3status
 
 update_holder() {
-  local instance="$1"
-  local replacement="$2"
-  echo "$3" | jq --argjson arg_j "$replacement" "(.[] | (select(.instance==\"$instance\"))) |= \$arg_j"
-}
-
-remove_holder() {
-  local instance="$1"
-  echo "$2" | jq "del(.[] | (select(.instance==\"$instance\")))"
+    local instance="$1"
+    local replacement="$2"
+    echo "$3" | jq --argjson arg_j "$replacement" "(.[] | (select(.instance==\"$instance\"))) |= \$arg_j"
 }
 
 get_device_battery_status() {
-  for uuid in $(timeout 1 bluetoothctl devices | cut -f2 -d' ' 2>/dev/null)
-  do
-    local device_info
-    device_info="$(timeout 1 bluetoothctl info "$uuid")"
+    for uuid in $(timeout 1 bluetoothctl devices | cut -f2 -d' ' 2>/dev/null)
+    do
+        local device_info
+        device_info="$(timeout 1 bluetoothctl info "$uuid")"
 
-    if echo "$device_info" | grep -q 'Connected: yes\|Battery Percentage'; then
-      echo "$device_info" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }'
-      break
-    fi
-  done
+        if echo "$device_info" | grep -q 'Connected: yes\|Battery Percentage'; then
+            echo "$device_info" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }'
+            break
+        fi
+    done
 }
 
 update_json_with_text() {
-  local json="{ \"full_text\": \"$1\", \"color\": \"#FFFFFF\"}"
-  update_holder holder__headphones "$json" "$2"
+    local json="{ \"full_text\": \"$1\", \"color\": \"#FFFFFF\"}"
+    update_holder "holder__headphones" "$json" "$2"
 }
 
-i3status | (read -r line; echo "$line"; read -r line; echo "$line";
-  while true
-  do
+i3status | (
+    # read first 2 lines without formatting
     read -r line
-    json_array="$(echo "$line" | sed -e 's/^,//')"
-    echo ",$(update_json_with_text "$(get_device_battery_status)" "$json_array")"
-  done
+    echo "$line"
+    read -r line
+    echo "$line"
+
+    while true
+    do
+        read -r line
+        json_array="$(echo "$line" | sed -e 's/^,//')"
+        echo "$(update_json_with_text "$(get_device_battery_status)" "$json_array"),"
+    done
 )
