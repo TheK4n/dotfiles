@@ -1,0 +1,2 @@
+chmod 751 /home/user
+chmod 1777 /home/user/Public
