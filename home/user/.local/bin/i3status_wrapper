@@ -9,7 +9,7 @@
 #        format = "holder__headphones"
 # }
 
-# Make sure jq is installed
+[ -x "/usr/bin/jq" ] || exec i3status
 
 update_holder() {
   local instance="$1"
@@ -23,11 +23,12 @@ remove_holder() {
 }
 
 get_device_battery_status() {
-  for uuid in $(bluetoothctl devices | cut -f2 -d' ')
+  for uuid in $(timeout 1 bluetoothctl devices | cut -f2 -d' ' 2>/dev/null)
   do
-    local device_info="$(bluetoothctl info "$uuid")"
+    local device_info
+    device_info="$(timeout 1 bluetoothctl info "$uuid")"
 
-    if [ -n "$(echo $device_info | grep 'Connected: yes\|Battery Percentage')" ]; then
+    if echo "$device_info" | grep -q 'Connected: yes\|Battery Percentage'; then
       echo "$device_info" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }'
       break
     fi
@@ -39,9 +40,11 @@ update_json_with_text() {
   update_holder holder__headphones "$json" "$2"
 }
 
-i3status | (read line; echo "$line"; read line ; echo "$line" ; read line ; echo "$line" ; while true
-do
-  read line
-  json_array="$(echo $line | sed -e 's/^,//')"
-  echo ",$(update_json_with_text "$(get_device_battery_status)" "$json_array")"
-done)
+i3status | (read -r line; echo "$line"; read -r line; echo "$line";
+  while true
+  do
+    read -r line
+    json_array="$(echo "$line" | sed -e 's/^,//')"
+    echo ",$(update_json_with_text "$(get_device_battery_status)" "$json_array")"
+  done
+)

@@ -3,6 +3,8 @@ exec --no-startup-id ~/.screenlayout/default.sh
 set $SecMon "HDMI-0"
 
 for_window [tiling] border pixel 3
+smart_borders on
+
 set $mod Mod4
 
 exec --no-startup-id xset s off
@@ -180,7 +182,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # finds out, if available)
 bar {
         output primary
-        output nonprimary
         tray_output primary
         status_command exec ~/.local/bin/i3status_wrapper
 }
