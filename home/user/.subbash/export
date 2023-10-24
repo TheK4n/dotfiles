@@ -1,5 +1,5 @@
 
-umask 0077
+umask 022
 
 export EDITOR="nvim"
 export VISUAL="nvim"
