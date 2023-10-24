@@ -2,9 +2,20 @@ so () {
     [ -f "$1" ] && source "$1"
 }
 
+install_if_not_exists() {
+    local path="$HOME/.subzsh/plugins/$1"
+    if [ ! -d "$path" ]; then
+        /usr/bin/git clone "https://github.com/$1" "$path"
+    fi
+}
 
-so ~/.subzsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-so ~/.subzsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+install_if_not_exists zsh-users/zsh-autosuggestions
+install_if_not_exists zsh-users/zsh-syntax-highlighting
+install_if_not_exists hlissner/zsh-autopair
+install_if_not_exists unixorn/fzf-zsh-plugin
+
+so ~/.subzsh/plugins/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+so ~/.subzsh/plugins/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 so ~/.subzsh/plugins/hlissner/zsh-autopair/autopair.zsh
 so ~/.subzsh/plugins/unixorn/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 so ~/.subzsh/plugins/dirhistory.zsh
