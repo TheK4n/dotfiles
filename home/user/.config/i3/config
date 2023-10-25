@@ -156,13 +156,14 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $exitmode "exit: [e]xit, [r]eboot, [s]hutdown, [u]suspend, [l]ock"
+set $i3lock_cmd "i3lock -ef -c 1e1e1e"
+set $exitmode "Power: [e]xit, [r]eboot, [s]hutdown, s[u]spend, [l]ock"
 mode $exitmode {
         bindsym e exit
         bindsym r exec systemctl reboot
         bindsym s exec systemctl shutdown now
-        bindsym u exec systemctl suspend; mode "default"
-        bindsym l exec i3lock -ef -c 1e1e1e; mode "default"
+        bindsym u exec $i3lock_cmd; exec systemctl suspend; mode "default"
+        bindsym l exec $i3lock_cmd; mode "default"
 
         bindsym Escape mode "default"
         bindsym Return mode "default"
