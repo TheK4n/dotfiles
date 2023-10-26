@@ -7,10 +7,13 @@ smart_borders on
 
 set $mod Mod4
 
-exec --no-startup-id xset s off
-exec --no-startup-id xset dpms 0 0 0
-exec --no-startup-id xset r rate 250 100
-exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle -option caps:escape
+# screensaver
+set $i3lock_cmd "i3lock -enf -c 1e1e1e"
+exec --no-startup-id xset +dpms dpms 600 0 0
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
+
+exec_always --no-startup-id xset r rate 250 100
+exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle -option caps:escape
 exec --no-startup-id xrandr --dpi 80
 
 # wallpapers
@@ -156,7 +159,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $i3lock_cmd "i3lock -ef -c 1e1e1e"
 set $exitmode "Power: [e]xit, [r]eboot, [s]hutdown, s[u]spend, [l]ock"
 mode $exitmode {
         bindsym e exit
