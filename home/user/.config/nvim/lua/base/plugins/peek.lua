@@ -2,6 +2,9 @@ return {
     'toppair/peek.nvim',
     enabled = vim.fn.executable "deno" == 1,
     ft = {'markdown'},
+    keys = {
+        { '<Leader>rr', "<cmd>lua require('peek').open()<CR>" }
+    },
     build = 'deno task --quiet build:fast',
     config = function()
         require('peek').setup({
@@ -14,7 +17,6 @@ return {
             filetype = {'markdown'},
             throttle_at = 200000,
             throttle_time = 'auto',
-            vim.keymap.set('n', '<Leader>rr', "<cmd>lua require('peek').open()<CR>", {noremap=true, silent=true})
         })
     end,
 }
