@@ -1,6 +1,7 @@
 [core]
     excludesfile = ~/.config/git/ignore
-    editor = nvim
+    editor = $EDITOR
+    pager = $PAGER
     fileMode = false
     hooksPath = ~/.config/git/hooks
 
@@ -22,9 +23,9 @@
     ui = auto
 
 [alias]
-    a = "!git status --short | peco | awk '{print $2}' | xargs git add"
-    d = "!git diff --color=always | $PAGER"
-    ds = "!git diff --staged --color=always | $PAGER"
+    a = "!git status --short | fzf | awk '{print $2}' | xargs git add"
+    d = "!git diff --color=always | bash -c \"$PAGER\""
+    ds = "!git diff --staged --color=always | bash -c \"$PAGER\""
     dno = diff --name-only
     co = checkout
     ci = commit
