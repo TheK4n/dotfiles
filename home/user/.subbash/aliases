@@ -52,6 +52,7 @@ alias mcdtmp='cd "$(mktemp -d)"'
 # time
 alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
+alias cal='cal -m'
 
 # vim
 alias svi="sudo -E nvim"
