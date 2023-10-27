@@ -47,8 +47,9 @@ disk "/home" {
 }
 
 memory {
-    format = " %used/%available"
+    format = " %used/%total"
     threshold_degraded = "1G"
+    threshold_critical = "200M"
     format_degraded = "MEMORY < %available"
 }
 
