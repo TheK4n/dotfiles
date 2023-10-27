@@ -1,18 +1,9 @@
-# i3status configuration file.
-# see "man i3status" for documentation.
-
-# It is important that this file is edited as UTF-8.
-# The following line should contain a sharp s:
-# ß
-# If the above line is not correctly displayed, fix your editor first!
-
 general {
     colors = true
     interval = 5
     output_format = i3bar
 }
 
-order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery all"
@@ -36,7 +27,15 @@ ethernet _first_ {
 }
 
 battery all {
-    format = " %status %percentage %remaining"
+    format = "%status %percentage"
+    last_full_capacity = false
+    format_down = ""
+    status_chr = ""
+    status_bat = ""
+    status_unk = "?"
+    status_full = ""
+    path = "/sys/class/power_supply/BAT%d/uevent"
+    low_threshold = 15
 }
 
 disk "/" {
@@ -47,12 +46,8 @@ disk "/home" {
     format = " %used/%total"
 }
 
-load {
-    format = "%1min"
-}
-
 memory {
-    format = "%used/%available"
+    format = " %used/%available"
     threshold_degraded = "1G"
     format_degraded = "MEMORY < %available"
 }
@@ -64,6 +59,7 @@ cpu_usage {
 cpu_temperature 0 {
     format = " %degrees°"
     max_threshold = "80"
+    format_above_threshold = " %degrees"
     path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
@@ -72,8 +68,8 @@ tztime local {
 }
 
 volume master {
-    format = " %volume" # шаблон громкости в активном состоянии
-    format_muted = " %volume" # шаблон громкости в состоянии muted (без звука)
+    format = " %volume"
+    format_muted = " %volume"
     device = "default"
     mixer = "Master"
     mixer_idx = 0
