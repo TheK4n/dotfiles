@@ -8,9 +8,9 @@ smart_borders on
 set $mod Mod4
 
 # screensaver
-set $i3lock_cmd "i3lock -enf -c 1e1e1e"
+set $i3lock_cmd "i3lock -enf -i $HOME/.wallpaper/*.png"
 exec --no-startup-id xset +dpms dpms 600 0 0
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -i $HOME/.wallpaper/*.png
 
 exec_always --no-startup-id xset r rate 250 100
 exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle -option caps:escape
