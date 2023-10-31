@@ -162,8 +162,8 @@ bindsym $mod+r mode "resize"
 set $exitmode "Power: [e]xit, [r]eboot, [s]hutdown, s[u]spend, [l]ock"
 mode $exitmode {
         bindsym e exit
-        bindsym r exec systemctl reboot
-        bindsym s exec systemctl shutdown now
+        bindsym r exec reboot
+        bindsym s exec shutdown -h now
         bindsym u exec $i3lock_cmd; exec systemctl suspend; mode "default"
         bindsym l exec $i3lock_cmd; mode "default"
 
