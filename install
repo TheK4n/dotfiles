@@ -142,7 +142,7 @@ cmd_gpg() {
 }
 
 cmd_i3() {
-    echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim"
+    echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim playerctl"
     _link_files_in_sandbox ${TARGETS["i3"]}
     __install_from_sandbox
 }
