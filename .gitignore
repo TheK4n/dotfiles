@@ -1,5 +1,4 @@
 home/user/.subzsh/plugins/*
-!home/user/.subzsh/plugins/dirhistory.zsh
 
 home/user/.config/nvim/plugin
 home/user/.config/nvim/spell

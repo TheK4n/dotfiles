@@ -91,7 +91,6 @@ cmd_bash() {
 }
 
 cmd_zsh() {
-
     _link_files_in_sandbox ${TARGETS["zsh"]}
     __install_from_sandbox
 }
@@ -176,6 +175,7 @@ cmd_termux() {
 
 cmd_arch() {
     echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
+    echo 'sudo systemctl enable --now gpm'
 }
 
 cmd_psql() {
