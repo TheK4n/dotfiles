@@ -172,7 +172,7 @@ mode $exitmode {
         bindsym e exit
         bindsym r exec reboot
         bindsym s exec shutdown -h now
-        bindsym u exec $i3lock_cmd; exec systemctl suspend; mode "default"
+        bindsym u exec exec systemctl suspend; mode "default"
         bindsym l exec $i3lock_cmd; mode "default"
 
         bindsym Escape mode "default"
