@@ -10,7 +10,7 @@ readonly SUB="$(pwd)/home/user"
 
 declare -A TARGETS=(
     ["bash"]=".config/bash .bashrc .profile"
-    ["zsh"]="%bash .config/zsh .zshrc .zprofile .zfunc .zlogout .inputrc"
+    ["zsh"]="%bash .config/zsh .zshrc .zprofile .zlogout .inputrc"
     ["tmux"]=".tmux.conf"
     ["alacritty"]=".config/alacritty"
     ["nvim"]=".config/nvim .local/bin/vim_askpass_helper .local/bin/vim_askpass_helper_python"
