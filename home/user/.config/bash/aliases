@@ -118,4 +118,4 @@ elif [[ "$OSTYPE" == "darwin" ]]; then
     alias paste='pbpaste'
 fi
 
-alias black='feh -YF ~/Pictures/black.png'
+alias black='convert canvas:none PNG:- | feh -YF -'
