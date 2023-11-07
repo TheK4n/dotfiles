@@ -26,7 +26,7 @@
     addEmptyPathspec = false
 
 [alias]
-    a = "!git ls-files -m | fzf | xargs git add"
+    a = "!git ls-files --exclude-standard -m --others -t | fzf | cut -d' ' -f2 | xargs git add"
     d = diff
     ds = diff --staged
     dno = diff --name-only

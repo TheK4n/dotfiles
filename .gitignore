@@ -1,12 +1,12 @@
-home/user/.subzsh/plugins/*
+home/user/.config/zsh/plugins/*
 
 home/user/.config/nvim/plugin
 home/user/.config/nvim/spell
 
-home/user/.subbash/bashrc.d/*
-!home/user/.subbash/bashrc.d/.gitkeep
-home/user/.subzsh/zshrc.d/*
-!home/user/.subzsh/zshrc.d/.gitkeep
+home/user/.config/bash/bashrc.d/*
+!home/user/config/bash/bashrc.d/.gitkeep
+home/user/.config/zsh/zshrc.d/*
+!home/user/.config/zsh/zshrc.d/.gitkeep
 
 *.zwc
 

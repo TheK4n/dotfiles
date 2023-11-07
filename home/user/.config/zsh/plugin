@@ -14,7 +14,7 @@ install_if_not_exists zsh-users/zsh-syntax-highlighting
 install_if_not_exists hlissner/zsh-autopair
 install_if_not_exists unixorn/fzf-zsh-plugin
 
-so ~/.subzsh/plugins/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-so ~/.subzsh/plugins/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
-so ~/.subzsh/plugins/hlissner/zsh-autopair/autopair.zsh
-so ~/.subzsh/plugins/unixorn/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+so ~/.config/zsh/plugins/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+so ~/.config/zsh/plugins/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
+so ~/.config/zsh/plugins/hlissner/zsh-autopair/autopair.zsh
+so ~/.config/zsh/plugins/unixorn/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh

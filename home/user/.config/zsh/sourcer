@@ -1,0 +1,22 @@
+
+_so () {
+    [ -f "$1" ] && source "$1"
+}
+
+_so /etc/zsh_command_not_found
+_so "$HOME"/.config/zsh/options
+_so "$HOME"/.config/zsh/completion
+_so "$HOME"/.config/zsh/history
+_so "$HOME"/.config/zsh/prompt
+_so "$HOME"/.config/zsh/other
+_so "$HOME"/.config/zsh/plugin
+_so "$HOME"/.config/zsh/aliases
+
+_so "$HOME"/.config/bash/aliases
+_so "$HOME"/.config/bash/completion
+_so "$HOME"/.config/bash/export
+_so "$HOME"/.config/bash/functions
+_so "$HOME"/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+_sod "$HOME"/.config/zsh/zshrc.d
