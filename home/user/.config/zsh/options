@@ -73,3 +73,23 @@ bindkey -M viins '^U' kill-whole-line
 bindkey -M viins '\e.' insert-last-word
 bindkey -M vicmd '^K' up-line-or-history
 bindkey -M vicmd '^J' down-line-or-history
+
+
+insert-sudo() {
+  local sudo_template="${SUDO:=sudo} "
+  local template_len="${#sudo_template}"
+
+  if [ -z "${LBUFFER}${RBUFFER}" ]; then
+    zle up-history
+  fi
+  if [ "${LBUFFER::$template_len}" = "$sudo_template" ]; then
+    LBUFFER="${LBUFFER:$template_len}"
+  else
+    LBUFFER="${sudo_template}${LBUFFER}"
+  fi
+}
+
+zle -N insert-sudo
+
+bindkey -M vicmd '^[s' insert-sudo
+bindkey -M viins '^[s' insert-sudo
