@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cat "$SUB/.ssh/config" >> "$HOME/.ssh/config"

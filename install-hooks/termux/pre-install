@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "apt install termux-api tsu"
