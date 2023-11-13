@@ -21,7 +21,6 @@ exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/pi
 exec --no-startup-id hsetroot
 exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
 
-
 font xft:FiraCode 12
 
 # Use pactl to adjust volume in PulseAudio.
@@ -39,6 +38,8 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 focus_follows_mouse no
 
