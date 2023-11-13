@@ -21,7 +21,6 @@ exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/pi
 exec --no-startup-id hsetroot
 exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
 
-
 font xft:FiraCode 12
 
 # Use pactl to adjust volume in PulseAudio.
@@ -194,7 +193,7 @@ bar {
         output primary
         output nonprimary
         tray_output primary
-        status_command exec ~/.local/bin/i3status_wrapper
+        status_command exec ~/.local/bin/conky-i3bar
         font xft:FiraCode 13
 }
 
