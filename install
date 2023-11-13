@@ -189,21 +189,21 @@ cmd_docker() {
 }
 
 is_target_installed() {
-    local not_fully_installed=0
+    local not_fully_installed=false
 
     local targetfile
     for targetfile in ${TARGETS["$1"]}
     do
         if [ "${targetfile::1}" = "%" ]; then
-            is_target_installed "${targetfile:1}" || not_fully_installed=1
+            is_target_installed "${targetfile:1}" || not_fully_installed=true
         else
             if [ ! -e "$TARGET_PATH/$targetfile" ]; then
                 echo "$targetfile not linked"
-                not_fully_installed=1
+                not_fully_installed=true
             fi
         fi
     done
-    if (( not_fully_installed != 0 )); then
+    if $not_fully_installed; then
         echo "Target '$1' not fully installed"
         echo
         return 1
