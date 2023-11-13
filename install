@@ -5,7 +5,9 @@ shopt -s nullglob
 
 readonly TARGET_PATH="$HOME"
 
-readonly SUB="$(pwd)/home/user"
+readonly DOTFILES_ROOT="$(pwd)"
+readonly SUB="$DOTFILES_ROOT/home/user"
+export SUB
 
 
 declare -A TARGETS=(
@@ -36,12 +38,6 @@ _die() {
 test "$0" = "./install" || _die "Error: Please, run this file from root of dotfiles, like this './install.sh TARGET" 1
 
 
-_die_if_installed() {
-    if [ -e "$1" ]; then
-        _die "Already installed" 1
-    fi
-}
-
 _link_files_in_sandbox() {
     local targetfile
     for targetfile in "$@"
@@ -61,7 +57,7 @@ _link_files_in_sandbox() {
 _compare_sandbox_to_home() {
     local comparisons
     comparisons="$(diff -rq "$SANDBOX_PATH" "$TARGET_PATH")"
-    echo "$comparisons" | grep -vE "^Only in .+"
+    echo "$comparisons" | grep -vE "^Only in .+" || true
 }
 
 _merge_sandbox_to_home() {
@@ -71,12 +67,11 @@ _merge_sandbox_to_home() {
 }
 
 __install_from_sandbox() {
-
-    local comparisons="$(_compare_sandbox_to_home)"
+    local comparisons
+    comparisons="$(_compare_sandbox_to_home)"
 
     if [ -n "$comparisons" ]; then
         echo "$comparisons" >&2
-        echo "Reverting..." >&2
         _die "Found conflicting files. Exiting" 1
     fi
 
@@ -85,107 +80,27 @@ __install_from_sandbox() {
     echo "Successfully installed"
 }
 
-cmd_bash() {
-    _link_files_in_sandbox ${TARGETS["bash"]}
+_execute_hook_if_executable() {
+    local hook_path="$DOTFILES_ROOT/install-hooks/$1/$2"
+    if [ -x "$hook_path" ]; then
+        echo "Executing $2 for target '$1'"
+        "$hook_path"
+    fi
+}
+
+execute_pre_hook() {
+    _execute_hook_if_executable "$1" "pre-install"
+}
+
+execute_post_hook() {
+    _execute_hook_if_executable "$1" "post-install"
+}
+
+install_target() {
+    execute_pre_hook "$1"
+    _link_files_in_sandbox ${TARGETS["$1"]}
     __install_from_sandbox
-}
-
-cmd_zsh() {
-    _link_files_in_sandbox ${TARGETS["zsh"]}
-    __install_from_sandbox
-}
-
-
-cmd_tmux() {
-    _link_files_in_sandbox ${TARGETS["tmux"]}
-    __install_from_sandbox
-}
-
-cmd_alacritty() {
-    _link_files_in_sandbox ${TARGETS["alacritty"]}
-    __install_from_sandbox
-}
-
-cmd_nvim() {
-    echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'"
-
-    _link_files_in_sandbox ${TARGETS["nvim"]}
-    __install_from_sandbox
-}
-
-cmd_ssh() {
-    cat "$SUB/.ssh/config" >> "$HOME/.ssh/config"
-}
-
-cmd_git() {
-    _link_files_in_sandbox ${TARGETS["git"]}
-    __install_from_sandbox
-}
-
-cmd_ranger() {
-    echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"
-
-    _link_files_in_sandbox ${TARGETS["ranger"]}
-
-    mkdir -p "$SANDBOX_PATH/.config/ranger/plugins"
-    git clone https://github.com/alexanderjeurissen/ranger_devicons "$SANDBOX_PATH/.config/ranger/plugins/ranger_devicons"
-    __install_from_sandbox
-    ranger --copy-config=all
-}
-
-cmd_gpg() {
-    _die_if_installed "$HOME/.gnupg"
-
-    cat "$SUB/.gnupg/gpg.conf" >> "$HOME/.gnupg/gpg.conf"
-    echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > "$HOME/.gnupg/gpg-agent.conf"; echo RELOADAGENT | gpg-connect-agent
-}
-
-cmd_i3() {
-    echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim playerctl"
-    _link_files_in_sandbox ${TARGETS["i3"]}
-    __install_from_sandbox
-}
-
-cmd_bat() {
-    _link_files_in_sandbox ${TARGETS["bat"]}
-    __install_from_sandbox
-}
-
-cmd_ipython() {
-    _link_files_in_sandbox ${TARGETS["ipython"]}
-    __install_from_sandbox
-}
-
-cmd_font() {
-    local sub
-    sub="$HOME/.local/share/fonts"
-
-    mkdir -p "$sub"
-    cd "$sub"
-    wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'
-    unzip FiraCode.zip -d "$sub"
-    git clone 'https://github.com/powerline/fonts.git' --depth=1
-    cd fonts
-    ./install.sh
-}
-
-cmd_termux() {
-    echo "apt install termux-api tsu"
-}
-
-cmd_arch() {
-    echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
-    echo 'sudo systemctl enable --now gpm'
-}
-
-cmd_psql() {
-    _link_files_in_sandbox ${TARGETS["psql"]}
-    __install_from_sandbox
-}
-
-cmd_docker() {
-    _link_files_in_sandbox ${TARGETS["docker"]}
-    __install_from_sandbox
+    execute_post_hook "$1"
 }
 
 is_target_installed() {
@@ -215,7 +130,7 @@ find_targets_that_depend_on() {
     local target
     for target in "${!TARGETS[@]}"
     do
-        if [[ " ${TARGETS["$target"]} " =~ %$1 ]]; then
+        if [[ " ${TARGETS["$target"]} " =~ " %$1 " ]]; then
             echo "$target"
         fi
     done
@@ -253,37 +168,30 @@ cmd_no_target() {
     _die "TARGET not exists" 1
 }
 
-
 cmd_list() {
     echo "${!TARGETS[@]}"
+}
+
+target_exists() {
+    if [[ " ${!TARGETS[*]} " =~ " $1 " ]]; then
+        true
+    else
+        false
+    fi
 }
 
 cmd_install() {
     local target
     for target in "$@"
     do
-        SANDBOX_PATH="$(mktemp -td "${USER:=user}.dotfiles_XXXXXXX")"
-        case "$target" in
-            bash) shift;       cmd_bash        "$@" ;;
-            zsh) shift;        cmd_zsh         "$@" ;;
-            tmux) shift;       cmd_tmux        "$@" ;;
-            alacritty) shift;  cmd_alacritty   "$@" ;;
-            nvim) shift;       cmd_nvim        "$@" ;;
-            ssh) shift;        cmd_ssh         "$@" ;;
-            git) shift;        cmd_git         "$@" ;;
-            ranger) shift;     cmd_ranger      "$@" ;;
-            gpg) shift;        cmd_gpg         "$@" ;;
-            i3) shift;         cmd_i3          "$@" ;;
-            bat) shift;        cmd_bat         "$@" ;;
-            font) shift;       cmd_font        "$@" ;;
-            termux) shift;     cmd_termux      "$@" ;;
-            arch) shift;       cmd_arch        "$@" ;;
-            psql) shift;       cmd_psql        "$@" ;;
-            docker) shift;     cmd_docker      "$@" ;;
-            ipython) shift;    cmd_ipython     "$@" ;;
-            *) shift;          cmd_no_target   "$@" ;;
-        esac
-        rm -rf "$SANDBOX_PATH"
+        if target_exists "$target"; then
+            SANDBOX_PATH="$(mktemp -td "${USER:=user}.dotfiles_XXXXXXX")"
+            export SANDBOX_PATH
+            install_target "$target"
+            rm -rf "$SANDBOX_PATH"
+        else
+            cmd_no_target
+        fi
     done
 }
 
