@@ -1,4 +1,4 @@
-_f() {}
+_f() { true ; }
 
 # colors
 if [ -x "$(command -v dircolors)" ]; then
@@ -16,7 +16,7 @@ alias ll='ls -lhFv'
 alias la='ls -AFv'
 alias lla='ls -lhFAv'
 alias ll.='ls -lhFAv --ignore="*"'
-alias lsl='_f() { ls -lhFA --color=always "${1:=.}" | tail -n +2 | bash -c "$PAGER" }; _f'
+alias lsl='_f() { ls -lhFA --color=always "${1:=.}" | tail -n +2 | bash -c "$PAGER" ; }; _f'
 
 
 alias _='sudo'
@@ -30,7 +30,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .3='cd ../../..'
-alias cl='_f() { cd "${1:=$HOME}" && ls -F --color=auto }; _f'
+alias cl='_f() { cd "${1:=$HOME}" && ls -F --color=auto ; }; _f'
 
 alias path='echo -e ${PATH//:/\\n}'
 

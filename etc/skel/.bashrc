@@ -5,20 +5,18 @@ if [ -x "$(which dircolors)" ]; then
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
-    alias egrep='egrep --color=auto'
     alias fgrep='fgrep --color=auto'
 
     alias ls='ls --color=auto'
 fi
 
-# these aliases use the "ls" alias, which was defined earlier
 alias l.='ls -AF --ignore="*"'
 alias ll='ls -lhF'
 alias la='ls -AF'
 
 alias lt='du -sh * | sort -h'
 
-alias rm='rm -r'
+alias rm='rm -ir'
 alias mkdir='mkdir -pv'
 
 alias cd..='cd ..'
