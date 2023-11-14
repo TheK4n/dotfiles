@@ -1,7 +1,7 @@
 [core]
     excludesfile = ~/.config/git/ignore
     editor = "$EDITOR"
-    pager = "$PAGER"
+    pager = "$PAGER -F"
     fileMode = false
     hooksPath = ~/.config/git/hooks
 
@@ -39,7 +39,7 @@
     bm = branch --merged
     bn = branch --no-merged
     hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all --color=always
-    hs = "!git hist -n 10 | $PAGER -F"
+    hs = "!git hist -n 10"
     df = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative | fzf | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
     type = cat-file -t
     dump = cat-file -p
