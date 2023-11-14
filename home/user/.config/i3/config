@@ -106,16 +106,16 @@ bindsym $mod+v split v
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Work"
+set $ws1 "1: Browser"
 set $ws2 "2: Code"
-set $ws3 "3"
+set $ws3 "3: Code"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9: Music"
-set $ws10 "10: Media"
+set $ws8 "8🗨️"
+set $ws9 "9🎵"
+set $ws10 "10🍿"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
