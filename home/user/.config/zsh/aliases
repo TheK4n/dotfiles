@@ -1,8 +1,7 @@
 alias -g L='| bash -c "$PAGER"'
 alias -g HL='| highlight -O ansi -S '
-alias -g ALL="1>/dev/null 2>&1"
-alias -g BG="&>/dev/null &"
-alias -g MOD='$(git diff --name-only --relative --diff-filter="acdr" | tr "\n" " ")'
+alias -g ALL="&>/dev/null"
+alias -g BG="ALL &"
 alias -g ?='| grep'
 alias -g BEEP='&& beep -f 800 -l 250 -n -f 1000 -l 500 || beep -f 800 -l 250 -n -f 500 -l 500'
 

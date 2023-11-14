@@ -1,4 +1,4 @@
-
+_f() {}
 
 # colors
 if [ -x "$(command -v dircolors)" ]; then
@@ -16,6 +16,7 @@ alias ll='ls -lhFv'
 alias la='ls -AFv'
 alias lla='ls -lhFAv'
 alias ll.='ls -lhFAv --ignore="*"'
+alias lsl='_f() { ls -lhFA --color=always "${1:=.}" | tail -n +2 | bash -c "$PAGER" }; _f'
 
 
 alias _='sudo'
@@ -27,16 +28,16 @@ alias mkdir='mkdir -pv'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 alias .3='cd ../../..'
+alias cl='_f() { cd "${1:=$HOME}" && ls -F --color=auto }; _f'
 
 alias path='echo -e ${PATH//:/\\n}'
-
-alias history='history 0'
 
 # shorts
 alias c='clear'
 alias q='exit 0'
-alias h='history'
+alias h='history 0'
 alias j='jobs -l'
 
 # utils
@@ -45,7 +46,6 @@ alias genpass="openssl rand -base64 12"
 alias gensalt="dd if=/dev/urandom count=16 2>/dev/null | sha256sum | head -c 64"
 alias diff='colordiff'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
-alias mcdtmp='cd "$(mktemp -d)"'
 
 
 # time
@@ -55,7 +55,6 @@ alias cal='cal -m'
 
 # vim
 alias svi="sudo -E nvim"
-alias edit=nvim
 
 # net
 alias ports='ss -tlnp'
@@ -68,7 +67,7 @@ alias weather='curl -4 wttr.in/$(cat) 2>/dev/null | head -n -1'  # weather by ci
 # starts web server
 alias www='python3 -m http.server 8000'
 
-# hard
+# hardware
 alias reboot='sudo /sbin/reboot'
 alias poweroff='sudo /sbin/poweroff'
 alias suspend='sudo systemctl suspend'
@@ -76,8 +75,6 @@ alias halt='sudo /sbin/halt'
 alias shutdown='sudo /sbin/shutdown now'
 
 alias meminfo='free -mlth'
-alias psmem='ps auxf | sort -nr -k 4 | bash -c "$PAGER"'
-alias music='mplayer -shuffle ~/Music/*.mp3'
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias wake='((speaker-test -t sine -f 400 &>/dev/null)& local pid=$! ;sleep 0.2s; kill -9 $pid) &>/dev/null'

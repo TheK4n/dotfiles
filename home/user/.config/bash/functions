@@ -1,5 +1,4 @@
-
-_sod () {
+_sod() {
     if [ -d "$1" ] && [ -n "$(ls "$1"/ 2>/dev/null)" ]; then
         for FILENAME in $(ls "$1"/ | sort -n)
         do
@@ -8,10 +7,8 @@ _sod () {
     fi
 }
 
-lt () {
-    local DIR
-    test -z "$1" && DIR="." || DIR="$1"
-    du -h "$DIR" 2>/dev/null | sort -h | tac
+lt() {
+    du -h "${1:=.}" 2>/dev/null | sort -h | tac
 }
 
 destroy() {
@@ -23,41 +20,9 @@ destroy() {
     [[ $response == [yY] ]] && shred -zun 25 "$1"
 }
 
-lsl () {
-
-    local DIR
-    DIR="$1"
-    
-    if [ -z "$1" ]; then
-        DIR="$(pwd)"
-    fi
-
-    ls -lhFA --color=always "${DIR}" | tail -n +2 | bash -c "$PAGER"
-}
-
 workon() {
-    local ENV_NAME
-    ENV_NAME="$1"
-
-    if [ -z "$1" ]; then
-        ENV_NAME=$(basename "$(pwd)")
-    fi
-
-    source /opt/pythonenv/"$ENV_NAME"/bin/activate
+    source /opt/pythonenv/"${1:=$(basename $PWD)}"/bin/activate
 }
-
-
-cl() {
-    local DIR
-    DIR="$*"
-
-    if [ $# -lt 1 ]; then
-        DIR="$HOME"
-    fi
-
-    cd "${DIR}" && ls -F --color=auto
-}
-
 
 py() {
     if [[ -z "$@" && -x "$(command -v ipython 2>/dev/null)" ]]; then
@@ -67,19 +32,9 @@ py() {
     fi
 }
 
-
 ve() {
-    local venv_name
-
-    if [ -n "$1" ]; then
-        venv_name="$1"
-    else
-        venv_name="venv"
-    fi
-
-    python3 -m virtualenv "$venv_name" && . "$venv_name/bin/activate"
+    python3 -m virtualenv "${1:=venv}" && . "${1:=venv}/bin/activate"
 }
-
 
 va() {
     local activate_venv
@@ -101,7 +56,7 @@ va() {
 }
 
 
-extract () {
+extract() {
     if [ -z "$1" ]; then  # if string non-zero
         # display usage if no parameters given
         echo "extract: error: usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
@@ -146,9 +101,12 @@ extract () {
 }
 
 
-mcd () {
-    test -z "$1" && return 1
-    mkdir -p "$1" && cd "$1" || return
+mcd() {
+    if [ -z "$1" ]; then
+        cd "$(mktemp -d)"
+    else
+        mkdir -p "$1" && cd "$1"
+    fi
 }
 
 
@@ -174,7 +132,7 @@ vpn() {
     )
 }
 
-# setup ssh tunnel to $1 as proxy
+# setup ssh tunnel to server $1 as proxy
 toggle-proxy() {
     if [ -z "$http_proxy" ]; then
         export {http,https,ftp,rsync}_proxy="socks5://127.0.0.1:8888"
@@ -200,26 +158,10 @@ split-file() {
         (mkdir "$1.splitted" && cd "$1.splitted" && split -d -b "$_size" "../$1")
 }
 
-# returns url to code previewer
-rayso() {
-    local CODE TITLE
-
-    if [[ -n "$1" ]]; then
-        CODE="$(cat "$1" | base64)"
-        TITLE="$(basename "$1")"
-    else
-        CODE="$(cat | base64)"
-        TITLE="Code"
-    fi
-
-    echo "https://ray.so/?colors=candy&background=true&darkMode=true&padding=64&title=${TITLE}&code=${CODE}&language=auto"
-}
-
-# json prettyfier
 json() {
-    if [ -t 0 ]; then # argument
+    if [ -t 0 ]; then  # argument
        python -m json.tool <<< "$*"
-    else # pipe
+    else  # pipe
        python -m json.tool
     fi
 }
@@ -234,20 +176,18 @@ _get_full_file_extension() {
 }
 
 rmt() {
-    local filename TRASH
+    local TRASH
     TRASH=~/.trash
 
-    if [ ! -d "$TRASH" ]; then
-        mkdir "$TRASH"
-    fi
-
+    local filename
     for filename in $*
     do
-        mv "$filename" "$TRASH"/"$(basename "$filename")-$(date +%s)"
+        local filename_out_path="${TRASH}$(realpath "$filename")"
+        mkdir -p "$(dirname "$filename_out_path")"
+        mv "$filename" "${filename_out_path}_$(date +%s)"
     done
 }
 
-# shows text from ~/.tips/*
 showtips() {
 
     TIPS_DIR="$HOME/.tips"
@@ -261,11 +201,9 @@ showtips() {
     return 0
 }
 
-
 most-often-commands() {
     history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn
 }
-
 
 # calculator
 = () {
