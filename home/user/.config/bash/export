@@ -3,7 +3,7 @@ umask 022
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export PAGER="less -niSR"
+export PAGER="less -niSR -+X -+F"
 export CDPATH=:~:~/code
 
 export HISTSIZE=10000

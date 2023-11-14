@@ -32,7 +32,7 @@ lsl () {
         DIR="$(pwd)"
     fi
 
-    ls -lhFA --color=always "${DIR}" | tail -n +2 | less -R
+    ls -lhFA --color=always "${DIR}" | tail -n +2 | bash -c "$PAGER"
 }
 
 workon() {

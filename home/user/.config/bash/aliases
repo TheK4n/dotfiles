@@ -36,7 +36,7 @@ alias history='history 0'
 # shorts
 alias c='clear'
 alias q='exit 0'
-alias h='history | less'
+alias h='history'
 alias j='jobs -l'
 
 # utils
@@ -76,7 +76,7 @@ alias halt='sudo /sbin/halt'
 alias shutdown='sudo /sbin/shutdown now'
 
 alias meminfo='free -mlth'
-alias psmem='ps auxf | sort -nr -k 4 | less -R'
+alias psmem='ps auxf | sort -nr -k 4 | bash -c "$PAGER"'
 alias music='mplayer -shuffle ~/Music/*.mp3'
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
