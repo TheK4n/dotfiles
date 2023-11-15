@@ -20,7 +20,8 @@ exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/pi
 exec --no-startup-id hsetroot
 exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
 
-font xft:FiraCode 12
+set $font_size 11
+font xft:FiraCode $font_size
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -49,7 +50,7 @@ bindsym $mod+Return exec alacritty --working-directory ~
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -i -b -p "Program to run: " -fn "FiraCode:pixelsize=16"
+bindsym $mod+d exec --no-startup-id dmenu_run -i -b -p "Program to run: " -fn xft:FiraCode:size=$font_size
 
 # change focus
 bindsym $mod+h focus left

@@ -1,3 +1,6 @@
+[[ -r ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+[[ -r ~/.xprofile ]] && source ~/.xprofile
+
 session=${1:-i3}
 
 case $session in

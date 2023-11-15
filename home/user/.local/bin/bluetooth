@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bssid="$(bluetoothctl devices | dmenu -p "Devices: " -l 20 | cut -d' ' -f2)"
+bssid="$(bluetoothctl devices | dmenu -b -p "Devices: " -l 20 | cut -d' ' -f2)"
 
 exit_counter=0
 until bluetoothctl connect "$bssid"
