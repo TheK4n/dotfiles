@@ -5,9 +5,7 @@ if [ -x "$(command -v dircolors)" ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
     alias grep='grep --color=auto'
-    alias egrep='egrep --color=auto'
     alias fgrep='fgrep --color=auto'
-
     alias ls='ls -v --color=auto'
 fi
 
@@ -16,7 +14,7 @@ alias ll='ls -lhFv'
 alias la='ls -AFv'
 alias lla='ls -lhFAv'
 alias ll.='ls -lhFAv --ignore="*"'
-alias lsl='_f() { ls -lhFA --color=always "${1:=.}" | tail -n +2 | bash -c "$PAGER" ; }; _f'
+alias lsl='_f() { ls -lhFA --color=always "${1:-.}" | tail -n +2 | bash -c "$PAGER" ; }; _f'
 
 
 alias _='sudo'
@@ -30,7 +28,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .3='cd ../../..'
-alias cl='_f() { cd "${1:=$HOME}" && ls -F --color=auto ; }; _f'
+alias cl='_f() { cd "${1:-$HOME}" && ls; }; _f'
 
 alias path='echo -e ${PATH//:/\\n}'
 

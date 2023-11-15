@@ -181,7 +181,7 @@ cmd_install() {
     for target in "$@"
     do
         if target_exists "$target"; then
-            SANDBOX_PATH="$(mktemp -td "${USER:=user}.dotfiles_XXXXXXX")"
+            SANDBOX_PATH="$(mktemp -td "${USER:-user}.dotfiles_XXXXXXX")"
             export SANDBOX_PATH
             install_target "$target"
             rm -rf "$SANDBOX_PATH"

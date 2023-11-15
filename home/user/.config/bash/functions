@@ -8,7 +8,7 @@ _sod() {
 }
 
 lt() {
-    du -h "${1:=.}" 2>/dev/null | sort -h | tac
+    du -h "${1:-.}" 2>/dev/null | sort -h | tac
 }
 
 destroy() {
@@ -21,7 +21,7 @@ destroy() {
 }
 
 workon() {
-    source /opt/pythonenv/"${1:=$(basename $PWD)}"/bin/activate
+    source /opt/pythonenv/"${1:-$(basename $PWD)}"/bin/activate
 }
 
 py() {
@@ -33,7 +33,7 @@ py() {
 }
 
 ve() {
-    python3 -m virtualenv "${1:=venv}" && . "${1:=venv}/bin/activate"
+    python3 -m virtualenv "${1:-venv}" && . "${1:-venv}/bin/activate"
 }
 
 va() {
@@ -132,14 +132,19 @@ vpn() {
     )
 }
 
-# setup ssh tunnel to server $1 as proxy
-toggle-proxy() {
-    if [ -z "$http_proxy" ]; then
-        export {http,https,ftp,rsync}_proxy="socks5://127.0.0.1:8888"
-        export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
-        ssh -vCTN -D 0.0.0.0:8888 "$1" 1>/dev/null 2>&1 &
+toggle-ssh-proxy() {
+    if [ -v http_proxy ]; then
+        unset {http,https,ftp,rsync,no}_proxy
+        echo "Disabled"
     else
-        unset {http,https,ftp,rsync,no}
+        if [ -z "$1" ]; then
+            echo "Proxy ssh server hostname not specified" 1>&2
+            return 1
+        fi
+        ssh -vCTN -D 1080 "$1" 1>/dev/null 2>&1 &
+        export {http,https,ftp,rsync}_proxy="socks5://127.0.0.1:1080" && \
+        export no_proxy="localhost,127.0.0.1/8,localaddress,.localdomain.com,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12"
+        echo "Enabled"
     fi
 }
 
@@ -149,13 +154,14 @@ open() {
 }
 
 split-file() {
-    local _size
-    test -z "$2" && _size=1G || _size="$2"
     test -e "$1" || return 1
+    local _size="${2:-1G}"
 
-    test -d "$1" && \
-        (mkdir "$1.tar.gz.splitted" && cd "$1.tar.gz.splitted" && tar -cz "../$1" | split -d -b "$_size") || \
+    if [ -d "$1" ]; then
+        (mkdir "$1.tar.gz.splitted" && cd "$1.tar.gz.splitted" && tar -cz "../$1" | split -d -b "$_size")
+    else
         (mkdir "$1.splitted" && cd "$1.splitted" && split -d -b "$_size" "../$1")
+    fi
 }
 
 json() {
@@ -189,7 +195,6 @@ rmt() {
 }
 
 showtips() {
-
     TIPS_DIR="$HOME/.tips"
 
     if [ ! -d "$TIPS_DIR" ]; then
@@ -202,7 +207,7 @@ showtips() {
 }
 
 most-often-commands() {
-    history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn
+    history 0 | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn
 }
 
 # calculator
