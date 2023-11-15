@@ -4,6 +4,7 @@ alias -g ALL="&>/dev/null"
 alias -g BG="ALL &"
 alias -g ?='| grep'
 alias -g BEEP='&& beep -f 800 -l 250 -n -f 1000 -l 500 || beep -f 800 -l 250 -n -f 500 -l 500'
+alias -g RED='2> >(while read line; do printf "\033[0;31m${line}\033[0m\n"; done)'
 
 alias -s mp4='vlc'
 alias -s mp3='audacious'
