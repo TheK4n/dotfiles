@@ -173,11 +173,7 @@ cmd_list() {
 }
 
 target_exists() {
-    if [[ " ${!TARGETS[*]} " =~ " $1 " ]]; then
-        true
-    else
-        false
-    fi
+    [[ " ${!TARGETS[*]} " =~ " $1 " ]]
 }
 
 cmd_install() {
