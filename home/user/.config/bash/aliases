@@ -57,7 +57,6 @@ alias svi="sudo -E nvim"
 # net
 alias ports='ss -tlnp'
 alias wget='wget -c'
-alias ping='ping -c 5'
 alias myip='curl ipinfo.io/ip'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us 2>/dev/null'  # CLI pastebin
 alias weather='curl -4 wttr.in/$(cat) 2>/dev/null | head -n -1'  # weather by city, gets city from stdin
