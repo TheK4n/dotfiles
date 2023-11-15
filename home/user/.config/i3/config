@@ -14,7 +14,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
 
 exec_always --no-startup-id xset r rate 250 100
 exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle -option caps:escape
-exec --no-startup-id xrandr --dpi 80
 
 # wallpapers
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
@@ -196,7 +195,6 @@ bar {
         output nonprimary
         tray_output primary
         status_command exec ~/.local/bin/i3status_wrapper
-        font xft:FiraCode 13
 }
 
 # Screenshots

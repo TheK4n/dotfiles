@@ -1,6 +1,3 @@
-[[ -r ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
-
-
 session=${1:-i3}
 
 case $session in
