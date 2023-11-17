@@ -4,6 +4,7 @@ return {
     'google/vim-searchindex',
     'rbgrouleff/bclose.vim',
     'chaoren/vim-wordmotion',
+    'preservim/vim-pencil',
     {
         'windwp/nvim-autopairs',
         desc = "Auto pair brackets and tags",
@@ -28,10 +29,6 @@ return {
         config = function()
             require('colorizer').setup()
         end
-    },
-    {
-        'preservim/vimux',
-        enabled = vim.fn.executable "tmux" == 1
     },
     {
         'nvim-treesitter/nvim-treesitter',
