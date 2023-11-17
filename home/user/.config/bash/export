@@ -3,14 +3,23 @@ umask 022
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export PAGER="less -niSR -+X -+F"
+
+LESS_OPTIONS+="-nMiSR -+X -+F"
+export LESS_OPTIONS
+
+PAGER="less"
+PAGER+=" $LESS_OPTIONS"
+export PAGER
+
 export CDPATH=:~:~/code
 
 export HISTSIZE=10000
 export HISTFILESIZE=10000
+export HISTCONTROL=ignoreboth:erasedups
 export HISTTIMEFORMAT="%F %T "
 export HISTIGNORE="&:l[lsa\.]:[bf]g:exit:q:clear:c:history:h"
 
+export BROWSERCLI=w3m
 test -z "$BROWSER" && export BROWSER=firefox
 
 

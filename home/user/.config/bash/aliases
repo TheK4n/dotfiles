@@ -2,11 +2,12 @@ _f() { true ; }
 
 # colors
 if [ -x "$(command -v dircolors)" ]; then
+    export LS_OPTIONS="--color=auto"
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias ls='ls -v --color=auto'
+    alias grep='grep $LS_OPTIONS'
+    alias fgrep='fgrep $LS_OPTIONS'
+    alias ls='ls -v $LS_OPTIONS'
 fi
 
 alias l.='ls -AFv --ignore="*"'
