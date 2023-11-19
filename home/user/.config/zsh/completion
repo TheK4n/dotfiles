@@ -25,3 +25,5 @@ zstyle ':completion:*:*:extract:*' file-patterns '*.tar* *.lzma *.bz2 *.zip *.7z
 autoload bashcompinit
 bashcompinit
 
+compdef _directories _d
+compdef _files _f

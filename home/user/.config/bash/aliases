@@ -1,3 +1,4 @@
+_d() { true ; }
 _f() { true ; }
 
 # colors
@@ -15,7 +16,7 @@ alias ll='ls -lhFv'
 alias la='ls -AFv'
 alias lla='ls -lhFAv'
 alias ll.='ls -lhFAv --ignore="*"'
-alias lsl='_f() { ls -lhFA --color=always "${1:-.}" | tail -n +2 | bash -c "$PAGER" ; }; _f'
+alias lsl='_d() { ls -lhFA --color=always "${1:-.}" | tail -n +2 | bash -c "$PAGER" ; }; _d'
 
 
 alias _='sudo'
@@ -29,7 +30,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .3='cd ../../..'
-alias cl='_f() { cd "${1:-$HOME}" && ls; }; _f'
+alias cl='_d() { cd "${1:-$HOME}" && ls; }; _d'
 
 alias path='echo -e ${PATH//:/\\n}'
 
@@ -60,10 +61,10 @@ alias ports='ss -tlnp'
 alias wget='wget -c'
 alias myip='curl ipinfo.io/ip'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us 2>/dev/null'  # CLI pastebin
-alias weather='curl -4 wttr.in/$(cat) 2>/dev/null | head -n -1'  # weather by city, gets city from stdin
+alias weather='(curl -4 wttr.in/$(cat) 2>/dev/null | head -n -1) <<<'
 
 # starts web server
-alias www='python3 -m http.server 8000'
+alias www='python3 -m http.server 8080'
 
 # hardware
 alias reboot='sudo /sbin/reboot'
