@@ -27,7 +27,7 @@ die_if_invalid_path() {
 
 
 cmd_list() {
-    find "$LAYOUTS_DIR" -type f -exec basename -s .sh {} \;
+    find "$LAYOUTS_DIR" -type f,l -exec basename -s .sh {} \;
 }
 
 cmd_edit() {
