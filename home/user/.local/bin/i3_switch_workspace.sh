@@ -9,7 +9,6 @@ function gen_workspaces()
 WORKSPACE=$(gen_workspaces | rofi -dmenu -i -p "Select workspace")
 
 if [ -n "${WORKSPACE}" ]
-
 then
     i3-msg workspace "${WORKSPACE}"
 fi

@@ -51,6 +51,7 @@ bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+i exec --no-startup-id ~/.local/bin/i3_switch_workspace.sh
+bindsym $mod+n exec --no-startup-id ~/.local/bin/slm_rofi.sh
 
 # change focus
 bindsym $mod+h focus left
