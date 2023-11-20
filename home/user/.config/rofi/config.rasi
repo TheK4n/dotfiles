@@ -1,1 +1,7 @@
+configuration {
+    show-icons: true;
+    matching: "fuzzy";
+    terminal: "alacritty";
+    font: "xft:FiraCode 12";
+}
 @theme "Arc-Dark"
