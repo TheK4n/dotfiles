@@ -44,7 +44,7 @@ bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec alacritty --working-directory ~
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -113,9 +113,9 @@ set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8💬"
-set $ws9 "9🎵"
-set $ws10 "10🍿"
+set $ws8 "8💬Social"
+set $ws9 "9🎵Music"
+set $ws10 "10🍿Media"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1

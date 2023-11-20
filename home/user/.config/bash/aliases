@@ -16,7 +16,7 @@ alias ll='ls -lhFv'
 alias la='ls -AFv'
 alias lla='ls -lhFAv'
 alias ll.='ls -lhFAv --ignore="*"'
-alias lsl='_d() { ls -lhFA --color=always "${1:-.}" | tail -n +2 | bash -c "$PAGER" ; }; _d'
+alias lsl='_d() { ls -lhFA --color=always "${1:-.}" | bash -c "$PAGER" ; }; _d'
 
 
 alias _='sudo'

@@ -34,7 +34,6 @@ env:
   WINIT_X11_SCALE_FACTOR: "1"
 key_bindings:
   - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
-  - { key: F11, action: ToggleFullScreen }
 
 live_config_reload: true
 dynamic_title: true
