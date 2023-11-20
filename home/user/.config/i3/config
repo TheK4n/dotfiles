@@ -49,8 +49,10 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -i -b -p "Program to run: " -fn xft:FiraCode:size=$font_size
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+i exec --no-startup-id i3_switch_workspace.sh
+bindsym $mod+o exec --no-startup-id slm_rofi.sh
+bindsym $mod+p exec --no-startup-id power_rofi.sh
 
 # change focus
 bindsym $mod+h focus left
@@ -173,7 +175,7 @@ mode $exitmode {
         bindsym e exit
         bindsym r exec reboot
         bindsym s exec shutdown -h now
-        bindsym u exec exec systemctl suspend; mode "default"
+        bindsym u exec systemctl suspend; mode "default"
         bindsym l exec $i3lock_cmd; mode "default"
         bindsym b exec convert canvas:none PNG:- | feh -YF -; mode "default"
 

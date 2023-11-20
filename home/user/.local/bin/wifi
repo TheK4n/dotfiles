@@ -2,6 +2,6 @@
 
 set -eo pipefail
 
-bssid="$(nmcli -f BSSID,SSID,SIGNAL,RATE,BARS,SECURITY dev wifi list | sed -n '1!p' | dmenu -b -p "WiFi: " -l 20 | cut -d' ' -f1)"
-pass="$(echo "" | dmenu -b -p "Password: ")"
+bssid="$(nmcli -f BSSID,SSID,SIGNAL,RATE,BARS,SECURITY dev wifi list | sed -n '1!p' | rofi -dmenu -p "WiFi: " -l 20 | cut -d' ' -f1)"
+pass="$(echo "" | rofi -dmenu -p "Password: ")"
 nmcli device wifi connect "$bssid" "password" "$pass"
