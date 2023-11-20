@@ -49,7 +49,8 @@ bindsym $mod+Return exec alacritty --working-directory ~
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons -theme gruvbox-dark
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
+bindsym $mod+i exec --no-startup-id ~/.local/bin/i3_switch_workspace.sh
 
 # change focus
 bindsym $mod+h focus left
