@@ -1,0 +1,14 @@
+
+# Local
+## 192.168.50.1 router.home
+## 192.168.50.2 router2.home
+
+## 192.168.50.10 files.home
+## 192.168.50.11 builder.home
+## 192.168.50.12 printer.home
+
+## 192.168.50.20 workstation.home
+## 192.168.50.21 phone.home
+
+# Network
+# 91.91.91.91 home
