@@ -4,12 +4,8 @@ umask 022
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-LESS_OPTIONS+="-nMiSR -+X -+F"
-export LESS_OPTIONS
-
-PAGER="less"
-PAGER+=" $LESS_OPTIONS"
-export PAGER
+export PAGER="less"
+export LESS="-nMiSR -+X -+F"
 
 export CDPATH=:~:~/code
 
