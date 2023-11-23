@@ -1,6 +1,5 @@
 # screen layout
 exec --no-startup-id ~/.screenlayout/default.sh
-set $SecMon "HDMI-0"
 
 for_window [tiling] border pixel 3
 smart_borders on
@@ -215,11 +214,11 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 workspace $ws1 output primary
 workspace $ws2 output primary
 workspace $ws3 output primary
-workspace $ws9 output $SecMon
-workspace $ws10 output $SecMon
+workspace $ws9 output nonprimary
+workspace $ws10 output nonprimary
 
 workspace hide1 output primary
-workspace hide2 output $SecMon
+workspace hide2 output nonprimary
 bindsym $mod+q exec --no-startup-id i3-msg workspace hide1; workspace hide2
 
 no_focus [title="^Peek preview$"]
