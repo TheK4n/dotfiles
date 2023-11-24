@@ -116,9 +116,7 @@ mcd() {
 ## sudo usermod -aG wireguard $USER
 vpn() {
     local STATUS SERVICE CONFIG CONFIGFILE
-    CONFIG="$1"
-
-    test -z "$CONFIG" && CONFIG="wg0"
+    CONFIG="${1:-wg0}"
 
     CONFIGFILE="/etc/wireguard/$CONFIG.conf"
 

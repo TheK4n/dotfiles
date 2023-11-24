@@ -32,7 +32,7 @@ declare -A TARGETS=(
 
 _die() {
     echo "$0: $1" >&2
-    exit "$2"
+    exit $2
 }
 
 test "$0" = "./install" || _die "Error: Please, run this file from root of dotfiles, like this './install.sh TARGET" 1
