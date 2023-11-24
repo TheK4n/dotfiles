@@ -1,21 +1,31 @@
-function SET_TERM_KEYMAP(bufnr, key, cmd)
+
+local function set_term_keymap(key, cmd)
+    local opts = { noremap = true, silent = true }
     local key_string = string.format([[<Leader>%s]], key)
     local cmd_string = string.format([[<cmd>%s<CR>]], cmd)
-    vim.api.nvim_buf_set_keymap(bufnr, 't', key_string, cmd_string, { noremap = true })
+    vim.api.nvim_set_keymap('t', key_string, cmd_string, opts)
 end
+
+local function set_term_keymaps()
+    set_term_keymap('t', 'ToggleTerm')
+    set_term_keymap('qa', 'qa!')
+    set_term_keymap('qq', 'bd!')
+end
+
+
 return {
     "akinsho/toggleterm.nvim",
     config = function()
-        local terminal_default = require('toggleterm.terminal').Terminal:new({
-            direction = 'horizontal',
-            on_open = function(term)
-                SET_TERM_KEYMAP(term.bufnr, 't', 'close')
-                SET_TERM_KEYMAP(term.bufnr, 'qa', 'qa!')
-                SET_TERM_KEYMAP(term.bufnr, 'qq', 'bd!')
-            end
+        vim.api.nvim_create_autocmd('TermEnter', {
+            pattern = 'term://*toggleterm#*',
+            callback = set_term_keymaps
         })
 
-        function _TERMINAL_DEFAULT_TOGGLE()
+        local terminal_default = require('toggleterm.terminal').Terminal:new({
+            direction = 'horizontal',
+        })
+
+        function _TERMINAL_TOGGLE()
             terminal_default:toggle()
         end
 
@@ -26,6 +36,6 @@ return {
         })
     end,
     keys = {
-        {"<Leader>t", "<cmd>lua _TERMINAL_DEFAULT_TOGGLE()<CR>"},
+        {"<Leader>t", "<cmd>lua _TERMINAL_TOGGLE()<CR>"},
     }
 }
