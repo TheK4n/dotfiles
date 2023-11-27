@@ -41,11 +41,12 @@
     hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn](%G?) %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --color=always
     history = hist --all
     hs = hist -n 10
+    last = log -1 HEAD
+    today = hist --since=midnight
     df = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative | fzf | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
     type = cat-file -t
     dump = cat-file -p
     unstage = "reset HEAD --"
-    last = log -1 HEAD
 
     # edit conflicted file on merge
     edit-unmerged = "!$EDITOR $(git ls-files --unmerged | cut -f2 | sort -u)"
