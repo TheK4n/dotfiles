@@ -3,8 +3,6 @@
 fpath=(~/.zfunc $fpath)
 autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
-compdef _files mcd
-compdef _poetry poetry
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -18,8 +16,6 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-# zstyle ':completion:*:*:workon:*' command 'ls -la /opt/pythonenv/' 
 zstyle ':completion:*:*:extract:*' file-patterns '*.tar* *.lzma *.bz2 *.zip *.7z'
 
 autoload bashcompinit
@@ -27,3 +23,4 @@ bashcompinit
 
 compdef _directories _d
 compdef _files _f
+compdef _directories mcd
