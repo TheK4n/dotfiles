@@ -1,0 +1,10 @@
+[Unit]
+Description=Disable capslock
+
+[Service]
+ExecStart=sh -c "dumpkeys | sed s/Caps_Lock/Control/ | loadkeys"
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+After=multi-user.target
