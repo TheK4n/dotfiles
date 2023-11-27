@@ -37,52 +37,12 @@ Config files for:
     <img src=".assets/prompt.png" alt="Prompt">
 </p>
 
-### i3
-
-
-| Feature                 |                        Shortcut                         |
-|:------------------------|:-------------------------------------------------------:|
-| Full Screen             |                    <kbd>PrtScr</kbd>                    |
-| Selection               |          <kbd>Shift</kbd> + <kbd>PrtScr</kbd>           |
-| Active Window           |          <kbd>Super</kbd> + <kbd>PrtScr</kbd>           |
-| Clipboard Full Screen   |           <kbd>Ctrl</kbd> + <kbd>PrtScr</kbd>           |
-| Clipboard Selection     | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>PrtScr</kbd>  |
-| Clipboard Active Window | <kbd>Ctrl</kbd> + <kbd>Super</kbd> + <kbd>PrtScr</kbd>  |
-
-
-### ZSH global aliases
-
-| Alias                   |                      Equals                      | Description                 |
-|:------------------------|:-------------------------------------------------|:----------------------------|
-| `git diff L`            | `git diff \| less -R`                            | View stdout                 |
-| `cat main.py HL py`     | `cat main.py \| highlight -O ansi --syntax py`   | Highlight syntax            |
-| `redis-server BG`       | `redis-server &>/dev/null &`                     | Run command in background   |
-
-
-You can add your files to the `~/.subbash/bashrc.d` directory for bash or `~/.subzsh/zshrc.d` directory for zsh so that they automatically run in ascending order when you open a terminal.\
+You can add your files to the `~/.config/bash/bashrc.d` directory for bash or `~/.config/zsh/zshrc.d` directory for zsh so that they automatically run in ascending order when you open a terminal.\
 Example:\
-`~/.subbash/bashrc.d/01_hello.sh`
+`~/.config/bash/bashrc.d/01_hello.sh`
 ```bash
 echo "Hello $USER!"
 ```
-
-### VIM shortcuts
-
-| Command                 |  Description                                        |
-|:-----------------------:|:----------------------------------------------------|
-| <kbd>,ff</kbd>          | Project files search by Telescope                   |
-| <kbd>,fg</kbd>          | Search words in project                             |
-| <kbd>,eh</kbd>          | Show hiden symbols like tabs                        |
-| <kbd>,l</kbd>           | Line number styles                                  |
-| <kbd>,c</kbd>           | Highlight cursor line                               |
-| <kbd>,/</kbd>           | Toggle search highlight                             |
-| <kbd>,qq</kbd>          | Delete current buffer                               |
-| <kbd>,qa</kbd>          | Close all without saving                            |
-| <kbd>,t</kbd>           | Tagbar                                              |
-| <kbd>,rr</kbd>          | Run script in new tab (python, go, preview markdown)|
-| <kbd>,rs</kbd>          | Run script in new tab by shebang                    |
-| <kbd>,rf</kbd>          | Format file (go, rust)                              |
-
 
 <a id="chapter-1"></a>
 ## Installation
@@ -95,10 +55,14 @@ cd dotfiles
 
 
 ## Installation script
+Per-user dotfiles "package" manager
 
 ### Features
 1. Installing files from dotfiles/home/user to $HOME
 2. Uninstalling installed files
+3. Check installation integrity
+4. Transaction based installation
+5. Do not overwrite your configs
 
 ### Dependencies
 * bash

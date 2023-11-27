@@ -54,10 +54,10 @@
     add-unmerged = "!git add $(git ls-files --unmerged | cut -f2 | sort -u)"
 
 [github]
-    user = "TheK4n"
-    email = "djvlad967891@gmail.com"
+    user = "thek4n"
+    email = "thek4n@yandex.ru"
 
 [user]
-    name = "TheK4n"
-    email = "djvlad967891@gmail.com"
+    name = "thek4n"
+    email = "thek4n@yandex.ru"
     signingkey = "thek4n"
