@@ -27,7 +27,6 @@ set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
@@ -36,6 +35,23 @@ bindsym XF86AudioPrev exec playerctl previous
 
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+
+
+bindsym $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0                        ## Hold to talk
+bindsym --release $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1              ## Release to mute
+
+bindsym $mod+Shift+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym XF86PickupPhone exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0               ## Hold to talk
+bindsym --release XF86PickupPhone exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1     ## Release to mute
+
+bindsym XF86Go exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0                        ## Hold to talk, x1carb11
+bindsym --release XF86Go exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1              ## Release to mute, x1carb11
+
+
+bindsym $mod+XF86AudioMicMute exec --no-startup-id pactl list short sources | awk '/input.*RUNNING/ {system("pactl set-source-mute " $1 " toggle")}'     ## Find and mute mics
+
 
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
@@ -95,11 +111,6 @@ bindsym $mod+slash focus mode_toggle
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# focus the parent container
-bindsym $mod+a focus parent
-# focus the child container
-bindsym $mod+z focus child
-
 # split in horizontal orientation
 bindsym $mod+b split h
 # split in vertical orientation
@@ -107,9 +118,9 @@ bindsym $mod+v split v
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Browser"
-set $ws2 "2: Code"
-set $ws3 "3: Code"
+set $ws1 "1 Browser"
+set $ws2 "2  Code"
+set $ws3 "3  Code"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -142,32 +153,35 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+bindsym $mod+u workspace prev
+bindsym $mod+Shift+u workspace next
 
 # resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym $mod+r mode "default"
+        bindsym p mode "resize_precise"
 
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
+mode "resize_precise" {
+        bindsym h resize shrink width 1 px or 1 ppt
+        bindsym j resize grow height 1 px or 1 ppt
+        bindsym k resize shrink height 1 px or 1 ppt
+        bindsym l resize grow width 1 px or 1 ppt
+
+        bindsym $mod+r mode "default"
+        bindsym p mode "resize"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
 set $exitmode "Power: [e]xit, [r]eboot, [s]hutdown, s[u]spend, [l]ock, [b]lack"
 mode $exitmode {
@@ -188,9 +202,6 @@ bindsym $mod+x mode $exitmode
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
 
 bar {
         output primary
