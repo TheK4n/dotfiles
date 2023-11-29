@@ -3,14 +3,17 @@
 set -ueo pipefail
 shopt -s nullglob
 
-readonly TARGET_PATH="$HOME"
+declare TARGET_PATH DOTFILES_ROOT SUB
 
-readonly DOTFILES_ROOT="$(pwd)"
-readonly SUB="$DOTFILES_ROOT/home/user"
+TARGET_PATH="$HOME"
+DOTFILES_ROOT="$(pwd)"
+SUB="$DOTFILES_ROOT/home/user"
+
+readonly TARGET_PATH DOTFILES_ROOT SUB
 export SUB
 
 
-declare -A TARGETS=(
+declare -r -A TARGETS=(
     ["bash"]=".config/bash .bashrc .profile"
     ["zsh"]="%bash .config/zsh .zshrc .zprofile .zlogout .inputrc"
     ["tmux"]=".tmux.conf"
