@@ -34,3 +34,10 @@ fi
 if [ -d "$HOME/.go" ] ; then
     export GOPATH="$HOME/.go"
 fi
+
+for TMPDIR in "$TMPDIR" "$TMP" /tmp /var/tmp
+do
+    test -d "$TMPDIR" && break
+done
+
+export TMPDIR

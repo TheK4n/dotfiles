@@ -3,13 +3,10 @@
 set -ueo pipefail
 shopt -s nullglob
 
-declare TARGET_PATH DOTFILES_ROOT SUB
+declare -r TARGET_PATH="$HOME"
+declare -r DOTFILES_ROOT="$PWD"
+declare -r SUB="$DOTFILES_ROOT/home/user"
 
-TARGET_PATH="$HOME"
-DOTFILES_ROOT="$(pwd)"
-SUB="$DOTFILES_ROOT/home/user"
-
-readonly TARGET_PATH DOTFILES_ROOT SUB
 export SUB
 
 
