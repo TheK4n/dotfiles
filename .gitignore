@@ -4,7 +4,7 @@ home/user/.config/nvim/plugin
 home/user/.config/nvim/spell
 
 home/user/.config/bash/bashrc.d/*
-!home/user/config/bash/bashrc.d/.gitkeep
+!home/user/.config/bash/bashrc.d/.gitkeep
 home/user/.config/zsh/zshrc.d/*
 !home/user/.config/zsh/zshrc.d/.gitkeep
 
