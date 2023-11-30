@@ -126,7 +126,7 @@ vpn() {
 
         systemctl --quiet is-active "$SERVICE" && \
             (sudo systemctl stop "$SERVICE" && echo DOWN) || \
-            (sudo systemctl start "$SERVICE" && ip -br a | grep wg0 | awk '{print $1":\t"$3}')
+            (sudo systemctl start "$SERVICE" && ip -br a | grep "$CONFIG" | awk '{print $1":\t"$3}')
     )
 }
 
