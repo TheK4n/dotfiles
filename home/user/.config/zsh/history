@@ -11,7 +11,7 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
-export HISTORY_IGNORE='(cd|c|q|exit|l[sal.]#( *)#|[bf]g#( *)#|..|lsl#( *)#|ll[a.]#( *)#)'
+export HISTORY_IGNORE='(cd|c|q|exit|l[sal.]|[bf]g#( *)#|..|lsl|ll[a.]|cd ..)'
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
