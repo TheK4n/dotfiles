@@ -1,17 +1,25 @@
 
 # History configurations
 export HISTFILE=~/.zsh_history
-export HISTSIZE=1000
-export SAVEHIST=2000
+export HISTSIZE=10000
+export SAVEHIST=20000
 setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
-#setopt share_history         # share command history data
+setopt share_history          # share command history data
 
-HISTORY_IGNORE="(exit|q|c|..|l[l,s,a,.])"
+export HISTORY_IGNORE='(cd|c|q|exit|l[sal.]#( *)#|[bf]g#( *)#|..|lsl#( *)#|ll[a.]#( *)#)'
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
+
+zshaddhistory() {
+  emulate -L zsh
+  ## uncomment if HISTORY_IGNORE
+  ## should use EXTENDED_GLOB syntax
+  setopt extendedglob
+  [[ ${1::-1} != ${~HISTORY_IGNORE} ]]
+}
