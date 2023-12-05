@@ -131,15 +131,20 @@ vpn() {
 }
 
 toggle-ssh-proxy() {
-    if [ -v http_proxy ]; then
+    SSH_PROXY_CONTROL_FILE="$XDG_RUNTIME_DIR/ssh_$1_proxy.control" 
+
+    if [ -z "$1" ]; then
+        echo "Proxy ssh server hostname not specified" 1>&2
+        return 1
+    fi
+
+    if [ -e "$SSH_PROXY_CONTROL_FILE" ]; then
         unset {http,https,ftp,rsync,no}_proxy
+        ssh -S "$SSH_PROXY_CONTROL_FILE" -O exit "$1"
+        unset SSH_PROXY_PID
         echo "Disabled"
     else
-        if [ -z "$1" ]; then
-            echo "Proxy ssh server hostname not specified" 1>&2
-            return 1
-        fi
-        ssh -vCTN -D 1080 "$1" 1>/dev/null 2>&1 &
+        ssh -nCTN -S "$SSH_PROXY_CONTROL_FILE" -D 1080 "$1"
         export {http,https,ftp,rsync}_proxy="socks5://127.0.0.1:1080" && \
         export no_proxy="localhost,127.0.0.1/8,localaddress,.localdomain.com,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12"
         echo "Enabled"
