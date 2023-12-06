@@ -1,6 +1,5 @@
-
-_so () {
-    [ -r "$1" ] && source "$1"
+_so() {
+    [ -r "$1" ] && [ -f "$1" ] && source "$1"
 }
 
 if [[ $0 == *bash ]]; then
@@ -13,7 +12,7 @@ if [[ $- == *i* ]]; then
     _so "$HOME/.config/bash/aliases"
     _so "$HOME/.config/bash/functions"
     _so "$HOME/.config/bash/completion"
-    _so "$HOME/.config/bash/hosts/$HOST"
+    _so "$HOME/.config/bash/hosts/$HOSTNAME"
 fi
 
 

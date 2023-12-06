@@ -1,8 +1,8 @@
 _sod() {
-    if [ -d "$1" ] && [ -n "$(ls "$1"/ 2>/dev/null)" ]; then
-        for FILENAME in $(ls "$1"/ | sort -n)
+    if [ -d "$1" ] && [ -n "$(ls "$1")" ]; then
+        for FILENAME in $(ls "$1" | sort -n)
         do
-            source "$1"/"$FILENAME"
+            source "$1/$FILENAME"
         done
     fi
 }
