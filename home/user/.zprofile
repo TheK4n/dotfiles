@@ -1,5 +1,6 @@
 if [[ "$TTY" =~ /dev/tty* ]]; then
     setterm -blength=0
+    setfont cyr-sun16
 fi
 
 
