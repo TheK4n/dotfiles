@@ -1,7 +1,7 @@
 [core]
     excludesfile = ~/.config/git/ignore
     editor = "$EDITOR"
-    pager = "$PAGER -F"
+    pager = "$PAGER -+C -F"
     fileMode = false
     hooksPath = ~/.config/git/hooks
 

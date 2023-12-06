@@ -11,7 +11,7 @@ export SUB
 
 
 declare -r -A TARGETS=(
-    ["bash"]=".config/bash .bashrc .profile"
+    ["bash"]=".config/bash .bashrc .profile .lesskey"
     ["zsh"]="%bash .config/zsh .zshrc .zprofile .zlogout .inputrc"
     ["tmux"]=".tmux.conf"
     ["alacritty"]=".config/alacritty"
