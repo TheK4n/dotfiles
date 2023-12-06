@@ -4,16 +4,17 @@ _so () {
 }
 
 if [[ $0 == *bash ]]; then
-    _so "$HOME"/.config/bash/export
-    _so "$HOME"/.config/bash/shopt
+    _so "$HOME/.config/bash/export"
+    _so "$HOME/.config/bash/shopt"
 fi
 
 if [[ $- == *i* ]]; then
-    _so "$HOME"/.config/bash/prompt
-    _so "$HOME"/.config/bash/aliases
-    _so "$HOME"/.config/bash/functions
-    _so "$HOME"/.config/bash/completion
+    _so "$HOME/.config/bash/prompt"
+    _so "$HOME/.config/bash/aliases"
+    _so "$HOME/.config/bash/functions"
+    _so "$HOME/.config/bash/completion"
+    _so "$HOME/.config/bash/hosts/$HOST"
 fi
 
 
-_sod "$HOME"/.config/bash/bashrc.d
+_sod "$HOME/.config/bash/bashrc.d"
