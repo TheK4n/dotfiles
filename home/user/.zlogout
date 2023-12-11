@@ -1,1 +1,1 @@
-[ -x /usr/bin/clear ] && /usr/bin/clear
+command -v clear >/dev/null && clear
