@@ -2,4 +2,4 @@
 # useradd -md /home/sandbox -s $0 sandbox
 # usermod -aG docker sandbox
 # echo "$0" | sudo tee -a /etc/shells  # for pam
-exec docker run --rm -it --name sandbox --network none alpine
+exec docker run --rm -it --name sandbox -v sandbox:/root -w /root --network none alpine
