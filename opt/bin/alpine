@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# useradd -md /home/sandbox -s /opt/bin/alpine sandbox
-# usermod -aG docker sandbox
-exec docker run --rm -it alpine
