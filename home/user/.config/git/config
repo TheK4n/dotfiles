@@ -43,7 +43,7 @@
     hs = hist -n 10
     last = log -1 HEAD
     today = hist --since=midnight
-    df = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative | fzf | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
+    df = "!git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative | fzf +m | awk '{print $1}' | xargs -I {} git diff {}^ {}"
     type = cat-file -t
     dump = cat-file -p
     unstage = "reset HEAD --"
