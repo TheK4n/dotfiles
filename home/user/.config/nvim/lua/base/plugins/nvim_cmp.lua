@@ -53,22 +53,6 @@ local function setup_cmp()
         }, {
         }),
     })
-
-    cmp.setup.cmdline({ '/', '?' }, {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = 'buffer' }
-      }
-    })
-
-    cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-        { name = 'path' }
-      }, {
-        { name = 'cmdline' }
-      })
-    })
 end
 
 return {
@@ -82,15 +66,9 @@ return {
             'hrsh7th/cmp-nvim-lsp',
         },
         config = setup_cmp,
-        keys = {
-            
-        },
     },
     {
         'neovim/nvim-lspconfig',
-        keys = {
-          
-        },
     },
     {
         'L3MON4D3/LuaSnip',
@@ -102,13 +80,11 @@ return {
             vim.g.snips_email = 'thek4n@yandex.com'
             vim.g.snips_github = 'https://github.com/thek4n'
 
-
             local function jump(val)
                 return function()
                     ls.jump(val)
                 end
             end
-
 
             local map = vim.keymap.set
             map({'i', 's'}, '<C-n>', jump(1))
