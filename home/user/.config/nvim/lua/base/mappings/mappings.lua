@@ -14,9 +14,9 @@ local function create_function_tabdo(command)
 end
 
 -- Toggle line highlighting
-map('n', '<Leader>c', create_function_tabdo('set cursorline!'), opts)
+map('n', '<Leader>hc', create_function_tabdo('set cursorline!'), opts)
 
-map('n', '<Leader>/',
+map('n', '<Leader>h/',
     function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
     opts)
 
@@ -43,7 +43,7 @@ map('n', '-', '<C-x>', opts)
 map({"n", "v"}, [[\]], ',', opts)
 
 -- Select all
-map('n', '<C-a>', 'gg<S-v>G', opts)
+map('n', '<C-a>', 'ggVG', opts)
 
 
 -- Scroll tabs
@@ -61,7 +61,7 @@ map("n", '<Leader>qq', '<cmd>bd!<CR>', opts)
 map("n", '<Leader>qa', '<cmd>qa!<CR>', opts)
 
 
-map("n", '<Leader>eh', '<cmd>set list!<CR>', opts)
+map("n", '<Leader>he', '<cmd>set list!<CR>', opts)
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
@@ -70,13 +70,12 @@ map("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true}
 
 
 -- Save from root
-vim.api.nvim_create_user_command('Sw', [[execute 'silent! write !SUDO_ASKPASS=$(command -v vim_askpass_helper_python) sudo -A tee % >/dev/null']], {})
-
+vim.api.nvim_create_user_command('W', [[execute 'silent! write !SUDO_ASKPASS=vim_askpass_helper_python sudo -A tee % >/dev/null' <bar> edit!]], {})
+vim.cmd([[autocmd FileChangedRO * set readonly!]])
 
 
 -- Toggle line number style
 function toggle_number_style()
-
     local opt = vim.opt
     local number = opt.number["_value"]
     local relativenumber = opt.relativenumber["_value"]
@@ -97,12 +96,12 @@ function toggle_number_style()
 end
 
 -- Toggle line number style
-map('n', '<Leader>l', create_function_tabdo('lua toggle_number_style()'), opts)
+map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'), opts)
 
 
 
 local function set_trouble_keymap(key, cmd)
-    map("n", string.format("<Leader>x%s", key), string.format("<cmd>TroubleToggle %s<CR>", cmd), opts)
+    map("n", string.format("<space>x%s", key), string.format("<cmd>TroubleToggle %s<CR>", cmd), opts)
 end
 
 set_trouble_keymap("x", "")
@@ -111,9 +110,16 @@ set_trouble_keymap("d", "document_diagnostics") -- diagnostic of current file
 
 
 local function set_gitsigns_keymap(key, cmd)
-    map("n", string.format("<Leader>g%s", key), string.format("<cmd>Gitsigns %s<CR>", cmd), opts)
+    map("n", string.format("<space>g%s", key), string.format("<cmd>Gitsigns %s<CR>", cmd), opts)
 end
 
 set_gitsigns_keymap('p', 'preview_hunk') -- show diff
 set_gitsigns_keymap('b', 'blame_line') -- show author, hash, date and message of current line commit
 set_gitsigns_keymap('n', 'next_hunk') -- go to next unstaged changes
+set_gitsigns_keymap('N', 'prev_hunk') -- go to prev unstaged changes
+set_gitsigns_keymap('r', 'reset_hunk') -- reset hunk under cursor
+set_gitsigns_keymap('h', 'toggle_linehl') -- line highlighting
+
+
+map("n", "<Leader>pl", "<cmd>Lazy<CR>")
+map("n", "<Leader>pm", "<cmd>Mason<CR>")
