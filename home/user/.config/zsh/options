@@ -72,6 +72,7 @@ bindkey -M viins '^U' kill-whole-line
 bindkey -M viins '\e.' insert-last-word
 bindkey -M vicmd '^K' up-line-or-history
 bindkey -M vicmd '^J' down-line-or-history
+bindkey '^[[Z' reverse-menu-complete
 
 
 insert-sudo() {
