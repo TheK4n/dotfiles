@@ -1,6 +1,6 @@
 #!/bin/sh
-if [ -e PKGBUILD ]
-then
+set -e
+if command -v makepkg >/dev/null && [ -e PKGBUILD ]; then
     makepkg --printsrcinfo > .SRCINFO
     git add .SRCINFO
     exit
