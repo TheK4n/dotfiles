@@ -11,12 +11,13 @@ export SUB
 
 
 declare -r -A TARGETS=(
-    ["bash"]=".config/bash .bashrc .profile .lesskey"
+    ["bash"]=".config/bash .bashrc .profile"
     ["zsh"]="%bash .config/zsh .zshrc .zprofile .zlogout .inputrc"
     ["tmux"]=".tmux.conf"
     ["alacritty"]=".config/alacritty"
     ["nvim"]=".config/nvim .local/bin/vim_askpass_helper .local/bin/vim_askpass_helper_python"
     ["ssh"]=""
+    ["less"]=".lesskey"
     ["git"]=".config/git"
     ["ranger"]=".config/ranger"
     ["gpg"]=""
