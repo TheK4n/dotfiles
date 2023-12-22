@@ -1,0 +1,5 @@
+cat > "$HOME/.config/bash/bashrc.d/01_tmux.sh" << EOF
+if command -v tmux 1>/dev/null && [[ -z "\$TMUX" ]] && [[ ! "\$TERM" =~ tmux ]]; then
+    exec tmux new
+fi
+EOF
