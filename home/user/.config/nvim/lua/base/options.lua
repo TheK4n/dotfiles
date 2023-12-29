@@ -13,7 +13,7 @@ opt.relativenumber = true
 opt.clipboard:append { 'unnamed' }
 opt.clipboard:append { 'unnamedplus' }
 
-opt.shortmess:append { s = true, I = true}  -- disable startup message
+opt.shortmess:append { s = true, I = true }  -- disable startup message
 
 opt.shell = 'zsh'
 
