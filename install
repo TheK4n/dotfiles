@@ -62,9 +62,7 @@ _compare_sandbox_to_home() {
 }
 
 _merge_sandbox_to_home() {
-    set +e
-    cp -RTnP "$SANDBOX_PATH" "$TARGET_PATH"
-    set -e
+    cp -RTnP "$SANDBOX_PATH" "$TARGET_PATH" || true
 }
 
 __install_from_sandbox() {
