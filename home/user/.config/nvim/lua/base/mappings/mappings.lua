@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
 
 vim.g.mapleader = ','
@@ -13,55 +12,60 @@ local function create_function_tabdo(command)
     end
 end
 
--- Toggle line highlighting
-map('n', '<Leader>hc', create_function_tabdo('set cursorline!'), opts)
+map('n', '<Leader>hc', create_function_tabdo('set cursorline!'),
+    {desc = "Toggle line highlighting"})
 
 map('n', '<Leader>h/',
     function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
-    opts)
+    {desc = "Toggle search highlighting"})
 
-map('i', 'jf', '<ESC>', opts)
-map('i', 'оа', '<ESC>', opts)
+map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
+    {desc = "Toggle line number style"})
 
-map('n', '<Enter>', 'o<ESC>', opts)
-map('n', '<Space>', 'O<ESC>', opts)
+map('i', 'jf', '<ESC>')
+map('i', 'оа', '<ESC>')
+
+map('n', '<Enter>', 'o<ESC>')
+map('n', '<Space>', 'O<ESC>')
 
 -- x to blackhole
-map({'n', 'v'}, 'x', '"_x', opts)
-map('n', '<bs>', '"_X', opts)
+map({'n', 'v'}, 'x', '"_x')
+map('n', '<bs>', '"_X')
 
 
 -- Put without overwrite yanked text
-map('x', 'p', 'P', opts)
+map('x', 'p', 'P')
 
 
 -- Increment/decrement
-map('n', '+', '<C-a>', opts)
-map('n', '-', '<C-x>', opts)
+map('n', '+', '<C-a>')
+map('n', '-', '<C-x>')
 
 -- map \ to prev finding
-map({"n", "v"}, [[\]], ',', opts)
+map({"n", "v"}, [[\]], ',')
 
 -- Select all
-map('n', '<C-a>', 'ggVG', opts)
+map('n', '<C-a>', 'ggVG')
 
 
 -- Scroll tabs
-map("n", '<C-l>', vim.cmd.tabnext, opts)
-map("n", '<C-h>', vim.cmd.tabprev, opts)
+map("n", '<C-l>', vim.cmd.tabnext)
+map("n", '<C-h>', vim.cmd.tabprev)
 
 
 -- Open file under cursor in new tab
 map("n", 'gf', '<C-w>gf')
 
 
--- Kill current buffer
-map("n", '<Leader>qq', '<cmd>bd!<CR>', opts)
--- Quick exit without saving
-map("n", '<Leader>qa', '<cmd>qa!<CR>', opts)
+map("n", '<Leader>qq', '<cmd>bd!<CR>',
+    {desc = "Kill current buffer"})
+
+map("n", '<Leader>qa', '<cmd>qa!<CR>',
+    {desc = "Exit without saving"})
 
 
-map("n", '<Leader>he', '<cmd>set list!<CR>', opts)
+map("n", '<Leader>he', '<cmd>set list!<CR>',
+    {desc = "Show hidden symbols"})
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
@@ -95,13 +99,11 @@ function toggle_number_style()
     end
 end
 
--- Toggle line number style
-map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'), opts)
 
 
 
 local function set_trouble_keymap(key, cmd)
-    map("n", string.format("<space>x%s", key), string.format("<cmd>TroubleToggle %s<CR>", cmd), opts)
+    map("n", string.format("<space>x%s", key), string.format("<cmd>TroubleToggle %s<CR>", cmd))
 end
 
 set_trouble_keymap("x", "")
@@ -110,7 +112,7 @@ set_trouble_keymap("d", "document_diagnostics") -- diagnostic of current file
 
 
 local function set_gitsigns_keymap(key, cmd)
-    map("n", string.format("<space>g%s", key), string.format("<cmd>Gitsigns %s<CR>", cmd), opts)
+    map("n", string.format("<space>g%s", key), string.format("<cmd>Gitsigns %s<CR>", cmd))
 end
 
 set_gitsigns_keymap('p', 'preview_hunk') -- show diff
@@ -121,5 +123,8 @@ set_gitsigns_keymap('r', 'reset_hunk') -- reset hunk under cursor
 set_gitsigns_keymap('h', 'toggle_linehl') -- line highlighting
 
 
-map("n", "<Leader>pl", "<cmd>Lazy<CR>")
-map("n", "<Leader>pm", "<cmd>Mason<CR>")
+map("n", "<Leader>pl", "<cmd>Lazy<CR>",
+    {desc = "Package manager"})
+
+map("n", "<Leader>pm", "<cmd>Mason<CR>",
+    {desc = "LSP Manager"})

@@ -3,9 +3,6 @@ return {
     event = { "VeryLazy" },
     enabled = vim.fn.executable("deno") == 1,
     ft = {'markdown'},
-    keys = {
-        { '<Leader>rr', "<cmd>PeekOpen<CR>" }
-    },
     build = 'deno task --quiet build:fast',
     config = function()
         local peek = require('peek')
@@ -40,5 +37,12 @@ return {
             vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
             vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
         end
+
+        vim.api.nvim_create_autocmd("FileType", {
+                pattern = 'markdown', callback = function()
+                    vim.keymap.set("n", "<Leader>rr", "<cmd>PeekOpen<CR>")
+                end
+            }
+        )
     end,
 }
