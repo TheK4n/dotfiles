@@ -22,7 +22,7 @@ alias lsl='_d() { ls -lhFA --color=always "${1:-.}" | $PAGER ; }; _d'
 alias _='sudo'
 alias root='sudo -i TMOUT=450'
 
-alias rm='rm -ir'
+alias rm='rm -Ivr --one-file-system'
 alias mkdir='mkdir -pv'
 
 alias cd..='cd ..'
