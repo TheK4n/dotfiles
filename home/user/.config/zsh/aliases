@@ -1,5 +1,6 @@
 alias -g L='| $PAGER'
 alias -g HL='| highlight -O ansi -S '
+alias -g JSON='| json HL json'
 alias -g ALL="&>/dev/null"
 alias -g BG="ALL &"
 alias -g ?='| grep'
