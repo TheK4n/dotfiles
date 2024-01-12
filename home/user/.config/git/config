@@ -4,6 +4,13 @@
     pager = "$PAGER -+C -F"
     fileMode = false
     hooksPath = ~/.config/git/hooks
+    whitespace = fix,trailing-space,cr-at-eol
+    autocrlf = input
+
+[i18n]
+    commitEncoding = utf-8
+    logOutputEncoding = utf-8
+
 
 [init]
     defaultBranch = master    
@@ -25,10 +32,23 @@
 [advice]
     addEmptyPathspec = false
 
+[log]
+    abbrevCommit = true
+    showSignature = true
+
+[apply]
+    whitespace = fix
+
+[diff]
+    mnemonicPrefix = true
+    suppressBlankEmpty = true
+    rename = copy
+    submodule = short
+
 [alias]
     a = "!git ls-files --exclude-standard -m --others -t | fzf -m --bind ctrl-a:toggle-all | cut -d' ' -f2 | xargs git add"
-    d = diff
-    ds = diff --staged
+    d = diff --color-words
+    ds = diff --staged --colors-only
     dno = diff --name-only
     co = checkout
     ci = commit
@@ -53,6 +73,7 @@
 
     # add conflicted file on merge
     add-unmerged = "!git add $(git ls-files --unmerged | cut -f2 | sort -u)"
+    remove-remote-tag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 }; f"
 
 [github]
     user = "thek4n"
@@ -62,3 +83,20 @@
     name = "thek4n"
     email = "thek4n@yandex.ru"
     signingkey = "thek4n"
+
+[url "https://github.com/"]
+    insteadOf = "gh:"
+
+[url "git@github.com:"]
+    pushInsteadOf = "https://github.com/"
+    pushInsteadOf = "http://github.com/"
+    pushInsteadOf = "gh:"
+
+[url "https://gist.github.com/"]
+    insteadOf = "gist:"
+
+[url "git@gist.github.com:"]
+    pushInsteadOf = "https://gist.github.com/"
+    pushInsteadOf = "http://gist.github.com/"
+    pushInsteadOf = "gist:"
+
