@@ -27,14 +27,6 @@ if [ -d "$HOME/.npm-global/bin" ] ; then
     export PATH="$HOME/.npm-global/bin:$PATH"
 fi
 
-if [ -d "$HOME/.go/bin" ] ; then
-    export PATH="$HOME/.go/bin:$PATH"
-fi
-
-if [ -d "$HOME/.go" ] ; then
-    export GOPATH="$HOME/.go"
-fi
-
 for TMPDIR in "$TMPDIR" "$TMP" /tmp /var/tmp
 do
     test -d "$TMPDIR" && break
