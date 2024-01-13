@@ -48,7 +48,7 @@
 [alias]
     a = "!git ls-files --exclude-standard -m --others -t | fzf -m --bind ctrl-a:toggle-all | cut -d' ' -f2 | xargs git add"
     d = diff --color-words
-    ds = diff --staged --colors-only
+    ds = diff --staged --color-words
     dno = diff --name-only
     co = checkout
     ci = commit
