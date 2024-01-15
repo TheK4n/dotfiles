@@ -1,7 +1,6 @@
 local opt = vim.opt
 
 
-
 opt.ruler = true
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
@@ -20,23 +19,16 @@ opt.shell = 'zsh'
 opt.ttimeoutlen = 50
 opt.timeoutlen = 500
 
-vim.cmd([[
-    filetype plugin indent on
-]])
-
-vim.cmd([[
-    syntax enable
-]])
 
 opt.compatible = false
 
 opt.hidden = true
 
-opt.expandtab = true
+opt.expandtab = true  -- spaces instead of tab
 opt.smarttab = true
-opt.tabstop = 4
+opt.tabstop = 4  -- 1 tab = .tabstop spaces
 opt.softtabstop = 4
-opt.shiftwidth = 4
+opt.shiftwidth = 4  -- width of 1 tab in spaces
 opt.autoindent = true
 opt.smartindent = true
 opt.showtabline = 2
@@ -96,11 +88,9 @@ opt.ffs = 'unix,mac'
 opt.path:append { '**' } -- Finding files - Search down into subfolders
 
 
-vim.cmd([[
-    let &t_SI.="\e[5 q"
-    let &t_SR.="\e[3 q"
-    let &t_EI.="\e[1 q"
-]])
+vim.g.t_SI = [[\e[5 q]]
+vim.g.t_SR = [[\e[3 q]]
+vim.g.t_EI = [[\e[1 q]]
 
 -- SI - режим вставки
 -- SR - режим замены
