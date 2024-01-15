@@ -59,8 +59,6 @@ bindkey -M viins 'jf' vi-cmd-mode
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^[[3;5~' kill-word                       # ctrl + Supr
 bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[H' beginning-of-line                  # home
 bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo                               # shift + tab undo last action
@@ -73,6 +71,8 @@ bindkey -M viins '\e.' insert-last-word
 bindkey -M vicmd '^K' up-line-or-history
 bindkey -M vicmd '^J' down-line-or-history
 bindkey '^[[Z' reverse-menu-complete
+bindkey "^[[A~" history-beginning-search-backward
+bindkey "^[[B~" history-beginning-search-forward
 
 
 insert-sudo() {
