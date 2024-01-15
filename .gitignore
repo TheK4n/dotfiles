@@ -22,3 +22,4 @@ home/user/.gnupg/*
 lazy-lock.json
 
 home/user/.config/ranger/plugins
+home/user/.termux/shell

@@ -35,23 +35,21 @@ opt.hidden = true
 opt.expandtab = true
 opt.smarttab = true
 opt.tabstop = 4
-
-
-opt.cursorline = true
 opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.autoindent = true
 opt.smartindent = true
+opt.showtabline = 2
+
+opt.cursorline = true
 opt.wrap = false
 
 opt.ttyfast = true
 opt.autoread = true
 
-
 opt.errorbells = false
 opt.visualbell = false
 opt.showcmd = true
-opt.showtabline = 2
 
 opt.ignorecase = true
 opt.smartcase = true -- if search line hasn`t Upper case chars - ignore case search, else case-sensivity search
