@@ -16,9 +16,9 @@ end
 
 function detect_indent_type()
     if vim.bo.expandtab then
-        return "indent: " .. vim.bo.tabstop .. "s"
+        return vim.bo.shiftwidth .. " spaces"
     else
-        return "indent: " .. 1 .. "t = " .. vim.bo.tabstop .. "s"
+        return vim.bo.shiftwidth / vim.bo.tabstop .. " tabs (" .. vim.bo.tabstop .. ")"
     end
 end
 
