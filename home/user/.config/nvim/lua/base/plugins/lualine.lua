@@ -15,11 +15,10 @@ function get_formatted_virtual_env()
 end
 
 function detect_indent_type()
-    local shiftwidth = vim.bo.shiftwidth
     if vim.bo.expandtab then
-        return shiftwidth .. " spaces"
+        return "indent: " .. vim.bo.tabstop .. "s"
     else
-        return shiftwidth .. " tab"
+        return "indent: " .. 1 .. "t = " .. vim.bo.tabstop .. "s"
     end
 end
 

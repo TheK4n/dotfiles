@@ -29,9 +29,9 @@ opt.hidden = true
 
 opt.expandtab = true  -- spaces instead of tab
 opt.smarttab = true
-opt.tabstop = 4  -- 1 tab = .tabstop spaces
+opt.tabstop = 4  -- 1 tab appears number spaces
 opt.softtabstop = 4
-opt.shiftwidth = 4  -- width of 1 tab in spaces
+opt.shiftwidth = vim.bo.tabstop  -- insert tab or shift inserting .shiftwidth*.tabstop spaces or .shiftwidth/.tabstop tabs
 opt.autoindent = true
 opt.smartindent = true
 opt.showtabline = 2
