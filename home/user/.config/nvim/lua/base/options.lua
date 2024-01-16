@@ -15,6 +15,7 @@ opt.clipboard:append { 'unnamedplus' }
 opt.shortmess:append { s = true, I = true }  -- disable startup message
 
 opt.cmdheight = 0
+vim.wo.signcolumn = "yes"
 
 opt.shell = 'zsh'
 
