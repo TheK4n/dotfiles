@@ -12,9 +12,9 @@ opt.relativenumber = true
 opt.clipboard:append { 'unnamed' }
 opt.clipboard:append { 'unnamedplus' }
 
-opt.shortmess:append { s = true, I = true }  -- disable startup message
+opt.shortmess:append{a = true, s = true, I = true, c = true, S = true }  -- disable startup message
 
-opt.cmdheight = 0
+opt.cmdheight = 1
 vim.wo.signcolumn = "yes:2"
 
 opt.shell = 'zsh'
