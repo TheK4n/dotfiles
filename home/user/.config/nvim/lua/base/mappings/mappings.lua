@@ -46,6 +46,7 @@ map({"n", "v"}, [[\]], ',')
 
 -- Select all
 map('n', '<C-a>', 'mvggVG')
+map('v', '<C-a>', '<Esc>`v')
 
 
 -- Scroll tabs
