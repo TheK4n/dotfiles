@@ -19,6 +19,8 @@ map('n', '<Leader>h/',
     function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
     {desc = "Toggle search highlighting"})
 
+map('n', '/', ':set hlsearch<CR>/')
+
 map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
     {desc = "Toggle line number style"})
 
