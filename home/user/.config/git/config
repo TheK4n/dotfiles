@@ -33,7 +33,6 @@
 
 [log]
     abbrevCommit = true
-    showSignature = true
 
 [apply]
     whitespace = fix
