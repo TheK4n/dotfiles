@@ -209,4 +209,3 @@ case "$executed_command" in
     *) shift;        cmd_install "$executed_command" "$@" ;;
 esac
 exit 0
-
