@@ -1,2 +1,44 @@
-#!/usr/bin/env bash
-echo -e "SETTITLE vim\nOPTION default-prompt=[sudo] password for $USER:\nGETPIN" | pinentry --display :0 2>/dev/null | grep ^D | cut -d" " -f2-
+#!/usr/bin/env python3
+
+import os
+import tkinter as tk
+from tkinter import Entry, Label
+
+
+class App:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("vim")
+        self.root.attributes('-type', 'dialog')
+
+        self.create_label()
+        self.create_widget_get_password()
+        self.create_button_ok()
+
+    def mainloop(self):
+        self.root.mainloop()
+
+    def __event_get(self, _):
+        print(self.widget.get())
+        self.root.quit()
+
+    def create_label(self):
+        label_text = f"[sudo] password for {os.getlogin()}:"
+        user_password = Label(self.root, text = label_text)
+        user_password.grid(row = 1, column = 1)
+
+    def create_widget_get_password(self):
+        self.widget = Entry(self.root, show="*", width=15)
+        self.widget.grid(row = 1, column = 2)
+        self.widget.focus_set()
+
+    def create_button_ok(self):
+        btn = tk.Button(self.root, text="OK")
+        btn.bind("<Button-1>", self.__event_get)
+        self.root.bind("<Return>", self.__event_get)
+        btn.grid(row = 1, column = 3)
+
+
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()
