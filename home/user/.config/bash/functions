@@ -131,7 +131,7 @@ vpn() {
 }
 
 toggle-ssh-proxy() {
-    SSH_PROXY_CONTROL_FILE="$XDG_RUNTIME_DIR/ssh_$1_proxy.control" 
+    SSH_PROXY_CONTROL_FILE="$XDG_RUNTIME_DIR/ssh_$1_proxy.control"
 
     if [ -z "$1" ]; then
         echo "Proxy ssh server hostname not specified" 1>&2
@@ -216,4 +216,9 @@ most-often-commands() {
 # calculator
 = () {
     echo "$*" | bc -l
+}
+
+# Disable tmux on remote machine
+ssht() {
+    ssh -t "$1" 'TMUX=NO $SHELL -l'
 }
