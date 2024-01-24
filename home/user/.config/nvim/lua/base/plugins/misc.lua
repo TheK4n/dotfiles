@@ -8,9 +8,10 @@ return {
     {
         'windwp/nvim-autopairs',
         desc = "Auto pair brackets and tags",
-        config = function()
-            require("nvim-autopairs").setup()
-        end
+        event = "InsertEnter",
+        opts = {
+            disable_in_macro = true,
+        }
     },
     {
         'windwp/nvim-ts-autotag',
