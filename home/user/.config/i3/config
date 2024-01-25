@@ -57,6 +57,7 @@ bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 focus_follows_mouse no
+mouse_warping none
 
 # start a terminal
 bindsym $mod+Return exec alacritty
