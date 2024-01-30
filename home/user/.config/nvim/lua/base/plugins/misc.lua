@@ -52,6 +52,10 @@ return {
         end
     },
     {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    },
+    {
         'folke/trouble.nvim',
         dependencies = { 'kyazdani42/nvim-web-devicons' },
         config = function()
