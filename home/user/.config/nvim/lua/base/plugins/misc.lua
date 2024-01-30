@@ -1,5 +1,4 @@
 return {
-    'tpope/vim-surround',
     'tpope/vim-repeat',
     'google/vim-searchindex',
     'rbgrouleff/bclose.vim',
@@ -12,6 +11,14 @@ return {
         opts = {
             disable_in_macro = true,
         }
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup()
+        end
     },
     {
         'windwp/nvim-ts-autotag',
