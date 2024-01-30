@@ -13,7 +13,7 @@ local function setup_cmp()
 
     cmp.setup({
       completion = {
-        autocomplete = false
+        autocomplete = {'TextChanged'}
       },
       snippet = {
         expand = function(args)

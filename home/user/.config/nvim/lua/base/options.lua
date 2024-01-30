@@ -22,6 +22,7 @@ opt.shell = 'zsh'
 opt.ttimeoutlen = 50
 opt.timeoutlen = 500
 
+opt.pumheight = 15
 
 opt.compatible = false
 
