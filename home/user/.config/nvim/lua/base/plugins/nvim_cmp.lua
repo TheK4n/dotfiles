@@ -44,14 +44,25 @@ local function setup_cmp()
         completion = cmp.config.window.bordered(border_opts),
         documentation = cmp.config.window.bordered(border_opts),
       },
-
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          require "cmp-under-comparator".under,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
       sources = cmp.config.sources({
-          { name = 'nvim_lsp', priority = 1000 },
-          { name = 'luasnip', priority = 750 },
-          { name = 'buffer', priority = 500 },
+          { name = 'nvim_lsp', priority = 1250 },
+          { name = 'luasnip', priority = 1000 },
+          { name = 'buffer', priority = 750 },
+          { name = "dotenv", priority = 500 },
           { name = 'path', priority = 250 },
-        }, {
-        }),
+      }),
     })
 end
 
@@ -94,6 +105,8 @@ return {
             "hrsh7th/cmp-cmdline",
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
+            'lukas-reineke/cmp-under-comparator',
+            'SergioRibera/cmp-dotenv'
         },
         config = setup_cmp,
     },
