@@ -15,7 +15,7 @@ opt.clipboard:append { 'unnamedplus' }
 opt.shortmess:append{a = true, s = true, I = true, c = true, S = true }  -- disable startup message
 
 opt.cmdheight = 1
-vim.wo.signcolumn = "yes:2"
+vim.wo.signcolumn = "yes:1"
 
 opt.shell = 'zsh'
 
@@ -138,3 +138,5 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         vim.cmd('silent! loadview 1')
     end,
 })
+
+vim.opt.foldcolumn = "1"
