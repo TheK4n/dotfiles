@@ -125,12 +125,16 @@ vim.cmd.highlight({ "DiagnosticHint", "guifg=Grey" })
 opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 
 
--- remember line number
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd("BufWinLeave", {
     pattern = {"*"},
     callback = function()
-        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-            vim.api.nvim_exec("normal! g'\"",false)
-        end
+        vim.cmd.mkview(1)
     end
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = {"*"},
+    callback = function()
+        vim.cmd('silent! loadview 1')
+    end,
 })
