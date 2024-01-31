@@ -126,14 +126,14 @@ opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKL
 
 
 vim.api.nvim_create_autocmd("BufWinLeave", {
-    pattern = {"*"},
+    pattern = {"*.*"},
     callback = function()
         vim.cmd.mkview(1)
     end
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = {"*"},
+    pattern = {"*.*"},
     callback = function()
         vim.cmd('silent! loadview 1')
     end,
