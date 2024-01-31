@@ -24,7 +24,7 @@ map('n', '<Leader>h/',
 map('n', '/', ':set hlsearch<CR>/')
 
 -- copy selection to search line
-map('v', '<C-f>', '"fy:set hlsearch<CR>/<C-r>f<CR>')
+map('v', '<C-f>', '"fy:set hlsearch<CR>/\\V<C-r>f/C<CR>')
 
 map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
     {desc = "Toggle line number style"})
