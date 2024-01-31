@@ -65,7 +65,7 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun -m -4
 bindsym $mod+i exec --no-startup-id i3_switch_workspace.sh
 bindsym $mod+o exec --no-startup-id slm_rofi.sh
 bindsym $mod+p exec --no-startup-id power_rofi.sh
