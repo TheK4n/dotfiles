@@ -5,9 +5,7 @@ shopt -s nullglob
 
 declare -r TARGET_PATH="$HOME"
 declare -r DOTFILES_ROOT="$PWD"
-declare -r SUB="$DOTFILES_ROOT/home/user"
-
-export SUB
+declare -xr SUB="$DOTFILES_ROOT/home/user"
 
 
 declare -r -A TARGETS=(
