@@ -58,6 +58,11 @@ opt.colorcolumn = '81'
 opt.scrolloff = 7
 
 
+opt.formatoptions:remove("c")
+opt.formatoptions:remove("r")
+opt.formatoptions:remove("o")
+
+
 opt.termguicolors = true
 
 opt.background = 'dark'
@@ -112,9 +117,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
-
--- dont auto commenting new lines
-vim.api.nvim_create_autocmd("BufEnter", {pattern = "*", command = [[set fo-=c fo-=r fo-=o]]})
 
 vim.cmd.highlight({ "DiagnosticError", "guifg=Grey" })
 vim.cmd.highlight({ "DiagnosticWarn", "guifg=Grey" })
