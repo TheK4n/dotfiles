@@ -58,9 +58,15 @@ opt.colorcolumn = '81'
 opt.scrolloff = 7
 
 
-opt.formatoptions:remove("c")
-opt.formatoptions:remove("r")
-opt.formatoptions:remove("o")
+-- disable paste comment on new line
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = {"*"},
+    callback = function()
+        opt.formatoptions:remove("c")
+        opt.formatoptions:remove("r")
+        opt.formatoptions:remove("o")
+    end,
+})
 
 
 opt.termguicolors = true
