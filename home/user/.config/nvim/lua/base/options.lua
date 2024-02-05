@@ -55,7 +55,7 @@ opt.mousehide = true
 opt.mouse = 'a'
 
 opt.colorcolumn = '81'
-opt.scrolloff = 7
+opt.scrolloff = 999
 
 
 -- disable paste comment on new line
