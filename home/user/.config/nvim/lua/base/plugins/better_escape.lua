@@ -4,6 +4,7 @@ return {
         require("better_escape").setup({
             mapping = {'jf', 'оа'},
             timeout = vim.o.timeoutlen,
+            keys = '<ESC>`^'
         })
     end,
 }

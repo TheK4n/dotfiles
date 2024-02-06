@@ -32,8 +32,8 @@ map('n', '<C-f>', ':set hlsearch<CR>/\\V<C-r><C-w>\\C<CR>')
 map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
     {desc = "Toggle line number style"})
 
-map('i', 'jf', '<ESC>')
-map('i', 'оа', '<ESC>')
+map('i', 'jf', '<ESC>`^')
+map('i', 'оа', '<ESC>`^')
 
 map('n', '<Enter>', 'o<ESC>')
 map('n', '<Space>', 'O<ESC>')
