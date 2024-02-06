@@ -27,6 +27,7 @@ declare -r -A TARGETS=(
     ["psql"]=".psqlrc"
     ["docker"]=".docker/cli-plugins"
     ["ipython"]=".ipython/profile_default/ipython_config.py"
+    ["gdb"]=".config/gdb"
 )
 
 _die() {
