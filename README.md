@@ -62,7 +62,7 @@ Per-user dotfiles "package" manager
 2. Uninstalling installed files
 3. Check installation integrity
 4. Transaction based installation
-5. Do not overwrite your configs
+5. Does not overwrite your configs
 
 ### Dependencies
 * bash
