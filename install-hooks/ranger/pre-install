@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-echo "sudo pacman -S highlight ttf-joypixels noto-fonts-emoji ueberzug poppler"

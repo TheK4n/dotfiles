@@ -50,31 +50,7 @@ echo "Hello $USER!"
 ```bash
 git clone https://github.com/TheK4n/dotfiles
 cd dotfiles
-./install zsh nvim ...
+stow -R --target ~/.config home/user/.config
 ```
-
-
-## Installation script
-Per-user dotfiles "package" manager
-
-### Features
-1. Installing files from dotfiles/home/user to $HOME
-2. Uninstalling installed files
-3. Check installation integrity
-4. Transaction based installation
-5. Does not overwrite your configs
-
-### Dependencies
-* bash
-* coreutils
-* diffutils
-* grep
-
-
-### Optional dependencies
-* git
-* wget
-* unzip
-
 
 <h1 align="center"><a href="#top">▲</a></h1>

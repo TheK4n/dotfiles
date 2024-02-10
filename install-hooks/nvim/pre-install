@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-echo "sudo pacman -S npm ctags fzf glow; mkdir ~/.npm-global; npm config set prefix '~/.npm-global'"
