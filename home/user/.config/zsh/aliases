@@ -1,7 +1,7 @@
 alias -g L='| $PAGER'
 alias -g HL='| highlight -O ansi -S '
 alias -g JSON='| json HL json'
-alias -g DI='| colordiff'
+alias -g DI='| diff'
 alias -g ?='| grep'
 
 alias -g Q="&>/dev/null"
