@@ -117,3 +117,6 @@ elif [[ "$OSTYPE" == "darwin" ]]; then
 fi
 
 alias black='convert canvas:none PNG:- | feh -YF -'
+
+# :)
+alias PINK='beep -f 234 -l 550 -n -f 350 -l 450 -n -f 194 -l 450 -n -f 328 -l 450'
