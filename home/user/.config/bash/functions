@@ -103,7 +103,7 @@ extract() {
 
 mcd() {
     if [ -z "$1" ]; then
-        cd "$(mktemp -d)"
+        cd "$(mktemp -td "${USER:-user}.XXXX")"
     else
         mkdir -p "$1" && cd "$1"
     fi
