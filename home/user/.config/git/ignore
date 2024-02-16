@@ -24,3 +24,11 @@ db.sqlite3
 
 
 nohup.out
+
+*.cmake
+CMakeCache.txt
+CMakeFiles
+
+*.a
+*.so
+*.o
