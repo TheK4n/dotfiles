@@ -44,7 +44,7 @@ map('n', '<bs>', '"_X')
 
 
 -- Put without overwrite yanked text
-map('x', 'p', 'P')
+map({'n', 'v'}, 'p', 'P')
 
 
 -- Increment/decrement
