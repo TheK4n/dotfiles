@@ -11,5 +11,6 @@ elif command -v tmux &>/dev/null && [[ $(tty) = "/dev/tty2" ]] && [[ ! "$TERM" =
 fi
 
 if [[ -n "$SSH_CLIENT" ]] && [[ ! "$TERM" =~ tmux ]] && [[ -z "$TMUX" ]]; then
+    export SSH_CLIENT  # for prompt
     exec tmux new-session -s ssh -A
 fi
