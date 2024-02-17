@@ -30,3 +30,4 @@ map_filetype('rust', '<Leader>rr', 'cargo run')
 -- map_filetype('rust', '<Leader>rf', 'cargo fmt -p') -- fix (without open terminal)
 
 map_filetype('c', '<Leader>rr', 'gcc % && ./a.out')
+map_filetype('cpp', '<Leader>rr', 'g++ % && ./a.out')
