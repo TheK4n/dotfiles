@@ -67,6 +67,7 @@
     type = cat-file -t
     dump = cat-file -p
     unstage = "reset HEAD --"
+    count = "rev-list --count --all"
 
     # edit conflicted file on merge
     edit-unmerged = "!$EDITOR $(git ls-files --unmerged | cut -f2 | sort -u)"
