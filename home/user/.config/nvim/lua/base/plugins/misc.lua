@@ -1,4 +1,5 @@
 return {
+    'HiPhish/rainbow-delimiters.nvim',
     'tpope/vim-repeat',
     'google/vim-searchindex',
     'rbgrouleff/bclose.vim',
