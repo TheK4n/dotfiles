@@ -16,7 +16,7 @@ local function map_filetype(filetype, key, cmd)
     )
 end
 
--- map_filename('manpage', '<Leader>rr', 'man -P cat -l %') -- fix (by filenamej)
+-- map_filename('manpage', '<Leader>rr', 'man -P cat -l %') -- fix (by filename)
 
 map_filetype('*', '<Leader>rs', '$(head -1 % | cut -c 3-) %')
 
@@ -24,10 +24,8 @@ map_filetype('python', '<Leader>rr', 'python3 %')
 map_filetype('python', '<Leader>rt', 'pytest %')
 
 map_filetype('go', '<Leader>rr', 'go run')
--- map_filetype('go', '<Leader>rf', 'go fmt') -- fix (without open terminal)
 
 map_filetype('rust', '<Leader>rr', 'cargo run')
--- map_filetype('rust', '<Leader>rf', 'cargo fmt -p') -- fix (without open terminal)
 
 map_filetype('c', '<Leader>rr', 'gcc % && ./a.out')
 map_filetype('cpp', '<Leader>rr', 'g++ % && ./a.out')
