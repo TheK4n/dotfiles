@@ -9,7 +9,8 @@ declare -xr SUB="$DOTFILES_ROOT/home/user"
 
 
 declare -r -A TARGETS=(
-    ["bash"]=".config/bash .bashrc .profile"
+    ["colors"]=".config/terminal-colors.d"
+    ["bash"]=".config/bash .bashrc .profile %colors"
     ["zsh"]="%bash .config/zsh .zshenv .inputrc"
     ["tmux"]=".tmux.conf"
     ["alacritty"]=".config/alacritty"
