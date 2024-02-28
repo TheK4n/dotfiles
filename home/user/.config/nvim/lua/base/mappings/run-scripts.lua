@@ -16,7 +16,7 @@ local function map_filetype(filetype, key, cmd)
     )
 end
 
--- map_filename('manpage', '<Leader>rr', 'man -P cat -l %') -- fix (by filename)
+map_filetype('nroff', '<Leader>rr', 'man -P cat -l %')
 
 map_filetype('*', '<Leader>rs', '$(head -1 % | cut -c 3-) %')
 
