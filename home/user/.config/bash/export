@@ -18,13 +18,8 @@ export HISTIGNORE="&:l[lsa\.]:[bf]g:exit:q:clear:c:history:h"
 export BROWSERCLI=w3m
 test -z "$BROWSER" && export BROWSER=firefox
 
-
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [ -d "$HOME/.npm-global/bin" ] ; then
-    export PATH="$HOME/.npm-global/bin:$PATH"
 fi
 
 for TMPDIR in "$TMPDIR" "$TMP" /tmp /var/tmp
