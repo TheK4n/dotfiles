@@ -222,3 +222,19 @@ most-often-commands() {
 ssht() {
     ssh -t "$1" 'TMUX=NO $SHELL -l'
 }
+
+q() {
+    if [[ -n "$TMUX" ]]; then
+        local REPLY
+        echo -n "Tmux session - you really want to exit? [Y/n] "
+        read REPLY
+
+        if [[ "$REPLY" == [Yy]* ]]; then
+            exit 0
+        else
+            echo "Press 'Ctrl+b d' to detach tmux session"
+            return 0
+        fi
+    fi
+    exit 0
+}
