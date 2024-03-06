@@ -20,17 +20,12 @@ bindkey -v
 
 # Change cursor shape for different vi modes.
 zle-keymap-select() {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[2 q'
-
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-    
-  fi
+    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+        echo -ne '\e[2 q'
+    elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] ||
+         [[ ${KEYMAP} = '' ]]    || [[ $1 = 'beam' ]]; then
+        echo -ne '\e[5 q'
+    fi
 }
 
 zle -N zle-keymap-select
@@ -73,6 +68,8 @@ bindkey -M vicmd '^J' down-line-or-history
 bindkey '^[[Z' reverse-menu-complete
 # bindkey "^[[A~" history-beginning-search-backward
 # bindkey "^[[B~" history-beginning-search-forward
+bindkey -M viins "^H" backward-delete-char
+bindkey -M viins "^?" backward-delete-char
 
 
 insert-sudo() {
