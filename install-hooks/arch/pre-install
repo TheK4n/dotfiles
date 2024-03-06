@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
+echo 'pacman -S man-pages man-db gdb strace'
 echo 'echo "ParallelDownloads = 5" >> /etc/pacman.conf'
 echo 'sudo systemctl enable --now gpm'
