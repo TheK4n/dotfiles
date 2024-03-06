@@ -32,6 +32,8 @@ alias ....='cd ../../..'
 alias .3='cd ../../..'
 alias cl='_d() { cd "${1:-$HOME}" && ls; }; _d'
 
+alias q='exit 0'
+
 alias wp='cd $WORKING_PROJECT'
 
 alias path='echo -e ${PATH//:/\\n}'
@@ -101,12 +103,6 @@ alias drmi='docker image prune'
 
 
 # tmux
-if [[ -n "$TMUX" ]]; then
-    alias q='tmux detach'
-else
-    alias q='exit 0'
-fi
-
 alias td='tmux detach'
 
 
