@@ -99,6 +99,9 @@ alias dcd='docker-compose down'
 alias drmc='docker container prune'
 alias drmi='docker image prune'
 
+# tmux
+alias td='tmux detach'
+
 
 # clipboard
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
