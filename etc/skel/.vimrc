@@ -1,5 +1,5 @@
 set number "номер строки
-set ruler 
+set ruler
 set laststatus=2
 set encoding=utf-8 "Ставит кодировку UTF-8
 set nocompatible "Отключает обратную совместимость с Vi
@@ -34,16 +34,6 @@ set virtualedit=onemore  " allow for cursor beyond last character
 
 " f4 toggle hlsearch
 nnoremap <F4> :set invhlsearch<CR>
-
-" navigation on russian
-nmap о j
-nmap л k
-nmap р h
-nmap д l
-nmap ш i
-nmap ф a
-nmap в d
-
 
 set ffs=unix,dos,mac
 set encoding=utf8
