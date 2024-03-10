@@ -103,7 +103,7 @@ alias drmi='docker image prune'
 
 
 # tmux
-alias td='tmux detach'
+alias dt='tmux detach'
 
 
 # clipboard
