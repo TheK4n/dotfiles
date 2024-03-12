@@ -57,13 +57,14 @@
     br = branch
     bm = branch --merged
     bn = branch --no-merged
-    hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn](%G?) %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --color=always
+    hist = log --pretty=format:'%Cgreen%h %Creset%cd %Cblue[%cn](%G?) %Creset%s%C(yellow)%d%C(reset)' --graph --date=relative --decorate --color=always
     history = hist --all
     hs = hist -n 10
     hsa = hist -n 10 --all
     last = log -1 HEAD
     today = hist --since=midnight
-    df = "!git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative | fzf +m | awk '{print $1}' | xargs -I {} git diff {}^ {}"
+    df = "!git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf +m | awk '{print $1}' | xargs -I {} git diff {}^ {}"
+    fdf = "!git log --pretty=format:'%h' --date=relative | fzf --bind ctrl-/:toggle-preview --preview-window right:60% --preview=\"git diff {}^ {} --color=always\""
     type = cat-file -t
     dump = cat-file -p
     unstage = "reset HEAD --"
