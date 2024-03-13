@@ -12,57 +12,53 @@ local function setup_cmp()
     local cmp = require("cmp")
 
     cmp.setup({
-      completion = {
-        autocomplete = {'TextChanged'}
-      },
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body)
-        end,
-      },
-      mapping = {
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
+        completion = {
+            autocomplete = {'TextChanged'}
         },
-      },
-
-      window = {
-        completion = cmp.config.window.bordered(border_opts),
-        documentation = cmp.config.window.bordered(border_opts),
-      },
-      sorting = {
-        comparators = {
-          cmp.config.compare.offset,
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          require "cmp-under-comparator".under,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
+        snippet = {
+            expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+            end,
         },
-      },
-      sources = cmp.config.sources({
-          { name = 'nvim_lsp', priority = 1250 },
-          { name = 'luasnip', priority = 1000 },
-          { name = 'buffer', priority = 750 },
-          { name = "dotenv", priority = 500 },
-          { name = 'path', priority = 250 },
-      }),
+        mapping = {
+            ['<Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end, { "i", "s" }),
+            ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm {
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = false,
+            },
+        },
+        window = {
+            completion = cmp.config.window.bordered(border_opts),
+            documentation = cmp.config.window.bordered(border_opts),
+        },
+        sorting = {
+            priority_weight = 1.0,
+            comparators = {
+                cmp.config.compare.locality,
+                cmp.config.compare.recently_used,
+                cmp.config.compare.score,
+                cmp.config.compare.offset,
+                cmp.config.compare.order,
+            },
+        },
+        sources = cmp.config.sources({
+            { name = 'nvim_lsp', priority = 1000 },
+            { name = 'luasnip', priority = 750 },
+            { name = "dotenv", priority = 500 },
+            { name = 'path', priority = 250 },
+        }),
     })
 end
 
