@@ -44,7 +44,7 @@
     submodule = short
 
 [alias]
-    a = "!git ls-files --exclude-standard -m --others -t | fzf -m --bind ctrl-a:toggle-all --bind load:last --preview 'echo {} | cut -d\" \" -f2 | xargs git diff --color=always' | cut -d' ' -f2 | xargs git add"
+    a = "!git ls-files --exclude-standard -m --others -t | fzf -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs git add"
     d = diff
     di = diff
     ds = diff --staged
@@ -63,7 +63,7 @@
     hsa = hist -n 10 --all
     last = log -1 HEAD
     today = hist --since=midnight
-    df = "!git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --preview='echo {} | cut -d \" \" -f1 | xargs -I _ git diff --color=always _^ _'"
+    df = "!git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --preview='git diff --color=always {1}^ {1}'"
     type = cat-file -t
     dump = cat-file -p
     unstage = "reset HEAD --"
