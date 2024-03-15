@@ -220,5 +220,10 @@ most-often-commands() {
 
 # Disable tmux on remote machine
 ssht() {
-    ssh -t "$1" 'TMUX=NO $SHELL -l'
+    ssh -t $@ 'TMUX=NO $SHELL -l'
+}
+
+# Enable X11Forwarding and disable mux session
+sshx() {
+    ssh -X -o ControlMaster=no $@
 }
