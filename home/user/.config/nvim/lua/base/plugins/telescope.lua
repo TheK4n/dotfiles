@@ -17,6 +17,7 @@ return {
     },
     config = function()
         local telescope = require("telescope")
+        local actions = require("telescope.actions")
 
         telescope.load_extension("fzf")
 
@@ -27,6 +28,21 @@ return {
                 },
             },
             defaults = {
+                mappings = {
+                    i = {
+                        ["<C-j>"] = actions.move_selection_next,
+                        ["<C-k>"] = actions.move_selection_previous,
+                        ["<C-n>"] = actions.preview_scrolling_down,
+                        ["<C-p>"] = actions.preview_scrolling_up,
+                        ["<C-a>"] = actions.toggle_all,
+                        ["?"] = actions.which_key,
+                        ["jf"] = { "<esc>", type = "command" },
+                    },
+                    n = {
+                        ["jf"] = actions.close,
+                        ["?"] = actions.which_key,
+                    }
+                },
                 selection_caret = " ",
                 path_display = { "truncate" },
                 file_ignore_patterns = {
