@@ -67,6 +67,7 @@ alias wget='wget -c'
 alias myip='curl ipinfo.io/ip'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us 2>/dev/null'  # CLI pastebin
 alias weather='(curl -4 wttr.in/$(cat) 2>/dev/null | head -n -1) <<<'
+alias ip='ip -c'
 
 # starts web server
 alias www='python3 -m http.server 8080'
