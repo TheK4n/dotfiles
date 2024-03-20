@@ -5,7 +5,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 export PAGER="less"
-export LESS="-nCMiSRx4 -# 1 -+X -+F"
+export LESS="-nMiSRx4 -# 1 -+X -+F"
 
 export CDPATH=:~:~/code
 
