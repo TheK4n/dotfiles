@@ -27,5 +27,5 @@ map_filetype('go', '<Leader>rr', 'go run')
 
 map_filetype('rust', '<Leader>rr', 'cargo run')
 
-map_filetype('c', '<Leader>rr', 'gcc % && ./a.out')
-map_filetype('cpp', '<Leader>rr', 'g++ % && ./a.out')
+map_filetype('c', '<Leader>rr', 'gcc -o /tmp/a.out % && /tmp/a.out')
+map_filetype('cpp', '<Leader>rr', 'g++ -o /tmp/a.out % && /tmp/a.out')
