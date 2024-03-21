@@ -6,6 +6,7 @@ smart_borders on
 
 set $mod Mod4
 
+
 # screensaver
 set $i3lock_cmd "i3lock -enf -c 1e1e1e"
 exec --no-startup-id xset +dpms dpms 600 0 0
@@ -57,7 +58,7 @@ bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 focus_follows_mouse no
-mouse_warping none
+popup_during_fullscreen smart
 
 # start a terminal
 bindsym $mod+Return exec alacritty
