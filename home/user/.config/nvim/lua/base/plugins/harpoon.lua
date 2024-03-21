@@ -10,8 +10,16 @@ return {
 
         harpoon:setup()
 
-        vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
-        vim.keymap.set("n", "<leader>fh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end,
+            {desc = "Append file to session manager"}
+        )
+
+        vim.keymap.set("n", "<leader>hd", function() harpoon:list():remove() end,
+            {desc = "Remove file from session manager"}
+        )
+        vim.keymap.set("n", "<leader>fh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+            {desc = "Open session manager UI"}
+        )
 
         vim.keymap.set("n", "<A-1>", function() harpoon:list():select(1) end)
         vim.keymap.set("n", "<A-2>", function() harpoon:list():select(2) end)
