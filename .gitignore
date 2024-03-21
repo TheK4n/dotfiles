@@ -23,3 +23,6 @@ lazy-lock.json
 
 home/user/.config/ranger/plugins
 home/user/.termux/shell
+
+home/user/.tmux/*
+!home/user/.tmux/01.conf
