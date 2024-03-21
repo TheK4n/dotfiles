@@ -205,7 +205,12 @@ showtips() {
         git init "$TIPS_DIR"
     fi
 
-    cat "$TIPS_DIR"/* 2>/dev/null
+    local content
+    for filename in "$TIPS_DIR"/*
+    do
+        content="$(cat "$filename")"
+        echo "$content"
+    done
     return 0
 }
 
