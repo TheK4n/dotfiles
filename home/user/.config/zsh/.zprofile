@@ -9,7 +9,7 @@ elif [[ "$TTY" = "/dev/tty2" ]] && command -v tmux &>/dev/null && [[ ! "$TERM" =
     exec tmux new-session -s "$(basename $TTY)" -A
 fi
 
-if [[ -n "$SSH_CLIENT" ]] && [[ ! "$TERM" =~ tmux ]] && [[ -z "$TMUX" ]]; then
+if [[ -n "$SSH_CLIENT" ]] && command -v tmux &>/dev/null && [[ ! "$TERM" =~ tmux ]] && [[ -z "$TMUX" ]]; then
     export SSH_CLIENT
     exec tmux new-session -s ssh -A
 fi
