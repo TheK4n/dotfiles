@@ -17,8 +17,9 @@ return {
         vim.keymap.set("n", "<leader>hd", function() harpoon:list():remove() end,
             {desc = "Remove file from session manager"}
         )
-        vim.keymap.set("n", "<leader>fh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-            {desc = "Open session manager UI"}
+
+        vim.keymap.set("n", "<leader>fh", ":Telescope harpoon marks<CR>",
+            {desc = "Remove file from session manager"}
         )
 
         vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
@@ -58,9 +59,6 @@ return {
                 sorter = conf.generic_sorter({}),
             }):find()
         end
-
-        vim.keymap.set("n", "<leader>fh", function() toggle_telescope(harpoon:list()) end,
-            { desc = "Open harpoon window" })
 
     end
 }
