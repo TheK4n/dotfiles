@@ -28,7 +28,6 @@ do
 done
 
 export TMPDIR
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:"
 
 export FZF_DEFAULT_OPTS="\
 --bind \
