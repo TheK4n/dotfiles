@@ -1,7 +1,7 @@
 # .zshrc by TheK4n
 # https://github.com/TheK4n/dotfiles
 
-if command -v tmux &>/dev/null && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+if command -v tmux &>/dev/null && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ "$(tty)" != "/dev/tty3" ] && [[ -z "$SSH_CLIENT" ]]; then
     exec tmux
 fi
 
