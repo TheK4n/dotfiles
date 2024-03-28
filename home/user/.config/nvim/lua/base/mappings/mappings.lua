@@ -55,8 +55,8 @@ map('n', '-', '<C-x>')
 map({"n", "v"}, [[\]], ',')
 
 -- Select all
-map('n', '<C-a>', 'mvggVG')
-map('v', '<C-a>', '<Esc>`v:delmarks v<CR>', {silent = true})
+map('n', '<Space>a', 'mvggVG')
+map('v', '<Space>a', '<Esc>`v:delmarks v<CR>', {silent = true})
 
 
 -- Scroll tabs
