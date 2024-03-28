@@ -228,3 +228,9 @@ most-often-commands() {
 sshx() {
     ssh -X -o ControlMaster=no -o ControlPath=none $@
 }
+
+# Open remote tmux
+ssht() {
+    REMOTE="$1"; shift
+    ssh -t "$REMOTE" tmux -u "$@"
+}
