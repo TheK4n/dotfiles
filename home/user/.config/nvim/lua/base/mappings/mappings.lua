@@ -35,6 +35,8 @@ map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
 map('i', 'jf', '<ESC>`^')
 map('i', 'оа', '<ESC>`^')
 
+map('n', 'Ж', ':')
+
 map('n', '<Enter>', 'o<ESC>')
 map('n', '<Space>', 'O<ESC>')
 
