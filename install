@@ -91,14 +91,38 @@ execute_pre_hook() {
     _execute_hook_if_executable "$1" "pre-install"
 }
 
+recursive_execute_pre_hooks() {
+    local targetfile
+    for targetfile in ${TARGETS["$1"]}
+    do
+        if [ "${targetfile::1}" = "%" ]; then
+            recursive_execute_pre_hooks "${targetfile:1}"
+            execute_pre_hook "${targetfile:1}"
+        fi
+    done
+}
+
 execute_post_hook() {
     _execute_hook_if_executable "$1" "post-install"
 }
 
+recursive_execute_post_hooks() {
+    local targetfile
+    for targetfile in ${TARGETS["$1"]}
+    do
+        if [ "${targetfile::1}" = "%" ]; then
+            recursive_execute_post_hooks "${targetfile:1}"
+            execute_post_hook "${targetfile:1}"
+        fi
+    done
+}
+
 install_target() {
     execute_pre_hook "$1"
+    recursive_execute_pre_hooks "$1"
     _link_files_in_sandbox ${TARGETS["$1"]}
     __install_from_sandbox
+    recursive_execute_post_hooks "$1"
     execute_post_hook "$1"
 }
 
