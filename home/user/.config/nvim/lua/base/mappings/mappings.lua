@@ -66,10 +66,6 @@ map("n", '<C-l>', vim.cmd.tabnext)
 map("n", '<C-h>', vim.cmd.tabprev)
 
 
--- Open file under cursor in new tab
-map("n", 'gf', '<C-w>gf')
-
-
 map("n", '<Leader>qq', '<cmd>bd!<CR>',
     {desc = "Kill current buffer"})
 
