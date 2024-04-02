@@ -1,5 +1,5 @@
 
-function get_formatted_cwd()
+function GET_FORMATTED_CWD()
     return vim.fn.getcwd():gsub(os.getenv("HOME"), "~")
 end
 
@@ -7,14 +7,14 @@ local function get_virtual_env()
     return vim.fs.basename(os.getenv("VIRTUAL_ENV"))
 end
 
-function get_formatted_virtual_env()
+function GET_FORMATTED_VIRTUAL_ENV()
     if vim.bo.filetype == 'python' then
         return "<" .. get_virtual_env() .. ">"
     end
     return ""
 end
 
-function detect_indent_type()
+function DETECT_INDENT_TYPE()
     if vim.bo.expandtab then
         return vim.bo.shiftwidth .. " spaces"
     else
@@ -29,8 +29,15 @@ return {
             sections = {
                 lualine_a = {'mode'},
                 lualine_b = {'branch', 'diff', 'diagnostics'},
-                lualine_c = {'get_formatted_cwd()'},
-                lualine_x = {'get_formatted_virtual_env()', 'detect_indent_type()', 'filetype'},
+                lualine_c = {
+                    'GET_FORMATTED_CWD()',
+                    {
+                        'filename',
+                        file_status = true,
+                        path = 1
+                    },
+                },
+                lualine_x = {'GET_FORMATTED_VIRTUAL_ENV()', 'DETECT_INDENT_TYPE()', 'filetype'},
                 lualine_y = {'progress'},
                 lualine_z = {'location'},
               },

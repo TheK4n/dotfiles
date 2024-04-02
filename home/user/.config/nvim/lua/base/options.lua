@@ -17,7 +17,7 @@ opt.shortmess:append{a = true, s = true, I = true, c = true, S = true}  -- disab
 opt.cmdheight = 1
 vim.wo.signcolumn = "yes:1"
 
-opt.shell = 'zsh'
+opt.shell = vim.env.SHELL
 
 opt.ttimeoutlen = 50
 opt.timeoutlen = 500
@@ -28,6 +28,7 @@ opt.compatible = false
 
 opt.hidden = true
 
+-- indent
 opt.expandtab = true  -- spaces instead of tab
 opt.smarttab = true
 opt.tabstop = 4  -- 1 tab appears number spaces
@@ -35,7 +36,9 @@ opt.softtabstop = 4
 opt.shiftwidth = vim.bo.tabstop  -- insert tab or shift inserting .shiftwidth*.tabstop spaces or .shiftwidth/.tabstop tabs
 opt.autoindent = true
 opt.smartindent = true
-opt.showtabline = 2
+
+-- tabline
+opt.showtabline = 1
 
 opt.cursorline = true
 opt.wrap = false
