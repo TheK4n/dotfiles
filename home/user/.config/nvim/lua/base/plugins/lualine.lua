@@ -1,8 +1,4 @@
 
-function GET_FORMATTED_CWD()
-    return vim.fn.getcwd():gsub(os.getenv("HOME"), "~")
-end
-
 local function get_virtual_env()
     return vim.fs.basename(os.getenv("VIRTUAL_ENV"))
 end
@@ -26,11 +22,19 @@ return {
     'nvim-lualine/lualine.nvim',
     config = function()
         require("lualine").setup({
+            options = {
+                component_separators = { left = '//', right = '' },
+            },
             sections = {
                 lualine_a = {'mode'},
                 lualine_b = {'branch', 'diff', 'diagnostics'},
                 lualine_c = {
-                    'GET_FORMATTED_CWD()',
+                    {
+                        'vim.fn.getcwd()',
+                        fmt = function(str)
+                            return str:gsub(os.getenv("HOME"), "~")
+                        end
+                    },
                     {
                         'filename',
                         file_status = true,
