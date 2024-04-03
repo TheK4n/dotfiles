@@ -23,7 +23,7 @@ return {
     config = function()
         require("lualine").setup({
             options = {
-                component_separators = { left = '//', right = '' },
+                component_separators = { left = '/', right = '' },
             },
             sections = {
                 lualine_a = {'mode'},
@@ -33,18 +33,21 @@ return {
                         'vim.fn.getcwd()',
                         fmt = function(str)
                             return str:gsub(os.getenv("HOME"), "~")
-                        end
+                        end,
+                        color = { fg = 'white', gui='bold' },
+                        padding = { left = 1, right = 0 }
                     },
                     {
                         'filename',
                         file_status = true,
-                        path = 1
+                        path = 1,
+                        padding = { left = 0, right = 1 }
                     },
                 },
                 lualine_x = {'GET_FORMATTED_VIRTUAL_ENV()', 'DETECT_INDENT_TYPE()', 'filetype'},
                 lualine_y = {'progress'},
                 lualine_z = {'location'},
-              },
+            },
         })
     end,
     dependencies = { 'kyazdani42/nvim-web-devicons' }
