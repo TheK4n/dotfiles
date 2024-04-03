@@ -1,3 +1,5 @@
+# vim: ft=zsh
+
 alias -g L='| $PAGER'
 alias -g HL='| highlight -O ansi -S '
 alias -g JSON='| json HL json'
