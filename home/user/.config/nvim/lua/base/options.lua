@@ -38,7 +38,7 @@ opt.autoindent = true
 opt.smartindent = true
 
 -- tabline
-opt.showtabline = 1
+opt.showtabline = 0
 
 opt.cursorline = true
 opt.wrap = false
