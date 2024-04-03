@@ -42,7 +42,6 @@ map('n', '<Space>', 'O<ESC>')
 
 -- x to blackhole
 map({'n', 'v'}, 'x', '"_x')
-map('n', '<bs>', '"_X')
 
 
 -- Put without overwrite yanked text
@@ -78,6 +77,10 @@ map("n", '<Leader>he', '<cmd>set list!<CR>',
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
+-- Tab to go prev buffer
+map("n", "<TAB>", ":b#<CR>", {silent = true})
+
+
 -- Expand %% to dirname of current file in command line
 map("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true})
 
@@ -107,8 +110,6 @@ function toggle_number_style()
         opt.relativenumber = false
     end
 end
-
-
 
 
 local function set_trouble_keymap(key, cmd)
