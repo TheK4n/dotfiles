@@ -1,0 +1,13 @@
+[Unit]
+Description=Tmux server
+Requires=default.target
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/tmux -D
+ExecStop=/usr/bin/tmux kill-server
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
