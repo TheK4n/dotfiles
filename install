@@ -10,7 +10,7 @@ declare -xr SUB="$DOTFILES_ROOT/home/user"
 
 declare -r -A TARGETS=(
     ["colors"]=".config/terminal-colors.d"
-    ["tmux"]=".config/tmux .tmux"
+    ["tmux"]=".config/tmux .tmux .config/systemd/user"
     ["bash"]=".config/bash .bashrc .profile %tmux %colors"
     ["zsh"]="%bash .config/zsh .zshenv .inputrc"
     ["alacritty"]=".config/alacritty"
