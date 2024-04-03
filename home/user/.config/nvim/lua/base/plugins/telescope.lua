@@ -10,7 +10,7 @@ return {
         }
     },
     keys = {
-        { '<Leader><Leader>', '<cmd>Telescope buffers<CR>' },
+        { '<Leader>fb', '<cmd>Telescope buffers<CR>' },
         { '<Leader>ff', '<cmd>Telescope find_files<CR>' },
         { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
         { '<Leader>fc', '<cmd>Telescope git_commits<CR>' },
