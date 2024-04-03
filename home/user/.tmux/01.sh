@@ -11,7 +11,7 @@ if ! tmux has-session -t "$SESSION"; then
     tmux new-session -s "$SESSION" -d -n "$MAINW" -c "$WORKING_PROJECT"
     tmux send-keys -t "$SESSION:$MAINW" '$EDITOR' Enter
     tmux send-keys -t "$SESSION:$MAINW" , f f
-    tmux splitw -t "$SESSION:$MAINW" -d -h -l 35% -c '#{pane_current_path}'
+    tmux splitw -t "$SESSION:$MAINW" -d -h -l 40% -c '#{pane_current_path}'
 fi
 
 tmux switch-client -t "$SESSION"

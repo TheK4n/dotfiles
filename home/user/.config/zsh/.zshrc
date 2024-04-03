@@ -1,7 +1,12 @@
 # .zshrc by TheK4n
 # https://github.com/TheK4n/dotfiles
 
-if command -v tmux &>/dev/null && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ "$(tty)" != "/dev/tty3" ]; then
+if \
+  [ "$(tty)" != "/dev/tty3" ] && \
+  [ -z "$TMUX" ]              && \
+  [[ ! "$TERM" =~ tmux ]]     && \
+  command -v tmux &>/dev/null
+then
     exec tmux
 fi
 
