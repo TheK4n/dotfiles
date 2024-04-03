@@ -7,7 +7,11 @@ if \
   [[ ! "$TERM" =~ tmux ]]     && \
   command -v tmux &>/dev/null
 then
-    exec tmux
+    if systemctl -q --user is-active tmux; then
+        exec tmux -N -L "$USER" new
+    else
+        exec tmux
+    fi
 fi
 
 if [ -f "$ZDOTDIR/sourcer" ]; then
