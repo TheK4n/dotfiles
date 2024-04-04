@@ -27,3 +27,4 @@ home/user/.termux/shell
 home/user/.config/tmux/plugins
 home/user/.tmux/*
 !home/user/.tmux/01.sh
+!home/user/.tmux/10.sh
