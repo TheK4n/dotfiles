@@ -23,7 +23,7 @@ destroy() {
 }
 
 workon() {
-    source /opt/pythonenv/"${1:-$(basename $PWD)}"/bin/activate
+    source "/opt/pythonenv/${1:-$(basename $PWD)}/bin/activate"
 }
 
 py() {
@@ -122,23 +122,29 @@ vpn() {
 
     CONFIGFILE="/etc/wireguard/$CONFIG.conf"
 
-    test -e "$CONFIGFILE" || (echo "Config '$CONFIGFILE' not exists" >&2; return 1) && (
+    if [ ! -e "$CONFIGFILE" ]; then
+        echo "Config '$CONFIGFILE' not exists" >&2
+        return 1
+    fi
 
-        SERVICE="wg-quick@$CONFIG.service"
+    SERVICE="wg-quick@$CONFIG.service"
 
-        systemctl --quiet is-active "$SERVICE" && \
-            (sudo systemctl stop "$SERVICE" && echo DOWN) || \
-            (sudo systemctl start "$SERVICE" && ip -br a | grep "$CONFIG" | awk '{print $1":\t"$3}')
-    )
+    if systemctl --quiet is-active "$SERVICE"; then
+        sudo systemctl stop "$SERVICE"
+        echo "DOWN"
+    else
+        sudo systemctl start "$SERVICE" && ip -br a | grep "$CONFIG" | awk '{print $1":\t"$3}'
+    fi
 }
 
 toggle-ssh-proxy() {
-    SSH_PROXY_CONTROL_FILE="$XDG_RUNTIME_DIR/ssh_$1_proxy.control"
-
     if [ -z "$1" ]; then
         echo "Proxy ssh server hostname not specified" 1>&2
         return 1
     fi
+
+    SSH_PROXY_CONTROL_FILE="$XDG_RUNTIME_DIR/ssh_${1}_proxy.control"
+
 
     if [ -e "$SSH_PROXY_CONTROL_FILE" ]; then
         unset {http,https,ftp,rsync,no}_proxy
