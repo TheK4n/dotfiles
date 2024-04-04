@@ -23,7 +23,7 @@ return {
     config = function()
         require("lualine").setup({
             options = {
-                component_separators = { left = '/', right = '' },
+                component_separators = { left = '', right = '' },
             },
             sections = {
                 lualine_a = {'mode'},
@@ -32,13 +32,28 @@ return {
                     {
                         'vim.fn.getcwd()',
                         fmt = function(str)
-                            return str:gsub(os.getenv("HOME"), "~")
+                            local res = str
+
+                            res = str:gsub(os.getenv("HOME"), "~")
+
+                            return res
                         end,
                         color = { fg = 'white', gui='bold' },
                         padding = { left = 1, right = 0 }
                     },
                     {
                         'filename',
+                        fmt = function(str)
+                            local res = str
+
+                            if string.sub(res, 1, 1) == '/' then
+                                res = " " .. res
+                            else
+                                res = "/" .. res
+                            end
+
+                            return res
+                        end,
                         file_status = true,
                         path = 1,
                         padding = { left = 0, right = 1 }
