@@ -18,6 +18,10 @@ function DETECT_INDENT_TYPE()
     end
 end
 
+local function is_absolute_path(path)
+    return string.sub(path, 1, 1) == '/' or string.sub(path, 1, 1) == '~'
+end
+
 return {
     'nvim-lualine/lualine.nvim',
     config = function()
@@ -46,7 +50,7 @@ return {
                         fmt = function(str)
                             local res = str
 
-                            if string.sub(res, 1, 1) == '/' then
+                            if is_absolute_path(res) then
                                 res = " " .. res
                             else
                                 res = "/" .. res
