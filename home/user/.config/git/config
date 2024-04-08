@@ -62,6 +62,7 @@
     hs = hist -n 10
     hsa = hist -n 10 --all
     last = log -1 HEAD
+    lastd = diff HEAD^ HEAD
     today = hist --since=midnight
     df = "!git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --preview='git diff --color=always {1}^ {1}' | awk '{print $1}' | xargs -I {} git diff {}^ {}"
     type = cat-file -t
