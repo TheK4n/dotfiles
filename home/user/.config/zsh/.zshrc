@@ -8,9 +8,9 @@ if \
   command -v tmux &>/dev/null
 then
     if systemctl -q --user is-active tmux; then
-        exec tmux -N -L "$USER" new
+        exec tmux -N -L "$USER" new-session -A
     else
-        exec tmux
+        exec tmux new-session -A
     fi
 fi
 
