@@ -20,7 +20,9 @@ local plugins = {}
 
 local modules = vim.split(vim.fn.glob(vim.fn.stdpath("config") .. '/lua/*/plugins/*lua'), '\n')
 
-for i, module_path in pairs(modules) do
+local splitted_path
+local module_name
+for _, module_path in pairs(modules) do
     splitted_path = vim.split(module_path, '/')
     module_name = splitted_path[#splitted_path]:gsub(".lua", "")
 
