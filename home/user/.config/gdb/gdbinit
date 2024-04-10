@@ -196,10 +196,10 @@ define flags
 # ZF (zero) flag
     if (($eflags >> 6) & 1)
         printf "Z "
-	set $_zf_flag = 1
+    set $_zf_flag = 1
     else
         printf "z "
-	set $_zf_flag = 0
+    set $_zf_flag = 0
     end
     if (($eflags >> 4) & 1)
         printf "A "
@@ -209,18 +209,18 @@ define flags
 # PF (parity) flag
     if (($eflags >> 2) & 1)
         printf "P "
-	set $_pf_flag = 1
+    set $_pf_flag = 1
     else
         printf "p "
-	set $_pf_flag = 0
+    set $_pf_flag = 0
     end
 # CF (carry) flag
     if ($eflags & 1)
         printf "C "
-	set $_cf_flag = 1
+    set $_cf_flag = 1
     else
         printf "c "
-	set $_cf_flag = 0
+    set $_cf_flag = 0
     end
     printf "\n"
 end
@@ -419,11 +419,11 @@ define reg
     echo \033[0m
  end
 # call smallregisters
-	smallregisters
+    smallregisters
 # display conditional jump routine
-	if ($64BITS == 1)
-	 printf "\t\t\t\t"
-	end
+    if ($64BITS == 1)
+     printf "\t\t\t\t"
+    end
     dumpjump
     printf "\n"
 end
@@ -434,53 +434,53 @@ end
 define smallregisters
  if ($64BITS == 1)
 #64bits stuff
-	# from rax
-	set $eax = $rax & 0xffffffff
-	set $ax = $rax & 0xffff
-	set $al = $ax & 0xff
-	set $ah = $ax >> 8
-	# from rbx
-	set $bx = $rbx & 0xffff
-	set $bl = $bx & 0xff
-	set $bh = $bx >> 8
-	# from rcx
-	set $ecx = $rcx & 0xffffffff
-	set $cx = $rcx & 0xffff
-	set $cl = $cx & 0xff
-	set $ch = $cx >> 8
-	# from rdx
-	set $edx = $rdx & 0xffffffff
-	set $dx = $rdx & 0xffff
-	set $dl = $dx & 0xff
-	set $dh = $dx >> 8
-	# from rsi
-	set $esi = $rsi & 0xffffffff
-	set $si = $rsi & 0xffff
-	# from rdi
-	set $edi = $rdi & 0xffffffff
-	set $di = $rdi & 0xffff
+    # from rax
+    set $eax = $rax & 0xffffffff
+    set $ax = $rax & 0xffff
+    set $al = $ax & 0xff
+    set $ah = $ax >> 8
+    # from rbx
+    set $bx = $rbx & 0xffff
+    set $bl = $bx & 0xff
+    set $bh = $bx >> 8
+    # from rcx
+    set $ecx = $rcx & 0xffffffff
+    set $cx = $rcx & 0xffff
+    set $cl = $cx & 0xff
+    set $ch = $cx >> 8
+    # from rdx
+    set $edx = $rdx & 0xffffffff
+    set $dx = $rdx & 0xffff
+    set $dl = $dx & 0xff
+    set $dh = $dx >> 8
+    # from rsi
+    set $esi = $rsi & 0xffffffff
+    set $si = $rsi & 0xffff
+    # from rdi
+    set $edi = $rdi & 0xffffffff
+    set $di = $rdi & 0xffff
 #32 bits stuff
  else
-	# from eax
-	set $ax = $eax & 0xffff
-	set $al = $ax & 0xff
-	set $ah = $ax >> 8
-	# from ebx
-	set $bx = $ebx & 0xffff
-	set $bl = $bx & 0xff
-	set $bh = $bx >> 8
-	# from ecx
-	set $cx = $ecx & 0xffff
-	set $cl = $cx & 0xff
-	set $ch = $cx >> 8
-	# from edx
-	set $dx = $edx & 0xffff
-	set $dl = $dx & 0xff
-	set $dh = $dx >> 8
-	# from esi
-	set $si = $esi & 0xffff
-	# from edi
-	set $di = $edi & 0xffff
+    # from eax
+    set $ax = $eax & 0xffff
+    set $al = $ax & 0xff
+    set $ah = $ax >> 8
+    # from ebx
+    set $bx = $ebx & 0xffff
+    set $bl = $bx & 0xff
+    set $bh = $bx >> 8
+    # from ecx
+    set $cx = $ecx & 0xffff
+    set $cl = $cx & 0xff
+    set $ch = $cx >> 8
+    # from edx
+    set $dx = $edx & 0xffff
+    set $dl = $dx & 0xff
+    set $dh = $dx >> 8
+    # from esi
+    set $si = $esi & 0xffff
+    # from edi
+    set $di = $edi & 0xffff
  end
 
 end
@@ -674,15 +674,15 @@ define ddump
         else
          printf "[0x%04X:0x%08X]", $ds, $data_addr
         end
-	echo \033[34m
-	printf "------------------------"
+    echo \033[34m
+    printf "------------------------"
     printf "-------------------------------"
     if ($64BITS == 1)
      printf "-------------------------------------"
-	end
+    end
 
-	echo \033[1;34m
-	printf "[data]\n"
+    echo \033[1;34m
+    printf "[data]\n"
         echo \033[0m
         set $_count = 0
         while ($_count < $arg0)
@@ -717,36 +717,35 @@ end
 
 
 define datawin
- if ($64BITS == 1)
-    if ((($rsi >> 0x18) == 0x40) || (($rsi >> 0x18) == 0x08) || (($rsi >> 0x18) == 0xBF))
-        set $data_addr = $rsi
-    else
-        if ((($rdi >> 0x18) == 0x40) || (($rdi >> 0x18) == 0x08) || (($rdi >> 0x18) == 0xBF))
-            set $data_addr = $rdi
+    if ($64BITS == 1)
+        if ((($rsi >> 0x18) == 0x40) || (($rsi >> 0x18) == 0x08) || (($rsi >> 0x18) == 0xBF))
+            set $data_addr = $rsi
         else
-            if ((($rax >> 0x18) == 0x40) || (($rax >> 0x18) == 0x08) || (($rax >> 0x18) == 0xBF))
-                set $data_addr = $rax
+            if ((($rdi >> 0x18) == 0x40) || (($rdi >> 0x18) == 0x08) || (($rdi >> 0x18) == 0xBF))
+                set $data_addr = $rdi
             else
-                set $data_addr = $rsp
+                if ((($rax >> 0x18) == 0x40) || (($rax >> 0x18) == 0x08) || (($rax >> 0x18) == 0xBF))
+                    set $data_addr = $rax
+                else
+                    set $data_addr = $rsp
+                end
+            end
+        end
+    else
+        if ((($esi >> 0x18) == 0x40) || (($esi >> 0x18) == 0x08) || (($esi >> 0x18) == 0xBF))
+            set $data_addr = $esi
+        else
+            if ((($edi >> 0x18) == 0x40) || (($edi >> 0x18) == 0x08) || (($edi >> 0x18) == 0xBF))
+                set $data_addr = $edi
+            else
+                if ((($eax >> 0x18) == 0x40) || (($eax >> 0x18) == 0x08) || (($eax >> 0x18) == 0xBF))
+                    set $data_addr = $eax
+                else
+                    set $data_addr = $esp
+                end
             end
         end
     end
-
- else
-    if ((($esi >> 0x18) == 0x40) || (($esi >> 0x18) == 0x08) || (($esi >> 0x18) == 0xBF))
-        set $data_addr = $esi
-    else
-        if ((($edi >> 0x18) == 0x40) || (($edi >> 0x18) == 0x08) || (($edi >> 0x18) == 0xBF))
-            set $data_addr = $edi
-        else
-            if ((($eax >> 0x18) == 0x40) || (($eax >> 0x18) == 0x08) || (($eax >> 0x18) == 0xBF))
-                set $data_addr = $eax
-            else
-                set $data_addr = $esp
-            end
-        end
-    end
- end
     ddump $CONTEXTSIZE_DATA
 end
 document datawin
