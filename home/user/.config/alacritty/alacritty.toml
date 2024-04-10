@@ -15,11 +15,16 @@ action = "SpawnNewInstance"
 key = "Return"
 mods = "Control|Shift"
 
+[[keyboard.bindings]]
+action = "None"
+key = "Space"
+mods = "Control|Shift"
+
 [mouse]
 hide_when_typing = true
 
 [scrolling]
-history = 100000
+history = 10000
 multiplier = 3
 
 [window]
