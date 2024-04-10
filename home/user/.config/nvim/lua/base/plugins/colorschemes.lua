@@ -23,7 +23,7 @@ return {
         'lukas-reineke/virt-column.nvim',
         config = function()
             require("virt-column").setup({
-                virtcolumn = '+1,81'
+                virtcolumn = '81'
             })
         end
     },
