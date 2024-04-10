@@ -11,4 +11,20 @@ return {
     {
         'ellisonleao/gruvbox.nvim'
     },
+    {
+        'xiyaowong/transparent.nvim',
+        config = function()
+            require("transparent").setup({
+                exclude_groups = {'CursorLine'},
+            })
+        end
+    },
+    {
+        'lukas-reineke/virt-column.nvim',
+        config = function()
+            require("virt-column").setup({
+                virtcolumn = '+1,81'
+            })
+        end
+    },
 }

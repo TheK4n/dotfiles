@@ -57,7 +57,6 @@ opt.incsearch = true
 opt.mousehide = true
 opt.mouse = 'a'
 
-opt.colorcolumn = '81'
 opt.scrolloff = 999
 
 
@@ -90,7 +89,7 @@ opt.directory = { prefix .. "/swap//" }
 
 
 local function makeDirIfNoExists(path)
-    local path = path["_value"]
+    path = path["_value"]
     if (vim.fn.isdirectory(path) == 0) then
         vim.fn.mkdir(path, "p")
     end
