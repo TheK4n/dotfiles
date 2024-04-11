@@ -108,6 +108,9 @@ alias drmi='docker image prune'
 # tmux
 alias dt='tmux detach'
 
+# x11
+alias caps='xdotool key Caps_Lock'
+
 
 # clipboard
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
