@@ -1,3 +1,4 @@
+# vim: ft=bash
 
 umask 022
 
@@ -6,6 +7,10 @@ export VISUAL="nvim"
 
 export PAGER="less"
 export LESS="-nMiSRx4 -# 1 -+X -+F"
+
+if command -v "lesspipe.sh" &>/dev/null; then
+    export LESSOPEN="| lesspipe.sh %s"
+fi
 
 export CDPATH=:~:~/code
 

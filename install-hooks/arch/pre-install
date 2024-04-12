@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-echo 'pacman -S man-pages man-db gdb strace'
+echo 'pacman -S man-pages man-db lesspipe'
 echo 'echo "ParallelDownloads = 5\nVerbosePkgLists" >> /etc/pacman.conf'
 echo 'sudo systemctl enable --now gpm'
