@@ -140,6 +140,23 @@ map("n", "<Leader>pm", "<cmd>Mason<CR>",
     {desc = "LSP Manager"})
 
 
+local function reload_config()
+    vim.cmd.source('~/.config/nvim/init.lua')
+    vim.notify('Config reloaded...', vim.log.levels.INFO)
+end
+
+local function fetch_and_reload_config()
+    vim.fn.system('git -C ~/dotfiles pull')
+    reload_config()
+end
+
+map("n", "<Leader>pr", reload_config,
+    {desc = "Reload config"})
+
+map("n", "<Leader>pR", fetch_and_reload_config,
+    {desc = "Fetch and reload config"})
+
+
 vim.cmd(
 [[
 menu Encoding.koi8-r :e ++enc=koi8-r ++ff=unix<CR>
