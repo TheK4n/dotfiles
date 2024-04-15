@@ -18,5 +18,3 @@ alias -g BEEP='&& beep -f 800 -l 250 -n -f 1000 -l 500 || beep -f 800 -l 250 -n 
 alias -s mp4='vlc'
 alias -s mp3='audacious'
 alias -s flac='audacious'
-
-bindkey '`' autosuggest-accept

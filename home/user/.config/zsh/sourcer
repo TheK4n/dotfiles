@@ -2,14 +2,6 @@ _so() {
     [ -r "$1" ] && [ -f "$1" ] && source "$1"
 }
 
-_so /etc/zsh_command_not_found
-_so "$ZDOTDIR/options"
-_so "$ZDOTDIR/completion"
-_so "$ZDOTDIR/history"
-_so "$ZDOTDIR/prompt"
-_so "$ZDOTDIR/other"
-_so "$ZDOTDIR/plugin"
-_so "$ZDOTDIR/aliases"
 
 _so "$XDG_CONFIG_HOME/bash/export"
 _so "$XDG_CONFIG_HOME/bash/aliases"
@@ -17,5 +9,17 @@ _so "$XDG_CONFIG_HOME/bash/completion"
 _so "$XDG_CONFIG_HOME/bash/functions"
 _so "$XDG_CONFIG_HOME/bash/hosts/$HOST"
 
+
+_so /etc/zsh_command_not_found
+_so "$ZDOTDIR/options"
+_so "$ZDOTDIR/completion"
+_so "$ZDOTDIR/history"
+_so "$ZDOTDIR/prompt"
+_so "$ZDOTDIR/other"
+_so "$ZDOTDIR/aliases"
+
+_so "$ZDOTDIR/plugin"
+
+bindkey '`' autosuggest-accept
 
 _sod "$ZDOTDIR/zshrc.d"
