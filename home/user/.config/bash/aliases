@@ -110,6 +110,7 @@ alias dt='tmux detach'
 
 # x11
 alias caps='xdotool key Caps_Lock'
+alias CAPS='xdotool key Caps_Lock'
 
 
 # clipboard
