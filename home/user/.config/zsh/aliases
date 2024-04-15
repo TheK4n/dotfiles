@@ -6,6 +6,8 @@ alias -g JSON='| json HL json'
 alias -g DI='| diff'
 alias -g ?='| grep'
 
+alias -g O="1>/dev/null"
+alias -g R="2>/dev/null"
 alias -g Q="&>/dev/null"
 alias -g BG="Q &"
 
