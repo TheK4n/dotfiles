@@ -7,7 +7,7 @@ if \
   [[ ! "$TERM" =~ tmux ]]     && \
   command -v tmux &>/dev/null
 then
-    if tmux -N -L "$USER" server-info &>/dev/null; then
+    if tmux -N -L "$USER" list-sessions &>/dev/null; then
         if [ -n "$SSH_CLIENT" ]; then
             exec tmux -N -L "$USER" new-session
         else
