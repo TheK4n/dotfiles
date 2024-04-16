@@ -3,3 +3,4 @@
 echo 'pacman -S man-pages man-db lesspipe'
 echo 'echo "ParallelDownloads = 5\nVerbosePkgLists" >> /etc/pacman.conf'
 echo 'sudo systemctl enable --now gpm'
+echo 'sudo sysctl kernel.sysrq=1'
