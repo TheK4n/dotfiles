@@ -7,10 +7,18 @@ if \
   [[ ! "$TERM" =~ tmux ]]     && \
   command -v tmux &>/dev/null
 then
-    if systemctl -q --user is-active tmux; then
-        exec tmux -N -L "$USER" new-session -A
+    if tmux -N -L "$USER" server-info &>/dev/null; then
+        if [ -n "$SSH_CLIENT" ]; then
+            exec tmux -N -L "$USER" new-session
+        else
+            exec tmux -N -L "$USER" new-session -A
+        fi
     else
-        exec tmux new-session -A
+        if [ -n "$SSH_CLIENT" ]; then
+            exec tmux new-session
+        else
+            exec tmux new-session -A
+        fi
     fi
 fi
 
