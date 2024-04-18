@@ -15,7 +15,6 @@ return {
     },
     {
         "kylechui/nvim-surround",
-        version = "*",
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup()
@@ -29,6 +28,7 @@ return {
     },
     {
         'numToStr/Comment.nvim',
+        keys = { { "gc" }, { "gc", mode = "v" } },
         config = function()
             require("Comment").setup()
         end
@@ -42,6 +42,7 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
+        event = "BufReadPost",
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {"python", "lua", "vim", "html", "rust", "markdown"},

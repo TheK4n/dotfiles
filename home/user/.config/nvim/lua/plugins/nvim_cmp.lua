@@ -65,6 +65,7 @@ end
 return {
     {
         'L3MON4D3/LuaSnip',
+        event = "InsertEnter",
         build = "make install_jsregexp",
         dependencies = {
             'hrsh7th/nvim-cmp',
@@ -95,6 +96,7 @@ return {
     },
     {
         'hrsh7th/nvim-cmp',
+        event = "InsertEnter",
         dependencies = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
@@ -108,5 +110,6 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
+        event = "InsertEnter",
     },
 }
