@@ -16,21 +16,7 @@ install_lazy_if_not_installed(lazypath)
 vim.opt.rtp:prepend(lazypath)
 
 
-local plugins = {}
-
-local modules = vim.split(vim.fn.glob(vim.fn.stdpath("config") .. '/lua/*/plugins/*lua'), '\n')
-
-local splitted_path
-local module_name
-for _, module_path in pairs(modules) do
-    splitted_path = vim.split(module_path, '/')
-    module_name = splitted_path[#splitted_path]:gsub(".lua", "")
-
-    table.insert(plugins, require('base.plugins.' .. module_name))
-end
-
-
 require("lazy").setup(
-    plugins,
+    "plugins",
     { lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json" }
 )
