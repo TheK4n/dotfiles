@@ -5,7 +5,7 @@ local function install_lazy_if_not_installed(lazypath)
             "git", "clone",
             "--filter=blob:none",
             "https://github.com/folke/lazy.nvim.git",
-            "--branch=stable", -- latest stable release
+            "--branch=stable",
             lazypath,
         })
     end
@@ -32,7 +32,5 @@ end
 
 require("lazy").setup(
     plugins,
-    {
-        lockfile = vim.fn.stdpath "data" .. "/lazy-lock.json"
-    }
+    { lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json" }
 )
