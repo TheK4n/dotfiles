@@ -60,7 +60,7 @@ alias nowdate='date +"%d-%m-%Y"'
 alias cal='cal -m'
 
 # vim
-alias vi='\nvim'
+alias vi='nvim'
 alias svi="sudo -E nvim"
 
 # net

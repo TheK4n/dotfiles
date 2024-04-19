@@ -8,5 +8,12 @@ return {
         'sgur/vim-textobj-parameter',
         event = "InsertEnter",
         dependencies = { 'kana/vim-textobj-user' }
-    }
+    },
+    {
+        'chaoren/vim-wordmotion',
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    },
 }

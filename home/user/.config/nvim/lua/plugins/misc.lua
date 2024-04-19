@@ -1,9 +1,7 @@
 return {
-    'HiPhish/rainbow-delimiters.nvim',
     'tpope/vim-repeat',
     'google/vim-searchindex',
     'rbgrouleff/bclose.vim',
-    'chaoren/vim-wordmotion',
     'preservim/vim-pencil',
     {
         'windwp/nvim-autopairs',
@@ -34,12 +32,6 @@ return {
         end
     },
     {
-        'norcalli/nvim-colorizer.lua',
-        config = function()
-            require('colorizer').setup()
-        end
-    },
-    {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         event = "BufReadPost",
@@ -54,14 +46,24 @@ return {
         end
     },
     {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    },
-    {
         'folke/trouble.nvim',
         dependencies = { 'kyazdani42/nvim-web-devicons' },
         config = function()
             require("trouble").setup()
         end
     },
+    {
+        "thek4n/mdimage.nvim",
+        config = function()
+            require("mdimage").setup({
+                target_path = "./.img",
+            })
+        end
+    },
+    {
+        "thek4n/postman.nvim",
+        config = function()
+            vim.keymap.set("n", "<Leader>rl", '<cmd>PostmanExec<CR>')
+        end
+    }
 }
