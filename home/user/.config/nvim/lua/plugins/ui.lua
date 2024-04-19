@@ -81,6 +81,8 @@ return {
     },
     {
         'EdenEast/nightfox.nvim',
+        lazy = false,
+        priority = 1000,
         config = function()
             local colorscheme = require("nightfox")
             colorscheme.compile()
@@ -89,10 +91,13 @@ return {
         end
     },
     {
-        'ellisonleao/gruvbox.nvim'
+        'ellisonleao/gruvbox.nvim',
+        lazy = true,
     },
     {
         'xiyaowong/transparent.nvim',
+        lazy = false,
+        priority = 1000,
         config = function()
             require("transparent").setup({
                 exclude_groups = {'CursorLine'},
@@ -101,6 +106,7 @@ return {
     },
     {
         'lukas-reineke/virt-column.nvim',
+        lazy = true,
         config = function()
             require("virt-column").setup({
                 virtcolumn = '81'
@@ -109,6 +115,7 @@ return {
     },
     {
         'norcalli/nvim-colorizer.lua',
+        lazy = true,
         config = function()
             require('colorizer').setup()
         end
@@ -134,6 +141,7 @@ return {
     },
     {
         'folke/which-key.nvim',
+        lazy = true,
         config = function()
             require("which-key").setup()
         end

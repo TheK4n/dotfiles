@@ -145,16 +145,25 @@ local function reload_config()
     vim.notify('Config reloaded...', vim.log.levels.INFO)
 end
 
-local function fetch_and_reload_config()
+local function fetch_config()
     vim.fn.system('git -C ~/dotfiles pull')
+end
+
+local function update_plugins()
+    vim.cmd("Lazy sync")
+end
+
+local function fetch_and_reload_config_and_update_plugins()
+    fetch_config()
     reload_config()
+    update_plugins()
 end
 
 map("n", "<Leader>pr", reload_config,
     {desc = "Reload config"})
 
-map("n", "<Leader>pR", fetch_and_reload_config,
-    {desc = "Fetch and reload config"})
+map("n", "<Leader>pR", fetch_and_reload_config_and_update_plugins,
+    {desc = "Fetch and reload config and update plugins"})
 
 
 vim.cmd([[
