@@ -22,8 +22,13 @@ local function is_absolute_path(path)
 end
 
 return {
-    "folke/twilight.nvim",
-    'HiPhish/rainbow-delimiters.nvim',
+    {
+        "folke/twilight.nvim",
+        cmd = "Twilight"
+    },
+    {
+        'HiPhish/rainbow-delimiters.nvim',
+    },
     {
         'nvim-lualine/lualine.nvim',
         event = "VeryLazy",
