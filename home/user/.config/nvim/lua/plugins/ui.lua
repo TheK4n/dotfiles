@@ -106,7 +106,7 @@ return {
     },
     {
         'lukas-reineke/virt-column.nvim',
-        lazy = true,
+        lazy = false,
         config = function()
             require("virt-column").setup({
                 virtcolumn = '81'
@@ -115,7 +115,7 @@ return {
     },
     {
         'norcalli/nvim-colorizer.lua',
-        lazy = true,
+        lazy = false,
         config = function()
             require('colorizer').setup()
         end
@@ -141,7 +141,6 @@ return {
     },
     {
         'folke/which-key.nvim',
-        lazy = true,
         config = function()
             require("which-key").setup()
         end
