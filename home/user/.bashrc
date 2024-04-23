@@ -5,21 +5,10 @@ if \
   [ "$(tty)" != "/dev/tty3" ] && \
   [ -z "$TMUX" ]              && \
   [[ ! "$TERM" =~ tmux ]]     && \
-  command -v tmux &>/dev/null
+  command -v tmux &>/dev/null && \
+  tmux -N -L "$USER" list-sessions &>/dev/null
 then
-    if tmux -N -L "$USER" list-sessions &>/dev/null; then
-        if [ -n "$SSH_CLIENT" ]; then
-            exec tmux -N -L "$USER" new-session
-        else
-            exec tmux -N -L "$USER" new-session -A
-        fi
-    else
-        if [ -n "$SSH_CLIENT" ]; then
-            exec tmux new-session
-        else
-            exec tmux new-session -A
-        fi
-    fi
+    exec tmux -N -L "$USER" new-session
 fi
 
 if [ -f "$HOME/.config/bash/sourcer" ]; then
