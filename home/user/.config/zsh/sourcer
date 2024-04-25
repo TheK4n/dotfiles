@@ -1,3 +1,5 @@
+# vim: ft=zsh
+
 _so() {
     [ -r "$1" ] && [ -f "$1" ] && source "$1"
 }
@@ -5,7 +7,6 @@ _so() {
 
 _so "$XDG_CONFIG_HOME/bash/export"
 _so "$XDG_CONFIG_HOME/bash/aliases"
-_so "$XDG_CONFIG_HOME/bash/completion"
 _so "$XDG_CONFIG_HOME/bash/functions"
 _so "$XDG_CONFIG_HOME/bash/hosts/$HOST"
 
