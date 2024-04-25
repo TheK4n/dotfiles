@@ -1,7 +1,6 @@
 return {
     'tpope/vim-repeat',
     'google/vim-searchindex',
-    'rbgrouleff/bclose.vim',
     'preservim/vim-pencil',
     {
         'windwp/nvim-autopairs',
@@ -62,6 +61,8 @@ return {
     },
     {
         "thek4n/postman.nvim",
+        keys = {"<leader>rl"},
+        cmd = {"PostmanExec"},
         config = function()
             vim.keymap.set("n", "<Leader>rl", '<cmd>PostmanExec<CR>')
         end

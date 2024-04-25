@@ -34,6 +34,7 @@ return {
         event = "VeryLazy",
         config = function()
             require("lualine").setup({
+                theme = "tokyonight",
                 options = {
                     component_separators = { left = '', right = '' },
                 },
@@ -81,18 +82,24 @@ return {
     },
     {
         'EdenEast/nightfox.nvim',
-        lazy = false,
-        priority = 1000,
+        lazy = true,
         config = function()
             local colorscheme = require("nightfox")
             colorscheme.compile()
             colorscheme.setup()
-            vim.cmd.colorscheme("nightfox")
         end
     },
     {
         'ellisonleao/gruvbox.nvim',
         lazy = true,
+    },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme("tokyonight")
+        end
     },
     {
         'xiyaowong/transparent.nvim',
