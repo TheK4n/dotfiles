@@ -89,6 +89,7 @@ return {
         config = function()
             require("nightfox").setup({
                 options = {
+                    transparent = true,
                     styles = {
                         strings = "italic",
                         comments = "italic",
@@ -110,8 +111,7 @@ return {
     },
     {
         'xiyaowong/transparent.nvim',
-        lazy = false,
-        priority = 1000,
+        lazy = true,
         config = function()
             require("transparent").setup({
                 exclude_groups = {'CursorLine'},
