@@ -3,7 +3,7 @@
 umask 022
 
 export EDITOR="nvim"
-export VISUAL="nvim"
+export VISUAL="$EDITOR"
 
 export PAGER="less"
 export LESS="-nMiSRx4 -# 1 -+X -+F"
