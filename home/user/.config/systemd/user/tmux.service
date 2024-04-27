@@ -7,7 +7,7 @@ After=default.target
 Type=simple
 ExecStart=/usr/bin/tmux -D -L %u
 ExecStop=/usr/bin/tmux -L %u kill-server
-ExecReload=/usr/bin/tmux -L %u source-file /home/%u/.config/tmux/tmux.conf
+ExecReload=/usr/bin/tmux -L %u source-file %h/.config/tmux/tmux.conf
 Restart=always
 
 [Install]
