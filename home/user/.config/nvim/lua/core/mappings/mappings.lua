@@ -175,3 +175,10 @@ menu Encoding.koi8-u :e ++enc=koi8-u ++ff=unix<CR>
 
 map <F8> :emenu Encoding.
 ]])
+
+map("n", "<Leader>cd", "<cmd>colorscheme default<CR>")
+map("n", "<Leader>cn", "<cmd>colorscheme nightfox<CR>")
+
+map("n", "<Leader>ct", "<cmd>colorscheme elflord<CR>",
+    {desc = "TTY colorscheme"}
+)
