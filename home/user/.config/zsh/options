@@ -72,7 +72,7 @@ bindkey -M viins "^H" backward-delete-char
 bindkey -M viins "^?" backward-delete-char
 
 
-zle_highlight=('paste:bg=20,fg=15', 'region:bg=20,fg=15')  # colors of visual select
+zle_highlight=('paste:bg=24,fg=15', 'region:bg=24,fg=15')  # colors of visual select
 
 
 insert-sudo() {
