@@ -47,11 +47,6 @@ map({'n', 'v'}, 'x', '"_x')
 -- Put without overwrite yanked text
 map('v', 'p', 'P')
 
-
--- Increment/decrement
-map('n', '+', '<C-a>')
-map('n', '-', '<C-x>')
-
 -- map \ to prev finding
 map({"n", "v"}, [[\]], ',')
 
