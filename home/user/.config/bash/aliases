@@ -112,6 +112,8 @@ alias dt='tmux detach'
 alias caps='xdotool key Caps_Lock'
 alias CAPS='xdotool key Caps_Lock'
 
+alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ██████████\n"; done'
+
 
 # clipboard
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
