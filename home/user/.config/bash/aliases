@@ -52,7 +52,7 @@ alias gensalt="dd if=/dev/urandom count=16 2>/dev/null | sha256sum | head -c 64"
 alias diff='colordiff'
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
 alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'
-
+alias m='noglob ='
 
 # time
 alias now='date +"%T"'
