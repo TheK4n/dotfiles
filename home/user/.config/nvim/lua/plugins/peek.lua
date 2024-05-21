@@ -37,12 +37,5 @@ return {
             vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
             vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
         end
-
-        vim.api.nvim_create_autocmd("FileType", {
-                pattern = 'markdown', callback = function()
-                    vim.keymap.set("n", "<Leader>rr", "<cmd>PeekOpen<CR>")
-                end
-            }
-        )
     end,
 }
