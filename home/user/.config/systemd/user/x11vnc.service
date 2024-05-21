@@ -3,6 +3,7 @@ Description=VNC Server for X11
 Requires=default.target
 After=default.target
 
+# x11vnc -storepasswd ~/.vnc/passwd
 [Service]
 Type=simple
 ExecStartPre=/bin/sleep 10
