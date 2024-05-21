@@ -89,6 +89,12 @@
 [url "https://github.com/"]
     insteadOf = "gh:"
 
+[url "https://gitlab.com/"]
+    insteadOf = "gl:"
+
+[url "https://bitbucket.org/"]
+    insteadOf = "bb:"
+
 [url "git@github.com:"]
     pushInsteadOf = "https://github.com/"
     pushInsteadOf = "http://github.com/"
