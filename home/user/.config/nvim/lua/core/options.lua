@@ -60,6 +60,15 @@ opt.mouse = 'a'
 opt.scrolloff = 999
 
 
+COLUMN_NUMBER_BEFORE_INSERT=1
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+    callback = function()
+        _, COLUMN_NUMBER_BEFORE_INSERT = unpack(vim.api.nvim_win_get_cursor(0))
+    end,
+})
+
+
 -- disable paste comment on new line
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = {"*"},
