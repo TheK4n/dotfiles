@@ -36,7 +36,9 @@ export TMPDIR
 
 export FZF_DEFAULT_OPTS="\
 --cycle \
---marker="*" \
+--pointer='' \
+--marker='+' \
+--color='pointer:green' \
 --bind \
 ctrl-/:toggle-preview,\
 ctrl-a:toggle-all,\
