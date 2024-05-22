@@ -178,7 +178,10 @@ return {
                 cmdline = {
                     enabled = true,
                     view = "cmdline_popup",
-                }
+                },
+                health = {
+                    checker = true,
+                },
             })
         end
     }
