@@ -50,6 +50,7 @@
     di = diff
     ds = diff --staged
     dno = diff --name-only
+    dw = diff --word-diff=color
     co = checkout
     ci = commit
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
