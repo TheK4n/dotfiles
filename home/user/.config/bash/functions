@@ -231,14 +231,7 @@ most-often-commands() {
     echo "$*" | bc -l
 }
 
-
 # Enable X11Forwarding and disable mux session
 sshx() {
     ssh -X -o ControlMaster=no -o ControlPath=none $@
-}
-
-# Open remote tmux
-ssht() {
-    REMOTE="$1"; shift
-    ssh -t "$REMOTE" tmux -u "$@"
 }
