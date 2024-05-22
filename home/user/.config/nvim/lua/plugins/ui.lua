@@ -164,4 +164,22 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {}
     },
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        config = function()
+            require("noice").setup({
+                presets = {
+                    bottom_search = true,
+                },
+                cmdline = {
+                    enabled = true,
+                    view = "cmdline_popup",
+                }
+            })
+        end
+    }
 }

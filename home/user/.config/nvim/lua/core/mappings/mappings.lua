@@ -21,7 +21,7 @@ map('n', '<Leader>h/',
 
 
 -- enable search highlight in search mode
-map('n', '/', ':set hlsearch<CR>/')
+map('n', '/', ':set hlsearch<CR>/', {silent = true})
 
 -- copy selection to search line
 map('v', '<C-f>', '"fy:set hlsearch<CR>/\\V<C-r>f\\C<CR>')
