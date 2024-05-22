@@ -45,6 +45,7 @@
 
 [alias]
     a = "!git ls-files --exclude-standard -m --others -t | fzf -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs git add"
+    s = "!git diff --name-only --cached | fzf -m --bind load:last --preview 'git diff --staged --color=always {1}' | xargs git restore --staged"
     d = diff
     di = diff
     ds = diff --staged
