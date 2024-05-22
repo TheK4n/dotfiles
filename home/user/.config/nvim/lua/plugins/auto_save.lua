@@ -5,7 +5,7 @@ return {
             enabled = true, -- start auto-save when the plugin is loaded (i.e. when your package manager loads it)
             execution_message = {
                 message = function() -- message to print on save
-                        return ""
+                    return ""
                 end,
                 dim = 0.18, -- dim the color of `message`
                 cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
@@ -15,9 +15,10 @@ return {
                 local fn = vim.fn
                 local utils = require("auto-save.utils.data")
                 if
-                    fn.getbufvar(buf, "&modifiable") == 1 and
-                    utils.not_in(fn.getbufvar(buf, "&filetype"), {}) then
-                    return true -- met condition(s), can save
+                  fn.getbufvar(buf, "&modifiable") == 1 and
+                  utils.not_in(fn.getbufvar(buf, "&filetype"), {})
+                then
+                        return true -- met condition(s), can save
                 end
                 return false -- can't save
             end,
