@@ -180,7 +180,7 @@ return {
                     view = "cmdline_popup",
                 },
                 health = {
-                    checker = true,
+                    checker = false,
                 },
             })
         end
