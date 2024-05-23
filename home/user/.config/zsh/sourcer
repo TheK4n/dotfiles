@@ -21,6 +21,8 @@ _so "$ZDOTDIR/aliases"
 
 _so "$ZDOTDIR/plugin"
 
+_so "$ZDOTDIR/calculator"
+
 bindkey '`' autosuggest-accept
 
 _sod "$ZDOTDIR/zshrc.d"

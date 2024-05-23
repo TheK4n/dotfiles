@@ -1,0 +1,10 @@
+# calculator
+autoload -U zcalc
+
+function __calc {
+    zcalc -f -e "$*"
+}
+aliases[calc]='noglob __calc'
+aliases[=]='noglob __calc'
+
+# vim: ft=zsh
