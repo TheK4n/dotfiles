@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
-for zfile in .zshenv .config/zsh/.zshrc .config/zsh/.zprofile .config/zsh/.zlogout .config/zsh/aliases .config/zsh/completion .config/zsh/history .config/zsh/options .config/zsh/other .config/zsh/plugin .config/zsh/prompt .config/zsh/sourcer; do
+for zfile in .zshenv .config/zsh/.zshrc .config/zsh/.zprofile .config/zsh/.zlogout .config/zsh/aliases .config/zsh/completion .config/zsh/history .config/zsh/options .config/zsh/other .config/zsh/plugin .config/zsh/calculator .config/zsh/prompt .config/zsh/sourcer; do
     zcompile "$HOME/$zfile"
 done
