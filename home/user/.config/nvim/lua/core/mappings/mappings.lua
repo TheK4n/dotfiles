@@ -51,7 +51,7 @@ map('n',
         vim.cmd('norm! .')
         vim.api.nvim_win_set_cursor(0, current_position)
     end,
-    {remap = false}
+    {remap = false, silent = true}
 )
 
 map('n', 'Ж', ':')
