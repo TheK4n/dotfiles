@@ -12,6 +12,9 @@ return {
                 build = "make"
             },
         },
+        cmd = {
+            "Telescope"
+        },
         keys = {
             { '<Leader>fb', '<cmd>Telescope buffers<CR>' },
             { '<Leader>ff', '<cmd>Telescope find_files<CR>' },
