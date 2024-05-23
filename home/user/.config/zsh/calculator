@@ -7,4 +7,17 @@ function __calc {
 aliases[calc]='noglob __calc'
 aliases[=]='noglob __calc'
 
+
+function accept-line() {
+    if [[ $BUFFER =~ '^[ ]?\(?[-+]?[0-9]+' ]]; then
+        echo
+        test "$BUFFER[1]" != " " && print -S -- "$BUFFER"  # saving the command to history
+        __calc "$BUFFER"
+        BUFFER=
+    fi
+    zle .$WIDGET
+}
+
+zle -N accept-line
+
 # vim: ft=zsh
