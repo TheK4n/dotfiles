@@ -226,11 +226,6 @@ most-often-commands() {
     history 0 | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn
 }
 
-# calculator
-= () {
-    echo "$*" | bc -l
-}
-
 # Enable X11Forwarding and disable mux session
 sshx() {
     ssh -X -o ControlMaster=no -o ControlPath=none $@

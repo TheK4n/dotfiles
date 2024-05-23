@@ -57,6 +57,7 @@ alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'
 alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
 alias cal='cal -m'
+alias beeptime='beep -D 400 -l 400 -r "$(date +%I)" -f 440 -n -D 1000 -l 0 -n -D 800 -l 200 -f 880 -r "$(($(date +%M)/15))"'
 
 # vim
 alias vi='nvim'
