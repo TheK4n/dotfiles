@@ -1,22 +1,16 @@
 
-#setopt correct            # auto correct mistakes
-setopt interactivecomments # allow comments in interactive mode
-setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
-setopt nonomatch           # hide error message if there is no match for the pattern
-setopt notify              # report the status of background jobs immediately
-setopt numericglobsort     # sort filenames numerically when it makes sense
-setopt promptsubst         # enable command substitution in prompt
-setopt noflowcontrol
+setopt interactivecomments  # allow comments in interactive mode
+setopt magicequalsubst      # enable filename expansion for arguments of the form ‘anything=expression’
+setopt nonomatch            # hide error message if there is no match for the pattern
+setopt notify               # report the status of background jobs immediately
+setopt numericglobsort      # sort filenames numerically when it makes sense
+setopt promptsubst          # enable command substitution in prompt
+setopt noflowcontrol        # disable C-s mapping
 
-WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
+WORDCHARS=${WORDCHARS//\/}  # Don't consider certain characters part of the word
 
 # hide EOL sign ('%')
 PROMPT_EOL_MARK=""
-
-# configure key keybindings
-
-# Activate vim mode.
-bindkey -v
 
 
 # Change cursor shape for different vi modes.
@@ -50,27 +44,24 @@ precmd_functions+=(_fix_cursor)
 # 6 -> steady bar, xterm.
 
 
+# Activate vim mode.
+bindkey -v
 
 bindkey -M viins 'jf' vi-cmd-mode
-bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[H' beginning-of-line                  # home
-bindkey '^[[F' end-of-line                        # end
-bindkey '^[[Z' undo                               # shift + tab undo last action
-bindkey '^K' up-line-or-history
-bindkey '^J' down-line-or-history
-bindkey '^U' kill-whole-line
-bindkey -M vicmd '^U' kill-whole-line
-bindkey -M viins '^U' kill-whole-line
-bindkey -M viins '\e.' insert-last-word
-bindkey -M vicmd '^K' up-line-or-history
-bindkey -M vicmd '^J' down-line-or-history
-bindkey '^[[Z' reverse-menu-complete
-# bindkey "^[[A~" history-beginning-search-backward
-# bindkey "^[[B~" history-beginning-search-forward
-bindkey -M viins "^H" backward-delete-char
-bindkey -M viins "^?" backward-delete-char
+
+bindkey ' ' magic-space  # history expansion on space
+
+bindkey '^K' up-line-or-history  # C-k
+bindkey -M vicmd '^K' up-line-or-history  # C-k
+
+bindkey '^J' down-line-or-history  # C-j
+bindkey -M vicmd '^J' down-line-or-history  # C-j
+
+bindkey -M vicmd '^U' kill-whole-line  # C-u
+bindkey -M viins '^U' kill-whole-line  # C-u
+
+bindkey -M viins '\e.' insert-last-word  # M-.
+bindkey '^[[Z' reverse-menu-complete  # S-Tab
 
 
 zle_highlight=('paste:bg=24,fg=15', 'region:bg=24,fg=15')  # colors of visual select
@@ -92,5 +83,5 @@ insert-sudo() {
 
 zle -N insert-sudo
 
-bindkey -M vicmd '^S' insert-sudo
-bindkey -M viins '^S' insert-sudo
+bindkey -M vicmd '^S' insert-sudo  # C-s
+bindkey -M viins '^S' insert-sudo  # C-s
