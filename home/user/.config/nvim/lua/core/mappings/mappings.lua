@@ -190,6 +190,15 @@ menu Encoding.koi8-u :e ++enc=koi8-u ++ff=unix<CR>
 map <F8> :emenu Encoding.
 ]])
 
+
+vim.cmd([[
+menu Indent.tabs :set noexpandtab tabstop=4 shiftwidth=4<CR>
+menu Indent.spaces :set expandtab tabstop=4 shiftwidth=4<CR>
+
+map <F7> :emenu Indent.
+]])
+
+
 map("n", "<Leader>cd", "<cmd>colorscheme default<CR>")
 map("n", "<Leader>cn", "<cmd>colorscheme nightfox<CR>")
 
