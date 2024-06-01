@@ -144,6 +144,8 @@ vim.cmd.highlight({ "DiagnosticHint", "guifg=Grey" })
 opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 
 
+opt.viewoptions = "folds,cursor"
+
 vim.api.nvim_create_autocmd({"BufWinLeave", "BufLeave"}, {
     pattern = {"?*"},
     callback = function()
