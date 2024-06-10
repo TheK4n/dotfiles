@@ -45,7 +45,7 @@
 
 [alias]
     a = "!git ls-files --exclude-standard -m --others -t | fzf -0 -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs -r git add"
-    s = "!git diff --name-only --cached | fzf -0 -m --bind load:last --preview 'git diff --staged --color=always {1}' | xargs -r git restore --staged"
+    u = "!git diff --name-only --cached | fzf -0 -m --bind load:last --preview 'git diff --staged --color=always {1}' | xargs -r git restore --staged"
     d = diff
     di = diff
     ds = diff --staged
@@ -55,6 +55,7 @@
     ci = commit
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+    pr = "pull --rebase"
     st = status
     br = branch
     bm = branch --merged

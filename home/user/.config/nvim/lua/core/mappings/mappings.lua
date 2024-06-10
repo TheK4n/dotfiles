@@ -101,6 +101,7 @@ map("c", '%%', [[getcmdtype() == ':' ? expand('%:h').'/' : '%%']], {expr = true}
 
 -- Save from root
 vim.api.nvim_create_user_command('W', [[execute 'silent! write !SUDO_ASKPASS=vim_askpass_helper sudo -A tee % >/dev/null' <bar> edit!]], {})
+vim.api.nvim_create_user_command('X', [[execute 'silent! write !SUDO_ASKPASS=vim_askpass_helper sudo -A tee % >/dev/null' <bar> edit! | q]], {})
 vim.cmd([[autocmd FileChangedRO * set readonly!]])
 
 

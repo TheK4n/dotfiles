@@ -66,7 +66,8 @@ alias svi="sudo -E nvim"
 # net
 alias ports='ss -tlnp'
 alias wget='wget -c'
-alias myip='curl ipinfo.io/ip'
+# alias myip='curl ipinfo.io/ip'
+alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us 2>/dev/null'  # CLI pastebin
 alias weather='(curl -4 wttr.in/$(cat) 2>/dev/null | head -n -1) <<<'
 alias ip='ip -c'
