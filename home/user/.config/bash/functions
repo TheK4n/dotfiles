@@ -58,14 +58,13 @@ va() {
 }
 
 
-extract() {
-    if [ -z "$1" ]; then  # if string non-zero
-        # display usage if no parameters given
+extract() (
+    if [ -z "$1" ]; then
         echo "extract: error: usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
         return 2
     fi
 
-    if ! [ -f "$1" ]; then   # if file not exist
+    if ! [ -f "$1" ]; then
         echo "extract: error: '$1' file does not exist" >&2
         return 1
     fi
@@ -99,8 +98,7 @@ extract() {
         *.exe)      cabextract   ../"$1" ;;
         *)          echo "extract: error: '$1' - unknown archive method" >&2 ;;
     esac
-    cd ..
-}
+)
 
 
 mcd() {
