@@ -35,6 +35,7 @@ CMakeFiles
 *.so
 *.o
 a.out
+*.exe
 
 build/
 dist/
