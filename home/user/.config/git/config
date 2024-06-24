@@ -53,7 +53,7 @@
     dw = diff --word-diff=color
     co = checkout
     ci = commit
-    cm = "commit -m"
+    cm = "!_m() { git commit -m \"$*\"; }; _m"
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
     pr = "pull --rebase"
