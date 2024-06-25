@@ -54,6 +54,7 @@
     co = checkout
     ci = commit
     amend = commit --amend --no-edit
+    amenda = commit --all --amend --no-edit
     cm = "!_m() { git commit -m \"$*\"; }; _m"
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
