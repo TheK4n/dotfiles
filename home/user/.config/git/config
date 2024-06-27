@@ -53,9 +53,11 @@
     dw = diff --word-diff=color
     co = checkout
     ci = commit
+    cia = commit -a
     amend = commit --amend --no-edit
     amenda = commit --all --amend --no-edit
     cim = "!_m() { git commit -m \"$*\"; }; _m"
+    cima = "!_m() { git commit -am \"$*\"; }; _m"
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
     pr = "pull --rebase"
