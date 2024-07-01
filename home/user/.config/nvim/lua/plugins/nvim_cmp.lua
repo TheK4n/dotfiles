@@ -18,6 +18,7 @@ local function setup_cmp()
         snippet = {
             expand = function(args)
             require('luasnip').lsp_expand(args.body)
+            vim.snippet.expand(args.body)
             end,
         },
         mapping = {
@@ -46,10 +47,11 @@ local function setup_cmp()
         sorting = {
             priority_weight = 1.0,
             comparators = {
+                cmp.config.compare.score,
                 cmp.config.compare.locality,
                 cmp.config.compare.recently_used,
-                cmp.config.compare.score,
                 cmp.config.compare.offset,
+                require("cmp-under-comparator").under,
                 cmp.config.compare.order,
             },
         },
@@ -101,7 +103,6 @@ return {
         dependencies = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
             'lukas-reineke/cmp-under-comparator',
