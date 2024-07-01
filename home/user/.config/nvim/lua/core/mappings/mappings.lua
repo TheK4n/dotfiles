@@ -57,7 +57,7 @@ map('n',
 map('n', 'Ж', ':')
 
 map('n', '<Enter>', 'o<ESC>')
-map('n', '<Space>', 'O<ESC>')
+
 
 -- x to blackhole
 map({'n', 'v'}, 'x', '"_x')
