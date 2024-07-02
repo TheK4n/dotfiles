@@ -56,9 +56,10 @@ local function setup_cmp()
             },
         },
         sources = cmp.config.sources({
-            { name = 'nvim_lsp', priority = 1250 },
-            { name = 'luasnip', priority = 1000 },
-            { name = 'buffer', priority = 750 },
+            { name = 'nvim_lsp', priority = 1500 },
+            { name = 'luasnip', priority = 1250 },
+            { name = 'buffer', priority = 1000 },
+            { name = 'tmux', priority = 750 },
             { name = "dotenv", priority = 500 },
             { name = 'path', priority = 250 },
         }),
@@ -88,9 +89,17 @@ return {
             end
 
             local map = vim.keymap.set
-            map({'i', 's'}, '<C-n>', jump(1))
-            map({'i', 's'}, '<C-p>', jump(-1))
-
+            map({'i', 's'}, '<C-n>', jump(1), {silent = true})
+            map({'i', 's'}, '<C-p>', jump(-1), {silent = true})
+            map({'i', 's'}, '<C-k>', ls.expand(), {silent = true})
+            map({"i", "s"}, "<C-e>",
+                function()
+                    if ls.choice_active() then
+                        ls.change_choice(1)
+                    end
+                end,
+                {silent = true}
+            )
 
             local luasnip_loaders = require("luasnip.loaders.from_snipmate")
 
@@ -106,7 +115,8 @@ return {
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
             'lukas-reineke/cmp-under-comparator',
-            'SergioRibera/cmp-dotenv'
+            'SergioRibera/cmp-dotenv',
+            'andersevenrud/cmp-tmux',
         },
         config = setup_cmp,
     },
