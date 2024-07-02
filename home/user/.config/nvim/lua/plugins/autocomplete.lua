@@ -91,7 +91,7 @@ return {
             local map = vim.keymap.set
             map({'i', 's'}, '<C-n>', jump(1), {silent = true})
             map({'i', 's'}, '<C-p>', jump(-1), {silent = true})
-            map({'i', 's'}, '<C-k>', ls.expand(), {silent = true})
+            map({'i', 's'}, '<C-k>', ls.expand, {silent = true})
             map({"i", "s"}, "<C-e>",
                 function()
                     if ls.choice_active() then
