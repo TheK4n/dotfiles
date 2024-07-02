@@ -12,7 +12,7 @@ opt.relativenumber = true
 opt.clipboard:append { 'unnamed' }
 opt.clipboard:append { 'unnamedplus' }
 
-opt.shortmess:append{a = true, s = true, I = true, c = true}
+opt.shortmess:append{a = true, s = true, I = true, c = true, S = true}
 
 opt.cmdheight = 0
 vim.wo.signcolumn = "yes:1"

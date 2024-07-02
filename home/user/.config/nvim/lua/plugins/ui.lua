@@ -44,11 +44,7 @@ return {
                         {
                             'vim.fn.getcwd()',
                             fmt = function(str)
-                                local res = str
-
-                                res = str:gsub(os.getenv("HOME"), "~")
-
-                                return res
+                                return str:gsub(os.getenv("HOME"), "~")
                             end,
                             color = { fg='white', gui='bold' },
                             padding = { left = 1, right = 0 }
@@ -72,8 +68,8 @@ return {
                         },
                     },
                     lualine_x = {'GET_FORMATTED_VIRTUAL_ENV()', 'DETECT_INDENT_TYPE()', 'filetype'},
-                    lualine_y = {'progress'},
-                    lualine_z = {'location'},
+                    lualine_y = {'searchcount'},
+                    lualine_z = {'location', 'selectioncount'},
                 },
             })
         end,
