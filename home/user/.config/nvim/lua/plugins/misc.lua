@@ -45,13 +45,6 @@ return {
         end
     },
     {
-        'folke/trouble.nvim',
-        dependencies = { 'kyazdani42/nvim-web-devicons' },
-        config = function()
-            require("trouble").setup()
-        end
-    },
-    {
         "thek4n/mdimage.nvim",
         config = function()
             require("mdimage").setup({

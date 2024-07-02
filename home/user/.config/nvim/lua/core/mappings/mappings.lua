@@ -91,6 +91,13 @@ map("n", '<Leader>he', '<cmd>set list!<CR>',
 vim.opt.listchars=[[tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶]]
 
 
+map("n", "<Leader>pl", "<cmd>Lazy<CR>",
+    {desc = "Package manager"})
+
+map("n", "<Leader>pm", "<cmd>Mason<CR>",
+    {desc = "LSP Manager"})
+
+
 -- Tab to go prev buffer
 map("n", "<TAB>", ":b#<CR>", {silent = true})
 
@@ -125,34 +132,6 @@ function toggle_number_style()
         opt.relativenumber = false
     end
 end
-
-
-local function set_trouble_keymap(key, cmd)
-    map("n", string.format("<space>x%s", key), string.format("<cmd>TroubleToggle %s<CR>", cmd))
-end
-
-set_trouble_keymap("x", "")
-set_trouble_keymap("w", "workspace_diagnostics") -- lsp diagnostic of workspace
-set_trouble_keymap("d", "document_diagnostics") -- diagnostic of current file
-
-
-local function set_gitsigns_keymap(key, cmd)
-    map("n", string.format("<space>g%s", key), string.format("<cmd>Gitsigns %s<CR>", cmd))
-end
-
-set_gitsigns_keymap('p', 'preview_hunk') -- show diff
-set_gitsigns_keymap('b', 'blame_line') -- show author, hash, date and message of current line commit
-set_gitsigns_keymap('n', 'next_hunk') -- go to next unstaged changes
-set_gitsigns_keymap('N', 'prev_hunk') -- go to prev unstaged changes
-set_gitsigns_keymap('r', 'reset_hunk') -- reset hunk under cursor
-set_gitsigns_keymap('h', 'toggle_linehl') -- line highlighting
-
-
-map("n", "<Leader>pl", "<cmd>Lazy<CR>",
-    {desc = "Package manager"})
-
-map("n", "<Leader>pm", "<cmd>Mason<CR>",
-    {desc = "LSP Manager"})
 
 
 local function reload_config()

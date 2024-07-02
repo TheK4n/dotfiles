@@ -98,4 +98,57 @@ return {
             })
         end
     },
+    {
+        'folke/trouble.nvim',
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        config = function()
+            require("trouble").setup()
+
+            local function set_trouble_keymap(key, cmd)
+                vim.keymap.set(
+                    "n",
+                    string.format("<space>x%s", key),
+                    string.format("<cmd>Trouble %s<CR>", cmd)
+                )
+            end
+
+            set_trouble_keymap("x", "diagnostics toggle")
+            set_trouble_keymap("X", "diagnostics toggle filter.buf=0")
+            set_trouble_keymap("Q", "qflist toggle")
+            set_trouble_keymap("l", "lsp toggle focus=false win.position=right")
+
+        end
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        event = "BufReadPost",
+        enabled = vim.fn.executable "git" == 1,
+        config = function()
+            require("gitsigns").setup({
+                signs = {
+                    add = { text = "+" },
+                    change = { text = "|" },
+                    delete = { text = "-" },
+                    topdelete = { text = "^" },
+                    changedelete = { text = "~" },
+                    untracked = { text = "0" },
+                }
+            })
+
+            local function set_gitsigns_keymap(key, cmd)
+                vim.keymap.set(
+                    "n",
+                    string.format("<space>g%s", key),
+                    string.format("<cmd>Gitsigns %s<CR>", cmd)
+                )
+            end
+
+            set_gitsigns_keymap('p', 'preview_hunk') -- show diff
+            set_gitsigns_keymap('b', 'blame_line') -- show author, hash, date and message of current line commit
+            set_gitsigns_keymap('n', 'next_hunk') -- go to next unstaged changes
+            set_gitsigns_keymap('N', 'prev_hunk') -- go to prev unstaged changes
+            set_gitsigns_keymap('r', 'reset_hunk') -- reset hunk under cursor
+            set_gitsigns_keymap('h', 'toggle_linehl') -- line highlighting
+        end
+    }
 }

@@ -1,9 +1,9 @@
 local on_attach = function(_, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_get_option_value(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_set_option_value(...) end
 
     -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc', {})
 
     -- Mappings.
     local opts = { noremap=true, silent=true }
