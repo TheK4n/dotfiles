@@ -107,6 +107,7 @@ return {
     },
     {
         'xiyaowong/transparent.nvim',
+        enabled = false,
         lazy = true,
         config = function()
             require("transparent").setup({
@@ -119,7 +120,7 @@ return {
         lazy = false,
         config = function()
             require("virt-column").setup({
-                virtcolumn = '81'
+                virtcolumn = '80'
             })
         end
     },
@@ -177,6 +178,16 @@ return {
                 },
                 health = {
                     checker = false,
+                },
+                routes = {
+                    { -- hack to disable search count
+                        filter = {
+                            event = "msg_show",
+                            kind = "echo",
+                            ["not"] = { cmdline = true },
+                        },
+                        opts = { skip = true },
+                    },
                 },
             })
         end
