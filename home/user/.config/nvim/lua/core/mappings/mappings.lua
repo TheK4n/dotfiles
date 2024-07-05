@@ -4,6 +4,16 @@ local map = vim.keymap.set
 vim.g.mapleader = ','
 
 
+
+-- Sections
+map('n', '<Leader>h', '', {desc = "UI"})
+map('n', '<Leader>c', '', {desc = "Colorschemes"})
+map('n', '<Leader>f', '', {desc = "Telescope"})
+map('n', '<Leader>p', '', {desc = "Config manage"})
+map('n', '<Leader>q', '', {desc = "Exits"})
+map('n', '<Leader>r', '', {desc = "Run file"})
+
+
 local function create_function_tabdo(command)
     return function()
         local curr_tab = vim.fn.tabpagenr()

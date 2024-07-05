@@ -21,6 +21,7 @@ return {
             require("telescope").load_extension("refactoring")
         end,
         keys = {
+            { "<space>r", "", desc = "Refactoring", mode = {"n", "v"} },
             {
                 "<space>rr",
                 ":lua require('refactoring').select_refactor()<CR>",
@@ -75,6 +76,7 @@ return {
             {
                 "<leader>fr",
                 "<Cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+                desc = "Telescope refactorings",
                 mode = "n",
             }
         }
@@ -104,18 +106,20 @@ return {
         config = function()
             require("trouble").setup()
 
-            local function set_trouble_keymap(key, cmd)
+            vim.keymap.set("n", "<space>x", "", {desc = "Diagnostics"})
+            local function set_trouble_keymap(key, cmd, opts)
                 vim.keymap.set(
                     "n",
                     string.format("<space>x%s", key),
-                    string.format("<cmd>Trouble %s<CR>", cmd)
+                    string.format("<cmd>Trouble %s<CR>", cmd),
+                    opts
                 )
             end
 
-            set_trouble_keymap("x", "diagnostics toggle")
-            set_trouble_keymap("X", "diagnostics toggle filter.buf=0")
-            set_trouble_keymap("Q", "qflist toggle")
-            set_trouble_keymap("l", "lsp toggle focus=false win.position=right")
+            set_trouble_keymap("x", "diagnostics toggle", {desc = "Workspace diagnostics window"})
+            set_trouble_keymap("X", "diagnostics toggle filter.buf=0", {desc = "Buffer diagnostics window"})
+            set_trouble_keymap("Q", "qflist toggle", {desc = "Qflist"})
+            set_trouble_keymap("l", "lsp toggle focus=false win.position=right", {desc = "Toggle LSP diagnostics"})
 
         end
     },
@@ -135,20 +139,22 @@ return {
                 }
             })
 
-            local function set_gitsigns_keymap(key, cmd)
+            vim.keymap.set("n", "<space>g", "", {desc = "Git actions"})
+            local function set_gitsigns_keymap(key, cmd, opts)
                 vim.keymap.set(
                     "n",
                     string.format("<space>g%s", key),
-                    string.format("<cmd>Gitsigns %s<CR>", cmd)
+                    string.format("<cmd>Gitsigns %s<CR>", cmd),
+                    opts
                 )
             end
 
-            set_gitsigns_keymap('p', 'preview_hunk') -- show diff
-            set_gitsigns_keymap('b', 'blame_line') -- show author, hash, date and message of current line commit
-            set_gitsigns_keymap('n', 'next_hunk') -- go to next unstaged changes
-            set_gitsigns_keymap('N', 'prev_hunk') -- go to prev unstaged changes
-            set_gitsigns_keymap('r', 'reset_hunk') -- reset hunk under cursor
-            set_gitsigns_keymap('h', 'toggle_linehl') -- line highlighting
+            set_gitsigns_keymap('p', 'preview_hunk', {desc = "Preview hunk"})
+            set_gitsigns_keymap('b', 'blame_line', {desc = "Show line commit info"})
+            set_gitsigns_keymap('n', 'next_hunk', {desc = "Next changes"})
+            set_gitsigns_keymap('N', 'prev_hunk', {desc = "Previous changes"})
+            set_gitsigns_keymap('r', 'reset_hunk', {desc = "Reset changes"})
+            set_gitsigns_keymap('h', 'toggle_linehl', {desc = "Toggle changes highlight"})
         end
     },
     {
@@ -173,7 +179,8 @@ return {
                 },
             },
         }
-        vim.keymap.set("n", "<space>ca", require("actions-preview").code_actions)
+        vim.keymap.set("n", "<space>c", "", {desc = "Code action"})
+        vim.keymap.set("n", "<space>ca", require("actions-preview").code_actions, {desc = "Code action"})
     end,
     },
 }
