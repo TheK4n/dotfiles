@@ -103,9 +103,14 @@ return {
         "max397574/better-escape.nvim",
         config = function()
             require("better_escape").setup({
-                mapping = {'jf', 'оа'},
+                mappings = {
+                    i = {
+                        j = {
+                            f = "<ESC>`^"
+                        }
+                    }
+                },
                 timeout = vim.o.timeoutlen,
-                keys = '<ESC>`^'
             })
         end,
     },
