@@ -42,17 +42,6 @@ map('n', '<C-f>', ':set hlsearch<CR>/\\V<C-r><C-w>\\C<CR>')
 map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
     {desc = "Toggle line number style"})
 
-map('i', 'jf', '<ESC>`^')
-map('i', 'оа', '<ESC>`^')
-
-map('i',
-    '<C-[>',
-    function()
-        local current_line, _ = unpack(vim.api.nvim_win_get_cursor(0))
-        vim.api.nvim_win_set_cursor(0, {current_line, COLUMN_NUMBER_BEFORE_INSERT})
-        vim.cmd('stopinsert')
-    end
-)
 
 map('n',
     '.',
