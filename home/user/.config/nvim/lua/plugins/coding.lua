@@ -136,7 +136,16 @@ return {
                     topdelete = { text = "^" },
                     changedelete = { text = "~" },
                     untracked = { text = "0" },
-                }
+                },
+                signs_staged = {
+                    add = { text = '+' },
+                    change = { text = '|' },
+                    delete = { text = '-' },
+                    topdelete = { text = "^" },
+                    changedelete = { text = '~' },
+                    untracked = { text = '0' },
+                },
+                signs_staged_enable = true,
             })
 
             vim.keymap.set("n", "<space>g", "", {desc = "Git actions"})
