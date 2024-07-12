@@ -31,4 +31,6 @@ map_filetype('rust', '<Leader>rr', 'cargo run')
 map_filetype('c', '<Leader>rr', 'gcc -o /tmp/a.out % && /tmp/a.out')
 map_filetype('cpp', '<Leader>rr', 'g++ -o /tmp/a.out % && /tmp/a.out')
 
+map_filetype('asm', '<Leader>rr', 'as -o /tmp/out.o % && ld -o /tmp/a.out /tmp/out.o && /tmp/a.out')
+
 map_filetype('make', '<Leader>rr', 'make -C "$(dirname "%")"')
