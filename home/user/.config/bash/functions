@@ -10,7 +10,7 @@ _sod() {
 }
 
 lt() {
-    du -h "${1:-.}" 2>/dev/null | sort -h | tac
+    du -h "${1:-.}" 2>/dev/null | sort -h
 }
 
 destroy() {
