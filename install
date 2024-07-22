@@ -1,23 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -ueo pipefail
 shopt -s nullglob
 
 declare -r TARGET_PATH="$HOME"
-declare -r DOTFILES_ROOT="$PWD"
+
+
+_detect_current_script_real_directory() {
+    realpath -e -- "$(dirname -- "$(readlink -e -- "${BASH_SOURCE[0]:-$0}")")"
+}
+
+declare DOTFILES_ROOT
+DOTFILES_ROOT="$(_detect_current_script_real_directory)"
+readonly DOTFILES_ROOT
+
 declare -xr SUB="$DOTFILES_ROOT/home/user"
+
+source "$DOTFILES_ROOT/TARGETS.sh"
 
 
 _die() {
     echo "$0: $1" >&2
     exit $2
 }
-
-test "$0" = "./install" || _die "Error: Please, run this file from root of dotfiles, like this './install.sh TARGET" 1
-
-
-source "$DOTFILES_ROOT/TARGETS.sh"
-
 
 _link_files_in_sandbox() {
     local targetfile
@@ -60,6 +65,7 @@ __install_from_sandbox() {
 }
 
 _execute_hook_if_executable() {
+    # all hooks gets SUB and SANDBOX_PATH env variables
     local hook_path="$DOTFILES_ROOT/install-hooks/$1/$2"
     if [ -x "$hook_path" ]; then
         echo "Executing $2 for target '$1'"
