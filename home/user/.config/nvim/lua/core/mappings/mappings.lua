@@ -43,6 +43,9 @@ map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
     {desc = "Toggle line number style"})
 
 
+map('n', '~', 'vg~', {desc = "Toggle character case"})
+
+
 map('n',
     '.',
     function()
