@@ -1,5 +1,41 @@
-local on_attach = function(_, bufnr)
 
+local lsp_have_feature = {
+    rename = function(client)
+        return client.supports_method "textDocument/rename"
+    end,
+    inlay_hint = function(client)
+        return client.supports_method "textDocument/inlayHint"
+    end,
+}
+
+local function get_lsp_client_names(have_feature)
+    local client_names = {}
+    local attached_clients = vim.lsp.get_clients { bufnr = 0 }
+    for _, client in ipairs(attached_clients) do
+        if have_feature(client) then
+            table.insert(client_names, client.name)
+        end
+    end
+    return client_names
+end
+
+local function lsp_buf_rename(client_name)
+    vim.lsp.buf.rename(nil, { name = client_name })
+end
+
+function lsp_buf_rename_use_any(fallback)
+    local client_names = get_lsp_client_names(lsp_have_feature.rename)
+    for _, client_name in ipairs(client_names) do
+        lsp_buf_rename(client_name)
+        return
+    end
+    if fallback then
+        fallback()
+    end
+end
+
+
+local on_attach = function(_, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_set_option_value(...) end
 
@@ -28,7 +64,7 @@ local on_attach = function(_, bufnr)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', desc("Remove workspace folder"))
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', desc("Show workspace folders"))
     buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', desc("Show type"))
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', desc("Rename object"))
+    buf_set_keymap('n', '<space>rn', "<cmd>lua lsp_buf_rename_use_any()<CR>", desc("Rename object"))
     buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', desc("Show diagnostic"))
     buf_set_keymap('n', '<space>p', '<cmd>lua vim.diagnostic.goto_prev()<CR>', desc("Previous problem"))
     buf_set_keymap('n', '<space>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', desc("Next problem"))

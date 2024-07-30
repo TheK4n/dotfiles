@@ -191,5 +191,13 @@ return {
                 },
             })
         end
-    }
+    },
+    {
+        "https://github.com/liangxianzhe/floating-input.nvim.git",
+        config = function()
+            vim.ui.input = function(opts, on_confirm)
+                require("floating-input").input(opts, on_confirm, { border = 'single' })
+            end
+        end
+    },
 }
