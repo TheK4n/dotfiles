@@ -21,6 +21,7 @@ return {
             { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
             { '<Leader>fc', '<cmd>Telescope git_commits<CR>' },
             { '<Leader>fd', '<cmd>Telescope diagnostics<CR>' },
+            { '<Leader><Leader>', '<cmd>Telescope buffers<CR>' },
         },
         config = function()
             local telescope = require("telescope")

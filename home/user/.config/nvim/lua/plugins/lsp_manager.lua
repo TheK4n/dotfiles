@@ -55,9 +55,10 @@ local on_attach = function(_, bufnr)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', desc("Go declaration"))
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', desc("Go definition"))
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', desc("Go implementation"))
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', desc("Get references"))
+    buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', desc("Go definition"))
+    buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', desc("Go implementation"))
+    buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', desc("Go references"))
+    buf_set_keymap('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', desc("Go type references"))
     buf_set_keymap('n', '<space>k', '<cmd>lua vim.lsp.buf.hover()<CR>', desc("Show help"))
     buf_set_keymap('n', '<space>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', desc("Show signature"))
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', desc("Add workspace folder"))
@@ -78,6 +79,7 @@ return {
         dependencies = {
             'neovim/nvim-lspconfig',
             "williamboman/mason-lspconfig.nvim",
+            'nvim-telescope/telescope.nvim',
         },
         config = function()
             require("mason").setup()
