@@ -114,6 +114,9 @@ vim.api.nvim_create_user_command('X', [[execute 'silent! write !SUDO_ASKPASS=vim
 vim.cmd([[autocmd FileChangedRO * set readonly!]])
 
 
+vim.api.nvim_create_user_command('Q', ':qa!', {})
+
+
 -- Toggle line number style
 function toggle_number_style()
     local opt = vim.opt

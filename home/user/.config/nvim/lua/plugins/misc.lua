@@ -37,6 +37,7 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {"python", "lua", "vim", "html", "rust", "markdown", "regex"},
+                ignore_install = { 'org' },
                 auto_install = true,
                 highlight = {
                     enable = true,
