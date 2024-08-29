@@ -1,0 +1,12 @@
+[Unit]
+Description=SSH proxy
+Requires=default.target
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -o ControlMaster=no -o ExitOnForwardFailure=yes -vCTN -D 127.0.0.1:1080 server.vpn
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
