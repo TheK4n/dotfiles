@@ -91,6 +91,8 @@ return {
         },
         config = function()
             require('leap').opts.safe_labels = {}
+            vim.keymap.set("v", "J", "<Plug>(leap-forward-to)")
+            vim.keymap.set("v", "K", "<Plug>(leap-backward-to)")
         end,
     },
     {
