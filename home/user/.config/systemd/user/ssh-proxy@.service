@@ -1,0 +1,14 @@
+[Unit]
+Description=SSH proxy
+Requires=default.target
+After=default.target
+
+# ln -s % ~/.config/systemd/user
+# systemctl --user enable --now ssh-proxy@server.vpn
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -o ControlMaster=no -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -vCTN -D 127.0.0.1:1080 %i
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
