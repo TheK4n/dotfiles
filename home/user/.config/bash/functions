@@ -2,9 +2,10 @@
 
 _sod() {
     if [ -d "$1" ] && [ -n "$(ls "$1")" ]; then
-        for FILENAME in $(ls "$1" | sort -n)
+        local filename
+        for filename in $(ls "$1" | sort -n)
         do
-            source "$1/$FILENAME"
+            source "${1}/${filename}"
         done
     fi
 }
@@ -23,14 +24,14 @@ destroy() {
 }
 
 workon() {
-    source "/opt/pythonenv/${1:-$(basename $PWD)}/bin/activate"
+    source "/opt/pythonenv/${1:-$(basename "$PWD")}/bin/activate"
 }
 
 py() {
     if [[ -z "$@" && -x "$(command -v ipython 2>/dev/null)" ]]; then
         ipython -i -c "q = exit"
     else
-        python3 $@
+        python3 "$@"
     fi
 }
 
@@ -39,14 +40,14 @@ ve() {
 }
 
 va() {
-    local activate_venv
-
     if [ -f "./venv/bin/activate" ]; then
         source "./venv/bin/activate"
         return 0
     fi
 
+    local activate_venv
     activate_venv="$(find -P . -maxdepth 3 -type f -wholename '*/bin/activate' | sort | head -n 1)"
+    readonly activate_venv
 
     if [ -n "$activate_venv" ]; then
         source "$activate_venv"
@@ -69,16 +70,13 @@ extract() (
         return 1
     fi
 
-    local NAME
-    NAME=${1%%.*}  # removes extension from filename
-
-
-    if [ -e "$NAME" ]; then
-        echo "extract: error: '$NAME' exists" >&2
+    local -r name="${1%%.*}"  # removes extension from filename
+    if [ -e "$name" ]; then
+        echo "extract: error: '$name' exists" >&2
         return 1
     fi
 
-    mkdir "$NAME" && cd "$NAME" || return 1
+    mkdir "$name" && cd "$name" || return 1
 
     case $1 in
         *.tar.bz2)  tar xjf      ../"$1" ;;
@@ -100,60 +98,11 @@ extract() (
     esac
 )
 
-
 mcd() {
     if [ -z "$1" ]; then
         cd "$(mktemp -td "${USER:-user}.XXXX")"
     else
         mkdir -p "$1" && cd "$1"
-    fi
-}
-
-
-# toggle wireguard vpn with interface /etc/wireguard/wg0.conf
-# to allow sudo user toggle vpn without password:
-## sudo groupadd wireguard
-## sudo usermod -aG wireguard $USER
-vpn() {
-    local STATUS SERVICE CONFIG CONFIGFILE
-    CONFIG="${1:-wg0}"
-
-    CONFIGFILE="/etc/wireguard/$CONFIG.conf"
-
-    if [ ! -e "$CONFIGFILE" ]; then
-        echo "Config '$CONFIGFILE' not exists" >&2
-        return 1
-    fi
-
-    SERVICE="wg-quick@$CONFIG.service"
-
-    if systemctl --quiet is-active "$SERVICE"; then
-        sudo systemctl stop "$SERVICE"
-        echo "DOWN"
-    else
-        sudo systemctl start "$SERVICE" && ip -br a | grep "$CONFIG" | awk '{print $1":\t"$3}'
-    fi
-}
-
-toggle-ssh-proxy() {
-    if [ -z "$1" ]; then
-        echo "Proxy ssh server hostname not specified" 1>&2
-        return 1
-    fi
-
-    SSH_PROXY_CONTROL_FILE="$XDG_RUNTIME_DIR/ssh_${1}_proxy.control"
-
-
-    if [ -e "$SSH_PROXY_CONTROL_FILE" ]; then
-        unset {http,https,ftp,rsync,no}_proxy
-        ssh -S "$SSH_PROXY_CONTROL_FILE" -O exit "$1"
-        unset SSH_PROXY_PID
-        echo "Disabled"
-    else
-        ssh -nCTN -S "$SSH_PROXY_CONTROL_FILE" -D 1080 "$1"
-        export {http,https,ftp,rsync}_proxy="socks5://127.0.0.1:1080" && \
-        export no_proxy="localhost,127.0.0.1/8,localaddress,.localdomain.com,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12"
-        echo "Enabled"
     fi
 }
 
@@ -164,12 +113,12 @@ open() {
 
 split-file() {
     test -e "$1" || return 1
-    local _size="${2:-1G}"
+    local -r size="${2:-1G}"
 
     if [ -d "$1" ]; then
-        (mkdir "$1.tar.gz.splitted" && cd "$1.tar.gz.splitted" && tar -cz "../$1" | split -d -b "$_size")
+        (mkdir "$1.tar.gz.splitted" && cd "$1.tar.gz.splitted" && tar -cz "../$1" | split -d -b "$size")
     else
-        (mkdir "$1.splitted" && cd "$1.splitted" && split -d -b "$_size" "../$1")
+        (mkdir "$1.splitted" && cd "$1.splitted" && split -d -b "$size" "../$1")
     fi
 }
 
@@ -184,6 +133,8 @@ json() {
 _get_full_file_extension() {
     local filename
     filename=$(basename "$1")
+    readonly filename
+
     if [ "${filename:0:1}" = "." ]; then
         filename="${filename:1}"
     fi
@@ -191,28 +142,31 @@ _get_full_file_extension() {
 }
 
 rmt() {
-    local TRASH
-    TRASH=~/.trash
+    local -r TRASH="${HOME}/.trash"
 
     local filename
-    for filename in $*
+    for filename in "$@"
     do
-        local filename_out_path="${TRASH}$(realpath "$filename")"
+        local filename_out_path
+        filename_out_path="${TRASH}$(realpath "$filename")"
+        readonly filename_out_path
+
         mkdir -p "$(dirname "$filename_out_path")"
         mv "$filename" "${filename_out_path}_$(date +%s)"
     done
 }
 
 showtips() {
-    TIPS_DIR="$HOME/.tips"
+    local -r tips_dir="${HOME}/.tips"
 
-    if [ ! -d "$TIPS_DIR" ]; then
-        mkdir "$TIPS_DIR" 2>/dev/null
-        git init "$TIPS_DIR"
+    if [ ! -d "$tips_dir" ]; then
+        mkdir "$tips_dir" 2>/dev/null
+        git init "$tips_dir"
     fi
 
     local content
-    for filename in "$TIPS_DIR"/*
+    local filename
+    for filename in "$tips_dir"/*
     do
         content="$(cat "$filename")"
         echo "$content"
@@ -226,5 +180,5 @@ most-often-commands() {
 
 # Enable X11Forwarding and disable mux session
 sshx() {
-    ssh -X -o ControlMaster=no -o ControlPath=none $@
+    ssh -X -o ControlMaster=no -o ControlPath=none "$@"
 }
