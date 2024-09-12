@@ -3,6 +3,7 @@ so () {
 }
 
 install_if_not_exists() {
+    PATH="${PATH}:/usr/bin"
     local path="$HOME/.config/zsh/plugins/$1"
     if [ ! -d "$path" ]; then
         git clone "https://github.com/$1" "$path"
