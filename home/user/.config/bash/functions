@@ -40,7 +40,16 @@ ve() {
 }
 
 va() {
-    if [ -f "./venv/bin/activate" ]; then
+    if [[ -v 1 ]]; then
+        if [[ -f "${1}/bin/activate" ]]; then
+            source "${1}/bin/activate"
+            return 0
+        fi
+        echo "va: error: virtual environment ${1} not found, use python3 -m virtualenv venv" >&2
+        return 1
+    fi
+
+    if [[ -f "./venv/bin/activate" ]]; then
         source "./venv/bin/activate"
         return 0
     fi
@@ -49,7 +58,7 @@ va() {
     activate_venv="$(find -P . -maxdepth 3 -type f -wholename '*/bin/activate' | sort | head -n 1)"
     readonly activate_venv
 
-    if [ -n "$activate_venv" ]; then
+    if [[ -f "$activate_venv" ]]; then
         source "$activate_venv"
         return 0
     else
