@@ -116,8 +116,8 @@ mcd() {
 }
 
 open() {
-    test -e $1 || return 1
-    nohup xdg-open $1 1>/dev/null 2>&1 &
+    test -e "$1" || return 1
+    nohup xdg-open "$1" 1>/dev/null 2>&1 &
 }
 
 split-file() {
@@ -141,13 +141,13 @@ json() {
 
 _get_full_file_extension() {
     local filename
-    filename=$(basename "$1")
+    filename="$(basename "$1")"
     readonly filename
 
     if [ "${filename:0:1}" = "." ]; then
         filename="${filename:1}"
     fi
-    echo ${filename#*.}
+    echo "${filename#*.}"
 }
 
 rmt() {
@@ -192,7 +192,7 @@ sshx() {
     ssh -X -o ControlMaster=no -o ControlPath=none "$@"
 }
 
-django_start_project() (
+django-start-project() (
     set -ue
     local -r project_name="$1"
 
