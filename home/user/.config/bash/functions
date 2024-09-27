@@ -182,3 +182,16 @@ most-often-commands() {
 sshx() {
     ssh -X -o ControlMaster=no -o ControlPath=none "$@"
 }
+
+django_start_project() (
+    set -ue
+    local -r project_name="$1"
+
+    mkdir "$project_name"
+    cd "$project_name"
+    python3 -m virtualenv venv
+    . venv/bin/activate
+    pip install django
+    django-admin startproject core .
+    git init
+)
