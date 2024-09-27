@@ -1,15 +1,17 @@
 # vim: ft=zsh
 
 alias -g L='| $PAGER'
+alias -g H='| head'
+alias -g T='| tail'
 alias -g HL='| highlight -O ansi -S '
 alias -g JSON='| json HL json'
 alias -g DI='| diff'
 alias -g ?='| grep'
 
-alias -g O="1>/dev/null"
-alias -g R="2>/dev/null"
-alias -g Q="&>/dev/null"
-alias -g BG="Q &"
+alias -g O="1>/dev/null"  # stdOut
+alias -g E="2>/dev/null"  # stdErr
+alias -g A="&>/dev/null"  # All
+alias -g BG="A &"  # background
 
 alias -g RED='2> >(while read line; do printf "\033[0;31m${line}\033[0m\n"; done)'
 
