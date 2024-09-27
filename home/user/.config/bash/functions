@@ -121,18 +121,20 @@ open() {
 }
 
 split-file() {
-    test -e "$1" || return 1
+    if [[ ! -e "$1" ]]; then
+        echo "file '${1}' not found" >&2
+        return 1
+    fi
+
     local -r size="${2:-1G}"
 
-    if [ -d "$1" ]; then
-        (mkdir "$1.tar.gz.splitted" && cd "$1.tar.gz.splitted" && tar -cz "../$1" | split -d -b "$size")
-    else
-        (mkdir "$1.splitted" && cd "$1.splitted" && split -d -b "$size" "../$1")
-    fi
+    mkdir "${1}.splitted"
+    cd "${1}.splitted"
+    split -d -b "$size" "../${1}"
 }
 
 json() {
-    if [ -t 0 ]; then  # argument
+    if [ -t 0 ]; then
        python -m json.tool <<< "$*"
     else  # pipe
        python -m json.tool
@@ -151,13 +153,13 @@ _get_full_file_extension() {
 }
 
 rmt() {
-    local -r TRASH="${HOME}/.trash"
+    local -r trash="${TRASH:-"${HOME}/.trash"}"
 
     local filename
     for filename in "$@"
     do
         local filename_out_path
-        filename_out_path="${TRASH}$(realpath "$filename")"
+        filename_out_path="${trash}$(realpath "$filename")"
         readonly filename_out_path
 
         mkdir -p "$(dirname "$filename_out_path")"
