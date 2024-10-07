@@ -193,7 +193,7 @@ mode $exitmode {
         bindsym s exec shutdown -h now
         bindsym u exec systemctl suspend; mode "default"
         bindsym l exec $i3lock_cmd; mode "default"
-        bindsym b exec convert canvas:none PNG:- | feh -YF -; mode "default"
+        bindsym b exec magick canvas:none PNG:- | feh -YF -; mode "default"
 
         bindsym Escape mode "default"
         bindsym Return mode "default"

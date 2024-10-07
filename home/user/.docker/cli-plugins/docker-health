@@ -6,7 +6,7 @@ cat << HERE
      "SchemaVersion": "0.1.0",
      "Vendor": "Thek4n",
      "Version": "0.1.0",
-     "ShortDescription": "Open interactive bash in container"
+     "ShortDescription": "Check health of docker container"
 }
 HERE
 exit
@@ -14,9 +14,9 @@ fi
 
 usage() {
 cat <<EOF
-Usage: docker shell CONTAINER
+Usage: docker health CONTAINER
 
-Enter the container shell (bash or sh)
+Check health of docker container
 EOF
 }
 
@@ -27,16 +27,18 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
     exit 0
 fi
 
+
 readonly CONTAINER="$1"
 
 if [ -z "$CONTAINER" ]; then
-    echo "Error: Container was not specified"
+    echo "Error: Container name was not specified"
     exit 1
 fi
 
 set -e
 
-docker exec -it "$CONTAINER" \
-    /bin/sh -c "[ -e /bin/bash ] && exec /bin/bash || exec /bin/sh"
+status="$(docker container inspect --format='{{index .State.Health.Status}}' "$CONTAINER")"
+readonly status
 
-exit 0
+echo "$status"
+test "$status" = 'healthy'
