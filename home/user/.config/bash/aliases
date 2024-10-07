@@ -92,8 +92,8 @@ elif [[ "$OSTYPE" == "linux-android"* ]]; then
 fi
 
 # python
-alias pipir='python3 -m pip install -r requirements.txt'
-alias pipar='python3 -m pip freeze > requirements.txt'
+alias pipir='pip install -r requirements.txt'
+alias pipar='pip list --not-required --format freeze | tee requirements.txt'
 alias vd='deactivate'
 
 # git
