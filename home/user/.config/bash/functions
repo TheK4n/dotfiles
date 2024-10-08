@@ -233,7 +233,6 @@ cleanup-downloads() {
     cleanup-directory "${downloads_directory}" >> "${log_file}"
 }
 
-
 _bak() {
     local -r filename="${1}"
     mv "${filename}" "${filename}.bak"
@@ -242,6 +241,11 @@ _bak() {
 _unbak() {
     local -r filename="${1}"
     local -r new_filename="${filename/%.bak/}"
+
+    if [[ -e "${new_filename}" ]]; then
+        echo "Filename '${new_filename}' already exists" >&2
+        return 1
+    fi
 
     mv "${filename}" "${new_filename}"
 }
