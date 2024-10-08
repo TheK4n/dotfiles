@@ -194,15 +194,65 @@ sshx() {
     ssh -X -o ControlMaster=no -o ControlPath=none "$@"
 }
 
-django-start-project() (
+django-create-project() (
     set -ue
-    local -r project_name="$1"
+    local -r project_name="${1}"
 
-    mkdir "$project_name"
-    cd "$project_name"
+    mkdir "${project_name}"
+    cd "${project_name}"
     python3 -m virtualenv venv
     . venv/bin/activate
     pip install django
     django-admin startproject core .
     git init
 )
+
+cleanup-directory() {
+    local -r directory="${1}"
+
+    if [[ ! -d "${directory}" ]]; then
+        echo "Directory '${directory}' not found" >&2
+        return 1
+    fi
+
+    age="+21" # Notation: +n  => "At least n days"
+    echo "Deleting files not accessed for a ${age} days:"
+    find "${directory}" -atime "${age}" -exec rm -fv {} \;
+
+    echo "Deleting empty directories:"
+    find "${directory}" -type d -empty -print -delete
+}
+
+cleanup-downloads() {
+    local -r downloads_directory="${HOME}/Downloads"
+    local -r log_file="${downloads_directory}/cleanup.log"
+
+    touch "${log_file}"
+
+    echo "$(date -Iseconds) : Start cleanup" >> "${log_file}"
+    cleanup-directory "${downloads_directory}" >> "${log_file}"
+}
+
+
+_bak() {
+    local -r filename="${1}"
+    mv "${filename}" "${filename}.bak"
+}
+
+_unbak() {
+    local -r filename="${1}"
+    local -r new_filename="${filename/%.bak/}"
+
+    mv "${filename}" "${new_filename}"
+}
+
+bak() {
+    local filename
+    for filename in "$@"; do
+        if [[ "${filename: -4}" = ".bak" ]]; then
+            _unbak "${filename}"
+        else
+            _bak "${filename}"
+        fi
+    done
+}
