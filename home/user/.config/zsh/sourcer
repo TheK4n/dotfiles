@@ -11,7 +11,6 @@ _so "$XDG_CONFIG_HOME/bash/functions"
 _so "$XDG_CONFIG_HOME/bash/hosts/$HOST"
 
 
-_so /etc/zsh_command_not_found
 _so "$ZDOTDIR/options"
 _so "$ZDOTDIR/completion"
 _so "$ZDOTDIR/history"
@@ -21,8 +20,8 @@ _so "$ZDOTDIR/aliases"
 
 _so "$ZDOTDIR/plugin"
 
-_so "$ZDOTDIR/calculator"
+_so "$ZDOTDIR/mappings"
 
-bindkey '`' autosuggest-accept
+_so "$ZDOTDIR/calculator"
 
 _sod "$ZDOTDIR/zshrc.d"
