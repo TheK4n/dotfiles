@@ -15,12 +15,27 @@ lt() {
 }
 
 destroy() {
-    test -n "$1" || return 1
-    test -e "$1" || return 1
+    local -r filename="${1}"
 
-    echo -n "Sure want to destroy file '$1' with size $(du -hs "$1" | awk '{printf $1}') [y/N] "
+    if [[ ! -f "${filename}" ]]; then
+        echo "destroy: File '${filename}' not found" >&2
+        return 1
+    fi
+
+    local filesize
+    filesize="$(du -hs "${filename}" | awk '{printf $1}')"
+    readonly filesize
+
+    echo -n "Sure want to destroy file '${filename}' with size ${filesize} [y/N] "
+
+    local response
     read -r response
-    [[ $response == [yY] ]] && shred -zun 25 "$1"
+    readonly response
+    if [[ ! "${response}" == [yY] ]]; then
+        return 1
+    fi
+
+    shred -zun 3 "${filename}"
 }
 
 workon() {
