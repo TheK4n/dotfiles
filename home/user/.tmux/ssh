@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo -n "ssh server: "
+declare SSH_SERVER
+read -r SSH_SERVER
+readonly SSH_SERVER
+
+readonly SESSION="ssh-${SSH_SERVER}"
+
+if ! tmux has-session -t "${SESSION}"; then
+    tmux new-session -s "${SESSION}" -d -n "${MAINW}" -c "${WORKING_PROJECT}" "ssh ${SSH_SERVER}"
+fi
+
+tmux switch-client -t "${SESSION}"

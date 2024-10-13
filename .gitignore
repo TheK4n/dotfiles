@@ -28,6 +28,7 @@ home/user/.termux/shell
 home/user/.config/tmux/plugins
 home/user/.config/tmux/local.conf
 
-!home/user/.tmux/*
-!home/user/.tmux/dotfiles.sh
-!home/user/.tmux/temp.sh
+home/user/.tmux/*
+!home/user/.tmux/dotfiles
+!home/user/.tmux/temp
+!home/user/.tmux/ssh
