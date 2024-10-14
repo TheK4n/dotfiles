@@ -30,5 +30,5 @@ home/user/.config/tmux/local.conf
 
 home/user/.tmux/*
 !home/user/.tmux/dotfiles
-!home/user/.tmux/temp
+!home/user/.tmux/sandbox
 !home/user/.tmux/ssh
