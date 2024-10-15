@@ -2,8 +2,17 @@
 
 set -x
 
-readonly RND="${RANDOM}"
-readonly SESSION="sandbox${RND}"
+declare RND="${RANDOM}"
+declare SESSION="sandbox${RND}"
+
+while tmux has-session -t "${SESSION}" 2>/dev/null
+do
+    RND="${RANDOM}"
+    SESSION="sandbox${RND}"
+done
+
+readonly RND
+readonly SESSION
 
 
 declare WORKING_PROJECT
