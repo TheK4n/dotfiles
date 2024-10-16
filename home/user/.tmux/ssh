@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
+set -eu
+
 echo -n "ssh server: "
 declare SSH_SERVER
 read -r SSH_SERVER
 readonly SSH_SERVER
 
-declare SSH_SERVER_SESSION_NAME
-SSH_SERVER_SESSION_NAME="$(echo "$SSH_SERVER" | sed 's/\./_/')"
-readonly SSH_SERVER_SESSION_NAME
+declare -r SSH_SERVER_SESSION_NAME="${SSH_SERVER//\./_}"
+declare -r SESSION="ssh-${SSH_SERVER_SESSION_NAME}"
 
-readonly SESSION="ssh-${SSH_SERVER_SESSION_NAME}"
 
-if ! tmux has-session -t "${SESSION}"; then
-    tmux new-session -s "${SESSION}" -d -n "${MAINW}" -c "${WORKING_PROJECT}" "ssh ${SSH_SERVER}"
+if ! tmux has-session -t "${SESSION}" 2>/dev/null; then
+    tmux new-session -s "${SESSION}" -d -n "1" "ssh ${SSH_SERVER}"
 fi
 
 tmux switch-client -t "${SESSION}"

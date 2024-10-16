@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+set -eux
 
 declare RND="${RANDOM}"
 declare SESSION="sandbox${RND}"
