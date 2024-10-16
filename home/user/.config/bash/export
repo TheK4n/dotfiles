@@ -21,7 +21,8 @@ export HISTTIMEFORMAT="%F %T "
 export HISTIGNORE="&:l[lsa\.]:[bf]g:exit:q:clear:c:history:h"
 
 export BROWSERCLI=w3m
-test -z "$BROWSER" && export BROWSER=firefox
+test -z "$BROWSER" && BROWSER=firefox
+export BROWSER
 
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$HOME/.local/bin:$PATH"
