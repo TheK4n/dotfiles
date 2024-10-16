@@ -2,17 +2,26 @@
 
 set -eu
 
-echo -n "ssh server: "
-declare SSH_SERVER
-read -r SSH_SERVER
-readonly SSH_SERVER
+SSH_SERVERS="$(grep 'Host ' "${HOME}/.ssh/config" | sed 's/^Host //')"
+HOSTS=$(grep -v '^#' /etc/hosts)
+ALL_HOSTS="$(echo "$SSH_SERVERS" "$HOSTS" | grep -v '\*'| sed 's/ /\n/g' | sed '/^$/d' | sort | uniq)"
 
-declare -r SSH_SERVER_SESSION_NAME="${SSH_SERVER//\./_}"
-declare -r SESSION="ssh-${SSH_SERVER_SESSION_NAME}"
+SSH_SERVER="$(echo -n "$ALL_HOSTS" | fzf +m --print-query --bind 'tab:replace-query' | tail -n 1)"
+
+
+if [[ -z "${SSH_SERVER}" ]]; then
+    exit 0
+fi
+
+
+SSH_SERVER_SESSION_NAME="${SSH_SERVER//\./-}"
+SSH_SERVER_SESSION_NAME="${SSH_SERVER_SESSION_NAME//:/-}"
+SSH_SERVER_SESSION_NAME="${SSH_SERVER_SESSION_NAME%% *}"
+declare -r SESSION="ssh_${SSH_SERVER_SESSION_NAME}"
 
 
 if ! tmux has-session -t "${SESSION}" 2>/dev/null; then
-    tmux new-session -s "${SESSION}" -d -n "1" "ssh ${SSH_SERVER}"
+    tmux new-session -s "${SESSION}" -d -n "1" "ssh ${SSH_SERVER} || read"
 fi
 
 tmux switch-client -t "${SESSION}"
