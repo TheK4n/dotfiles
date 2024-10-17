@@ -275,3 +275,7 @@ bak() {
         fi
     done
 }
+
+f() {
+    find . -name "*${1}*"
+}

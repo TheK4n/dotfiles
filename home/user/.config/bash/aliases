@@ -40,6 +40,9 @@ alias wp='cd $WORKING_PROJECT'
 
 alias path='echo -e ${PATH//:/\\n}'
 
+alias dh='dirs -v'
+alias pd='popd'
+
 # shorts
 alias c='clear'
 alias h='history 0'

@@ -48,3 +48,19 @@ bindkey -M viins '^S' insert-sudo  # C-s
 bindkey '`' autosuggest-accept
 bindkey '^?' backward-delete-char
 bindkey '^W' backward-delete-word
+
+
+popdquiet() {
+    popd &>/dev/null
+    zle reset-prompt
+}
+zle -N popdquiet
+bindkey "^P" popdquiet
+
+
+cddotdot() {
+    cd ..
+    zle reset-prompt
+}
+zle -N cddotdot
+bindkey "^O" cddotdot
