@@ -2,13 +2,15 @@
 
 set -eux
 
+declare -r SESSION_PREFIX="sandbox"
+
 declare RND="${RANDOM}"
-declare SESSION="sandbox${RND}"
+declare SESSION="${SESSION_PREFIX}${RND}"
 
 while tmux has-session -t "${SESSION}" 2>/dev/null
 do
     RND="${RANDOM}"
-    SESSION="sandbox${RND}"
+    SESSION="${SESSION_PREFIX}${RND}"
 done
 
 readonly RND
@@ -16,7 +18,7 @@ readonly SESSION
 
 
 declare WORKING_PROJECT
-WORKING_PROJECT="$(mktemp -td "sandbox${RND}.XXXX")"
+WORKING_PROJECT="$(mktemp -td "${SESSION_PREFIX}${RND}.XXXX")"
 readonly WORKING_PROJECT
 
 tmux new-session -s "${SESSION}" -d -c "${WORKING_PROJECT}"
