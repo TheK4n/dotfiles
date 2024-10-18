@@ -44,8 +44,8 @@
     submodule = short
 
 [alias]
-    a = "!git ls-files --exclude-standard -m --others -t | fzf -0 -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs -r git add"
-    u = "!git diff --name-only --cached | fzf -0 -m --bind load:last --preview 'git diff --staged --color=always {1}' | xargs -r git restore --staged"
+    a = "!git ls-files --exclude-standard -m --others -t | fzf -1 -0 -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs -r git add"
+    u = "!git diff --name-only --cached | fzf -1 -0 -m --bind load:last --preview 'git diff --staged --color=always {1}' | xargs -r git restore --staged"
     d = diff
     di = diff
     ds = diff --staged
