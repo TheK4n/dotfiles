@@ -1,0 +1,4 @@
+#!/bin/bash
+echo
+figlet -ct -f banner "welcome mr.kan"
+echo

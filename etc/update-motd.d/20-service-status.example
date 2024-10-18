@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo wg0 status: $(systemctl is-active wg-quick@wg0.service)
+
+if ! systemctl is-active wg-quick@wg0.service &>/dev/null; then
+    echo 'Executing this command may fix wireguard: "sudo apt update && sudo apt install linux-headers-$(uname -r) && sudo reboot"'
+fi
+
+echo
