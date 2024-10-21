@@ -27,11 +27,6 @@ alias root='sudo -i TMOUT=450'
 alias rm='rm -Ivr --one-file-system'
 alias mkdir='mkdir -pv'
 
-alias cd..='cd ..'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .3='cd ../../..'
 alias cl='_d() { cd "${1:-$HOME}" && ls; }; _d'
 
 alias q='exit 0'

@@ -7,6 +7,15 @@ alias -g HL='| highlight -O ansi -S '
 alias -g JSON='| json HL json'
 alias -g DI='| diff'
 alias -g ?='| grep'
+alias -g C='| wc -l'
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .3='../../..'
+alias -g .....='../../../..'
+alias -g .4='../../../..'
+
+alias -g D="DISPLAY=:0.0"
 
 alias -g O="1>/dev/null"  # stdOut
 alias -g E="2>/dev/null"  # stdErr

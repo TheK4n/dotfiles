@@ -6,6 +6,7 @@ setopt notify               # report the status of background jobs immediately
 setopt numericglobsort      # sort filenames numerically when it makes sense
 setopt promptsubst          # enable command substitution in prompt
 setopt noflowcontrol        # disable C-s mapping
+setopt autocd
 
 
 DIRSTACKSIZE=8
