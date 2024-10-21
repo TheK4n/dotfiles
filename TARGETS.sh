@@ -1,6 +1,6 @@
 declare -r -A TARGETS=(
     ["colors"]=".config/terminal-colors.d"
-    ["tmux"]=".config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_attach_session.sh"
+    ["tmux"]=".config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_choose_session.sh"
     ["bash"]=".config/bash .bashrc .profile %tmux %colors"
     ["zsh"]="%bash .config/zsh .zshenv .inputrc"
     ["alacritty"]=".config/alacritty"
