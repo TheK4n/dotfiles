@@ -18,6 +18,17 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*:*:extract:*' file-patterns '*.tar* *.lzma *.bz2 *.zip *.7z'
 
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
+
+zstyle ':completion:*' squeeze-slashes true
+
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+
 autoload bashcompinit
 bashcompinit
 
