@@ -5,7 +5,7 @@ export FZF_DEFAULT_OPTS="\
 --cycle \
 --pointer='' \
 --marker='+' \
---color='pointer:green' \
+--color='pointer:blue,prompt:blue' \
 --bind \
 ctrl-/:toggle-preview,\
 ctrl-p:preview-up,\
