@@ -19,6 +19,7 @@
 
 [pull]
     rebase = false
+    ff = only
 
 [color]
     status = auto
