@@ -38,11 +38,17 @@
 [apply]
     whitespace = fix
 
+[rerere]
+    enabled = true
+
 [diff]
     mnemonicPrefix = true
     suppressBlankEmpty = true
     rename = copy
     submodule = short
+    algorithm = histogram
+    colormoved = default
+    colormovedws = allow-indentation-change
 
 [alias]
     a = "!git ls-files --exclude-standard -m --others -t | fzf -1 -0 -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs -r git add"
