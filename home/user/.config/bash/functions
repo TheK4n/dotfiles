@@ -60,7 +60,7 @@ va() {
             source "${1}/bin/activate"
             return 0
         fi
-        echo "va: error: virtual environment ${1} not found, use python3 -m virtualenv venv" >&2
+        echo "va: error: virtual environment ${1} not found, use 'python3 -m virtualenv ${1}'" >&2
         return 1
     fi
 
@@ -244,7 +244,7 @@ cleanup-downloads() {
 
     touch "${log_file}"
 
-    echo "$(date -Iseconds) : Start cleanup" | tee -a "${log_file}"
+    echo "$(date -Iseconds) : Start cleanup" >> "${log_file}"
     cleanup-directory "${downloads_directory}" | tee -a "${log_file}"
 }
 
