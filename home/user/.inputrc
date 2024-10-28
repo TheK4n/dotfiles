@@ -1,7 +1,8 @@
+$include /etc/inputrc
+
 set horizontal-scroll-mode Off
 set editing-mode vi
 set keymap vi
 set convert-meta on
 set bell-style none
-
-$include /etc/inputrc
+set show-mode-in-prompt on
