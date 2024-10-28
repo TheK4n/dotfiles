@@ -132,6 +132,8 @@ elif [[ "$OSTYPE" == "darwin" ]]; then
     alias paste='pbpaste'
 fi
 
+alias sshn='ssh -S none'
+
 alias black='magick canvas:none PNG:- | feh -YF -'
 
 # :)
