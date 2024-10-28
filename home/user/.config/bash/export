@@ -6,7 +6,7 @@ export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
 export PAGER="less"
-export LESS="-nMiSRx4 --mouse -# 1 -+X -+F"
+export LESS="-nMWiSRx4 --mouse -j2 -# 1 -+X -+F"
 
 if command -v "lesspipe.sh" &>/dev/null; then
     export LESSOPEN="| lesspipe.sh %s"

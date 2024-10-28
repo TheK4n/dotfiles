@@ -31,7 +31,7 @@ alias cl='_d() { cd "${1:-$HOME}" && ls; }; _d'
 
 alias q='exit 0'
 
-alias wp='cd $WORKING_PROJECT'
+alias wp='cd "$WORKING_PROJECT"'
 
 alias path='echo -e ${PATH//:/\\n}'
 
