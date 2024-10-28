@@ -244,8 +244,8 @@ cleanup-downloads() {
 
     touch "${log_file}"
 
-    echo "$(date -Iseconds) : Start cleanup" >> "${log_file}"
-    cleanup-directory "${downloads_directory}" >> "${log_file}"
+    echo "$(date -Iseconds) : Start cleanup" | tee -a "${log_file}"
+    cleanup-directory "${downloads_directory}" | tee -a "${log_file}"
 }
 
 _bak() {
