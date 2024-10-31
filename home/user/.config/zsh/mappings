@@ -24,8 +24,6 @@ bindkey -M viins '\e.' insert-last-word  # M-.
 bindkey '^[[Z' reverse-menu-complete  # S-Tab
 
 
-
-
 insert-sudo() {
   local sudo_template="${SUDO:=sudo} "
   local template_len="${#sudo_template}"
@@ -56,6 +54,7 @@ popdquiet() {
 }
 zle -N popdquiet
 bindkey "^P" popdquiet
+bindkey -M vicmd "^P" popdquiet
 
 
 cddotdot() {
@@ -64,3 +63,4 @@ cddotdot() {
 }
 zle -N cddotdot
 bindkey "^O" cddotdot
+bindkey -M vicmd "^O" cddotdot
