@@ -32,3 +32,4 @@ home/user/.tmux/*
 !home/user/.tmux/dotfiles
 !home/user/.tmux/sandbox
 !home/user/.tmux/ssh
+!home/user/.tmux/example-background-job

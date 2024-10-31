@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -eu
+set -m  # enable background jobs
+
+readonly SESSION=example-background-job
+readonly MAINW=1
+
+
+if tmux has-session -t "${SESSION}" &>/dev/null; then
+    tmux kill-session -t "${SESSION}"
+fi
+
+tmux new-session -s "${SESSION}" -d -n "${MAINW}"
+tmux switch-client -t "${SESSION}"
+
+
+temp_script="$(mktemp)"
+readonly temp_script
+cat > "${temp_script}" << EOF
+#!/bin/bash
+
+cleanup() {
+    rm \$0  # remove self after exit
+}
+
+trap cleanup EXIT ERR
+
+sleep 3
+tmux send-keys -t "${SESSION}:${MAINW}.1" 'echo hello' Enter
+sleep 3
+tmux kill-session -t "${SESSION}"
+EOF
+
+chmod +x "${temp_script}"
+nohup "${temp_script}" >/dev/null &  # run in background
