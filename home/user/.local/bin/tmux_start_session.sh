@@ -4,14 +4,12 @@
 export FZF_DEFAULT_OPTS="\
 --cycle \
 --pointer='' \
---marker='+' \
 --color='pointer:green,prompt:green' \
 --bind \
 ctrl-/:toggle-preview,\
 ctrl-p:preview-up,\
 ctrl-n:preview-down,\
-ctrl-u:clear-query,\
-ctrl-q:toggle+down\
+ctrl-u:clear-query\
 "
 
 declare -r TMUX_SESSIONS="${HOME}/.tmux"

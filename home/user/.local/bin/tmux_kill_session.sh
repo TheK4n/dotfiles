@@ -11,7 +11,7 @@ ctrl-/:toggle-preview,\
 ctrl-p:preview-up,\
 ctrl-n:preview-down,\
 ctrl-u:clear-query,\
-ctrl-q:toggle\
+ctrl-o:toggle\
 "
 
 declare current_session

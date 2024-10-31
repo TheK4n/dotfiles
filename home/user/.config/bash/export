@@ -46,7 +46,7 @@ ctrl-a:toggle-all,\
 ctrl-p:preview-up,\
 ctrl-n:preview-down,\
 ctrl-u:clear-query,\
-ctrl-q:toggle+down,\
+ctrl-o:toggle,\
 tab:replace-query,\
 shift-tab:toggle\
 "
