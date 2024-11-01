@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 
 export FZF_DEFAULT_OPTS="\
@@ -12,18 +12,15 @@ ctrl-n:preview-down,\
 ctrl-u:clear-query\
 "
 
-declare -r TMUX_SESSIONS="${HOME}/.tmux"
+readonly TMUX_SESSIONS="${HOME}/.tmux"
 
 
-declare current_session
 current_session="$(tmux display-message -p '#S')"
 readonly current_session
 
-declare existing_sessions
 existing_sessions="$(tmux list-session -F '#S')"
 readonly existing_sessions
 
-declare sessions
 sessions="$(find "${TMUX_SESSIONS}/" -type f -executable -exec basename {} \;)"
 sessions="$(echo "${sessions}" | sed "s/^${current_session}/${current_session} (current)/")"
 
@@ -33,10 +30,9 @@ do
 done
 readonly sessions
 
-declare session_file
 session_file="$(echo "${sessions}" | fzf +m --preview-window 70% --preview "cat '${TMUX_SESSIONS}/{1}'" | awk '{printf $1}')"
 readonly session_file
 
-if [[ -n "${session_file}" ]]; then
+if [ -n "${session_file}" ]; then
     "${TMUX_SESSIONS}/${session_file}"
 fi
