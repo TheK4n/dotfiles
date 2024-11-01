@@ -5,7 +5,8 @@ export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
 --color='border:green,label:green'
 --border-label=' Start session '
---no-multi \
+--pointer='> '
+--marker=''
 "
 
 readonly TMUX_SESSIONS="${HOME}/.tmux"

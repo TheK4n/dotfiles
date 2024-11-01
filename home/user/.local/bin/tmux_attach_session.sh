@@ -9,6 +9,8 @@ ${FZF_DEFAULT_OPTS}
 --border-label=' Attach session '
 --preview-window=follow
 --preview='tmux capture-pane -p -e -t {1}'
+--pointer='> '
+--marker=''
 --bind
 ctrl-x:execute\(tmux\ kill-session\ -t\ {1}\)+reload\(${tmux_list_sessions_script}\),\
 load:reload\(${tmux_list_sessions_script}\;sleep\ 1\)\
