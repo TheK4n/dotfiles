@@ -7,7 +7,7 @@ export FZF_DEFAULT_OPTS="\
 --cycle \
 --pointer='' \
 --marker='+' \
---color='pointer:red,prompt:red' \
+--color='pointer:red,prompt:red,preview-border:red' \
 --multi \
 --preview-window 70%,follow \
 --preview 'tmux capture-pane -p -e -t {1}' \

@@ -6,7 +6,7 @@ readonly tmux_list_sessions_script="$HOME/.local/bin/tmux_list_sessions.sh"
 export FZF_DEFAULT_OPTS="\
 --cycle \
 --pointer='' \
---color='pointer:blue,prompt:blue' \
+--color='pointer:blue,prompt:blue,preview-border:blue' \
 --no-multi \
 --preview-window 70%,follow \
 --preview 'tmux capture-pane -p -e -t {1}'
