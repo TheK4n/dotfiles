@@ -4,17 +4,12 @@
 readonly tmux_list_sessions_script="$HOME/.local/bin/tmux_list_sessions.sh"
 
 export FZF_DEFAULT_OPTS="\
---cycle \
---pointer='' \
---color='pointer:blue,prompt:blue,preview-border:blue' \
---no-multi \
---preview-window 70%,follow \
---preview 'tmux capture-pane -p -e -t {1}'
---bind \
-ctrl-/:toggle-preview,\
-ctrl-p:preview-up,\
-ctrl-n:preview-down,\
-ctrl-u:clear-query,\
+${FZF_DEFAULT_OPTS}
+--color='border:blue,label:blue'
+--border-label=' Attach session '
+--preview-window=follow
+--preview='tmux capture-pane -p -e -t {1}'
+--bind
 ctrl-x:execute\(tmux\ kill-session\ -t\ {1}\)+reload\(${tmux_list_sessions_script}\),\
 load:reload\(${tmux_list_sessions_script}\;sleep\ 1\)\
 "

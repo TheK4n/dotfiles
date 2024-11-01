@@ -4,20 +4,13 @@
 readonly tmux_list_sessions_script="$HOME/.local/bin/tmux_list_sessions.sh"
 
 export FZF_DEFAULT_OPTS="\
---cycle \
---pointer='' \
---marker='+' \
---color='pointer:red,prompt:red,preview-border:red' \
---multi \
---preview-window 70%,follow \
---preview 'tmux capture-pane -p -e -t {1}' \
---bind \
-ctrl-/:toggle-preview,\
-ctrl-a:toggle-all,\
-ctrl-p:preview-up,\
-ctrl-n:preview-down,\
-ctrl-u:clear-query,\
-ctrl-o:toggle,\
+${FZF_DEFAULT_OPTS}
+--color='border:red,label:red'
+--border-label=' Kill sessions '
+--multi
+--preview-window=follow
+--preview='tmux capture-pane -p -e -t {1}'
+--bind
 ctrl-x:execute\(tmux\ kill-session\ -t\ {1}\)+reload\(${tmux_list_sessions_script}\)\
 "
 

@@ -2,14 +2,10 @@
 
 
 export FZF_DEFAULT_OPTS="\
---cycle \
---pointer='' \
---color='pointer:green,prompt:green,preview-border:green' \
---bind \
-ctrl-/:toggle-preview,\
-ctrl-p:preview-up,\
-ctrl-n:preview-down,\
-ctrl-u:clear-query\
+${FZF_DEFAULT_OPTS}
+--color='border:green,label:green'
+--border-label=' Start session '
+--no-multi \
 "
 
 readonly TMUX_SESSIONS="${HOME}/.tmux"
