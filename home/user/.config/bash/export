@@ -35,9 +35,9 @@ export TMPDIR
 
 export FZF_DEFAULT_OPTS="\
 --cycle
+--color='gutter:-1,pointer:red,preview-border:grey,separator:grey'
 --pointer='> '
 --marker='* '
---color='gutter:black,pointer:red,preview-border:grey,separator:grey'
 --bind
 ctrl-/:toggle-preview,\
 ctrl-a:toggle-all,\
