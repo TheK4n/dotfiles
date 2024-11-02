@@ -23,7 +23,7 @@ mods = "Control|Shift"
 hide_when_typing = true
 
 [scrolling]
-history = 10000
+history = 3000
 multiplier = 3
 
 [window]
