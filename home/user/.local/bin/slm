@@ -63,4 +63,3 @@ case "$1" in
     *) shift;          cmd_help       "$@" ;;
 esac
 exit 0
-

@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # The idea is to define "holder" modules in i3status config and then replace them
 
 # In order to make this example work you need to add
 # order += "tztime holder__headphones"
-# and 
+# and
 # tztime holder__headphones {
 #        format = "holder__headphones"
 # }
@@ -12,15 +12,14 @@
 [ -x "/usr/bin/jq" ] || exec i3status
 
 update_holder() {
-    local instance="$1"
-    local replacement="$2"
+    instance="$1"
+    replacement="$2"
     echo "$3" | jq --argjson arg_j "$replacement" "(.[] | (select(.instance==\"$instance\"))) |= \$arg_j"
 }
 
 get_device_battery_status() {
     for uuid in $(timeout 1 bluetoothctl devices | cut -f2 -d' ' 2>/dev/null)
     do
-        local device_info
         device_info="$(timeout 1 bluetoothctl info "$uuid")"
 
         if echo "$device_info" | grep -q 'Connected: yes\|Battery Percentage'; then
@@ -31,7 +30,7 @@ get_device_battery_status() {
 }
 
 update_json_with_text() {
-    local json="{ \"full_text\": \"$1\", \"color\": \"#FFFFFF\"}"
+    json="{ \"full_text\": \"$1\", \"color\": \"#FFFFFF\"}"
     update_holder "holder__headphones" "$json" "$2"
 }
 

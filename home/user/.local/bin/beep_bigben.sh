@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # g# e f# b | b f# g# e | g# f# e b
 

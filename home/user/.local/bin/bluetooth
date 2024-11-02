@@ -5,7 +5,7 @@ bssid="$(bluetoothctl devices | rofi -dmenu -p "Devices: " -l 20 | cut -d' ' -f2
 exit_counter=0
 until bluetoothctl connect "$bssid"
 do
-    ((exit_counter+=1))
+    exit_counter=$((exit_counter+1))
 
     if [ "$exit_counter" -gt 3 ]; then
         break

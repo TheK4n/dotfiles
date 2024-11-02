@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 beep \
     -f 1198.64491 -l 200 \

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 
 eval "$(echo "i3-msg exit

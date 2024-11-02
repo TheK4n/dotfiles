@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-set -eo pipefail
+set -ue
 
 bssid="$(nmcli -f BSSID,SSID,SIGNAL,RATE,BARS,SECURITY dev wifi list | sed -n '1!p' | rofi -dmenu -p "WiFi: " -l 20 | cut -d' ' -f1)"
 pass="$(echo "" | rofi -dmenu -p "Password: ")"

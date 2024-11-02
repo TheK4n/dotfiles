@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 
 export FZF_DEFAULT_OPTS="\
