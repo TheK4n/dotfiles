@@ -1,5 +1,26 @@
 #!/usr/bin/env zsh
 
-for zfile in .zshenv .config/zsh/.zshrc .config/zsh/.zprofile .config/zsh/.zlogout .config/zsh/aliases .config/zsh/completion .config/zsh/history .config/zsh/options .config/zsh/other .config/zsh/plugin .config/zsh/calculator .config/zsh/prompt .config/zsh/mappings .config/zsh/sourcer .config/zsh/export .config/zsh/functions; do
-    zcompile "$HOME/$zfile"
+readonly zfiles=(
+    .zshenv
+    .config/zsh/.zshrc
+    .config/zsh/.zprofile
+    .config/zsh/.zlogout
+    .config/zsh/aliases
+    .config/zsh/completion
+    .config/zsh/history
+    .config/zsh/options
+    .config/zsh/other
+    .config/zsh/plugin
+    .config/zsh/calculator
+    .config/zsh/prompt
+    .config/zsh/mappings
+    .config/zsh/sourcer
+    .config/zsh/export
+    .config/zsh/functions
+)
+
+
+for zfile in "${zfiles[@]}"
+do
+    zcompile "${HOME}/${zfile}"
 done
