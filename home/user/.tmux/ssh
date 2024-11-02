@@ -21,7 +21,7 @@ readonly SESSION="ssh_${SSH_SERVER_SESSION_NAME}"
 
 
 if ! tmux has-session -t "${SESSION}" 2>/dev/null; then
-    tmux new-session -s "${SESSION}" -d -n "1" "ssh ${SSH_SERVER} || read"
+    tmux new-session -s "${SESSION}" -d -n "1" "TERM=xterm ssh '${SSH_SERVER}' || read"
 fi
 
 tmux set-option -t "${SESSION}" status off
