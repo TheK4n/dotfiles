@@ -29,9 +29,6 @@ zstyle ':completion:*' squeeze-slashes true
 
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
-autoload bashcompinit
-bashcompinit
-
 compdef _directories _d
 compdef _files _f
 compdef _directories mcd

@@ -1,15 +1,21 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 set -eux
 
-declare -r SESSION_PREFIX="sandbox"
 
-declare RND="${RANDOM}"
-declare SESSION="${SESSION_PREFIX}${RND}"
+random() {
+    seq 0 65535 | shuf | head -n 1
+}
+
+readonly SESSION_PREFIX="sandbox"
+
+
+RND="$(random)"
+SESSION="${SESSION_PREFIX}${RND}"
 
 while tmux has-session -t "${SESSION}" 2>/dev/null
 do
-    RND="${RANDOM}"
+    RND="$(random)"
     SESSION="${SESSION_PREFIX}${RND}"
 done
 
@@ -17,7 +23,6 @@ readonly RND
 readonly SESSION
 
 
-declare WORKING_PROJECT
 WORKING_PROJECT="$(mktemp -td "${SESSION_PREFIX}${RND}.XXXX")"
 readonly WORKING_PROJECT
 

@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 git config --global user.name "$USER"
-git config --global user.email "${USER}@${HOST:-$HOSTNAME}"
+git config --global user.email "${USER}@${HOST}"
 git config --global user.signingkey "$USER"
 
 git config --global github.user "$USER"
-git config --global github.email "${USER}@${HOST:-$HOSTNAME}"
+git config --global github.email "${USER}@${HOST}"

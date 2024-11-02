@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 echo "sudo pacman -S nitrogen picom compton ttf-font-awesome xdotool xclip maim playerctl rofi"

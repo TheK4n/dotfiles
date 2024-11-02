@@ -20,7 +20,6 @@
 ## Project description
 
 Config files for:
-* bash
 * zsh
 * alacritty
 * tmux
@@ -37,17 +36,17 @@ Config files for:
     <img src=".assets/prompt.png" alt="Prompt">
 </p>
 
-You can add your files to the `~/.config/bash/bashrc.d` directory for bash or `~/.config/zsh/zshrc.d` directory for zsh so that they automatically run in ascending order when you open a terminal.\
+You can add your files to the  `~/.config/zsh/zshrc.d` directory for zsh so that they automatically run in ascending order when you open a terminal.\
 Example:\
-`~/.config/bash/bashrc.d/01_hello.sh`
-```bash
+`~/.config/zsh/zshrc.d/01_hello.sh`
+```sh
 echo "Hello $USER!"
 ```
 
 <a id="chapter-1"></a>
 ## Installation
 
-```bash
+```sh
 git clone https://github.com/TheK4n/dotfiles
 cd dotfiles
 ./install zsh nvim ...

@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-if [[ "$1" == "docker-cli-plugin-metadata" ]]; then
+if [ "$1" = "docker-cli-plugin-metadata" ]; then
 cat << HERE
 {
      "SchemaVersion": "0.1.0",
@@ -22,7 +22,7 @@ EOF
 
 shift
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     usage
     exit 0
 fi

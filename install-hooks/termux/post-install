@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 
-if [[ -d "$HOME/.shortcuts" ]]; then
+if [ -d "$HOME/.shortcuts" ]; then
     cp "$SUB/.shortcuts/*" "$HOME/.shortcuts"
 else
     cp -r "$SUB/.shortcuts" "$HOME"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo
 figlet -ct -f banner "welcome mr.kan"
 echo

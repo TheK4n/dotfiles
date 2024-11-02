@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 echo 'pacman -S man-pages man-db lesspipe'
 echo 'echo "ParallelDownloads = 5\nVerbosePkgLists" >> /etc/pacman.conf'

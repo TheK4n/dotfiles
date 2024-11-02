@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 sub="$HOME/.local/share/fonts"
 

@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-if [[ "$1" == "docker-cli-plugin-metadata" ]]; then
+if [ "$1" = "docker-cli-plugin-metadata" ]; then
 cat << HERE
 {
      "SchemaVersion": "0.1.0",
@@ -22,23 +22,24 @@ EOF
 
 shift
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     usage
     exit 0
 fi
 
 set -e
 
-result="CONTAINER NAME;IMAGE;IP\n"
 
-for container in $(docker ps -q | tr '\n' ' ')
-do
-    ip="$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container" 2>/dev/null)"
-    container_name="$(docker inspect --format='{{.Name}}' "$container" 2>/dev/null)"
-    image_name="$(docker inspect --format='{{.Config.Image}}' "$container" 2>/dev/null)"
+(
+    printf "CONTAINER NAME;IMAGE;IP\n"
+    for container in $(docker ps -q | tr '\n' ' ')
+    do
+        ip="$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container" 2>/dev/null)"
+        container_name="$(docker inspect --format='{{.Name}}' "$container" 2>/dev/null)"
+        image_name="$(docker inspect --format='{{.Config.Image}}' "$container" 2>/dev/null)"
 
-    result+="${container_name#"/"};${image_name};${ip}\n"
-done
+        printf "%s;%s;%s\n" "${container_name#/}" "${image_name}" "${ip}"
+    done
+) | column -t -s ";"
 
-echo -e "$result" 2>/dev/null | column -t -s ";"
 exit 0
