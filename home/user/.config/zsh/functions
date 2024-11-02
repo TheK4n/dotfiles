@@ -279,3 +279,30 @@ bak() {
 f() {
     find . -name "*${1}*"
 }
+
+mirror-site() (
+    set -eu
+
+    local -r name=$1; shift
+
+    mkdir -p "${name}" && cd "${name}"
+
+    local -r user_agent="Mozilla/5.0 ..."
+    wget \
+        --page-requisites \
+        --convert-links \
+        --adjust-extension \
+        --restrict-file-names=ascii \
+        --span-hosts \
+        --random-wait \
+        --execute robots=off \
+        --recursive \
+        --timestamping \
+        -l inf \
+        --no-remove-listing \
+        --no-parent \
+        --user-agent "$user_agent" \
+        --reject '*.woff*,*.ttf,*.eot,*.js' \
+        --tries 10 \
+        $@
+)

@@ -6,21 +6,27 @@ _f() { true ; }
 
 # colors
 if [ -x "$(command -v dircolors)" ]; then
-    export LS_OPTIONS="--color=auto"
+    LS_OPTIONS=(--color=auto -v)
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    alias grep='grep $LS_OPTIONS'
-    alias fgrep='fgrep $LS_OPTIONS'
-    alias ls='ls -v $LS_OPTIONS'
+    alias ls='ls $LS_OPTIONS'
 fi
 
-alias l.='ls -AFv --ignore="*"'
-alias ll='ls -lhFv'
-alias la='ls -AFv'
-alias lla='ls -lhFAv'
-alias ll.='ls -lhFAv --ignore="*"'
+alias l.='ls -AF --ignore="*"'
+alias ll='ls -lhF'
+alias la='ls -AF'
+alias lla='ls -lhFA'
+alias ll.='ls -lhFA --ignore="*"'
 alias lsl='_d() { ls -lhFA --color=always "${1:-.}" | $PAGER ; }; _d'
 
+GREP_OPTIONS=(
+    --color=auto
+    --binary-files=without-match
+    --exclude-dir=.git
+    --exclude-dir=.svn
+)
+
+alias grep='grep $GREP_OPTIONS'
 
 alias _='sudo'
 alias root='sudo -i TMOUT=450'

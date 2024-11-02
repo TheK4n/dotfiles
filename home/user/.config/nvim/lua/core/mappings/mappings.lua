@@ -56,6 +56,7 @@ map('n',
     {remap = false, silent = true}
 )
 
+map('n', 'q:', ':')
 map('n', 'Ж', ':')
 
 map('n', '<Enter>', 'o<ESC>')
