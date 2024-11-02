@@ -1,4 +1,4 @@
-# vim: ft=bash
+# vim: ft=zsh
 
 _sod() {
     if [ -d "$1" ] && [ -n "$(ls "$1")" ]; then

@@ -1,8 +1,7 @@
 declare -r -A TARGETS=(
     ["colors"]=".config/terminal-colors.d"
     ["tmux"]=".config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_list_sessions.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_kill_sessions.sh"
-    ["bash"]=".config/bash .bashrc .profile %tmux %colors"
-    ["zsh"]="%bash .config/zsh .zshenv .inputrc"
+    ["zsh"]=".config/zsh .zshenv .inputrc %colors"
     ["alacritty"]=".config/alacritty"
     ["nvim"]=".config/nvim .editorconfig .inputrc .editrc .local/bin/vim_askpass_helper"
     ["ssh"]=""
