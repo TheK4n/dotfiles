@@ -4,7 +4,7 @@ set -eux
 
 
 random() {
-    seq 0 65535 | shuf | head -n 1
+    shuf -i 0-32767 -n 1
 }
 
 readonly SESSION_PREFIX="sandbox"
