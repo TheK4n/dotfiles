@@ -1,132 +1,163 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -ueo pipefail
-shopt -s nullglob
+set -ue
 
-declare -r TARGET_PATH="$HOME"
+readonly TARGET_PATH="$HOME"
 
 
 _detect_current_script_real_directory() {
-    realpath -e -- "$(dirname -- "$(readlink -e -- "${BASH_SOURCE[0]:-$0}")")"
+    realpath -e -- "$(dirname -- "$(readlink -e -- "${0}")")"
 }
 
-declare DOTFILES_ROOT
 DOTFILES_ROOT="$(_detect_current_script_real_directory)"
 readonly DOTFILES_ROOT
 
-declare -xr SUB="${DOTFILES_ROOT}/home/user"
+readonly SUB="${DOTFILES_ROOT}/home/user"
+export SUB
 
-source "${DOTFILES_ROOT}/TARGETS.sh"
+. "${DOTFILES_ROOT}/TARGETS.sh"
 
 
 _die() {
-    echo "${0}: ${1}" >&2
-    exit $2
+    echo "$(basename "${0}"): ${1}" >&2
+    exit "${2}"
 }
 
-_link_files_in_sandbox() {
-    local targetfile
+string_get_first_char() (
+    printf %.1s "${1}"
+)
+
+string_exclude_first_char() (
+    echo "${1}" | tail -c+2
+)
+
+map_get_value() (
+    map="${1}"
+    key="${2}"
+
+    echo "${map}" | grep "${key}:" | cut -d ':' -f2
+)
+
+map_get_keys() (
+    map="${1}"
+
+    echo "${map}" | cut -d ':' -f1
+)
+
+map_key_exists() (
+    map="${1}"
+    key="${2}"
+
+    map_get_keys "${map}" | grep "${2}" 1>/dev/null
+)
+
+_link_files_in_sandbox() (
     for targetfile in "$@"
     do
         echo "installing: ${targetfile}"
-        if [[ "${targetfile::1}" = "%" ]]; then
-            _link_files_in_sandbox ${TARGETS["${targetfile:1}"]}
+        if [ "$(string_get_first_char "${targetfile}")" = "%" ]; then
+            files="$(map_get_value "${TARGETS}" "$(string_exclude_first_char "${targetfile}")")"
+            _link_files_in_sandbox ${files}
         else
-            if [[ ! "$(dirname "$targetfile")" = "." ]]; then
+            if [ ! "$(dirname "$targetfile")" = "." ]; then
                 mkdir -p "${SANDBOX_PATH}/$(dirname "$targetfile")"
             fi
             ln -sT "${SUB}/${targetfile}" "${SANDBOX_PATH}/${targetfile}"
         fi
     done
-}
+)
 
-_compare_sandbox_to_home() {
-    local comparisons
-    comparisons="$(diff -rq "$SANDBOX_PATH" "$TARGET_PATH")"
-    echo "$comparisons" | grep -vE "^Only in .+" || true
-}
+_compare_sandbox_to_home() (
+    comparisons="$(diff -rq "$SANDBOX_PATH" "$TARGET_PATH")" || true
+    echo "${comparisons}" | grep -vE "^Only in .+" || true
+)
 
-_merge_sandbox_to_home() {
-    cp -RTnP "$SANDBOX_PATH" "$TARGET_PATH" || true
-}
+_merge_sandbox_to_home() (
+    cp -RTnP "${SANDBOX_PATH}" "${TARGET_PATH}" || true
+)
 
-__install_from_sandbox() {
-    local comparisons
+__install_from_sandbox() (
     comparisons="$(_compare_sandbox_to_home)"
 
-    if [[ -n "$comparisons" ]]; then
-        echo "$comparisons" >&2
+    if [ -n "${comparisons}" ]; then
+        echo "${comparisons}" >&2
         _die "Found conflicting files. Exiting" 1
     fi
 
     echo "Merging to home..."
     _merge_sandbox_to_home
     echo "Successfully installed"
-}
+)
 
-_execute_hook_if_executable() {
+_execute_hook_if_executable() (
     # all hooks gets SUB and SANDBOX_PATH env variables
-    local -r target="$1"
-    local -r hook_name="$2"
+    target="$1"
+    hook_name="$2"
 
-    local hook_path="${DOTFILES_ROOT}/install-hooks/${target}/${hook_name}"
-    if [[ -x "$hook_path" ]]; then
+    hook_path="${DOTFILES_ROOT}/install-hooks/${target}/${hook_name}"
+    if [ -x "${hook_path}" ]; then
         echo "Executing ${hook_name} for target '${target}'"
-        "$hook_path"
+        "${hook_path}"
     fi
-}
+)
 
-execute_pre_hook() {
-    _execute_hook_if_executable "$1" "pre-install"
-}
+execute_pre_hook() (
+    _execute_hook_if_executable "${1}" "pre-install"
+)
 
-recursive_execute_pre_hooks() {
-    local targetfile
-    for targetfile in ${TARGETS["$1"]}
+recursive_execute_pre_hooks() (
+    files="$(map_get_value "${TARGETS}" "${1}")"
+
+    for targetfile in ${files}
     do
-        if [[ "${targetfile::1}" = "%" ]]; then
-            recursive_execute_pre_hooks "${targetfile:1}"
-            execute_pre_hook "${targetfile:1}"
+        if [ "$(string_get_first_char "${targetfile}")" = "%" ]; then
+            recursive_execute_pre_hooks "$(string_exclude_first_char "${targetfile}")"
+            execute_pre_hook "$(string_exclude_first_char "${targetfile}")"
         fi
     done
-}
+)
 
-execute_post_hook() {
+execute_post_hook() (
     _execute_hook_if_executable "$1" "post-install"
-}
+)
 
-recursive_execute_post_hooks() {
-    local targetfile
-    for targetfile in ${TARGETS["$1"]}
+recursive_execute_post_hooks() (
+    files="$(map_get_value "${TARGETS}" "${1}")"
+
+    for targetfile in ${files}
     do
-        if [[ "${targetfile::1}" = "%" ]]; then
-            recursive_execute_post_hooks "${targetfile:1}"
-            execute_post_hook "${targetfile:1}"
+        if [ "$(string_get_first_char "${targetfile}")" = "%" ]; then
+            recursive_execute_post_hooks "$(string_exclude_first_char "${targetfile}")"
+            execute_post_hook "$(string_exclude_first_char "${targetfile}")"
         fi
     done
-}
+)
 
-install_target() {
-    local -r target="$1"
+install_target() (
+    target="${1}"
 
-    execute_pre_hook "$target"
-    recursive_execute_pre_hooks "$target"
-    _link_files_in_sandbox ${TARGETS["$target"]}
+    files="$(map_get_value "${TARGETS}" "${target}")"
+
+    execute_pre_hook "${target}"
+    recursive_execute_pre_hooks "${target}"
+    _link_files_in_sandbox ${files}
     __install_from_sandbox
-    recursive_execute_post_hooks "$target"
-    execute_post_hook "$target"
-}
+    recursive_execute_post_hooks "${target}"
+    execute_post_hook "${target}"
+)
 
-is_target_installed() {
-    local not_fully_installed=false
+is_target_installed() (
+    target="${1}"
+    not_fully_installed=false
 
-    local targetfile
-    for targetfile in ${TARGETS["$1"]}
+    files="$(map_get_value "${TARGETS}" "${target}")"
+
+    for targetfile in ${files}
     do
-        if [[ "${targetfile::1}" = "%" ]]; then
-            is_target_installed "${targetfile:1}" || not_fully_installed=true
+        if [ "$(string_get_first_char "${targetfile}")" = "%" ]; then
+            is_target_installed "$(string_exclude_first_char "${targetfile}")" || not_fully_installed=true
         else
-            if [[ ! -e "$TARGET_PATH/$targetfile" ]]; then
+            if [ ! -e "${TARGET_PATH}/${targetfile}" ]; then
                 echo "${targetfile} not linked"
                 not_fully_installed=true
             fi
@@ -138,86 +169,85 @@ is_target_installed() {
         return 1
     fi
     return 0
-}
+)
 
-find_targets_that_depend_on() {
-    local target
-    for target in "${!TARGETS[@]}"
+find_targets_that_depend_on() (
+    for target in $(map_get_keys "${TARGETS}")
     do
-        if [[ " ${TARGETS["$target"]} " =~ " %${1} " ]]; then
-            echo "$target"
+        files="$(map_get_value "${TARGETS}" "${target}")"
+
+        if map_key_exists "${TARGETS}" "%${1}"; then
+            echo "${target}"
         fi
     done
-}
+)
 
-die_if_installed_targets_depend_on() {
+die_if_installed_targets_depend_on() (
     for reverse_dependecy in $(find_targets_that_depend_on "$1")
     do
-        if is_target_installed "$reverse_dependecy" >/dev/null; then
+        if is_target_installed "${reverse_dependecy}" >/dev/null; then
             _die "target '${reverse_dependecy}' is depends on installed target '${1}'. Exiting..." 1
         fi
     done
-}
+)
 
-cmd_unlink() {
-    local target targetfile
+cmd_unlink() (
     for target in "$@"
     do
-        die_if_installed_targets_depend_on "$target"
+        die_if_installed_targets_depend_on "${target}"
 
-        for targetfile in ${TARGETS["$target"]}
+        files="$(map_get_value "${TARGETS}" "${target}")"
+        for targetfile in ${files}
         do
-            if [[ "${targetfile::1}" = "%" ]]; then
+            if [ "$(string_get_first_char "${targetfile}")" = "%" ]; then
                 continue
             fi
 
-            if [[ -e "${TARGET_PATH}/${targetfile}" ]]; then
+            if [ -e "${TARGET_PATH}/${targetfile}" ]; then
                 unlink "${TARGET_PATH}/${targetfile}"
             fi
         done
     done
-}
+)
 
-cmd_no_target() {
+cmd_no_target() (
     _die "TARGET not exists" 1
-}
+)
 
-cmd_list() {
-    echo "${!TARGETS[@]}"
-}
+cmd_list() (
+    map_get_keys "${TARGETS}"
+)
 
-target_exists() {
-    local -r target="$1"
-    [[ " ${!TARGETS[*]} " =~ " ${target} " ]]
-}
+target_exists() (
+    target="$1"
+    map_key_exists "${TARGETS}" "${target}"
+)
 
-cmd_install() {
-    local target
+cmd_install() (
     for target in "$@"
     do
-        if target_exists "$target"; then
+        if target_exists "${target}"; then
             SANDBOX_PATH="$(mktemp -td "${USER:-user}.dotfiles_XXXXXXX")"
             export SANDBOX_PATH
-            install_target "$target"
+            install_target "${target}"
             rm -rf "$SANDBOX_PATH"
         else
             cmd_no_target
         fi
     done
-}
+)
 
-cmd_help() {
+cmd_help() (
     echo "Dotfiles installation script:
 Usage: ./install TARGET...
 Usage: ./install unlink TARGET...
 Usage: ./install check TARGET
 Usage: ./install list"
-}
+)
 
-unset executed_command
-readonly executed_command="$1"
+readonly executed_command="${1}"
 
-case "$executed_command" in
+case "${executed_command}" in
     unlink) shift;   cmd_unlink             "$@" ;;
     check) shift;    is_target_installed    "$@" ;;
     list) shift;     cmd_list               "$@" ;;
