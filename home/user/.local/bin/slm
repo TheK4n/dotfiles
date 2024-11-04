@@ -1,63 +1,40 @@
-#!/bin/bash
-
-LAYOUTS_DIR="$HOME/.screenlayout"
+#!/bin/sh
 
 
-_die() {
-    echo "$0: $1" >&2
-    exit $2
-}
+set -eu
 
-test -d "$LAYOUTS_DIR" || (mkdir "$LAYOUTS_DIR" && touch "$LAYOUTS_DIR/default.sh")
+readonly LAYOUTS_DIR="${HOME}/.screenlayout"
 
 
-die_if_invalid_path() {
-    if [[ -z "$1" ]]; then
-        _die "Blank name"
-    fi
-
-    if [[ "$1" =~ ".." ]]; then
-        _die "Path can\`t contains '..'" 3
-    fi
-
-    if [[ "$1" = /* ]]; then
-        _die "Path can\`t start from '/'" 3
-    fi
-}
-
+if [ ! -d "${LAYOUTS_DIR}" ]; then
+    mkdir "${LAYOUTS_DIR}"
+fi
 
 cmd_list() {
-    find "$LAYOUTS_DIR" -type f,l -exec basename -s .sh {} \;
-}
-
-cmd_edit() {
-    die_if_invalid_path "$1"
-    $EDITOR "$LAYOUTS_DIR/$1.sh"
-    chmod u+x "$LAYOUTS_DIR/$1.sh"
+    find "$LAYOUTS_DIR" -type f,l -exec basename {} \;
 }
 
 cmd_wallpaper() {
-    local wallpapers="$HOME/.wallpaper"
-    feh --no-fehbg --bg-scale "$wallpapers/$(ls "$wallpapers" | shuf -n 1)"
+    readonly wallpapers="${HOME}/.wallpaper"
+    feh --no-fehbg --bg-scale "$(find "${wallpapers}" | shuf -n 1)"
 }
 
 cmd_load() {
-    if [ -z "$1" ]; then
-        "$LAYOUTS_DIR/default.sh"
+    if [ -z "${1:-}" ]; then
+        "${LAYOUTS_DIR}/default"
     else
-        "$LAYOUTS_DIR/$1.sh"
+        "${LAYOUTS_DIR}/${1}"
     fi
     cmd_wallpaper
 }
 
 cmd_help () {
-    echo "slm (ls|add|load|wallpaper)" >&2
+    echo "slm (ls|load|wallpaper)" >&2
 }
 
 
 case "$1" in
     ls) shift;         cmd_list       "$@" ;;
-    add|edit) shift;   cmd_edit       "$@" ;;
     load) shift;       cmd_load       "$@" ;;
     wallpaper) shift;  cmd_wallpaper  "$@" ;;
     *) shift;          cmd_help       "$@" ;;

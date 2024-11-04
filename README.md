@@ -63,17 +63,5 @@ Per-user dotfiles "package" manager
 4. Transaction based installation
 5. Does not overwrite your configs
 
-### Dependencies
-* bash
-* coreutils
-* diffutils
-* grep
-
-
-### Optional dependencies
-* git
-* wget
-* unzip
-
 
 <h1 align="center"><a href="#top">▲</a></h1>
