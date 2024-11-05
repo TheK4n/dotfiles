@@ -8,7 +8,7 @@ set -o nounset
 readonly EXIT_SUCCESS=0
 
 readonly NOTES_DIR_BASE="${HOME}/.t"
-readonly NOTES_DIR="${NOTES_DIR_BASE}/${ns:-default}"
+readonly NOTES_DIR="${NOTES_DIR_BASE}/${t:-default}"
 
 TAB="$(printf -- '\t')"
 readonly TAB
@@ -34,8 +34,8 @@ cmd_help() {
 
 NAMESPACES
     t namespaces             # show namespaces
-    ns=work t a fix bug 211  # add note in workspace 'work'
-    ns=work t                # show notes in workspace 'work'"
+    t=work t a fix bug 211   # add note in workspace 'work'
+    t=work t                 # show notes in workspace 'work'"
 }
 
 
@@ -138,10 +138,10 @@ prettify() {
 
 cmd_show_namespaces() {
     (
-        for ns in $(find "${NOTES_DIR_BASE}/" -mindepth 1 -maxdepth 1 -type d | sort -n)
+        for namespace in $(find "${NOTES_DIR_BASE}/" -mindepth 1 -maxdepth 1 -type d | sort -n)
         do
-            namespace_notes_count="$(find "${ns}" -type f | wc -l)"
-            printf -- '%s\t(%s)\n' "$(basename "${ns}")" "${namespace_notes_count}"
+            namespace_notes_count="$(find "${namespace}" -type f | wc -l)"
+            printf -- '%s\t(%s)\n' "$(basename "${namespace}")" "${namespace_notes_count}"
         done
     ) | prettify
 }
