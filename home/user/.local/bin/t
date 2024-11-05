@@ -115,6 +115,9 @@ cmd_cat_note() {
     exit "$EXIT_SUCCESS"
 }
 
+cmd_show_namespaces() {
+    find "${NOTES_DIR_BASE}/" -mindepth 1 -type d -exec basename {} \;
+}
 
 remove_empty_namespaces() {
     find "${NOTES_DIR_BASE}" -type d -empty -exec rm -r {} \; 2>/dev/null || true
@@ -135,11 +138,12 @@ fi
 
 
 case "$1" in
-    show) shift;      show_notes_with_indexes ;;
-    add|a) shift;     cmd_add_note     "$@" ;;
-    delete|d) shift;  cmd_delete_note  "$@" ;;
-    e|edit) shift;    cmd_edit_note    "$@" ;;
-    help|usage) shift;      cmd_usage        "$@" ;;
+    show) shift;           show_notes_with_indexes ;;
+    ns|namespaces) shift;  cmd_show_namespaces     ;;
+    add|a) shift;          cmd_add_note       "$@" ;;
+    delete|d) shift;       cmd_delete_note    "$@" ;;
+    e|edit) shift;         cmd_edit_note      "$@" ;;
+    help|usage) shift;     cmd_usage          "$@" ;;
 
     *)                cmd_cat_note "$@" ;;
 esac
