@@ -1,19 +1,17 @@
 #!/bin/sh
 
+
 set -o errexit
 set -o nounset
 
 
 readonly EXIT_SUCCESS=0
 
-PROGRAM="$(basename "$0")"
-readonly PROGRAM
-
 readonly NOTES_DIR_BASE="${HOME}/.t"
 
 NOTES_DIR="${NOTES_DIR_BASE}"
-if [ -n "${N+x}" ]; then
-    NOTES_DIR="${NOTES_DIR}/${N}"
+if [ -n "${NS+x}" ]; then
+    NOTES_DIR="${NOTES_DIR}/${NS}"
 fi
 
 readonly NOTES_DIR
@@ -25,11 +23,11 @@ cmd_help() {
 
     t                - Show notes in format '[INDEX] NOTE NAME (LINES)'
     t show           - Show notes in format '[INDEX] NOTE NAME (LINES)'
-    t add [X X X]    - Add note with name X X X
+    t namespaces     - Show namespaces
+    t add (X X X)    - Add note with name X X X
     t edit (INDEX)   - Edit note with INDEX by \$EDITOR
     t delete (INDEX) - Delete note with INDEX
-    t namespaces     - Show namespaces
-    t help           - Show this message
+    t --help         - Show this message
 
     t a  - alias to add
     t e  - alias to edit
@@ -38,14 +36,14 @@ cmd_help() {
 
 
 NAMESPACES
-    N=work t a fix bug 211  # add note in workspace 'work'
-    N=work t  # show notes in workspace 'work'
-"
+    t namespaces            # show namespaces
+    NS=work t a fix bug 211  # add note in workspace 'work'
+    NS=work t                # show notes in workspace 'work'"
 }
 
 
 die() {
-    echo "${PROGRAM}: Error: ${1}" 1>&2
+    echo "$(basename "${0}"): Error: ${1}" 1>&2
     exit "${2:-$EXIT_SUCCESS}"
 }
 
@@ -119,13 +117,16 @@ cmd_cat_note() {
 }
 
 cmd_show_namespaces() {
-    find "${NOTES_DIR_BASE}/" -mindepth 1 -type d -exec basename {} \;
+    for ns in $(find "${NOTES_DIR_BASE}/" -mindepth 1 -maxdepth 1 -type d | sort -n)
+    do
+        namespace_notes_count="$(find "${ns}" -type f | wc -l)"
+        printf "%s (%s)\n" "$(basename "${ns}")" "${namespace_notes_count}"
+    done
 }
 
 remove_empty_namespaces() {
     find "${NOTES_DIR_BASE}" -type d -empty -exec rm -r {} \; 2>/dev/null || true
 }
-
 trap remove_empty_namespaces EXIT
 
 
@@ -140,14 +141,14 @@ if [ -z "${1+x}" ]; then
 fi
 
 
-case "$1" in
+case "${1}" in
     show) shift;           show_notes_with_indexes ;;
     ns|namespaces) shift;  cmd_show_namespaces     ;;
     add|a) shift;          cmd_add_note       "$@" ;;
     delete|d) shift;       cmd_delete_note    "$@" ;;
     e|edit) shift;         cmd_edit_note      "$@" ;;
-    help) shift;           cmd_help          "$@" ;;
+    --help) shift;         cmd_help                ;;
 
-    *)                cmd_cat_note "$@" ;;
+    *)                     cmd_cat_note       "$@" ;;
 esac
 exit "$EXIT_SUCCESS"
