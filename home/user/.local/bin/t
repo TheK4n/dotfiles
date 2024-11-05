@@ -21,13 +21,13 @@ cmd_help() {
     echo "USAGE
     T script for fast notes
 
-    t                - Show notes in format '[INDEX] NOTE NAME (LINES)'
-    t show           - Show notes in format '[INDEX] NOTE NAME (LINES)'
-    t namespaces     - Show namespaces
-    t add (X X X)    - Add note with name X X X
-    t edit (INDEX)   - Edit note with INDEX by \$EDITOR
-    t delete (INDEX) - Delete note with INDEX
-    t --help         - Show this message
+    t                            - Show notes in format '[INDEX] NOTE NAME (LINES)'
+    t show                       - Show notes in format '[INDEX] NOTE NAME (LINES)'
+    t namespaces                 - Show namespaces
+    t add (X X X)                - Add note with name X X X
+    t edit (INDEX)               - Edit note with INDEX by \$EDITOR
+    t delete (INDEX) [INDEX] ... - Delete notes with INDEXes
+    t --help                     - Show this message
 
     t a  - alias to add
     t e  - alias to edit
@@ -68,7 +68,7 @@ _remove_first_and_last_element() {
 
 find_note_name_by_index() {
     note_index="${1}"
-    show_notes_with_indexes | grep "^\[${note_index}\]" | _remove_first_and_last_element
+    grep "^\[${note_index}\]" | _remove_first_and_last_element
 }
 
 cmd_add_note() {
@@ -78,21 +78,27 @@ cmd_add_note() {
 }
 
 cmd_delete_note() {
-    note_index="${1}"
-    note="$(find_note_name_by_index "${note_index}")"
-    note_to_remove="${NOTES_DIR}/${note}"
+    current_notes="$(show_notes_with_indexes)"
 
-    if [ ! -f "${note_to_remove}" ]; then
-        die "Note with index ${note_index} not found" 1
-    fi
+    for note_index in "$@"
+    do
+        note="$(echo "${current_notes}" | find_note_name_by_index "${note_index}")"
+        note_to_remove="${NOTES_DIR}/${note}"
 
-    rm "${note_to_remove}"
+        if [ ! -f "${note_to_remove}" ]; then
+            die "Note with index ${note_index} not found" 1
+        fi
+
+        rm "${note_to_remove}"
+    done
+
+
     exit "$EXIT_SUCCESS"
 }
 
 cmd_edit_note() {
     note_index="${1}"
-    note="$(find_note_name_by_index "${note_index}")"
+    note="$(show_notes_with_indexes | find_note_name_by_index "${note_index}")"
     note_to_edit="${NOTES_DIR}/${note}"
 
     if [ ! -f "${note_to_edit}" ]; then
@@ -105,7 +111,7 @@ cmd_edit_note() {
 
 cmd_cat_note() {
     note_index="${1}"
-    note="$(find_note_name_by_index "${note_index}")"
+    note="$(show_notes_with_indexes | find_note_name_by_index "${note_index}")"
     note_to_cat="${NOTES_DIR}/${note}"
 
     if [ ! -f "${note_to_cat}" ]; then
