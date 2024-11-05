@@ -19,7 +19,7 @@ fi
 readonly NOTES_DIR
 
 
-cmd_usage() {
+cmd_help() {
     echo "USAGE
     T script for fast notes
 
@@ -28,10 +28,13 @@ cmd_usage() {
     t add [X X X]    - Add note with name X X X
     t edit (INDEX)   - Edit note with INDEX by \$EDITOR
     t delete (INDEX) - Delete note with INDEX
+    t namespaces     - Show namespaces
+    t help           - Show this message
 
-    t a - alias to add
-    t e - alias to edit
-    t d - alias to delete
+    t a  - alias to add
+    t e  - alias to edit
+    t d  - alias to delete
+    t ns - alias to namespaces
 
 
 NAMESPACES
@@ -143,7 +146,7 @@ case "$1" in
     add|a) shift;          cmd_add_note       "$@" ;;
     delete|d) shift;       cmd_delete_note    "$@" ;;
     e|edit) shift;         cmd_edit_note      "$@" ;;
-    help|usage) shift;     cmd_usage          "$@" ;;
+    help) shift;           cmd_help          "$@" ;;
 
     *)                cmd_cat_note "$@" ;;
 esac
