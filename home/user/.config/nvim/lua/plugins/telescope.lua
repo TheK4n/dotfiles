@@ -43,6 +43,7 @@ return {
                             ["<C-n>"] = actions.preview_scrolling_down,
                             ["<C-p>"] = actions.preview_scrolling_up,
                             ["<C-a>"] = actions.toggle_all,
+                            ["<C-o>"] = actions.toggle_selection,
                             ["?"] = actions.which_key,
                             ["jf"] = { "<esc>", type = "command" },
                         },
