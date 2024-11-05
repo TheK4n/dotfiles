@@ -39,9 +39,13 @@ show_notes_with_indexes() {
     IFS="${SAVEIFS}"
 }
 
+_remove_first_and_last_element() {
+    cut -d" " -f2- | rev | cut -d" " -f2- | rev
+}
+
 find_note_name_by_index() {
     note_index="${1}"
-    show_notes_with_indexes | grep "^\[${note_index}\]" | cut -d" " -f2- | rev | cut -d" " -f2- | rev
+    show_notes_with_indexes | grep "^\[${note_index}\]" | _remove_first_and_last_element
 }
 
 cmd_add_note() {
@@ -91,7 +95,7 @@ cmd_cat_note() {
 
 
 remove_empty() {
-    find "${NOTES_DIR_BASE}" -type d -empty -exec rm -r {} \; 2>/dev/null
+    find "${NOTES_DIR_BASE}" -type d -empty -exec rm -r {} \; 2>/dev/null || true
 }
 
 trap remove_empty EXIT
