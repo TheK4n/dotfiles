@@ -19,6 +19,28 @@ fi
 readonly NOTES_DIR
 
 
+cmd_usage() {
+    echo "USAGE
+    T script for fast notes
+
+    t                - Show notes in format '[INDEX] NOTE NAME (LINES)'
+    t show           - Show notes in format '[INDEX] NOTE NAME (LINES)'
+    t add [X X X]    - Add note with name X X X
+    t edit (INDEX)   - Edit note with INDEX by \$EDITOR
+    t delete (INDEX) - Delete note with INDEX
+
+    t a - alias to add
+    t e - alias to edit
+    t d - alias to delete
+
+
+NAMESPACES
+    N=work t a fix bug 211  # add note in workspace 'work'
+    N=work t  # show notes in workspace 'work'
+"
+}
+
+
 die() {
     echo "${PROGRAM}: Error: ${1}" 1>&2
     exit "${2:-$EXIT_SUCCESS}"
@@ -94,11 +116,11 @@ cmd_cat_note() {
 }
 
 
-remove_empty() {
+remove_empty_namespaces() {
     find "${NOTES_DIR_BASE}" -type d -empty -exec rm -r {} \; 2>/dev/null || true
 }
 
-trap remove_empty EXIT
+trap remove_empty_namespaces EXIT
 
 
 if [ ! -d "${NOTES_DIR}" ]; then
@@ -113,9 +135,11 @@ fi
 
 
 case "$1" in
-    add|a) shift;     cmd_add_note      "$@" ;;
-    delete|d) shift;  cmd_delete_note   "$@" ;;
-    e|edit) shift;    cmd_edit_note     "$@" ;;
+    show) shift;      show_notes_with_indexes ;;
+    add|a) shift;     cmd_add_note     "$@" ;;
+    delete|d) shift;  cmd_delete_note  "$@" ;;
+    e|edit) shift;    cmd_edit_note    "$@" ;;
+    help|usage) shift;      cmd_usage        "$@" ;;
 
     *)                cmd_cat_note "$@" ;;
 esac
