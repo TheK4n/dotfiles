@@ -1,0 +1,118 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+
+readonly EXIT_SUCCESS=0
+
+PROGRAM="$(basename "$0")"
+readonly PROGRAM
+
+readonly NOTES_DIR_BASE="${HOME}/.t"
+
+NOTES_DIR="${NOTES_DIR_BASE}"
+if [ -n "${N+x}" ]; then
+    NOTES_DIR="${NOTES_DIR}/${N}"
+fi
+
+readonly NOTES_DIR
+
+
+die() {
+    echo "${PROGRAM}: Error: ${1}" 1>&2
+    exit "${2:-$EXIT_SUCCESS}"
+}
+
+show_notes_with_indexes() {
+    SAVEIFS="${IFS}"
+    IFS='
+'
+    index=1
+    for note in $(find "${NOTES_DIR}" -maxdepth 1 -type f | sort -n)
+    do
+        note_lines="$(wc -l < "${note}")"
+        printf "[%d] %s (%s)\n" "${index}" "$(basename "${note}")" "${note_lines}"
+        index="$((index+1))"
+    done
+
+    IFS="${SAVEIFS}"
+}
+
+find_note_name_by_index() {
+    note_index="${1}"
+    show_notes_with_indexes | grep "^\[${note_index}\]" | cut -d" " -f2- | rev | cut -d" " -f2- | rev
+}
+
+cmd_add_note() {
+    note="${NOTES_DIR}/$*"
+    touch "${note}"
+    exit "$EXIT_SUCCESS"
+}
+
+cmd_delete_note() {
+    note_index="${1}"
+    note="$(find_note_name_by_index "${note_index}")"
+    note_to_remove="${NOTES_DIR}/${note}"
+
+    if [ ! -f "${note_to_remove}" ]; then
+        die "Note with index ${note_index} not found" 1
+    fi
+
+    rm "${note_to_remove}"
+    exit "$EXIT_SUCCESS"
+}
+
+cmd_edit_note() {
+    note_index="${1}"
+    note="$(find_note_name_by_index "${note_index}")"
+    note_to_edit="${NOTES_DIR}/${note}"
+
+    if [ ! -f "${note_to_edit}" ]; then
+        die "Note with index ${note_index} not found" 1
+    fi
+
+    $EDITOR "${note_to_edit}"
+    exit "$EXIT_SUCCESS"
+}
+
+cmd_cat_note() {
+    note_index="${1}"
+    note="$(find_note_name_by_index "${note_index}")"
+    note_to_cat="${NOTES_DIR}/${note}"
+
+    if [ ! -f "${note_to_cat}" ]; then
+        die "Note with index ${note_index} not found" 1
+    fi
+
+    cat "${note_to_cat}"
+    exit "$EXIT_SUCCESS"
+}
+
+
+remove_empty() {
+    find "${NOTES_DIR_BASE}" -type d -empty -exec rm -r {} \; 2>/dev/null
+}
+
+trap remove_empty EXIT
+
+
+if [ ! -d "${NOTES_DIR}" ]; then
+    mkdir -p "${NOTES_DIR}"
+fi
+
+
+if [ -z "${1+x}" ]; then
+    show_notes_with_indexes
+    exit "$EXIT_SUCCESS"
+fi
+
+
+case "$1" in
+    add|a) shift;     cmd_add_note      "$@" ;;
+    delete|d) shift;  cmd_delete_note   "$@" ;;
+    e|edit) shift;    cmd_edit_note     "$@" ;;
+
+    *)                cmd_cat_note "$@" ;;
+esac
+exit "$EXIT_SUCCESS"

@@ -1,7 +1,7 @@
 readonly TARGETS="\
 colors:.config/terminal-colors.d
 tmux:.config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_list_sessions.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_kill_sessions.sh
-zsh:.config/zsh .zshenv .inputrc %colors
+zsh:.config/zsh .zshenv .inputrc .local/bin/t %colors
 alacritty:.config/alacritty
 nvim:.config/nvim .editorconfig .inputrc .editrc .local/bin/vim_askpass_helper
 ssh:
