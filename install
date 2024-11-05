@@ -35,7 +35,7 @@ map_get_value() (
     map="${1}"
     key="${2}"
 
-    echo "${map}" | grep "${key}:" | cut -d ':' -f2
+    echo "${map}" | grep "^${key}:" | cut -d ':' -f2
 )
 
 map_get_keys() (
@@ -48,7 +48,7 @@ map_key_exists() (
     map="${1}"
     key="${2}"
 
-    map_get_keys "${map}" | grep "${2}" 1>/dev/null
+    map_get_keys "${map}" | grep "^${2}" 1>/dev/null
 )
 
 _link_files_in_sandbox() (
