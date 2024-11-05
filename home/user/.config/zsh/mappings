@@ -44,6 +44,8 @@ bindkey '`' autosuggest-accept
 bindkey '^?' backward-delete-char
 bindkey '^W' backward-delete-word
 
+bindkey -M vicmd '^H' backward-delete-char
+
 
 popdquiet() {
     popd &>/dev/null
