@@ -8,13 +8,7 @@ set -o nounset
 readonly EXIT_SUCCESS=0
 
 readonly NOTES_DIR_BASE="${HOME}/.t"
-
-NOTES_DIR="${NOTES_DIR_BASE}"
-if [ -n "${NS+x}" ]; then
-    NOTES_DIR="${NOTES_DIR}/${NS}"
-fi
-
-readonly NOTES_DIR
+readonly NOTES_DIR="${NOTES_DIR_BASE}/${NS:-default}"
 
 
 cmd_help() {
