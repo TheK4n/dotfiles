@@ -44,12 +44,19 @@ die() {
     exit "${2:-$EXIT_SUCCESS}"
 }
 
+get_notes_sorted_by_access_time() {
+    find "${NOTES_DIR}" -maxdepth 1 -type f -printf '%C@ %p\n' \
+        | sort -k1 -r \
+        | cut -d" " -f2- \
+        | tr '\n' "${IFS}"
+}
+
 show_notes_with_indexes() {
     SAVEIFS="${IFS}"
-    IFS='
-'
+    IFS=';'
+
     index=1
-    for note in $(find "${NOTES_DIR}" -maxdepth 1 -type f | sort -n)
+    for note in $(IFS="${IFS}" get_notes_sorted_by_access_time)
     do
         note_lines="$(wc -l < "${note}")"
         if [ "${note_lines}" -gt 70 ]; then
