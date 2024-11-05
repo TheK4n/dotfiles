@@ -44,12 +44,13 @@ return {
                             ["<C-p>"] = actions.preview_scrolling_up,
                             ["<C-a>"] = actions.toggle_all,
                             ["<C-o>"] = actions.toggle_selection,
-                            ["?"] = actions.which_key,
-                            ["jf"] = { "<esc>", type = "command" },
                         },
                         n = {
-                            ["jf"] = actions.close,
-                            ["?"] = actions.which_key,
+                            ["<C-j>"] = actions.move_selection_next,
+                            ["<C-k>"] = actions.move_selection_previous,
+                            ["<C-n>"] = actions.preview_scrolling_down,
+                            ["<C-p>"] = actions.preview_scrolling_up,
+                            ["<C-a>"] = actions.toggle_all,
                         }
                     },
                     selection_caret = " ",

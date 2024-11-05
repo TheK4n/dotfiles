@@ -102,30 +102,6 @@ return {
         end
     },
     {
-        "max397574/better-escape.nvim",
-        config = function()
-            require("better_escape").setup({
-                timeout = vim.o.timeoutlen,
-                default_mappings = false,
-                mappings = {
-                    i = {
-                        j = {
-                            f = "<ESC>`^"
-                        },
-                        ["о"] = {
-                            ["а"] = "<ESC>`^"
-                        },
-                    },
-                    c = {
-                        j = {
-                            f = "<Esc>",
-                        },
-                    },
-                },
-            })
-        end,
-    },
-    {
         'Pocco81/auto-save.nvim',
         config = function()
             require("auto-save").setup({

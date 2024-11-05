@@ -1,10 +1,7 @@
-
+KEYTIMEOUT=1
 # Activate vim mode.
 bindkey -v
 
-bindkey -M viins 'jf' vi-cmd-mode
-
-bindkey -M visual 'jf' vi-cmd-mode
 bindkey -M visual 'i' vi-insert
 bindkey -M visual 'a' vi-add-next
 
