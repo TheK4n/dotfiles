@@ -8,7 +8,7 @@ set -o nounset
 readonly EXIT_SUCCESS=0
 
 readonly NOTES_DIR_BASE="${HOME}/.t"
-readonly NOTES_DIR="${NOTES_DIR_BASE}/${NS:-default}"
+readonly NOTES_DIR="${NOTES_DIR_BASE}/${ns:-default}"
 
 TAB="$(printf -- '\t')"
 readonly TAB
@@ -34,8 +34,8 @@ cmd_help() {
 
 NAMESPACES
     t namespaces             # show namespaces
-    NS=work t a fix bug 211  # add note in workspace 'work'
-    NS=work t                # show notes in workspace 'work'"
+    ns=work t a fix bug 211  # add note in workspace 'work'
+    ns=work t                # show notes in workspace 'work'"
 }
 
 
@@ -61,6 +61,8 @@ show_notes_with_indexes() {
         note_lines="$(wc -l < "${note}")"
         if [ "${note_lines}" -gt 70 ]; then
             note_lines="..."
+        elif [ "${note_lines}" -eq 0 ]; then
+            note_lines="-"
         fi
 
         printf -- '[%d]\t%s\t(%s)\n' "${index}" "$(basename -- "${note}")" "${note_lines}"
