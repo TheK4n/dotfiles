@@ -10,6 +10,9 @@ readonly EXIT_SUCCESS=0
 readonly NOTES_DIR_BASE="${HOME}/.t"
 readonly NOTES_DIR="${NOTES_DIR_BASE}/${NS:-default}"
 
+TAB="$(printf '\t')"
+readonly TAB
+
 
 cmd_help() {
     echo "USAGE
@@ -49,7 +52,11 @@ show_notes_with_indexes() {
     for note in $(find "${NOTES_DIR}" -maxdepth 1 -type f | sort -n)
     do
         note_lines="$(wc -l < "${note}")"
-        printf "[%d] %s (%s)\n" "${index}" "$(basename "${note}")" "${note_lines}"
+        if [ "${note_lines}" -gt 70 ]; then
+            note_lines="..."
+        fi
+
+        printf "[%d]\t%s\t(%s)\n" "${index}" "$(basename "${note}")" "${note_lines}"
         index="$((index+1))"
     done
 
@@ -57,7 +64,7 @@ show_notes_with_indexes() {
 }
 
 _remove_first_and_last_element() {
-    cut -d" " -f2- | rev | cut -d" " -f2- | rev
+    cut -d"${TAB}" -f2
 }
 
 find_note_name_by_index() {
@@ -116,12 +123,22 @@ cmd_cat_note() {
     exit "$EXIT_SUCCESS"
 }
 
+prettify() {
+    column -t -s "${TAB}"
+}
+
 cmd_show_namespaces() {
-    for ns in $(find "${NOTES_DIR_BASE}/" -mindepth 1 -maxdepth 1 -type d | sort -n)
-    do
-        namespace_notes_count="$(find "${ns}" -type f | wc -l)"
-        printf "%s (%s)\n" "$(basename "${ns}")" "${namespace_notes_count}"
-    done
+    (
+        for ns in $(find "${NOTES_DIR_BASE}/" -mindepth 1 -maxdepth 1 -type d | sort -n)
+        do
+            namespace_notes_count="$(find "${ns}" -type f | wc -l)"
+            printf "%s\t(%s)\n" "$(basename "${ns}")" "${namespace_notes_count}"
+        done
+    ) | prettify
+}
+
+cmd_show_notes() {
+    show_notes_with_indexes | prettify
 }
 
 remove_empty_namespaces() {
@@ -136,19 +153,19 @@ fi
 
 
 if [ -z "${1+x}" ]; then
-    show_notes_with_indexes
+    cmd_show_notes
     exit "$EXIT_SUCCESS"
 fi
 
 
 case "${1}" in
-    show) shift;           show_notes_with_indexes ;;
-    ns|namespaces) shift;  cmd_show_namespaces     ;;
-    add|a) shift;          cmd_add_note       "$@" ;;
-    delete|d) shift;       cmd_delete_note    "$@" ;;
-    e|edit) shift;         cmd_edit_note      "$@" ;;
-    --help) shift;         cmd_help                ;;
+    show) shift;           cmd_show_notes       ;;
+    ns|namespaces) shift;  cmd_show_namespaces  ;;
+    add|a) shift;          cmd_add_note    "$@" ;;
+    delete|d) shift;       cmd_delete_note "$@" ;;
+    e|edit) shift;         cmd_edit_note   "$@" ;;
+    --help) shift;         cmd_help             ;;
 
-    *)                     cmd_cat_note       "$@" ;;
+    *)                     cmd_cat_note    "$@" ;;
 esac
 exit "$EXIT_SUCCESS"
