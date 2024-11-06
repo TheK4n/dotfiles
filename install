@@ -24,7 +24,7 @@ _die() {
 }
 
 string_get_first_char() (
-    printf %.1s "${1}"
+    printf '%.1s' "${1}"
 )
 
 string_exclude_first_char() (
@@ -68,7 +68,7 @@ _link_files_in_sandbox() (
 )
 
 _compare_sandbox_to_home() (
-    comparisons="$(diff -rq "$SANDBOX_PATH" "$TARGET_PATH")" || true
+    comparisons="$(diff -rq "${SANDBOX_PATH}" "${TARGET_PATH}")" || true
     echo "${comparisons}" | grep -vE "^Only in .+" || true
 )
 

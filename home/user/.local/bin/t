@@ -41,7 +41,7 @@ NAMESPACES
 
 die() {
     echo "$(basename "${0}"): Error: ${1}" 1>&2
-    exit "${2:-$EXIT_SUCCESS}"
+    exit "${2:-${EXIT_SUCCESS}}"
 }
 
 get_notes_sorted_by_access_time() {
@@ -84,7 +84,7 @@ find_note_name_by_index() {
 cmd_add_note() {
     note="${NOTES_DIR}/$*"
     touch "${note}"
-    exit "$EXIT_SUCCESS"
+    exit "${EXIT_SUCCESS}"
 }
 
 cmd_delete_note() {
@@ -103,7 +103,7 @@ cmd_delete_note() {
     done
 
 
-    exit "$EXIT_SUCCESS"
+    exit "${EXIT_SUCCESS}"
 }
 
 cmd_edit_note() {
@@ -115,8 +115,8 @@ cmd_edit_note() {
         die "Note with index ${note_index} not found" 1
     fi
 
-    $EDITOR "${note_to_edit}"
-    exit "$EXIT_SUCCESS"
+    ${EDITOR} "${note_to_edit}"
+    exit "${EXIT_SUCCESS}"
 }
 
 cmd_cat_note() {
@@ -129,7 +129,7 @@ cmd_cat_note() {
     fi
 
     cat "${note_to_cat}"
-    exit "$EXIT_SUCCESS"
+    exit "${EXIT_SUCCESS}"
 }
 
 prettify() {
@@ -163,7 +163,7 @@ fi
 
 if [ -z "${1+x}" ]; then
     cmd_show_notes
-    exit "$EXIT_SUCCESS"
+    exit "${EXIT_SUCCESS}"
 fi
 
 
@@ -177,4 +177,4 @@ case "${1}" in
 
     *)                     cmd_cat_note    "$@" ;;
 esac
-exit "$EXIT_SUCCESS"
+exit "${EXIT_SUCCESS}"
