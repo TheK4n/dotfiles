@@ -61,6 +61,10 @@ show_notes_with_indexes() {
     for note in $(IFS="${IFS}" get_notes_sorted_by_access_time)
     do
         note_lines="$(wc -l < "${note}")"
+
+        if [ "${note_lines}" -gt 0 ]; then
+            note_lines="$((note_lines+1))"
+        fi
         if [ "${note_lines}" -gt 70 ]; then
             note_lines="..."
         elif [ "${note_lines}" -eq 0 ]; then
