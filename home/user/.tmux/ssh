@@ -2,26 +2,32 @@
 
 set -eu
 
-SSH_SERVERS="$(grep 'Host ' "${HOME}/.ssh/config" | sed 's/^Host //')"
-HOSTS="$(grep -v '^#' /etc/hosts)"
-HISTORY_HOSTS="$(grep ssh "${HOME}/.zsh_history" | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
 
-ALL_HOSTS="$(echo "$SSH_SERVERS" "$HOSTS" "$HISTORY_HOSTS" | grep -v '\*'| sed 's/ /\n/g ; /^$/d' | sort | uniq | tac)"
+export FZF_DEFAULT_OPTS="\
+${FZF_DEFAULT_OPTS}
+--border-label=' Start SSH session '
+--preview-window=hidden
+--preview=''
+"
 
-SSH_SERVER="$(echo "$ALL_HOSTS" | fzf +m --print-query --bind 'tab:replace-query' | tail -n 1)"
+ssh_hosts="$(grep 'Host ' "${HOME}/.ssh/config" | sed 's/^Host //')"
+etc_hosts="$(grep -v '^#' /etc/hosts)"
+history_hosts="$(grep ssh "${HOME}/.zsh_history" | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
+all_hosts="$(echo "${ssh_hosts}" "${etc_hosts}" "${history_hosts}" | grep -v '\*'| sed 's/ /\n/g ; /^$/d' | sort | uniq | tac)"
 
 
-if [ -z "${SSH_SERVER}" ]; then
+choosed_ssh_server="$(echo "${all_hosts}" | fzf | tail -n 1)"
+
+
+if [ -z "${choosed_ssh_server}" ]; then
     exit 0
 fi
 
-
-SSH_SERVER_SESSION_NAME="$(echo "${SSH_SERVER%% *}" | sed 's/\./\-/g ; s/\:/\-/g')"
-readonly SESSION="ssh_${SSH_SERVER_SESSION_NAME}"
+SESSION="ssh_$(echo "${choosed_ssh_server%% *}" | sed 's/\./\-/g ; s/\:/\-/g')"
 
 
 if ! tmux has-session -t "${SESSION}" 2>/dev/null; then
-    tmux new-session -s "${SESSION}" -d -n "1" "TERM=xterm ssh ${SSH_SERVER} || read"
+    tmux new-session -s "${SESSION}" -d -n "1" "TERM=xterm ssh ${choosed_ssh_server} || read"
 fi
 
 tmux set-option -t "${SESSION}" status off
