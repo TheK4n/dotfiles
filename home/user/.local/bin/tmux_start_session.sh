@@ -1,15 +1,18 @@
 #!/bin/sh
 
 
+readonly TMUX_SESSIONS="${HOME}/.tmux"
+readonly EDITOR="nvim"
+
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
 --color='border:green,label:green'
 --border-label=' Start session '
 --pointer='> '
 --marker=''
+--bind
+ctrl-e:execute\(${EDITOR}\ \"${TMUX_SESSIONS}/{1}\"\)\
 "
-
-readonly TMUX_SESSIONS="${HOME}/.tmux"
 
 
 current_session="$(tmux display-message -p '#S')"
