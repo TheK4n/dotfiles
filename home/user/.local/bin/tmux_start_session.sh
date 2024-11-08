@@ -8,6 +8,7 @@ export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
 --color='border:green,label:green'
 --border-label=' Start session '
+--preview='highlight -O ansi '${TMUX_SESSIONS}/{1}''
 --pointer='> '
 --marker=''
 --bind
@@ -30,7 +31,7 @@ do
 done
 readonly sessions
 
-session_file="$(echo "${sessions}" | fzf +m --preview-window 70% --preview "cat '${TMUX_SESSIONS}/{1}'" | awk '{printf $1}')"
+session_file="$(echo "${sessions}" | fzf | awk '{printf $1}')"
 readonly session_file
 
 if [ -n "${session_file}" ]; then
