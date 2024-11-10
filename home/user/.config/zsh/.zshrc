@@ -7,7 +7,7 @@ if \
   [ -z "$TMUX" ]              && \
   tmux -N -L "$USER" list-sessions &>/dev/null
 then
-    exec tmux -N -L "$USER" new-session
+    exec tmux -N -L "$USER" new-session -A
 fi
 
 if [ -f "$ZDOTDIR/sourcer" ]; then
