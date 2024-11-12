@@ -1,12 +1,26 @@
 #info
 j next-line
 k prev-line
+l forward-char
+h backward-char
+0 beginning-of-line
+$ end-of-line
+
+w forward-word
+b backward-word
+
+g beginning-of-node
+G end-of-node
+
 ^n next-node
 ^p prev-node
+^u up-node
+^d dir-node
+
 
 #var
-link-style=yellow
-active-link-style=yellow,bold
+link-style=magenta,underline
+active-link-style=cyan,bold,underline
 match-style=underline,bold,nocolour
 scroll-behavior=Page Only
 cursor-movement-scrolls=Off
