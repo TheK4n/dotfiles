@@ -139,7 +139,6 @@ elif [[ "$OSTYPE" == "darwin" ]]; then
     alias paste='pbpaste'
 fi
 
-alias ssh='TERM=xterm ssh'
 alias sshn='ssh -S none'
 
 alias black='magick canvas:none PNG:- | feh -YF -'
@@ -163,6 +162,7 @@ alias -g .....='../../../..'
 alias -g .4='../../../..'
 
 alias -g D="DISPLAY=:0.0"
+alias -g XT="TERM=xterm"
 
 alias -g O="1>/dev/null"  # stdOut
 alias -g E="2>/dev/null"  # stdErr
