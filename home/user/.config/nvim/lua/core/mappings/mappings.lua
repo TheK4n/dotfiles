@@ -77,11 +77,6 @@ map('n', '<C-a>', 'mvggVG')
 map('v', '<C-a>', '<Esc>`v:delmarks v<CR>', {silent = true})
 
 
--- Scroll tabs
-map("n", '<C-l>', vim.cmd.tabnext)
-map("n", '<C-h>', vim.cmd.tabprev)
-
-
 map("n", '<Leader>qq', '<cmd>bd!<CR>',
     {desc = "Kill current buffer"})
 
