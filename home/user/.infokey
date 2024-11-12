@@ -1,0 +1,19 @@
+#info
+j next-line
+k prev-line
+^n next-node
+^p prev-node
+
+#var
+link-style=yellow
+active-link-style=yellow,bold
+match-style=underline,bold,nocolour
+scroll-behavior=Page Only
+cursor-movement-scrolls=Off
+show-index-match=On
+visible-bell=On
+automatic-tiling=on
+automatic-footnotes=on
+highlight-searches=on
+mouse=normal-tracking
+nodeline=print

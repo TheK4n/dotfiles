@@ -1,12 +1,12 @@
 readonly TARGETS="\
 colors:.config/terminal-colors.d
+less:.lesskey .infokey
 tmux:.config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_list_sessions.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_kill_sessions.sh
 t:.local/bin/t
-zsh:.config/zsh .zshenv .inputrc %t %colors
+zsh:.config/zsh .zshenv .inputrc %colors
 alacritty:.config/alacritty
-nvim:.config/nvim .editorconfig .inputrc .editrc .local/bin/vim_askpass_helper
+nvim:.config/nvim .editorconfig .editrc .local/bin/vim_askpass_helper
 ssh:
-less:.lesskey
 git:.config/git
 ranger:.config/ranger
 gpg:
@@ -18,4 +18,5 @@ arch:
 psql:.psqlrc
 docker:.docker/cli-plugins
 ipython:.ipython/profile_default/ipython_config.py
-gdb:.config/gdb"
+gdb:.config/gdb
+all:%less %t %tmux %zsh %nvim %git"
