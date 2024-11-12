@@ -43,7 +43,6 @@ local on_attach = function(_, bufnr)
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc', {})
 
     -- Mappings.
-
     local opts = { noremap=true, silent=true }
 
     local function desc(description)

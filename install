@@ -2,7 +2,7 @@
 
 set -ue
 
-readonly TARGET_PATH="$HOME"
+readonly TARGET_PATH="${HOME}"
 
 
 _detect_current_script_real_directory() {
