@@ -12,39 +12,39 @@
 [ -x "/usr/bin/jq" ] || exec i3status
 
 update_holder() {
-    instance="$1"
-    replacement="$2"
-    echo "$3" | jq --argjson arg_j "$replacement" "(.[] | (select(.instance==\"$instance\"))) |= \$arg_j"
+    instance="${1}"
+    replacement="${2}"
+    echo "${3}" | jq --argjson arg_j "${replacement}" "(.[] | (select(.instance==\"${instance}\"))) |= \$arg_j"
 }
 
 get_device_battery_status() {
     for uuid in $(timeout 1 bluetoothctl devices | cut -f2 -d' ' 2>/dev/null)
     do
-        device_info="$(timeout 1 bluetoothctl info "$uuid")"
+        device_info="$(timeout 1 bluetoothctl info "${uuid}")"
 
-        if echo "$device_info" | grep -q 'Connected: yes\|Battery Percentage'; then
-            echo "$device_info" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }'
+        if echo "${device_info}" | grep -q 'Connected: yes\|Battery Percentage'; then
+            echo "${device_info}" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }'
             break
         fi
     done
 }
 
 update_json_with_text() {
-    json="{ \"full_text\": \"$1\", \"color\": \"#FFFFFF\"}"
-    update_holder "holder__headphones" "$json" "$2"
+    json="{ \"full_text\": \"${1}\", \"color\": \"#FFFFFF\"}"
+    update_holder "holder__headphones" "${json}" "${2}"
 }
 
 i3status | (
     # read first 2 lines without formatting
     read -r line
-    echo "$line"
+    echo "${line}"
     read -r line
-    echo "$line"
+    echo "${line}"
 
     while true
     do
         read -r line
-        json_array="$(echo "$line" | sed -e 's/^,//')"
-        echo "$(update_json_with_text "$(get_device_battery_status)" "$json_array"),"
+        json_array="$(echo "${line}" | sed -e 's/^,//')"
+        echo "$(update_json_with_text "$(get_device_battery_status)" "${json_array}"),"
     done
 )

@@ -33,7 +33,7 @@ cmd_help () {
 }
 
 
-case "$1" in
+case "${1}" in
     ls) shift;         cmd_list       "$@" ;;
     load) shift;       cmd_load       "$@" ;;
     wallpaper) shift;  cmd_wallpaper  "$@" ;;

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-pidd="$(ps -u "${USER}" -o pid,%mem,%cpu,comm | sort -b -k2 -r | sed -n '1!p' | rofi -dmenu -i -l 15 | awk '{print $1}')"
-kill -15 "$pidd"

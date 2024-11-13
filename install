@@ -59,8 +59,8 @@ _link_files_in_sandbox() (
             files="$(map_get_value "${TARGETS}" "$(string_exclude_first_char "${targetfile}")")"
             _link_files_in_sandbox ${files}
         else
-            if [ ! "$(dirname "$targetfile")" = "." ]; then
-                mkdir -p "${SANDBOX_PATH}/$(dirname "$targetfile")"
+            if [ ! "$(dirname "${targetfile}")" = "." ]; then
+                mkdir -p "${SANDBOX_PATH}/$(dirname "${targetfile}")"
             fi
             ln -sT "${SUB}/${targetfile}" "${SANDBOX_PATH}/${targetfile}"
         fi
