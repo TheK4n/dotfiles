@@ -1,0 +1,109 @@
+#!/bin/sh
+
+
+set -o errexit
+set -o nounset
+
+
+readonly EXIT_SUCCESS=0
+
+readonly SECRETS_DIR_BASE="${HOME}/.k"
+
+
+cmd_help() {
+    echo "USAGE
+    k script for store secrets
+
+    t                               - Show list secrets
+    t (SECRET)                      - Show secret content
+    t add (SECRET)                  - Add secret (read content from stdin or from EDITOR)
+    t edit (SECRET)                 - Edit secret with INDEX by \$EDITOR
+    t delete (SECRET) [SECRET] ...  - Delete secrets
+    t --help                        - Show this message
+
+    t a       - alias for add
+    t e       - alias for edit
+    t d       - alias for delete"
+}
+
+
+die() {
+    echo "$(basename "${0}"): Error: ${1}" 1>&2
+    exit "${2:-${EXIT_SUCCESS}}"
+}
+
+cmd_add_secret() {
+    if read -t 0 _; then
+        cat > "${SECRETS_DIR_BASE}/${1}"
+    else
+        ${EDITOR} "${SECRETS_DIR_BASE}/${1}"
+    fi
+    exit "${EXIT_SUCCESS}"
+}
+
+cmd_delete_secret() {
+    for secret in "$@"
+    do
+        secret_to_remove="${SECRETS_DIR_BASE}/${secret}"
+
+        if [ ! -f "${secret_to_remove}" ]; then
+            die "Secret '${secret}' not found" 1
+        fi
+
+        rm "${secret_to_remove}"
+    done
+
+
+    exit "${EXIT_SUCCESS}"
+}
+
+cmd_edit_secret() {
+    secret="${1}"
+    secret_to_edit="${SECRETS_DIR_BASE}/${secret}"
+
+    if [ ! -f "${secret_to_edit}" ]; then
+        die "Secret '${secret}' not found" 1
+    fi
+
+    ${EDITOR} "${secret_to_edit}"
+    exit "${EXIT_SUCCESS}"
+}
+
+cmd_cat_secret() {
+    secret="${1}"
+    secret_to_cat="${SECRETS_DIR_BASE}/${secret}"
+
+    if [ ! -f "${secret_to_cat}" ]; then
+        die "Secret '${secret}' not found" 1
+    fi
+
+    cat "${secret_to_cat}"
+    exit "${EXIT_SUCCESS}"
+}
+
+cmd_show_secrets() {
+    ls "${SECRETS_DIR_BASE}"
+}
+
+
+if [ ! -d "${SECRETS_DIR_BASE}" ]; then
+    mkdir "${SECRETS_DIR_BASE}"
+fi
+
+
+if [ -z "${1+x}" ]; then
+    cmd_show_secrets
+    exit "${EXIT_SUCCESS}"
+fi
+
+
+case "${1}" in
+    show) shift;           cmd_show_secrets     ;;
+    a|add) shift;          cmd_add_secret    "$@" ;;
+    d|delete) shift;       cmd_delete_secret "$@" ;;
+    e|edit) shift;         cmd_edit_secret   "$@" ;;
+    --help) shift;         cmd_help             ;;
+
+    *)                     cmd_cat_secret    "$@" ;;
+esac
+exit "${EXIT_SUCCESS}"
