@@ -7,23 +7,19 @@ set -o nounset
 
 readonly EXIT_SUCCESS=0
 
-readonly SECRETS_DIR_BASE="${HOME}/.k"
+readonly SECRETS_DIR_BASE="${HOME}/.secrets"
 
 
 cmd_help() {
     echo "USAGE
-    k script for store secrets
+    key script for store secrets
 
-    t                               - Show list secrets
-    t (SECRET)                      - Show secret content
-    t add (SECRET)                  - Add secret (read content from stdin or from EDITOR)
-    t edit (SECRET)                 - Edit secret with INDEX by \$EDITOR
-    t delete (SECRET) [SECRET] ...  - Delete secrets
-    t --help                        - Show this message
-
-    t a       - alias for add
-    t e       - alias for edit
-    t d       - alias for delete"
+    key list                          - Show list secrets
+    key get (SECRET)                  - Show secret content
+    key set (SECRET)                  - Add secret (read content from stdin or from args or from EDITOR)
+    key edit (SECRET)                 - Edit secret with INDEX by \$EDITOR
+    key delete (SECRET) [SECRET] ...  - Delete secrets
+    key --help                        - Show this message"
 }
 
 
@@ -32,11 +28,15 @@ die() {
     exit "${2:-${EXIT_SUCCESS}}"
 }
 
-cmd_add_secret() {
+cmd_set_secret() {
+    secret_to_add="${SECRETS_DIR_BASE}/${1}"; shift
+
     if read -t 0 _; then
-        cat > "${SECRETS_DIR_BASE}/${1}"
+        cat > "${secret_to_add}"
+    elif [ -n "$*" ]; then
+        echo "$*" > "${secret_to_add}"
     else
-        ${EDITOR} "${SECRETS_DIR_BASE}/${1}"
+        ${EDITOR} "${secret_to_add}"
     fi
     exit "${EXIT_SUCCESS}"
 }
@@ -69,7 +69,7 @@ cmd_edit_secret() {
     exit "${EXIT_SUCCESS}"
 }
 
-cmd_cat_secret() {
+cmd_get_secret() {
     secret="${1}"
     secret_to_cat="${SECRETS_DIR_BASE}/${secret}"
 
@@ -81,7 +81,7 @@ cmd_cat_secret() {
     exit "${EXIT_SUCCESS}"
 }
 
-cmd_show_secrets() {
+cmd_list_secrets() {
     ls "${SECRETS_DIR_BASE}"
 }
 
@@ -92,18 +92,19 @@ fi
 
 
 if [ -z "${1+x}" ]; then
-    cmd_show_secrets
+    cmd_help
     exit "${EXIT_SUCCESS}"
 fi
 
 
 case "${1}" in
-    show) shift;           cmd_show_secrets     ;;
-    a|add) shift;          cmd_add_secret    "$@" ;;
-    d|delete) shift;       cmd_delete_secret "$@" ;;
-    e|edit) shift;         cmd_edit_secret   "$@" ;;
-    --help) shift;         cmd_help             ;;
+    l|list) shift;    cmd_list_secrets       ;;
+    s|set) shift;     cmd_set_secret    "$@" ;;
+    g|get) shift;     cmd_get_secret    "$@" ;;
+    d|delete) shift;  cmd_delete_secret "$@" ;;
+    e|edit) shift;    cmd_edit_secret   "$@" ;;
+    --help) shift;    cmd_help               ;;
 
-    *)                     cmd_cat_secret    "$@" ;;
+    *)              cmd_help    "$@" ;;
 esac
 exit "${EXIT_SUCCESS}"
