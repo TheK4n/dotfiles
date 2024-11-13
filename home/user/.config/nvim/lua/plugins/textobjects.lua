@@ -5,7 +5,6 @@ return {
     },
     {
         'sgur/vim-textobj-parameter',
-        event = "InsertEnter",
         dependencies = { 'kana/vim-textobj-user' }
     },
     {
