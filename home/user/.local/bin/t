@@ -53,7 +53,8 @@ get_notes_sorted_by_access_time() {
         | tr '\n' "${IFS}"
 }
 
-show_notes_with_indexes() {
+
+get_notes_with_indexes() {
     SAVEIFS="${IFS}"
     IFS=';'
 
@@ -71,7 +72,15 @@ show_notes_with_indexes() {
             note_lines="-"
         fi
 
-        printf -- '[%d]\t%s\t(%s)\n' "${index}" "$(basename -- "${note}")" "${note_lines}"
+        note_name="$(basename -- "${note}")"
+
+        if ${_TO_SHOW:-false}; then
+            if [ "${#note_name}" -gt "$(($(tput cols)/2))" ]; then
+                note_name="$(echo "${note_name}" | cut -c -$(($(tput cols)/2-4)) )..."
+            fi
+        fi
+
+        printf -- '[%d]\t%s\t(%s)\n' "${index}" "${note_name}" "${note_lines}"
         index="$((index+1))"
     done
 
@@ -94,7 +103,7 @@ cmd_add_note() {
 }
 
 cmd_delete_note() {
-    current_notes="$(show_notes_with_indexes)"
+    current_notes="$(get_notes_with_indexes)"
 
     for note_index in "$@"
     do
@@ -114,7 +123,7 @@ cmd_delete_note() {
 
 cmd_edit_note() {
     note_index="${1}"
-    note="$(show_notes_with_indexes | find_note_name_by_index "${note_index}")"
+    note="$(get_notes_with_indexes | find_note_name_by_index "${note_index}")"
     note_to_edit="${NOTES_DIR}/${note}"
 
     if [ ! -f "${note_to_edit}" ]; then
@@ -127,13 +136,14 @@ cmd_edit_note() {
 
 cmd_cat_note() {
     note_index="${1}"
-    note="$(show_notes_with_indexes | find_note_name_by_index "${note_index}")"
+    note="$(get_notes_with_indexes | find_note_name_by_index "${note_index}")"
     note_to_cat="${NOTES_DIR}/${note}"
 
     if [ ! -f "${note_to_cat}" ]; then
         die "Note with index ${note_index} not found" 1
     fi
 
+    printf "%s:" "$(basename "${note_to_cat}")"
     cat "${note_to_cat}"
     exit "${EXIT_SUCCESS}"
 }
@@ -153,7 +163,7 @@ cmd_show_namespaces() {
 }
 
 cmd_show_notes() {
-    show_notes_with_indexes | prettify
+    _TO_SHOW=true get_notes_with_indexes | prettify
 }
 
 remove_empty_namespaces() {
