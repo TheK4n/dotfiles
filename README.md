@@ -36,7 +36,8 @@ Config files for:
     <img src=".assets/prompt.png" alt="Prompt">
 </p>
 
-You can add your files to the  `~/.config/zsh/zshrc.d` directory for zsh so that they automatically run in ascending order when you open a terminal.\
+You can add your files to the  `~/.config/zsh/zshrc.d` directory for zsh so
+that they automatically run in ascending order when you open a terminal.\
 Example:\
 `~/.config/zsh/zshrc.d/01_hello.sh`
 ```sh

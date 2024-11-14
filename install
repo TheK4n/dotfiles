@@ -211,7 +211,7 @@ cmd_unlink() (
 )
 
 cmd_no_target() (
-    _die "TARGET not exists" 1
+    _die "TARGET '${1}' not exists" 1
 )
 
 cmd_list() (
@@ -226,14 +226,14 @@ target_exists() (
 cmd_install() (
     for target in "$@"
     do
-        if target_exists "${target}"; then
-            SANDBOX_PATH="$(mktemp -td "${USER:-user}.dotfiles_XXXXXXX")"
-            export SANDBOX_PATH
-            install_target "${target}"
-            rm -rf "${SANDBOX_PATH}"
-        else
-            cmd_no_target
+        if ! target_exists "${target}"; then
+            cmd_no_target "${target}"
         fi
+
+        SANDBOX_PATH="$(mktemp -td "${USER:-user}.dotfiles_XXXXXXX")"
+        export SANDBOX_PATH
+        install_target "${target}"
+        rm -rf "${SANDBOX_PATH}"
     done
 )
 
