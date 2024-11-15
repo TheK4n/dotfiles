@@ -75,8 +75,8 @@ get_notes_with_indexes() {
         note_name="$(basename -- "${note}")"
 
         if ${_TO_SHOW:-false}; then
-            if [ "${#note_name}" -gt "$(($(tput cols)/2))" ]; then
-                note_name="$(echo "${note_name}" | cut -c -$(($(tput cols)/2-4)) )..."
+            if [ "${#note_name}" -gt "$(($(tput cols)-12))" ]; then
+                note_name="$(echo "${note_name}" | colrm $(($(tput cols)-12)))..."
             fi
         fi
 
