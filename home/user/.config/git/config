@@ -79,7 +79,7 @@
     last = log -1 HEAD
     lastd = diff HEAD^ HEAD
     today = hist --since=midnight
-    df = "!git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --preview-window=65% --preview='git diff --color=always {1}^ {1}' | awk '{print $1}' | xargs -I {} git diff {}^ {}"
+    df = "!git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --bind 'enter:execute(git diff --color=always {1}^ {1} | ${PAGER})' --preview-window=65% --preview='git diff --color=always {1}^ {1}'"
     type = cat-file -t
     dump = cat-file -p
     unstage = "reset HEAD --"
