@@ -5,8 +5,11 @@ readonly tmux_list_sessions_script="${HOME}/.local/bin/tmux_list_sessions.sh"
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
---color='border:blue,label:blue'
+--no-multi
+--border=rounded
+--border-label-pos=bottom
 --border-label=' Attach session '
+--color='border:blue,label:blue'
 --preview-window=follow
 --preview='tmux capture-pane -p -e -t {1}'
 --pointer='> '

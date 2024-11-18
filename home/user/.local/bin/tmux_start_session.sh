@@ -6,8 +6,10 @@ readonly EDITOR="nvim"
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
---color='border:green,label:green'
+--border=rounded
+--border-label-pos=bottom
 --border-label=' Start session '
+--color='border:green,label:green'
 --preview='highlight -O ansi '${TMUX_SESSIONS}/{1}''
 --pointer='> '
 --marker=''

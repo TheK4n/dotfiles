@@ -26,6 +26,7 @@ export FZF_DEFAULT_OPTS="\
 --color='gutter:-1,pointer:red,preview-border:grey,separator:grey'
 --pointer='> '
 --marker='* '
+--preview-window=70%
 --bind
 ctrl-/:toggle-preview,\
 ctrl-a:toggle-all,\

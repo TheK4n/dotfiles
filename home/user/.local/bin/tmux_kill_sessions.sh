@@ -5,9 +5,11 @@ readonly tmux_list_sessions_script="${HOME}/.local/bin/tmux_list_sessions.sh"
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
---color='border:red,label:red'
---border-label=' Kill sessions '
 --multi
+--border=rounded
+--border-label-pos=bottom
+--border-label=' Kill sessions '
+--color='border:red,label:red'
 --preview-window=follow
 --preview='tmux capture-pane -p -e -t {1}'
 --bind
