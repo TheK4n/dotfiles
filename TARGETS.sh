@@ -19,4 +19,5 @@ psql:.psqlrc
 docker:.docker/cli-plugins
 ipython:.ipython/profile_default/ipython_config.py
 gdb:.config/gdb
+sandbox:
 all:%less %t %tmux %zsh %nvim %git"

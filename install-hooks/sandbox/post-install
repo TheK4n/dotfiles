@@ -1,0 +1,28 @@
+#!/bin/sh
+
+
+sudo useradd -M -s /opt/bin/sandbox sandbox
+sudo usermod -aG docker sandbox
+echo "/opt/bin/sandbox" | sudo tee -a /etc/shells  # for pam
+
+
+set -eu
+
+
+cd "$(mktemp -d)"
+cat > Dockerfile << EOF
+FROM debian:bookworm-slim
+
+
+RUN apt update -y && apt upgrade -y && apt install -y neovim zsh git wget && \
+    useradd -Um -s /bin/zsh sandbox
+
+WORKDIR /home/sandbox
+USER sandbox
+
+RUN git clone https://github.com/thek4n/dotfiles && cd dotfiles && ./install zsh && zsh -i
+
+ENTRYPOINT ["zsh"]
+EOF
+
+docker build -t sandbox .
