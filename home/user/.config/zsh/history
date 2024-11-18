@@ -12,6 +12,12 @@ setopt HIST_IGNORE_SPACE      # Don't record an entry starting with a space.
 setopt HIST_FIND_NO_DUPS      # Do not display a line previously found.
 setopt HIST_SAVE_NO_DUPS      # Don't write duplicate entries in the history file.
 
+
+export HISTSIZE=100000
+export HISTFILESIZE="${HISTSIZE}"
+export HISTCONTROL=ignoreboth:erasedups
+export HISTTIMEFORMAT="%F %T "
+export HISTIGNORE="&:l[lsa\.]:[bf]g:exit:q:clear:c:history:h"
 export HISTORY_IGNORE='(cd|c|q|exit|l[sal.]|[bf]g#( *)#|..|lsl|ll[a.]|cd ..)'
 
 # configure `time` format
