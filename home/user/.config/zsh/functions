@@ -178,6 +178,7 @@ showtips() {
         git init "${tips_dir}"
     fi
 
+    set -o nullglob
     local filename
     for filename in "${tips_dir}"/*
     do
