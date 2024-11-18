@@ -1,18 +1,18 @@
 
 # vim: ft=zsh
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
-for TMPDIR in "$TMPDIR" "$TMP" /tmp /var/tmp
+for TMPDIR in "${TMPDIR}" "${TMP}" /tmp /var/tmp
 do
-    test -d "$TMPDIR" && break
+    test -d "${TMPDIR}" && break
 done
 export TMPDIR
 
 
 export EDITOR="nvim"
-export VISUAL="$EDITOR"
+export VISUAL="${EDITOR}"
 
 export PAGER="less"
 export LESS="-nMWiSRx4 --mouse -j2 -# 1 -+X -+F"
@@ -40,8 +40,8 @@ export BROWSERCLI=w3m
 test -z "${BROWSER}" && BROWSER=firefox
 export BROWSER
 
-if [ -d "$HOME/.local/bin" ] ; then
-    export PATH="$HOME/.local/bin:$PATH"
+if [ -d "${HOME}/.local/bin" ] ; then
+    export PATH="${HOME}/.local/bin:${PATH}"
 fi
 
 umask 022
