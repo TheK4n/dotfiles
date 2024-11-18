@@ -147,7 +147,7 @@ alias black='magick canvas:none PNG:- | feh -YF -'
 # :)
 alias PINK='beep -f 233 -l 440 -n -f 349 -l 440 -n -f 196 -l 440 -n -f 330 -l 650'
 
-alias -g L='| $PAGER'
+alias -g L='2>&1 | $PAGER'
 alias -g H='| head'
 alias -g T='| tail'
 alias -g HL='| highlight -O ansi -S '
