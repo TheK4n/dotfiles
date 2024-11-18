@@ -6,6 +6,8 @@ readonly EDITOR="nvim"
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
+--no-multi
+--marker=''
 --border=rounded
 --border-label-pos=bottom
 --border-label=' Start session '
