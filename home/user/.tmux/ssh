@@ -5,6 +5,7 @@ set -eu
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
+--print-query
 --border-label=' Start SSH session '
 --preview-window=hidden
 --preview=''
