@@ -11,8 +11,6 @@ ${FZF_DEFAULT_OPTS}
 --border-label=' Start session '
 --color='border:green,label:green'
 --preview='highlight -O ansi '${TMUX_SESSIONS}/{1}''
---pointer='> '
---marker=''
 --bind
 ctrl-e:execute\(${EDITOR}\ \"${TMUX_SESSIONS}/{1}\"\)\
 "
