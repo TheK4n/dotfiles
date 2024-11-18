@@ -4,23 +4,35 @@ _so() {
     [ -r "${1}" ] && [ -f "${1}" ] && source "${1}"
 }
 
+_sod() {
+    local -r dir_to_source="${1}"
+
+    if [ -d "${dir_to_source}" ] && [ -n "$(ls "${dir_to_source}")" ]; then
+        local filename
+        for filename in $(ls "${dir_to_source}" | sort -n)
+        do
+            source "${dir_to_source}/${filename}"
+        done
+    fi
+}
 
 
-_so "${ZDOTDIR}/export"
+source "${ZDOTDIR}/export"
+
+source "${ZDOTDIR}/options"
+source "${ZDOTDIR}/completion"
+source "${ZDOTDIR}/history"
+source "${ZDOTDIR}/prompt"
+source "${ZDOTDIR}/other"
+source "${ZDOTDIR}/aliases"
+source "${ZDOTDIR}/functions"
+
 _so "${ZDOTDIR}/hosts/${HOST}"
 
-_so "${ZDOTDIR}/options"
-_so "${ZDOTDIR}/completion"
-_so "${ZDOTDIR}/history"
-_so "${ZDOTDIR}/prompt"
-_so "${ZDOTDIR}/other"
-_so "${ZDOTDIR}/aliases"
-_so "${ZDOTDIR}/functions"
+source "${ZDOTDIR}/plugin"
 
-_so "${ZDOTDIR}/plugin"
+source "${ZDOTDIR}/mappings"
 
-_so "${ZDOTDIR}/mappings"
-
-_so "${ZDOTDIR}/calculator"
+source "${ZDOTDIR}/calculator"
 
 _sod "${ZDOTDIR}/zshrc.d"

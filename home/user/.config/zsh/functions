@@ -1,19 +1,5 @@
 # vim: ft=zsh
 
-_sod() {
-    if [ -d "$1" ] && [ -n "$(ls "$1")" ]; then
-        local filename
-        for filename in $(ls "$1" | sort -n)
-        do
-            source "${1}/${filename}"
-        done
-    fi
-}
-
-lt() {
-    du -h "${1:-.}" 2>/dev/null | sort -h
-}
-
 destroy() {
     local -r filename="${1}"
 
@@ -39,7 +25,8 @@ destroy() {
 }
 
 workon() {
-    source "/opt/pythonenv/${1:-$(basename "$PWD")}/bin/activate"
+    local -r venvs="${VENVS:-/opt/pythonenv}"
+    source "${venvs}/${1:-$(basename "${PWD}")}/bin/activate"
 }
 
 py() {
@@ -51,7 +38,8 @@ py() {
 }
 
 ve() {
-    python3 -m virtualenv "${1:-venv}" && . "${1:-venv}/bin/activate"
+    local -r venv_name="${1:-venv}"
+    python3 -m venv "${venv_name}" && . "${venv_name}/bin/activate"
 }
 
 va() {
@@ -60,7 +48,7 @@ va() {
             source "${1}/bin/activate"
             return 0
         fi
-        echo "va: error: virtual environment ${1} not found, use 'python3 -m virtualenv ${1}'" >&2
+        echo "va: error: virtual environment ${1} not found, use 'python3 -m venv ${1}'" >&2
         return 1
     fi
 
@@ -73,70 +61,70 @@ va() {
     activate_venv="$(find -P . -maxdepth 3 -type f -wholename '*/bin/activate' | sort | head -n 1)"
     readonly activate_venv
 
-    if [[ -f "$activate_venv" ]]; then
-        source "$activate_venv"
+    if [[ -f "${activate_venv}" ]]; then
+        source "${activate_venv}"
         return 0
     else
-        echo "va: error: virtual environment not found, use python3 -m virtualenv venv" >&2
+        echo "va: error: virtual environment not found, use python3 -m venv venv" >&2
         return 1
     fi
 }
 
 
 extract() (
-    if [ -z "$1" ]; then
+    if [ -z "${1}" ]; then
         echo "extract: error: usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
         return 2
     fi
 
-    if ! [ -f "$1" ]; then
-        echo "extract: error: '$1' file does not exist" >&2
+    if ! [ -f "${1}" ]; then
+        echo "extract: error: '${1}' file does not exist" >&2
         return 1
     fi
 
     local -r name="${1%%.*}"  # removes extension from filename
-    if [ -e "$name" ]; then
-        echo "extract: error: '$name' exists" >&2
+    if [ -e "${name}" ]; then
+        echo "extract: error: '${name}' exists" >&2
         return 1
     fi
 
-    mkdir "$name" && cd "$name" || return 1
+    mkdir "${name}" && cd "${name}" || return 1
 
     case $1 in
-        *.tar.bz2)  tar xjf      ../"$1" ;;
-        *.tar.gz)   tar xzf      ../"$1" ;;
-        *.tar.xz)   tar xJf      ../"$1" ;;
-        *.lzma)     unlzma       ../"$1" ;;
-        *.bz2)      bunzip2      ../"$1" ;;
-        *.rar)      unrar x -ad  ../"$1" ;;
-        *.gz)       gunzip       ../"$1" ;;
-        *.tar)      tar xf       ../"$1" ;;
-        *.tbz2)     tar xjf      ../"$1" ;;
-        *.tgz)      tar xzf      ../"$1" ;;
-        *.zip)      unzip        ../"$1" ;;
-        *.Z)        uncompress   ../"$1" ;;
-        *.7z)       7z x         ../"$1" ;;
-        *.xz)       unxz         ../"$1" ;;
-        *.exe)      cabextract   ../"$1" ;;
-        *)          echo "extract: error: '$1' - unknown archive method" >&2 ;;
+        *.tar.bz2)  tar xjf      ../"${1}" ;;
+        *.tar.gz)   tar xzf      ../"${1}" ;;
+        *.tar.xz)   tar xJf      ../"${1}" ;;
+        *.lzma)     unlzma       ../"${1}" ;;
+        *.bz2)      bunzip2      ../"${1}" ;;
+        *.rar)      unrar x -ad  ../"${1}" ;;
+        *.gz)       gunzip       ../"${1}" ;;
+        *.tar)      tar xf       ../"${1}" ;;
+        *.tbz2)     tar xjf      ../"${1}" ;;
+        *.tgz)      tar xzf      ../"${1}" ;;
+        *.zip)      unzip        ../"${1}" ;;
+        *.Z)        uncompress   ../"${1}" ;;
+        *.7z)       7z x         ../"${1}" ;;
+        *.xz)       unxz         ../"${1}" ;;
+        *.exe)      cabextract   ../"${1}" ;;
+        *)          echo "extract: error: '${1}' - unknown archive method" >&2 ;;
     esac
 )
 
 mcd() {
-    if [ -z "$1" ]; then
+    if [ -z "${1}" ]; then
         cd "$(mktemp -td "${USER:-user}.XXXX")"
     else
-        mkdir -p "$1" && cd "$1"
+        mkdir -p "${1}" && cd "${1}"
     fi
 }
 
 open() {
-    test -e "$1" || return 1
-    nohup xdg-open "$1" 1>/dev/null 2>&1 &
+    test -e "${1}" || return 1
+    nohup xdg-open "${1}" 1>/dev/null 2>&1 &
 }
 
 split-file() {
-    if [[ ! -e "$1" ]]; then
+    if [[ ! -e "${1}" ]]; then
         echo "file '${1}' not found" >&2
         return 1
     fi
@@ -145,7 +133,7 @@ split-file() {
 
     mkdir "${1}.splitted"
     cd "${1}.splitted"
-    split -d -b "$size" "../${1}"
+    split -d -b "${size}" "../${1}"
 }
 
 json() {
@@ -174,39 +162,32 @@ rmt() {
     for filename in "$@"
     do
         local filename_out_path
-        filename_out_path="${trash}$(realpath "$filename")"
+        filename_out_path="${trash}$(realpath "${filename}")"
         readonly filename_out_path
 
-        mkdir -p "$(dirname "$filename_out_path")"
-        mv "$filename" "${filename_out_path}_$(date +%s)"
+        mkdir -p "$(dirname "${filename_out_path}")"
+        mv "${filename}" "${filename_out_path}_$(date +%s)"
     done
 }
 
 showtips() {
     local -r tips_dir="${HOME}/.tips"
 
-    if [ ! -d "$tips_dir" ]; then
-        mkdir "$tips_dir" 2>/dev/null
-        git init "$tips_dir"
+    if [ ! -d "${tips_dir}" ]; then
+        mkdir "${tips_dir}" 2>/dev/null
+        git init "${tips_dir}"
     fi
 
-    local content
     local filename
-    for filename in "$tips_dir"/*
+    for filename in "${tips_dir}"/*
     do
-        content="$(cat "$filename")"
-        echo "$content"
+        cat "${filename}"
     done
     return 0
 }
 
 most-often-commands() {
     history 0 | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn
-}
-
-# Enable X11Forwarding and disable mux session
-sshx() {
-    ssh -X -o ControlMaster=no -o ControlPath=none "$@"
 }
 
 django-create-project() (
@@ -283,7 +264,7 @@ f() {
 mirror-site() (
     set -eu
 
-    local -r name=$1; shift
+    local -r name="${1}"; shift
 
     mkdir -p "${name}" && cd "${name}"
 
@@ -301,7 +282,7 @@ mirror-site() (
         -l inf \
         --no-remove-listing \
         --no-parent \
-        --user-agent "$user_agent" \
+        --user-agent "${user_agent}" \
         --reject '*.woff*,*.ttf,*.eot,*.js' \
         --tries 10 \
         $@
