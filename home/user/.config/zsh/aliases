@@ -4,20 +4,23 @@
 _d() { true ; }
 _f() { true ; }
 
-# colors
-if [ -x "$(command -v dircolors)" ]; then
-    LS_OPTIONS=(--color=auto -v)
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    alias ls='ls $LS_OPTIONS'
+alias ls='ls --classify=auto --color=always --human-readable'
+alias ll='ls -l'
+alias la='ls --almost-all'
+alias lla='ls -l --almost-all'
+alias l.='ls --almost-all --ignore="*"'
+alias ll.='ls -l --almost-all --ignore="*"'
+
+if command -v exa &>/dev/null; then
+    alias exa='exa --classify=auto --color=always'
+    alias ls='exa'
+    alias ll='exa --long'
+    alias la='exa --all'
+    alias lla='exa --long --all'
+    alias l.='_d() ( cd "${1:-.}" && exa --list-dirs .* ; ); _d'
+    alias ll.='_d() ( cd "${1:-.}" && exa --long --all --list-dirs .* ; ); _d'
 fi
-
-alias l.='ls -AF --ignore="*"'
-alias ll='ls -lhF'
-alias la='ls -AF'
-alias lla='ls -lhFA'
-alias ll.='ls -lhFA --ignore="*"'
-alias lsl='_d() { ls -lhFA --color=always "${1:-.}" | $PAGER ; }; _d'
 
 GREP_OPTIONS=(
     --color=auto
@@ -27,15 +30,15 @@ GREP_OPTIONS=(
 )
 
 alias grep='grep $GREP_OPTIONS'
-alias g='grep -R'
+alias g='grep --dereference-recursive'
 
 alias _='sudo'
-alias root='sudo -i TMOUT=450'
+alias root='sudo --login TMOUT=450'
 
-alias rm='rm -Ivr --one-file-system'
-alias mkdir='mkdir -pv'
+alias rm='rm --interactive=once --verbose --recursive --one-file-system'
+alias mkdir='mkdir --parents --verbose'
 
-alias cl='_d() { cd "${1:-$HOME}" && ls; }; _d'
+alias cl='_d() { cd "${1:-${HOME}}" && ls; }; _d'
 
 alias q='exit 0'
 
@@ -55,19 +58,23 @@ alias j='jobs -l'
 alias sha='(shasum -a 256 | head -c 64)'
 alias genpass="openssl rand -base64 12"
 alias gensalt="dd if=/dev/urandom count=16 2>/dev/null | sha256sum | head -c 64"
-alias diff='colordiff'
+
+if command -v colordiff &>/dev/null; then
+    alias diff='colordiff'
+fi
+
 alias tar-it='tar -czf "../${PWD##*/}.tar.gz" .'
 alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'
 
 # time
 alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
-alias cal='cal -m'
+alias cal='cal --monday'
 alias beeptime='beep -D 400 -l 400 -r "$(date +%I)" -f 440 -n -D 1000 -l 0 -n -D 800 -l 200 -f 880 -r "$(($(date +%M)/15))"'
 
 # vim
 alias vi='nvim'
-alias svi="sudo -E nvim"
+alias svi="sudo --preserve-env nvim"
 
 # net
 alias ports='ss -tlnp'
@@ -164,6 +171,8 @@ alias -g ....='../../..'
 alias -g .3='../../..'
 alias -g .....='../../../..'
 alias -g .4='../../../..'
+alias -g ......='../../../../..'
+alias -g .5='../../../../..'
 
 alias -g D="DISPLAY=:0.0"
 alias -g XT="TERM=xterm"
