@@ -20,6 +20,8 @@ if command -v exa &>/dev/null; then
     alias lla='exa --long --all'
     alias l.='_d() ( cd "${1:-.}" && exa --list-dirs .* ; ); _d'
     alias ll.='_d() ( cd "${1:-.}" && exa --long --all --list-dirs .* ; ); _d'
+
+    alias tree='exa --tree'
 fi
 
 GREP_OPTIONS=(
