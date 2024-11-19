@@ -60,7 +60,7 @@
     dw = diff --word-diff=color
     co = checkout
     ci = commit
-    cia = commit -a
+    cia = commit --all
     amend = commit --amend --no-edit
     amenda = commit --all --amend --no-edit
     cim = "!_m() { git commit -m \"$*\"; }; _m"
@@ -79,7 +79,7 @@
     last = log -1 HEAD
     lastd = diff HEAD^ HEAD
     today = hist --since=midnight
-    df = "!git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --bind 'enter:execute(git diff --color=always {1}^ {1} | ${PAGER})' --preview-window=65% --preview='git diff --color=always {1}^ {1}'"
+    df = "!_m() { git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --bind \"enter:execute(git diff --color=always $@ {1}^ {1} | ${PAGER})\" --preview-window=65% --preview=\"git diff --color=always $@ {1}^ {1}\"; }; _m"
     type = cat-file -t
     dump = cat-file -p
     unstage = "reset HEAD --"
