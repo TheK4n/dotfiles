@@ -1,6 +1,8 @@
 
 # vim: ft=zsh
 
+umask 022
+
 export XDG_CONFIG_HOME="${HOME}/.config"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
@@ -45,4 +47,7 @@ if [ -d "${HOME}/.local/bin" ] ; then
     export PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-umask 022
+export GOCACHE="/tmp/go-cache"
+export GOPATH="${HOME}/.cache/go"
+export GOENV="${GOPATH}/env"
+export GOMODCACHE="${GOPATH}/pkg/mod"
