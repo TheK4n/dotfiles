@@ -3,6 +3,7 @@
 
 umask 022
 
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
