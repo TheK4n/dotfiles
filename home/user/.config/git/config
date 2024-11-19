@@ -2,7 +2,7 @@
     excludesfile = ~/.config/git/ignore
     editor = "$EDITOR"
     pager = "$PAGER -+C -F"
-    fileMode = false
+    fileMode = true
     hooksPath = ~/.config/git/hooks
     whitespace = fix,trailing-space,cr-at-eol
     autocrlf = input
@@ -63,6 +63,9 @@
     cia = commit --all
     amend = commit --amend --no-edit
     amenda = commit --all --amend --no-edit
+    fuck = commit --amend
+    uncommit = reset --soft HEAD~1
+    untrack = rm --cache --
     cim = "!_m() { git commit -m \"$*\"; }; _m"
     cima = "!_m() { git commit -am \"$*\"; }; _m"
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
