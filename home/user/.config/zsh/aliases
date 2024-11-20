@@ -32,7 +32,7 @@ GREP_OPTIONS=(
 )
 
 alias grep='grep $GREP_OPTIONS'
-alias g='grep --dereference-recursive'
+alias g='grep --dereference-recursive --line-number'
 
 alias _='sudo'
 alias root='sudo --login TMOUT=450'

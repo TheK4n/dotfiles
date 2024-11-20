@@ -5,10 +5,40 @@ set -o errexit
 set -o nounset
 
 
+readonly ENV_FILE=".t.env"
 readonly EXIT_SUCCESS=0
-
 readonly NOTES_DIR_BASE="${HOME}/.t"
-readonly NOTES_DIR="${NOTES_DIR_BASE}/${t:-default}"
+readonly DEFAULT_NAMESPACE="def"
+
+
+find_file_up_fs() (
+    file_to_find="${1}"
+
+    while [ ! "$(pwd)" = "/" ]
+    do
+        if [ -f "${file_to_find}" ]; then
+            realpath "${file_to_find}"
+            break
+        fi
+        cd ..
+    done
+)
+
+load_env_if_found() {
+    env_file="$(find_file_up_fs "./${ENV_FILE}")"
+
+    if [ -n "${env_file}" ]; then
+        . "${env_file}"
+    fi
+}
+
+if [ -z "${t+x}" ]; then
+    load_env_if_found
+fi
+
+
+readonly t="${t:-${DEFAULT_NAMESPACE}}"
+readonly NOTES_DIR="${NOTES_DIR_BASE}/${t}"
 
 TAB="$(printf -- '\t')"
 readonly TAB
@@ -57,6 +87,11 @@ get_notes_sorted_by_access_time() {
 get_notes_with_indexes() {
     SAVEIFS="${IFS}"
     IFS=';'
+
+
+    if ${_TO_SHOW:-false}; then
+        printf -- '\033[1m# %s\033[0m\n\n' "${t}"
+    fi
 
     index=1
     for note in $(IFS="${IFS}" get_notes_sorted_by_access_time)
