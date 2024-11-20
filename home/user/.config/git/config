@@ -116,9 +116,13 @@
 [url "https://bitbucket.org/"]
     insteadOf = "bb:"
 
+[url "https://github.com/"]
+    insteadOf = "git@github.com:"
+
 [url "git@github.com:"]
     pushInsteadOf = "https://github.com/"
     pushInsteadOf = "http://github.com/"
+    pushInsteadOf = "git@github.com:"
     pushInsteadOf = "gh:"
 
 [url "git@gist.github.com:"]
