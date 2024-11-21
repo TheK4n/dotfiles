@@ -12,16 +12,16 @@ alias lla='ls -l --almost-all'
 alias l.='ls --almost-all --ignore="*"'
 alias ll.='ls -l --almost-all --ignore="*"'
 
-if command -v exa &>/dev/null; then
-    alias exa='exa --classify=auto --color=always'
-    alias ls='exa'
-    alias ll='exa --long'
-    alias la='exa --all'
-    alias lla='exa --long --all'
-    alias l.='_d() ( cd "${1:-.}" && exa --list-dirs .* ; ); _d'
-    alias ll.='_d() ( cd "${1:-.}" && exa --long --all --list-dirs .* ; ); _d'
+if command -v eza &>/dev/null; then
+    alias eza='eza --classify=auto --color=always'
+    alias ls='eza'
+    alias ll='eza --long'
+    alias la='eza --all'
+    alias lla='eza --long --all'
+    alias l.='_d() ( cd "${1:-.}" && eza --list-dirs .* ; ); _d'
+    alias ll.='_d() ( cd "${1:-.}" && eza --long --all --list-dirs .* ; ); _d'
 
-    alias tree='exa --tree'
+    alias tree='eza --tree'
 fi
 
 GREP_OPTIONS=(
