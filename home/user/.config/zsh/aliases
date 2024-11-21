@@ -59,7 +59,6 @@ alias h='history 0'
 alias j='jobs -l'
 
 # utils
-alias sha='(shasum -a 256 | head -c 64)'
 alias genpass="openssl rand -base64 12"
 alias gensalt="dd if=/dev/urandom count=16 2>/dev/null | sha256sum | head -c 64"
 

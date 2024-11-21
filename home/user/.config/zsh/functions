@@ -284,3 +284,13 @@ mirror-site() (
         --tries 10 \
         $@
 )
+
+sha() {
+    if [ -v 2 ]; then
+        shasum -a 256 "${@}"
+    elif [ -v 1 ]; then
+        shasum -a 256 "${@}" | head -c 64
+    else
+        shasum -a 256 | head -c 64
+    fi
+}
