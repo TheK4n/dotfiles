@@ -258,10 +258,6 @@ bak() {
     done
 }
 
-f() {
-    find . -name "*${1}*"
-}
-
 mirror-site() (
     set -eu
 
