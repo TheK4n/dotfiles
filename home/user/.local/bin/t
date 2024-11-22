@@ -88,23 +88,20 @@ get_notes_with_indexes() {
     SAVEIFS="${IFS}"
     IFS=';'
 
-
-    if ${_TO_SHOW:-false}; then
-        printf -- '\033[1m# %s\033[0m\n\n' "${t}"
-    fi
-
     index=1
     for note in $(IFS="${IFS}" get_notes_sorted_by_access_time)
     do
-        note_lines="$(wc -l < "${note}")"
+        if ${_TO_SHOW:-false}; then
+            note_lines="$(wc -l < "${note}")"
 
-        if [ "${note_lines}" -gt 0 ]; then
-            note_lines="$((note_lines+1))"
-        fi
-        if [ "${note_lines}" -gt 70 ]; then
-            note_lines="..."
-        elif [ "${note_lines}" -eq 0 ]; then
-            note_lines="-"
+            if [ "${note_lines}" -gt 0 ]; then
+                note_lines="$((note_lines+1))"
+            fi
+            if [ "${note_lines}" -gt 70 ]; then
+                note_lines="..."
+            elif [ "${note_lines}" -eq 0 ]; then
+                note_lines="-"
+            fi
         fi
 
         note_name="$(basename -- "${note}")"
@@ -115,7 +112,11 @@ get_notes_with_indexes() {
             fi
         fi
 
-        printf -- '[%d]\t%s\t(%s)\n' "${index}" "${note_name}" "${note_lines}"
+        if ${_TO_SHOW:-false}; then
+            printf -- '[%d]\t%s\t(%s)\n' "${index}" "${note_name}" "${note_lines}"
+        else
+            printf -- '[%d]\t%s\n' "${index}" "${note_name}"
+        fi
         index="$((index+1))"
     done
 
@@ -183,10 +184,6 @@ cmd_cat_note() {
     exit "${EXIT_SUCCESS}"
 }
 
-prettify() {
-    column -t -s "${TAB}"
-}
-
 cmd_show_namespaces() {
     (
         for namespace in $(find "${NOTES_DIR_BASE}/" -mindepth 1 -maxdepth 1 -type d | sort -n)
@@ -194,11 +191,12 @@ cmd_show_namespaces() {
             namespace_notes_count="$(find "${namespace}" -type f | wc -l)"
             printf -- '%s\t(%s)\n' "$(basename "${namespace}")" "${namespace_notes_count}"
         done
-    ) | prettify
+    ) | column -t -R -1 -s "${TAB}"
 }
 
 cmd_show_notes() {
-    _TO_SHOW=true get_notes_with_indexes | prettify
+    printf -- '\033[1m# %s\033[0m\n' "${t}"
+    _TO_SHOW=true get_notes_with_indexes | column -t -R 1,-1 -s "${TAB}"
 }
 
 remove_empty_namespaces() {
