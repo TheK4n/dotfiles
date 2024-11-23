@@ -17,8 +17,6 @@ _sod() {
 }
 
 
-source "${ZDOTDIR}/export"
-
 source "${ZDOTDIR}/options"
 source "${ZDOTDIR}/completion"
 source "${ZDOTDIR}/history"
