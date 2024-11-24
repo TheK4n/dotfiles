@@ -1,0 +1,47 @@
+# vim: ft=gitconfig
+
+
+[alias]
+    a = "!git ls-files --exclude-standard -m --others -t | fzf -1 -0 -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs -r git add"
+    u = "!git diff --name-only --cached | fzf -1 -0 -m --bind load:last --preview 'git diff --staged --color=always {1}' | xargs -r git restore --staged"
+    d = diff
+    di = diff
+    ds = diff --staged
+    dno = diff --name-only
+    dw = diff --word-diff=color
+    co = checkout
+    ci = commit
+    cia = commit --all
+    amend = commit --amend --no-edit
+    amenda = commit --all --amend --no-edit
+    fuck = commit --amend
+    uncommit = reset --soft HEAD~1
+    untrack = rm --cache --
+    cim = "!_m() { git commit -m \"$*\"; }; _m"
+    cima = "!_m() { git commit -am \"$*\"; }; _m"
+    ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+    pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+    pr = "pull --rebase"
+    st = status
+    br = branch
+    bm = branch --merged
+    bn = branch --no-merged
+    hist = log --pretty=format:'%Cgreen%h %Creset%cd %Cblue[%cn](%G?) %Creset%s%C(yellow)%d%C(reset)' --graph --date=relative --decorate --color=always
+    history = hist --all
+    hs = hist -n 10
+    hsa = hist -n 10 --all
+    last = log -1 HEAD
+    lastd = diff HEAD^ HEAD
+    today = hist --since=midnight
+    df = "!_m() { git log --pretty=format:'%h %cd [%cn] %s%d' --date=relative | fzf --bind \"enter:execute(git diff --color=always $@ {1}^ {1} | ${PAGER})\" --preview-window=65% --preview=\"git diff --color=always $@ {1}^ {1}\"; }; _m"
+    type = cat-file -t
+    dump = cat-file -p
+    unstage = "reset HEAD --"
+    count = "rev-list --count --all"
+
+    # edit conflicted file on merge
+    edit-unmerged = "!$EDITOR $(git ls-files --unmerged | cut -f2 | sort -u)"
+
+    # add conflicted file on merge
+    add-unmerged = "!git add $(git ls-files --unmerged | cut -f2 | sort -u)"
+    remove-remote-tag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 }; f"

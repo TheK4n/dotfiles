@@ -1,0 +1,28 @@
+# vim: ft=gitconfig
+
+# alias gh:=https://github.com/
+[url "https://github.com/"]
+    insteadOf = "gh:"
+
+# alias gist:=https://gist.github.com/
+[url "https://gist.github.com/"]
+    insteadOf = "gist:"
+
+# alias gl:=https://gitlab.com/
+[url "https://gitlab.com/"]
+    insteadOf = "gl:"
+
+# alias bb:=https://bitbucket.org/
+[url "https://bitbucket.org/"]
+    insteadOf = "bb:"
+
+[url "git@github.com:"]
+    pushInsteadOf = "https://github.com/"
+    pushInsteadOf = "http://github.com/"
+    pushInsteadOf = "git@github.com:"
+    pushInsteadOf = "gh:"
+
+[url "git@gist.github.com:"]
+    pushInsteadOf = "https://gist.github.com/"
+    pushInsteadOf = "http://gist.github.com/"
+    pushInsteadOf = "gist:"
