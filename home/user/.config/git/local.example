@@ -1,0 +1,13 @@
+# vim: ft=gitconfig
+
+[github]
+    user = "thek4n"
+    email = "thek4n@yandex.ru"
+
+[user]
+    name = "thek4n"
+    email = "thek4n@yandex.ru"
+    signingkey = "thek4n"
+
+[url "git@github.com:TheK4n/notes"]
+    insteadOf = "git@github.com:TheK4n/notes"

@@ -16,6 +16,7 @@
 [url "https://bitbucket.org/"]
     insteadOf = "bb:"
 
+
 [url "git@github.com:"]
     pushInsteadOf = "https://github.com/"
     pushInsteadOf = "http://github.com/"
@@ -26,3 +27,15 @@
     pushInsteadOf = "https://gist.github.com/"
     pushInsteadOf = "http://gist.github.com/"
     pushInsteadOf = "gist:"
+
+[url "git@gitlab.com:"]
+    pushInsteadOf = "https://gitlab.com/"
+    pushInsteadOf = "http://gitlab.com/"
+    pushInsteadOf = "git@gitlab.com:"
+    pushInsteadOf = "gl:"
+
+[url "https://github.com/"]
+    insteadOf = "git@github.com:"
+
+[url "https://gitlab.com/"]
+    insteadOf = "git@gitlab.com:"
