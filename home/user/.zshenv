@@ -51,4 +51,9 @@ fi
 export GOCACHE="/tmp/go-cache"
 export GOPATH="${HOME}/.cache/go"
 export GOENV="${GOPATH}/env"
+export GOBIN="${GOPATH}/bin"
 export GOMODCACHE="${GOPATH}/pkg/mod"
+
+if [ -d "${GOBIN}" ] ; then
+    export PATH="${PATH}:${GOBIN}"
+fi
