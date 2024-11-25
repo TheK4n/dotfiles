@@ -24,7 +24,7 @@ map_filetype('markdown', '<Leader>rr', 'pandoc -t plain %')
 map_filetype('python', '<Leader>rr', 'python3 %')
 map_filetype('python', '<Leader>rt', 'pytest %')
 
-map_filetype('go', '<Leader>rr', 'go run')
+map_filetype('go', '<Leader>rr', 'go run %')
 
 map_filetype('rust', '<Leader>rr', 'cargo run')
 
