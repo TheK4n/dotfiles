@@ -49,10 +49,13 @@ if [ -d "${HOME}/.local/bin" ] ; then
 fi
 
 export GOCACHE="/tmp/go-cache"
-export GOPATH="${HOME}/.cache/go"
-export GOENV="${GOPATH}/env"
-export GOBIN="${GOPATH}/bin"
-export GOMODCACHE="${GOPATH}/pkg/mod"
+export GOPATH="${HOME}/code/go"
+export GOENV="${HOME}/.cache/go/env"
+export GOBIN="${HOME}/.cache/go/bin"
+export GOMODCACHE="${HOME}/.cache/go/pkg/mod"
+
+export GOPROXY=off
+export GOSUMDB=off
 
 if [ -d "${GOBIN}" ] ; then
     export PATH="${PATH}:${GOBIN}"
