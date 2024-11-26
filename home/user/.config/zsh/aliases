@@ -180,6 +180,7 @@ alias -g .5='../../../../..'
 
 alias -g D="DISPLAY=:0.0"
 alias -g XT="TERM=xterm"
+alias -g GP="GOPROXY=direct"
 
 alias -g O="1>/dev/null"  # stdOut
 alias -g E="2>/dev/null"  # stdErr

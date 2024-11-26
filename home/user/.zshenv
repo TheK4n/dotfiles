@@ -49,7 +49,7 @@ if [ -d "${HOME}/.local/bin" ] ; then
 fi
 
 export GOCACHE="/tmp/go-cache"
-export GOPATH="${HOME}/code/go"
+export GOPATH="${HOME}/.cache/go"
 export GOBIN="${HOME}/.local/bin"
 
 export GOPROXY=off
