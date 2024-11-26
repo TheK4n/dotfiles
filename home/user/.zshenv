@@ -50,9 +50,6 @@ fi
 
 export GOCACHE="/tmp/go-cache"
 export GOPATH="${HOME}/code/go"
+export GOBIN="${HOME}/.local/bin"
 
 export GOPROXY=off
-
-if [ -d "${GOBIN}" ] ; then
-    export PATH="${PATH}:${GOBIN}"
-fi
