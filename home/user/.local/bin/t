@@ -49,6 +49,7 @@ cmd_help() {
     T script for fast notes
 
     t                            - Show notes in format '[INDEX] NOTE NAME (LINES)'
+    t get (NOTE)                 - Get note content
     t show                       - Show notes in format '[INDEX] NOTE NAME (LINES)'
     t (INDEX)                    - Show note content
     t add (X X X)                - Add note with name X X X
@@ -188,6 +189,18 @@ cmd_cat_note() {
     exit "${EXIT_SUCCESS}"
 }
 
+cmd_get_note() {
+    note_to_cat="${NOTES_DIR}/${1}"
+
+    if [ ! -f "${note_to_cat}" ]; then
+        die "Note '${1}' not found" 1
+    fi
+
+    cat "${note_to_cat}"
+    exit "${EXIT_SUCCESS}"
+}
+
+
 cmd_show_namespaces() {
     (
         for namespace in $(find "${NOTES_DIR_BASE}/" -mindepth 1 -maxdepth 1 -type d | sort -n)
@@ -226,6 +239,7 @@ case "${1}" in
     a|add) shift;          cmd_add_note    "$@" ;;
     d|done|delete) shift;  cmd_delete_note "$@" ;;
     e|edit) shift;         cmd_edit_note   "$@" ;;
+    get) shift;            cmd_get_note    "$@" ;;
     --help) shift;         cmd_help             ;;
 
     *)                     cmd_cat_note    "$@" ;;
