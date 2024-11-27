@@ -60,9 +60,6 @@ bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 focus_follows_mouse no
 popup_during_fullscreen smart
 
-# start a terminal
-bindsym $mod+Return exec alacritty
-
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -236,3 +233,5 @@ workspace hide2 output nonprimary
 bindsym $mod+q exec --no-startup-id i3-msg workspace hide1; workspace hide2
 
 no_focus [title="^Peek preview$"]
+
+include ~/.config/i3/config.d/*.conf
