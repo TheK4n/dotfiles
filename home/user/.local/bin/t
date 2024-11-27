@@ -91,6 +91,10 @@ get_notes_with_indexes() {
     index=1
     for note in $(IFS="${IFS}" get_notes_sorted_by_access_time)
     do
+        if [ -z "${note}" ]; then
+            continue
+        fi
+
         if ${_TO_SHOW:-false}; then
             note_lines="$(wc -l < "${note}")"
 
@@ -179,7 +183,7 @@ cmd_cat_note() {
         die "Note with index ${note_index} not found" 1
     fi
 
-    printf '\033[1m# %s\033[0m\n\n' "$(basename "${note_to_cat}")"
+    printf '\033[1;34m# %s\033[0m\n\n' "$(basename "${note_to_cat}")"
     cat "${note_to_cat}"
     exit "${EXIT_SUCCESS}"
 }
@@ -195,7 +199,7 @@ cmd_show_namespaces() {
 }
 
 cmd_show_notes() {
-    printf -- '\033[1m# %s\033[0m\n' "${t}"
+    printf -- '\033[1;34m# %s\033[0m\n' "${t}"
     _TO_SHOW=true get_notes_with_indexes | column -t -R 1,-1 -s "${TAB}"
 }
 
