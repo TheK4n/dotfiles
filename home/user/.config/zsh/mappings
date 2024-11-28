@@ -49,17 +49,6 @@ bindkey '^W' backward-delete-word
 bindkey -M vicmd '^H' backward-delete-char
 
 
-listdirquiet() {
-    echo
-    ls
-    echo
-    zle reset-prompt
-}
-zle -N listdirquiet
-bindkey "^L" listdirquiet
-bindkey -M vicmd "^L" listdirquiet
-
-
 gitstatusquiet() {
     echo
     git status
@@ -67,8 +56,8 @@ gitstatusquiet() {
     zle reset-prompt
 }
 zle -N gitstatusquiet
-bindkey "^N" gitstatusquiet
-bindkey -M vicmd "^N" gitstatusquiet
+bindkey "^L" gitstatusquiet
+bindkey -M vicmd "^L" gitstatusquiet
 
 
 popdquiet() {
@@ -87,3 +76,19 @@ cddotdot() {
 zle -N cddotdot
 bindkey "^O" cddotdot
 bindkey -M vicmd "^O" cddotdot
+
+
+accept-line-or-list-dir() {
+    if [ -z "${LBUFFER}${RBUFFER}" ]; then
+        echo
+        ls
+        echo
+        zle reset-prompt
+    else
+        zle .accept-line
+    fi
+}
+
+zle -N accept-line-or-list-dir
+bindkey "^M" accept-line-or-list-dir
+bindkey -M vicmd "^M" accept-line-or-list-dir
