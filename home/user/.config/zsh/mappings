@@ -1,3 +1,5 @@
+# vim: ft=zsh
+
 KEYTIMEOUT=1
 # Activate vim mode.
 bindkey -v
@@ -22,17 +24,17 @@ bindkey '^[[Z' reverse-menu-complete  # S-Tab
 
 
 insert-sudo() {
-  local sudo_template="${SUDO:=sudo} "
-  local template_len="${#sudo_template}"
+    local sudo_template="${SUDO:=sudo} "
+    local template_len="${#sudo_template}"
 
-  if [ -z "${LBUFFER}${RBUFFER}" ]; then
-    zle up-history
-  fi
-  if [ "${LBUFFER::$template_len}" = "$sudo_template" ]; then
-    LBUFFER="${LBUFFER:$template_len}"
-  else
-    LBUFFER="${sudo_template}${LBUFFER}"
-  fi
+    if [ -z "${LBUFFER}${RBUFFER}" ]; then
+        zle up-history
+    fi
+    if [ "${LBUFFER::$template_len}" = "$sudo_template" ]; then
+        LBUFFER="${LBUFFER:$template_len}"
+    else
+        LBUFFER="${sudo_template}${LBUFFER}"
+    fi
 }
 
 zle -N insert-sudo
@@ -45,6 +47,28 @@ bindkey '^?' backward-delete-char
 bindkey '^W' backward-delete-word
 
 bindkey -M vicmd '^H' backward-delete-char
+
+
+listdirquiet() {
+    echo
+    ls
+    echo
+    zle reset-prompt
+}
+zle -N listdirquiet
+bindkey "^L" listdirquiet
+bindkey -M vicmd "^L" listdirquiet
+
+
+gitstatusquiet() {
+    echo
+    git status
+    echo
+    zle reset-prompt
+}
+zle -N gitstatusquiet
+bindkey "^N" gitstatusquiet
+bindkey -M vicmd "^N" gitstatusquiet
 
 
 popdquiet() {
