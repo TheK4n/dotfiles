@@ -29,7 +29,12 @@ insert-sudo() {
 
     if [ -z "${LBUFFER}${RBUFFER}" ]; then
         zle up-history
+        if [ ! "${LBUFFER::$template_len}" = "$sudo_template" ]; then
+            LBUFFER="${sudo_template}${LBUFFER}"
+        fi
+        return
     fi
+
     if [ "${LBUFFER::$template_len}" = "$sudo_template" ]; then
         LBUFFER="${LBUFFER:$template_len}"
     else
@@ -79,14 +84,15 @@ bindkey -M vicmd "^O" cddotdot
 
 
 accept-line-or-list-dir() {
-    if [ -z "${LBUFFER}${RBUFFER}" ]; then
-        echo
-        ls
-        echo
-        zle reset-prompt
-    else
+    if [ -n "${LBUFFER}${RBUFFER}" ]; then
         zle .accept-line
+        return
     fi
+
+    echo
+    ls
+    echo
+    zle reset-prompt
 }
 
 zle -N accept-line-or-list-dir
