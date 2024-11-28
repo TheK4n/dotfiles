@@ -32,9 +32,9 @@ GREP_OPTIONS=(
 )
 
 alias grep='grep $GREP_OPTIONS'
-alias g='grep --dereference-recursive --line-number'
+alias g='noglob grep $GREP_OPTIONS --dereference-recursive --line-number'
 
-alias f='_f() { find . -name "*${1}*" }; _f'
+alias f='_f() { find . -name "*${1}*" }; noglob _f'
 
 alias _='sudo'
 alias root='sudo --login TMOUT=450'
