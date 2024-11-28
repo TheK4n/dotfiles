@@ -13,33 +13,39 @@ local function setup_cmp()
 
     cmp.setup({
         completion = {
-            autocomplete = {'TextChanged'}
+            autocomplete = false,
         },
         snippet = {
             expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-            vim.snippet.expand(args.body)
+                require('luasnip').lsp_expand(args.body)
+                vim.snippet.expand(args.body)
             end,
         },
-        mapping = {
+        mapping = cmp.mapping.preset.insert({
+            -- при нажатии на таб открывается окно
+            -- при открытом окне таб дополняет первое предложение
             ['<Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.select_next_item()
+                    cmp.confirm({
+                        behavior = cmp.ConfirmBehavior.Select,
+                        select = true,
+                    })
                 elseif has_words_before() then
                     cmp.complete()
                 else
                     fallback()
                 end
             end, { "i", "s" }),
-            ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-j>'] = cmp.mapping.select_next_item({ behaviour = cmp.SelectBehavior.Select }),
+            ['<C-k>'] = cmp.mapping.select_prev_item({ behaviour = cmp.SelectBehavior.Select }),
+            ['<C-p>'] = cmp.mapping.scroll_docs(4),
+            ['<C-n>'] = cmp.mapping.scroll_docs(-4),
             ['<C-e>'] = cmp.mapping.abort(),
-            ['<CR>'] = cmp.mapping.confirm {
-                behavior = cmp.ConfirmBehavior.Replace,
+            ['<CR>']  = cmp.mapping.confirm({
+                behavior = cmp.ConfirmBehavior.Select,
                 select = false,
-            },
-        },
+            })
+        }),
         window = {
             completion = cmp.config.window.bordered(border_opts),
             documentation = cmp.config.window.bordered(border_opts),
