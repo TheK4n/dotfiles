@@ -101,9 +101,9 @@ alias shutdown='sudo /sbin/shutdown now'
 
 alias meminfo='free -mlth'
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     alias wake='((speaker-test -t sine -f 400 &>/dev/null)& local pid=$! ;sleep 0.2s; kill -9 $pid) &>/dev/null'
-elif [[ "$OSTYPE" == "linux-android"* ]]; then
+elif [[ "${OSTYPE}" == "linux-android"* ]]; then
     alias wake='termux-notification --sound --vibrate 500,1000,200'
 fi
 
@@ -137,18 +137,18 @@ alias gbuild='go build -o . ./...'
 
 
 # clipboard
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    if [[ -n "$DISPLAY" ]]; then
+if [ "${OSTYPE}" == "linux-gnu"* ]; then
+    if [ -n "${DISPLAY}" ]; then
         alias copy='xclip -selection clipboard -i'
         alias paste='xclip -selection clipboard -o'
     else
         alias copy='read -rd "EOF" TTYCLIPBOARD'
         alias paste='echo "$TTYCLIPBOARD"'
     fi
-elif [[ "$OSTYPE" == "linux-android"* ]]; then
+elif [[ "${OSTYPE}" == "linux-android"* ]]; then
     alias copy='termux-clipboard-set'
     alias paste='termux-clipboard-get'
-elif [[ "$OSTYPE" == "darwin" ]]; then
+elif [ "${OSTYPE}" == "darwin" ]; then
     alias copy='pbcopy'
     alias paste='pbpaste'
 fi
@@ -197,4 +197,5 @@ alias -g BEEP='&& beep -f 800 -l 250 -n -f 1000 -l 500 || beep -f 800 -l 250 -n 
 
 alias -s mp4='vlc'
 alias -s mp3='audacious'
+
 alias -s flac='audacious'
