@@ -18,7 +18,8 @@ order += "tztime local"
 
 wireless _first_ {
     format_up = " (%quality at %essid %frequency) %ip"
-    format_down = " down"
+    format_down = "   down"
+    color_bad = "#454545"
 }
 
 ethernet _first_ {
@@ -43,7 +44,7 @@ disk "/" {
 }
 
 disk "/home" {
-    format = " %used/%total"
+    format = "  %used/%total"
 }
 
 memory {
@@ -54,7 +55,7 @@ memory {
 }
 
 cpu_usage {
-    format = " %usage"
+    format = "  %usage"
 }
 
 cpu_temperature 0 {
@@ -68,8 +69,8 @@ tztime local {
 }
 
 volume master {
-    format = " %volume"
-    format_muted = ": muted %volume"
+    format = "   %volume"
+    format_muted = ":  muted %volume"
     device = "default"
     mixer = "Master"
     mixer_idx = 0
