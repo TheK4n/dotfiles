@@ -81,20 +81,3 @@ cddotdot() {
 zle -N cddotdot
 bindkey "^O" cddotdot
 bindkey -M vicmd "^O" cddotdot
-
-
-accept-line-or-list-dir() {
-    if [ -n "${LBUFFER}${RBUFFER}" ]; then
-        zle .accept-line
-        return
-    fi
-
-    echo
-    ls
-    echo
-    zle reset-prompt
-}
-
-zle -N accept-line-or-list-dir
-bindkey "^M" accept-line-or-list-dir
-bindkey -M vicmd "^M" accept-line-or-list-dir

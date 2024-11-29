@@ -12,13 +12,17 @@ aliases[=]='noglob __calc'
 
 
 function accept-line() {
-    if [[ $BUFFER =~ '^[ ]?\(?[-+]?[0-9]+[^a-zA-Z]+' ]]; then
+    if [[ -z "${BUFFER}" ]]; then
         echo
-        test "$BUFFER[1]" != " " && print -S -- "$BUFFER"  # saving the command to history
-        __calc "$BUFFER" | sed 's/\.$//'
+        ls
+    elif [[ ${BUFFER} =~ '^[ ]?\(?[-+]?[0-9]+[^a-zA-Z]+' ]]; then
+        echo
+        test "${BUFFER[1]}" != " " && print -S -- "${BUFFER}"  # saving the command to history
+        __calc "${BUFFER}" | sed 's/\.$//'
         BUFFER=
     fi
-    zle .$WIDGET
+
+    zle .${WIDGET}
 }
 
 zle -N accept-line
