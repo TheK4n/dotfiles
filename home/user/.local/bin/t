@@ -9,6 +9,7 @@ readonly ENV_FILE=".t.env"
 readonly EXIT_SUCCESS=0
 readonly NOTES_DIR_BASE="${HOME}/.t"
 readonly DEFAULT_NAMESPACE="def"
+readonly PATH_SEPARATOR_REPLACE="%2F"
 
 
 find_file_up_fs() (
@@ -84,6 +85,13 @@ get_notes_sorted_by_access_time() {
         | tr '\n' "${IFS}"
 }
 
+unescape_path_separators() {
+    sed "s/${PATH_SEPARATOR_REPLACE}/\//g"
+}
+
+escape_path_separators() {
+    sed "s/\//${PATH_SEPARATOR_REPLACE}/g"
+}
 
 get_notes_with_indexes() {
     SAVEIFS="${IFS}"
@@ -118,6 +126,7 @@ get_notes_with_indexes() {
         fi
 
         if ${_TO_SHOW:-false}; then
+            note_name="$(echo "${note_name}" | unescape_path_separators)"
             printf -- '[%d]\t%s\t(%s)\n' "${index}" "${note_name}" "${note_lines}"
         else
             printf -- '[%d]\t%s\n' "${index}" "${note_name}"
@@ -138,7 +147,8 @@ find_note_name_by_index() {
 }
 
 cmd_add_note() {
-    note="${NOTES_DIR}/$*"
+    note_name="$(echo "$*" | escape_path_separators)"
+    note="${NOTES_DIR}/${note_name}"
     touch "${note}"
     exit "${EXIT_SUCCESS}"
 }
@@ -184,7 +194,8 @@ cmd_cat_note() {
         die "Note with index ${note_index} not found" 1
     fi
 
-    printf '\033[1;34m# %s\033[0m\n\n' "$(basename "${note_to_cat}")"
+    note_name="$(basename "${note_to_cat}" | unescape_path_separators)"
+    printf '\033[1;34m# %s\033[0m\n\n' "${note_name}"
     cat "${note_to_cat}"
     exit "${EXIT_SUCCESS}"
 }
