@@ -10,6 +10,7 @@
     dno = diff --name-only
     dw = diff --word-diff=color
     co = checkout
+    col = checkout @{-1}
     ci = commit
     cia = commit --all
     amend = commit --amend --no-edit
