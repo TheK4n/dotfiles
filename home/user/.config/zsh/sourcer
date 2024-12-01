@@ -31,6 +31,6 @@ source "${ZDOTDIR}/plugin"
 
 source "${ZDOTDIR}/mappings"
 
-source "${ZDOTDIR}/calculator"
+source "${ZDOTDIR}/accept_line"
 
 _sod "${ZDOTDIR}/zshrc.d"

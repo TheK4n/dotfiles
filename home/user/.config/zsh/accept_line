@@ -1,5 +1,3 @@
-# calculator
-
 export ZCALC_HISTFILE="${HOME}/.zcalc_history"
 
 autoload -U zcalc
