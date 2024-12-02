@@ -137,7 +137,7 @@ alias gbuild='go build -o . ./...'
 
 
 # clipboard
-if [ "${OSTYPE}" == "linux-gnu"* ]; then
+if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     if [ -n "${DISPLAY}" ]; then
         alias copy='xclip -selection clipboard -i'
         alias paste='xclip -selection clipboard -o'
@@ -148,7 +148,7 @@ if [ "${OSTYPE}" == "linux-gnu"* ]; then
 elif [[ "${OSTYPE}" == "linux-android"* ]]; then
     alias copy='termux-clipboard-set'
     alias paste='termux-clipboard-get'
-elif [ "${OSTYPE}" == "darwin" ]; then
+elif [[ "${OSTYPE}" == "darwin" ]]; then
     alias copy='pbcopy'
     alias paste='pbpaste'
 fi
