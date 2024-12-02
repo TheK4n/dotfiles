@@ -13,7 +13,7 @@ local function setup_cmp()
 
     cmp.setup({
         completion = {
-            autocomplete = false,
+            autocomplete = {'TextChanged'},
         },
         snippet = {
             expand = function(args)
@@ -22,28 +22,29 @@ local function setup_cmp()
             end,
         },
         mapping = cmp.mapping.preset.insert({
-            -- при нажатии на таб открывается окно
-            -- при открытом окне таб дополняет первое предложение
-            ['<Tab>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.confirm({
-                        behavior = cmp.ConfirmBehavior.Select,
-                        select = true,
-                    })
-                elseif has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-            ['<C-j>'] = cmp.mapping.select_next_item({ behaviour = cmp.SelectBehavior.Select }),
-            ['<C-k>'] = cmp.mapping.select_prev_item({ behaviour = cmp.SelectBehavior.Select }),
+            ['<Tab>'] = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif has_words_before() then
+                        cmp.complete()
+                    else
+                        fallback()
+                    end
+                end,
+                { "i", "s" }
+            ),
+            ['<S-Tab>'] = cmp.mapping.select_prev_item({ behaviour = cmp.SelectBehavior.Select }),
             ['<C-p>'] = cmp.mapping.scroll_docs(4),
             ['<C-n>'] = cmp.mapping.scroll_docs(-4),
             ['<C-e>'] = cmp.mapping.abort(),
             ['<CR>']  = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Select,
-                select = false,
+                select = true,
+            }),
+            ['`'] = cmp.mapping.confirm({
+                behavior = cmp.ConfirmBehavior.Select,
+                select = true,
             })
         }),
         window = {
