@@ -9,6 +9,7 @@
     ds = diff --staged
     dno = diff --name-only
     dw = diff --word-diff=color
+    dws = diff --word-diff=color --staged
     co = checkout
     col = checkout @{-1}
     ci = commit
@@ -46,3 +47,5 @@
     # add conflicted file on merge
     add-unmerged = "!git add $(git ls-files --unmerged | cut -f2 | sort -u)"
     remove-remote-tag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 }; f"
+    aliases = "!git config -l | grep '^alias\\.' | cut -d. -f2-"
+    serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
