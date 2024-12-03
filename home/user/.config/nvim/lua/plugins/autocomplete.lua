@@ -13,7 +13,7 @@ local function setup_cmp()
 
     cmp.setup({
         completion = {
-            autocomplete = {'TextChanged'},
+            autocomplete = false,
         },
         snippet = {
             expand = function(args)
@@ -40,7 +40,7 @@ local function setup_cmp()
             ['<C-e>'] = cmp.mapping.abort(),
             ['<CR>']  = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Select,
-                select = true,
+                select = false,
             }),
             ['`'] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Select,
