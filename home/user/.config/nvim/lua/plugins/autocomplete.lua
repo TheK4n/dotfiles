@@ -42,10 +42,6 @@ local function setup_cmp()
                 behavior = cmp.ConfirmBehavior.Select,
                 select = false,
             }),
-            ['`'] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Select,
-                select = true,
-            })
         }),
         window = {
             completion = cmp.config.window.bordered(border_opts),
