@@ -4,7 +4,10 @@ fpath=(~/.zfunc $fpath)
 zmodload zsh/complist
 setopt menucomplete
 autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
+compinit -d ~/.cache/zsh/.zcompdump
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${HOME}/.cache/zsh/.zcompcache"
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
