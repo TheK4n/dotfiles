@@ -48,4 +48,6 @@
     add-unmerged = "!git add $(git ls-files --unmerged | cut -f2 | sort -u)"
     remove-remote-tag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 }; f"
     aliases = "!git config -l | grep '^alias\\.' | cut -d. -f2-"
+
+    # git clone git://localhost
     serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
