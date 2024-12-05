@@ -25,23 +25,26 @@ local function setup_cmp()
             ['<Tab>'] = cmp.mapping(
                 function(fallback)
                     if cmp.visible() then
-                        cmp.select_next_item()
+                        cmp.confirm({
+                            behavior = cmp.ConfirmBehavior.Select,
+                            select = true,
+                        })
                     elseif has_words_before() then
                         cmp.complete()
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        end
                     else
                         fallback()
                     end
                 end,
                 { "i", "s" }
             ),
-            ['<S-Tab>'] = cmp.mapping.select_prev_item({ behaviour = cmp.SelectBehavior.Select }),
+            ['<C-k>'] = cmp.mapping.select_prev_item({ behaviour = cmp.SelectBehavior.Select }),
+            ['<C-j>'] = cmp.mapping.select_next_item({ behaviour = cmp.SelectBehavior.Select }),
             ['<C-p>'] = cmp.mapping.scroll_docs(4),
             ['<C-n>'] = cmp.mapping.scroll_docs(-4),
             ['<C-e>'] = cmp.mapping.abort(),
-            ['<CR>']  = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Select,
-                select = false,
-            }),
         }),
         window = {
             completion = cmp.config.window.bordered(border_opts),
