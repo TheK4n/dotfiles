@@ -5,7 +5,7 @@ _d() { true ; }
 _f() { true ; }
 
 
-alias ls='ls --classify=auto --color=always --human-readable'
+alias ls='ls --classify=auto --human-readable'
 alias ll='ls -l'
 alias la='ls --almost-all'
 alias lla='ls -l --almost-all'
@@ -13,7 +13,7 @@ alias l.='ls --almost-all --ignore="*"'
 alias ll.='ls -l --almost-all --ignore="*"'
 
 if command -v eza &>/dev/null; then
-    alias eza='eza --classify=auto --color=always'
+    alias eza='eza --classify=auto'
     alias ls='eza'
     alias ll='eza --long'
     alias la='eza --all'
