@@ -1,20 +1,16 @@
-
 # enable completion features
 fpath=(~/.zfunc $fpath)
 zmodload zsh/complist
-setopt menucomplete
 autoload -Uz compinit
 compinit -d ~/.cache/zsh/.zcompdump
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${HOME}/.cache/zsh/.zcompcache"
-zstyle ':completion:*' menu yes select
+zstyle ':completion:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
@@ -25,7 +21,7 @@ zstyle ':completion:*:*:extract:*' file-patterns '*.tar* *.lzma *.bz2 *.zip *.7z
 zstyle ':completion:*' complete-options true
 zstyle ':completion:*' squeeze-slashes true
 
-zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate _prefix _list
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
@@ -39,7 +35,6 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 
-zstyle ':autocomplete:*' insert-unambiguous true
 
 compdef _directories _d
 compdef _files _f
@@ -58,3 +53,5 @@ bindkey -M menuselect '^M' check-command
 setopt list_packed
 setopt always_to_end
 setopt auto_param_slash
+setopt autolist
+unsetopt menu_complete
