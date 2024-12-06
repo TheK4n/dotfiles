@@ -110,6 +110,9 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+slash floating toggle
 bindsym $mod+Shift+comma sticky toggle
 
+for_window [title="Picture-in-Picture"] sticky enable
+for_window [title="Picture-in-Picture"] border pixel 0
+
 # change focus between tiling / floating windows
 bindsym $mod+slash focus mode_toggle
 
