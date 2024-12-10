@@ -48,7 +48,7 @@ if [ -d "${HOME}/.local/bin" ] ; then
     export PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-export GOCACHE="/tmp/go-cache"
+export GOCACHE="${TMPDIR}/go-cache"
 export GOPATH="${HOME}/.cache/go"
 export GOBIN="${HOME}/.local/bin"
 
