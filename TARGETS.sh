@@ -2,7 +2,7 @@ readonly TARGETS="\
 colors:.config/terminal-colors.d
 less:.lesskey .infokey
 tmux:.config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_list_sessions.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_kill_sessions.sh
-t:.local/bin/t
+t:
 zsh:.config/zsh .zshenv .inputrc %colors
 alacritty:.config/alacritty
 nvim:.config/nvim .editorconfig .editrc .local/bin/vim_askpass_helper
