@@ -1,8 +1,11 @@
 #!/bin/sh
 
 
-if [ -d "$HOME/.shortcuts" ]; then
-    cp "$SUB/.shortcuts/*" "$HOME/.shortcuts"
+if [ -d "${HOME}/.shortcuts" ]; then
+    cp "${SUB}/.shortcuts/"* "${HOME}/.shortcuts"
 else
-    cp -r "$SUB/.shortcuts" "$HOME"
+    cp -r "${SUB}/.shortcuts" "${HOME}"
 fi
+
+mkdir -p "${HOME}/bin"
+ln -s "$(which "${EDITOR}")" "${HOME}/bin/termux-file-editor"
