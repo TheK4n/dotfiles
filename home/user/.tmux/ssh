@@ -31,7 +31,4 @@ if ! tmux has-session -t "${SESSION}" 2>/dev/null; then
     tmux new-session -s "${SESSION}" -d -n "1" "TERM=xterm-256color ssh ${choosed_ssh_server} || read"
 fi
 
-tmux set-option -t "${SESSION}" status off
-tmux set-option -t "${SESSION}" prefix None
-tmux set-option -t "${SESSION}" key-table off
 tmux switch-client -t "${SESSION}"
