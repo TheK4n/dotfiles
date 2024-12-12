@@ -35,23 +35,9 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 
+zstyle ':autocomplete:*' min-input 3
+zstyle ':autocomplete:*' delay 0.1
 
 compdef _directories _d
 compdef _files _f
 compdef _directories mcd
-
-
-bindkey -M menuselect '^h' vi-backward-char
-bindkey -M menuselect '^k' vi-up-line-or-history
-bindkey -M menuselect '^j' vi-down-line-or-history
-bindkey -M menuselect '^l' vi-forward-char
-bindkey -M menuselect '^e' undo
-bindkey -M menuselect '^[' cancel
-bindkey -M menuselect '^I' accept-and-infer-next-history
-bindkey -M menuselect '^M' check-command
-
-setopt list_packed
-setopt always_to_end
-setopt auto_param_slash
-setopt autolist
-unsetopt menu_complete
