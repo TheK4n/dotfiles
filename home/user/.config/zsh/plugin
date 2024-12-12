@@ -13,10 +13,8 @@ install_if_not_exists zsh-users/zsh-autosuggestions
 install_if_not_exists zsh-users/zsh-syntax-highlighting
 install_if_not_exists hlissner/zsh-autopair
 install_if_not_exists unixorn/fzf-zsh-plugin
-install_if_not_exists marlonrichert/zsh-autocomplete
 
 _so "${HOME}/.config/zsh/plugins/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 _so "${HOME}/.config/zsh/plugins/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh"
 _so "${HOME}/.config/zsh/plugins/hlissner/zsh-autopair/autopair.zsh"
 _so "${HOME}/.config/zsh/plugins/unixorn/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh"
-_so "${HOME}/.config/zsh/plugins/marlonrichert/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
