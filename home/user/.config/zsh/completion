@@ -6,7 +6,7 @@ compinit -d ~/.cache/zsh/.zcompdump
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${HOME}/.cache/zsh/.zcompcache"
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu yes select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
@@ -47,7 +47,7 @@ bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -M menuselect '^l' vi-forward-char
 bindkey -M menuselect '^e' undo
 bindkey -M menuselect '^[' cancel
-bindkey -M menuselect '^I' accept-and-complete
+bindkey -M menuselect '^I' accept-and-infer-next-history
 bindkey -M menuselect '^M' check-command
 
 setopt list_packed

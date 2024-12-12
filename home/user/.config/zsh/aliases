@@ -1,6 +1,8 @@
 # vim: ft=zsh
 
 
+alias zshrc='source "${ZDOTDIR}/.zshrc"'
+
 _d() { true ; }
 _f() { true ; }
 
