@@ -8,6 +8,6 @@ zfiles+=($(find "${ZDOTDIR}/" -maxdepth 1 -type f -not -name '*.zwc'))
 
 for zfile in "${zfiles[@]}"
 do
-    echo zcompile "${zfile}"
+    echo "zcompile ${zfile}"
     zcompile "${zfile}"
 done

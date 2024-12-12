@@ -1,12 +1,10 @@
 # enable completion features
 fpath=(~/.zfunc $fpath)
 zmodload zsh/complist
-autoload -Uz compinit
-compinit -d ~/.cache/zsh/.zcompdump
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${HOME}/.cache/zsh/.zcompcache"
-zstyle ':completion:*' menu yes select
+zstyle ':completion:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
@@ -35,6 +33,9 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 
+zstyle ':autocomplete:*' min-input 3
+zstyle ':autocomplete:*' delay 0.3
+
 
 bindkey -M menuselect '^h' vi-backward-char
 bindkey -M menuselect '^k' vi-up-line-or-history
@@ -44,8 +45,3 @@ bindkey -M menuselect '^e' undo
 bindkey -M menuselect '^[' cancel
 bindkey -M menuselect '^M' check-command
 bindkey -M menuselect '^I' accept-and-infer-next-history
-
-
-compdef _directories _d
-compdef _files _f
-compdef _directories mcd
