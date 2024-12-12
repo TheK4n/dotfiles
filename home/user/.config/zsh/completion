@@ -38,6 +38,15 @@ zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 zstyle ':autocomplete:*' min-input 3
 zstyle ':autocomplete:*' delay 0.1
 
+
+bindkey -M menuselect '^h' vi-backward-char
+bindkey -M menuselect '^k' vi-up-line-or-history
+bindkey -M menuselect '^j' vi-down-line-or-history
+bindkey -M menuselect '^l' vi-forward-char
+bindkey -M menuselect '^e' undo
+bindkey -M menuselect '^[' cancel
+bindkey -M menuselect '^M' check-command
+
 compdef _directories _d
 compdef _files _f
 compdef _directories mcd
