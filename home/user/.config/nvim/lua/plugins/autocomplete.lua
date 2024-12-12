@@ -12,9 +12,6 @@ local function setup_cmp()
     local cmp = require("cmp")
 
     cmp.setup({
-        completion = {
-            autocomplete = false,
-        },
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
@@ -31,9 +28,6 @@ local function setup_cmp()
                         })
                     elseif has_words_before() then
                         cmp.complete()
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        end
                     else
                         fallback()
                     end
