@@ -34,9 +34,10 @@ zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 
 zstyle ':autocomplete:*' min-input 3
-zstyle ':autocomplete:*' delay 0.3
+zstyle ':autocomplete:*' delay 0.1
 
 
+bindkey '^N' down-line-or-select
 bindkey -M menuselect '^h' vi-backward-char
 bindkey -M menuselect '^k' vi-up-line-or-history
 bindkey -M menuselect '^j' vi-down-line-or-history
