@@ -294,3 +294,8 @@ sha() {
         shasum -a 256 | head -c 64
     fi
 }
+
+weather() {
+    local city="${1}"
+    curl "wttr.in/${city}" 2>/dev/null | head -n -1
+}
