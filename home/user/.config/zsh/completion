@@ -39,6 +39,15 @@ zstyle ':autocomplete:*' min-input 3
 zstyle ':autocomplete:*' delay 0.1
 zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 4 )) )'
 
+# all Tab widgets
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+
+# all history widgets
+zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+
+# ^S
+zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
+
 
 bindkey '^N' menu-select
 bindkey -M menuselect '^h' vi-backward-char
