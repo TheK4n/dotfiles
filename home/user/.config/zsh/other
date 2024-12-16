@@ -21,12 +21,28 @@ fi
 
 
 _autoenv() {
+    if [ -z "${PWD}" ]; then
+        return
+    fi
+
+    if ! grep "${PWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
+        return
+    fi
+
     if [ -f .env ]; then
         . ./.env
     fi
 }
 
 _autoenv_leave() {
+    if [ -z "${OLDPWD}" ]; then
+        return
+    fi
+
+    if ! grep "${OLDPWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
+        return
+    fi
+
     if [ -f "${OLDPWD}/.env.leave" ]; then
         . "${OLDPWD}/.env.leave"
     fi

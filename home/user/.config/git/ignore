@@ -19,6 +19,7 @@ __pycache__/
 *.log
 *.bak
 *~
+.env.leave
 
 # db
 *.db
