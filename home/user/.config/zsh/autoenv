@@ -1,0 +1,42 @@
+
+# vim: ft=zsh
+
+_autoenv() {
+    if [ -z "${PWD}" ]; then
+        return
+    fi
+
+    if ! grep "${PWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
+        return
+    fi
+
+    if [ -f .env ]; then
+        source ./.env
+    fi
+}
+
+_autoenv_leave() {
+    if [ -z "${OLDPWD}" ]; then
+        return
+    fi
+
+    if ! grep "${OLDPWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
+        return
+    fi
+
+    if [ -f "${OLDPWD}/.env.leave" ]; then
+        source "${OLDPWD}/.env.leave"
+    fi
+}
+
+autoload -U add-zsh-hook
+
+add-zsh-hook chpwd _autoenv
+add-zsh-hook chpwd _autoenv_leave
+
+
+if [ -f .env ]; then
+    if grep "${PWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
+        . ./.env
+    fi
+fi

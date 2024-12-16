@@ -29,6 +29,8 @@ _so "${ZDOTDIR}/hosts/${HOST}"
 
 source "${ZDOTDIR}/plugin"
 
+source "${ZDOTDIR}/autoenv"
+
 source "${ZDOTDIR}/mappings"
 
 source "${ZDOTDIR}/accept_line"
