@@ -1,4 +1,6 @@
 
+# vim: ft=zsh
+
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -14,4 +16,28 @@ if [ -x /usr/bin/dircolors ]; then
     # Take advantage of $LS_COLORS for completion as well
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
     zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+fi
+
+
+
+_autoenv() {
+    if [ -f .env ]; then
+        . ./.env
+    fi
+}
+
+_autoenv_leave() {
+    if [ -f "${OLDPWD}/.env.leave" ]; then
+        . "${OLDPWD}/.env.leave"
+    fi
+}
+
+autoload -U add-zsh-hook
+
+add-zsh-hook chpwd _autoenv
+add-zsh-hook chpwd _autoenv_leave
+
+
+if [ -f .env ]; then
+    . ./.env
 fi
