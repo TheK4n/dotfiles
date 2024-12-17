@@ -1,26 +1,30 @@
 
 # vim: ft=zsh
 
+_dir_authorized() {
+    if [ -z "${1}" ]; then
+        return 1
+    fi
+
+    if [ ! -d "${1}" ]; then
+        return 1
+    fi
+
+    grep "^${1}$" "${HOME}/.autoenv_authorized_dirs" &>/dev/null
+}
+
 _autoenv() {
-    if [ -z "${PWD}" ]; then
+    if ! _dir_authorized "${PWD}"; then
         return
     fi
 
-    if ! grep "${PWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
-        return
-    fi
-
-    if [ -f .env ]; then
+    if [ -f ./.env ]; then
         source ./.env
     fi
 }
 
 _autoenv_leave() {
-    if [ -z "${OLDPWD}" ]; then
-        return
-    fi
-
-    if ! grep "${OLDPWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
+    if ! _dir_authorized "${OLDPWD}"; then
         return
     fi
 
@@ -29,14 +33,17 @@ _autoenv_leave() {
     fi
 }
 
+
+alias authorize_dir='echo "\n${PWD}" >> "${HOME}/.autoenv_authorized_dirs"'
+
 autoload -U add-zsh-hook
 
 add-zsh-hook chpwd _autoenv
 add-zsh-hook chpwd _autoenv_leave
 
 
-if [ -f .env ]; then
-    if grep "${PWD}" ~/.autoenv_authorized_dirs &>/dev/null; then
-        . ./.env
+if [ -f ./.env ]; then
+    if _dir_authorized "${PWD}"; then
+        source ./.env
     fi
 fi
