@@ -1,7 +1,3 @@
-
-
-# vim: ft=zsh
-
 : ${AUTOENV_AUTH_FILE:=~/.autoenv_auth}
 : ${AUTOENV_FILE_ENTER:=.autoenv.zsh}
 : ${AUTOENV_FILE_LEAVE:=.autoenv_leave.zsh}
@@ -9,22 +5,34 @@
 : ${AUTOENV_HANDLE_LEAVE:=1}
 
 
-_dir_authorized() {
-    local dir="${1}"
+_autoenv_hash_pair() {
+    local env_file="${1:A}"
 
-    if [ -z "${dir}" ]; then
+    if [ ! -s "${env_file}" ]; then
         return 1
     fi
 
-    if [ ! -d "${dir}" ]; then
-        return 1
-    fi
+    local env_cksum=${${:-$(cksum "${env_file}")}[1]}
+    echo "${env_file}:${env_cksum}"
+}
 
-    grep "^${dir}$" "${AUTOENV_AUTH_FILE}" &>/dev/null
+_autoenv_envfile_authorize() {
+    local env_file="${1}"
+    local env_cksum="$(_autoenv_hash_pair "${env_file}")"
+
+    local line
+    while read -r line
+    do
+        if [ "${line}" == "${env_cksum}" ]; then
+            return 0
+        fi
+    done < "${AUTOENV_AUTH_FILE}"
+
+    return 1
 }
 
 _autoenv() {
-    if ! _dir_authorized "${PWD}"; then
+    if ! _autoenv_envfile_authorize "${PWD}/${AUTOENV_FILE_ENTER}"; then
         return
     fi
 
@@ -34,7 +42,7 @@ _autoenv() {
 }
 
 _autoenv_leave() {
-    if ! _dir_authorized "${OLDPWD}"; then
+    if ! _autoenv_envfile_authorize "${OLDPWD}/${AUTOENV_FILE_LEAVE}"; then
         return
     fi
 
@@ -42,10 +50,6 @@ _autoenv_leave() {
         source "${OLDPWD}/${AUTOENV_FILE_LEAVE}"
     fi
 }
-
-
-alias autoenv-auth='echo "\n${PWD}" >> "${AUTOENV_AUTH_FILE}"'
-
 
 if [[ "${AUTOENV_DISABLED}" != 1 ]]; then
     autoload -U add-zsh-hook
@@ -56,9 +60,23 @@ if [[ "${AUTOENV_DISABLED}" != 1 ]]; then
     fi
 
     if [ -f "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
-        if _dir_authorized "${PWD}"; then
+        if _autoenv_envfile_authorize "${PWD}/${AUTOENV_FILE_ENTER}"; then
             source "${PWD}/${AUTOENV_FILE_ENTER}"
         fi
     fi
 
 fi
+
+
+autoenv-auth() {
+    if [ -s "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
+        _autoenv_hash_pair "${PWD}/${AUTOENV_FILE_ENTER}" >> "${AUTOENV_AUTH_FILE}"
+    fi
+
+    if [ -s "${PWD}/${AUTOENV_FILE_LEAVE}" ]; then
+        _autoenv_hash_pair "${PWD}/${AUTOENV_FILE_LEAVE}" >> "${AUTOENV_AUTH_FILE}"
+    fi
+}
+
+
+# vim: ft=zsh
