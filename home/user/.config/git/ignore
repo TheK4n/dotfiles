@@ -19,7 +19,6 @@ __pycache__/
 *.log
 *.bak
 *~
-.env.leave
 
 # db
 *.db
@@ -43,3 +42,6 @@ build/
 dist/
 
 .tns
+
+.autoenv.zsh
+.autoenv_leave.zsh

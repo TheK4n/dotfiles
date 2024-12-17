@@ -1,16 +1,26 @@
 
+
 # vim: ft=zsh
 
+: ${AUTOENV_AUTH_FILE:=~/.autoenv_auth}
+: ${AUTOENV_FILE_ENTER:=.autoenv.zsh}
+: ${AUTOENV_FILE_LEAVE:=.autoenv_leave.zsh}
+: ${AUTOENV_DISABLED:=0}
+: ${AUTOENV_HANDLE_LEAVE:=1}
+
+
 _dir_authorized() {
-    if [ -z "${1}" ]; then
+    local dir="${1}"
+
+    if [ -z "${dir}" ]; then
         return 1
     fi
 
-    if [ ! -d "${1}" ]; then
+    if [ ! -d "${dir}" ]; then
         return 1
     fi
 
-    grep "^${1}$" "${HOME}/.autoenv_authorized_dirs" &>/dev/null
+    grep "^${dir}$" "${AUTOENV_AUTH_FILE}" &>/dev/null
 }
 
 _autoenv() {
@@ -18,8 +28,8 @@ _autoenv() {
         return
     fi
 
-    if [ -f ./.env ]; then
-        source ./.env
+    if [ -f "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
+        source "${PWD}/${AUTOENV_FILE_ENTER}"
     fi
 }
 
@@ -28,22 +38,27 @@ _autoenv_leave() {
         return
     fi
 
-    if [ -f "${OLDPWD}/.env.leave" ]; then
-        source "${OLDPWD}/.env.leave"
+    if [ -f "${OLDPWD}/${AUTOENV_FILE_LEAVE}" ]; then
+        source "${OLDPWD}/${AUTOENV_FILE_LEAVE}"
     fi
 }
 
 
-alias authorize_dir='echo "\n${PWD}" >> "${HOME}/.autoenv_authorized_dirs"'
-
-autoload -U add-zsh-hook
-
-add-zsh-hook chpwd _autoenv
-add-zsh-hook chpwd _autoenv_leave
+alias autoenv-auth='echo "\n${PWD}" >> "${AUTOENV_AUTH_FILE}"'
 
 
-if [ -f ./.env ]; then
-    if _dir_authorized "${PWD}"; then
-        source ./.env
+if [[ "${AUTOENV_DISABLED}" != 1 ]]; then
+    autoload -U add-zsh-hook
+    add-zsh-hook chpwd _autoenv
+
+    if [[ "${AUTOENV_HANDLE_LEAVE}" == 1 ]]; then
+        add-zsh-hook chpwd _autoenv_leave
     fi
+
+    if [ -f "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
+        if _dir_authorized "${PWD}"; then
+            source "${PWD}/${AUTOENV_FILE_ENTER}"
+        fi
+    fi
+
 fi
