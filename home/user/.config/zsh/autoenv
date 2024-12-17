@@ -13,7 +13,7 @@ _autoenv_hash_pair() {
     fi
 
     local env_cksum=${${:-$(cksum "${env_file}")}[1]}
-    echo "${env_file}:${env_cksum}"
+    printf "%s:%s" "${env_file}" "${env_cksum}"
 }
 
 _autoenv_envfile_authorize() {
@@ -71,10 +71,12 @@ fi
 autoenv-auth() {
     if [ -s "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
         _autoenv_hash_pair "${PWD}/${AUTOENV_FILE_ENTER}" >> "${AUTOENV_AUTH_FILE}"
+        echo "\n" >> "${AUTOENV_AUTH_FILE}"
     fi
 
     if [ -s "${PWD}/${AUTOENV_FILE_LEAVE}" ]; then
         _autoenv_hash_pair "${PWD}/${AUTOENV_FILE_LEAVE}" >> "${AUTOENV_AUTH_FILE}"
+        echo "\n" >> "${AUTOENV_AUTH_FILE}"
     fi
 }
 
