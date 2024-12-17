@@ -221,7 +221,7 @@ cleanup-directory() {
 }
 
 cleanup-downloads() {
-    local -r downloads_directory="${HOME}/Downloads"
+    local -r downloads_directory="${HOME}/downloads"
     local -r log_file="${downloads_directory}/cleanup.log"
 
     touch "${log_file}"

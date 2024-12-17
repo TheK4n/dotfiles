@@ -1,3 +1,0 @@
-chmod 751 "${HOME}"
-mkdir "${HOME}/Public"
-chmod 1777 "${HOME}/Public"
