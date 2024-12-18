@@ -43,12 +43,9 @@ alias root='sudo --login TMOUT=450'
 
 alias rm='rm --interactive=once --verbose --recursive --one-file-system'
 alias mkdir='mkdir --parents --verbose'
-
-alias cl='_d() { cd "${1:-${HOME}}" && ls; }; _d'
+alias md='mkdir --parents --verbose'
 
 alias q='exit 0'
-
-alias wp='cd "$WORKING_PROJECT"'
 
 alias path='echo -e ${PATH//:/\\n}'
 
@@ -79,7 +76,6 @@ alias beeptime='beep -D 400 -l 400 -r "$(date +%I)" -f 440 -n -D 1000 -l 0 -n -D
 
 # vim
 alias vi='nvim'
-alias e='nvim'
 alias svi="sudo --preserve-env nvim"
 
 # net
@@ -87,7 +83,6 @@ alias ports='ss -tlnp'
 alias wget='wget -c'
 # alias myip='curl ipinfo.io/ip'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias sprunge='curl -F "sprunge=<-" http://sprunge.us 2>/dev/null'  # CLI pastebin
 alias ip='ip -c'
 alias fastping='ping -c 100 -i 0.1'
 
@@ -113,9 +108,6 @@ fi
 alias pipir='pip install -r requirements.txt'
 alias pipar='pip list --not-required --format freeze | tee requirements.txt'
 alias vd='deactivate'
-
-# git
-alias watch-diff='watch --color "git diff --color=always"'
 
 
 # docker
@@ -189,15 +181,8 @@ alias -g GP="GOPROXY=direct"
 
 alias -g O="1>/dev/null"  # stdOut
 alias -g E="2>/dev/null"  # stdErr
-alias -g A="&>/dev/null"  # All
-alias -g BG="A &"  # background
+alias -g BG="O E &"  # background
 
 alias -g RED='2> >(while read line; do printf "\033[0;31m${line}\033[0m\n"; done)'
 
 alias -g BEEP='&& beep -f 800 -l 250 -n -f 1000 -l 500 || beep -f 800 -l 250 -n -f 500 -l 500'
-
-
-alias -s mp4='vlc'
-alias -s mp3='audacious'
-
-alias -s flac='audacious'

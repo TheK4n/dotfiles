@@ -24,11 +24,6 @@ destroy() {
     shred -zun 3 "${filename}"
 }
 
-workon() {
-    local -r venvs="${VENVS:-/opt/pythonenv}"
-    source "${venvs}/${1:-$(basename "${PWD}")}/bin/activate"
-}
-
 py() {
     if [[ -z "$@" && -x "$(command -v ipython 2>/dev/null)" ]]; then
         ipython -i -c "q = exit"
@@ -144,17 +139,6 @@ json() {
     fi
 }
 
-_get_full_file_extension() {
-    local filename
-    filename="$(basename "$1")"
-    readonly filename
-
-    if [ "${filename:0:1}" = "." ]; then
-        filename="${filename:1}"
-    fi
-    echo "${filename#*.}"
-}
-
 rmt() {
     local -r trash="${TRASH:-"${HOME}/.trash"}"
 
@@ -207,7 +191,7 @@ django-create-project() (
 cleanup-directory() {
     local -r directory="${1}"
 
-    if [[ ! -d "${directory}" ]]; then
+    if [ ! -d "${directory}" ]; then
         echo "Directory '${directory}' not found" >&2
         return 1
     fi
