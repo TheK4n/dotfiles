@@ -17,16 +17,15 @@ _autoenv_hash_pair() {
 }
 
 _autoenv_envfile_authorize() {
-    local env_file="${1}"
-    local env_cksum="$(_autoenv_hash_pair "${env_file}")"
+    local env_cksum="$(_autoenv_hash_pair "${1}")"
 
     local line
-    while read -r line
+    for line in $(<"${AUTOENV_AUTH_FILE}")
     do
         if [ "${line}" == "${env_cksum}" ]; then
             return 0
         fi
-    done < "${AUTOENV_AUTH_FILE}"
+    done
 
     return 1
 }
@@ -66,14 +65,15 @@ fi
 
 
 autoenv-auth() {
+    echo >> "${AUTOENV_AUTH_FILE}"
     if [ -s "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
         _autoenv_hash_pair "${PWD}/${AUTOENV_FILE_ENTER}" >> "${AUTOENV_AUTH_FILE}"
-        echo "\n" >> "${AUTOENV_AUTH_FILE}"
+        echo >> "${AUTOENV_AUTH_FILE}"
     fi
 
     if [ -s "${PWD}/${AUTOENV_FILE_LEAVE}" ]; then
         _autoenv_hash_pair "${PWD}/${AUTOENV_FILE_LEAVE}" >> "${AUTOENV_AUTH_FILE}"
-        echo "\n" >> "${AUTOENV_AUTH_FILE}"
+        echo >> "${AUTOENV_AUTH_FILE}"
     fi
 }
 
