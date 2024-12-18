@@ -31,24 +31,26 @@ _autoenv_envfile_authorize() {
     return 1
 }
 
-_autoenv() {
-    if ! _autoenv_envfile_authorize "${PWD}/${AUTOENV_FILE_ENTER}"; then
-        return
+_autoenv_source_if_authorized() {
+    local file_to_source="${1}"
+
+    if [ ! -s "${file_to_source}" ]; then
+        return 1
     fi
 
-    if [ -f "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
-        source "${PWD}/${AUTOENV_FILE_ENTER}"
+    if ! _autoenv_envfile_authorize "${file_to_source}"; then
+        return 1
     fi
+
+    source "${file_to_source}"
+}
+
+_autoenv() {
+    _autoenv_source_if_authorized "${PWD}/${AUTOENV_FILE_ENTER}"
 }
 
 _autoenv_leave() {
-    if ! _autoenv_envfile_authorize "${OLDPWD}/${AUTOENV_FILE_LEAVE}"; then
-        return
-    fi
-
-    if [ -f "${OLDPWD}/${AUTOENV_FILE_LEAVE}" ]; then
-        source "${OLDPWD}/${AUTOENV_FILE_LEAVE}"
-    fi
+    _autoenv_source_if_authorized "${OLDPWD}/${AUTOENV_FILE_LEAVE}"
 }
 
 if [[ "${AUTOENV_DISABLED}" != 1 ]]; then
@@ -59,12 +61,7 @@ if [[ "${AUTOENV_DISABLED}" != 1 ]]; then
         add-zsh-hook chpwd _autoenv_leave
     fi
 
-    if [ -f "${PWD}/${AUTOENV_FILE_ENTER}" ]; then
-        if _autoenv_envfile_authorize "${PWD}/${AUTOENV_FILE_ENTER}"; then
-            source "${PWD}/${AUTOENV_FILE_ENTER}"
-        fi
-    fi
-
+    _autoenv_source_if_authorized "${PWD}/${AUTOENV_FILE_ENTER}"
 fi
 
 
