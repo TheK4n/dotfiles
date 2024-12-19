@@ -57,9 +57,6 @@ alias c='clear'
 alias h='history 0'
 alias j='jobs -l'
 
-# utils
-alias genpass="openssl rand -base64 12"
-alias gensalt="dd if=/dev/urandom count=16 2>/dev/null | sha256sum | head -c 64"
 
 if command -v colordiff &>/dev/null; then
     alias diff='colordiff'
@@ -81,8 +78,6 @@ alias svi="sudo --preserve-env nvim"
 # net
 alias ports='ss -tlnp'
 alias wget='wget -c'
-# alias myip='curl ipinfo.io/ip'
-alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias ip='ip -c'
 alias fastping='ping -c 100 -i 0.1'
 

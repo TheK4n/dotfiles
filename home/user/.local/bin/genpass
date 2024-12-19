@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -ue
+
+openssl rand -base64 12

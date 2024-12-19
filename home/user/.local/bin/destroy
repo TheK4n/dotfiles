@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -eu
+
+readonly filename="${1}"
+
+if [ ! -f "${filename}" ]; then
+    echo "destroy: File '${filename}' not found" >&2
+    exit 1
+fi
+
+filesize="$(du -hs "${filename}" | awk '{printf $1}')"
+readonly filesize
+
+printf "Sure want to destroy file '%s' with size %s [y/N] " "${filename}" "${filesize}"
+
+read -r response
+readonly response
+if [ ! "${response}" = "y" ]; then
+    exit 1
+fi
+
+shred -zun 3 "${filename}"

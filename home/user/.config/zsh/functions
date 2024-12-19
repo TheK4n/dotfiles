@@ -1,29 +1,5 @@
 # vim: ft=zsh
 
-destroy() {
-    local -r filename="${1}"
-
-    if [[ ! -f "${filename}" ]]; then
-        echo "destroy: File '${filename}' not found" >&2
-        return 1
-    fi
-
-    local filesize
-    filesize="$(du -hs "${filename}" | awk '{printf $1}')"
-    readonly filesize
-
-    echo -n "Sure want to destroy file '${filename}' with size ${filesize} [y/N] "
-
-    local response
-    read -r response
-    readonly response
-    if [[ ! "${response}" == [yY] ]]; then
-        return 1
-    fi
-
-    shred -zun 3 "${filename}"
-}
-
 py() {
     if [[ -z "$@" && -x "$(command -v ipython 2>/dev/null)" ]]; then
         ipython -i -c "q = exit"
@@ -65,46 +41,6 @@ va() {
     fi
 }
 
-
-extract() (
-    if [ -z "${1}" ]; then
-        echo "extract: error: usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-        return 2
-    fi
-
-    if ! [ -f "${1}" ]; then
-        echo "extract: error: '${1}' file does not exist" >&2
-        return 1
-    fi
-
-    local -r name="${1%%.*}"  # removes extension from filename
-    if [ -e "${name}" ]; then
-        echo "extract: error: '${name}' exists" >&2
-        return 1
-    fi
-
-    mkdir "${name}" && cd "${name}" || return 1
-
-    case $1 in
-        *.tar.bz2)  tar xjf      ../"${1}" ;;
-        *.tar.gz)   tar xzf      ../"${1}" ;;
-        *.tar.xz)   tar xJf      ../"${1}" ;;
-        *.lzma)     unlzma       ../"${1}" ;;
-        *.bz2)      bunzip2      ../"${1}" ;;
-        *.rar)      unrar x -ad  ../"${1}" ;;
-        *.gz)       gunzip       ../"${1}" ;;
-        *.tar)      tar xf       ../"${1}" ;;
-        *.tbz2)     tar xjf      ../"${1}" ;;
-        *.tgz)      tar xzf      ../"${1}" ;;
-        *.zip)      unzip        ../"${1}" ;;
-        *.Z)        uncompress   ../"${1}" ;;
-        *.7z)       7z x         ../"${1}" ;;
-        *.xz)       unxz         ../"${1}" ;;
-        *.exe)      cabextract   ../"${1}" ;;
-        *)          echo "extract: error: '${1}' - unknown archive method" >&2 ;;
-    esac
-)
-
 mcd() {
     if [ -z "${1}" ]; then
         cd "$(mktemp -td "${USER:-user}.XXXX")"
@@ -118,40 +54,12 @@ open() {
     nohup xdg-open "${1}" 1>/dev/null 2>&1 &
 }
 
-split-file() {
-    if [[ ! -e "${1}" ]]; then
-        echo "file '${1}' not found" >&2
-        return 1
-    fi
-
-    local -r size="${2:-1G}"
-
-    mkdir "${1}.splitted"
-    cd "${1}.splitted"
-    split -d -b "${size}" "../${1}"
-}
-
 json() {
     if [ -t 0 ]; then
        python -m json.tool <<< "$*"
     else  # pipe
        python -m json.tool
     fi
-}
-
-rmt() {
-    local -r trash="${TRASH:-"${HOME}/.trash"}"
-
-    local filename
-    for filename in "$@"
-    do
-        local filename_out_path
-        filename_out_path="${trash}$(realpath "${filename}")"
-        readonly filename_out_path
-
-        mkdir -p "$(dirname "${filename_out_path}")"
-        mv "${filename}" "${filename_out_path}_$(date +%s)"
-    done
 }
 
 showtips() {
@@ -170,23 +78,6 @@ showtips() {
     done
     return 0
 }
-
-most-often-commands() {
-    history 0 | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn
-}
-
-django-create-project() (
-    set -ue
-    local -r project_name="${1}"
-
-    mkdir "${project_name}"
-    cd "${project_name}"
-    python3 -m virtualenv venv
-    . venv/bin/activate
-    pip install django
-    django-admin startproject core .
-    git init
-)
 
 cleanup-directory() {
     local -r directory="${1}"
@@ -241,33 +132,6 @@ bak() {
         fi
     done
 }
-
-mirror-site() (
-    set -eu
-
-    local -r name="${1}"; shift
-
-    mkdir -p "${name}" && cd "${name}"
-
-    local -r user_agent="Mozilla/5.0 ..."
-    wget \
-        --page-requisites \
-        --convert-links \
-        --adjust-extension \
-        --restrict-file-names=ascii \
-        --span-hosts \
-        --random-wait \
-        --execute robots=off \
-        --recursive \
-        --timestamping \
-        -l inf \
-        --no-remove-listing \
-        --no-parent \
-        --user-agent "${user_agent}" \
-        --reject '*.woff*,*.ttf,*.eot,*.js' \
-        --tries 10 \
-        $@
-)
 
 sha() {
     if [ -v 2 ]; then

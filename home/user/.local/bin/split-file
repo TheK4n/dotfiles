@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -eu
+
+
+if [ ! -e "${1}" ]; then
+    echo "file '${1}' not found" >&2
+    exit 1
+fi
+
+readonly size="${2:-1G}"
+
+mkdir "${1}.splitted"
+cd "${1}.splitted"
+split -d -b "${size}" "../${1}"
