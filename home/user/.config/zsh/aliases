@@ -179,9 +179,9 @@ alias -g D="DISPLAY=:0.0"
 alias -g XT="TERM=xterm"
 alias -g GP="GOPROXY=direct"
 
-alias -g O="1>/dev/null"  # stdOut
-alias -g E="2>/dev/null"  # stdErr
-alias -g BG="O E &"  # background
+alias -g DN=">/dev/null"
+alias -g 2DN="2>/dev/null"
+alias -g BG="DN 2DN &"  # background
 
 alias -g RED='2> >(while read line; do printf "\033[0;31m${line}\033[0m\n"; done)'
 
