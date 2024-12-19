@@ -58,6 +58,8 @@ gitstatusquiet() {
     echo
     git status
     echo
+    ls
+    echo
     zle reset-prompt
 }
 zle -N gitstatusquiet
