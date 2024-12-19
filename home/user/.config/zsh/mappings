@@ -83,3 +83,13 @@ cddotdot() {
 zle -N cddotdot
 bindkey "^O" cddotdot
 bindkey -M vicmd "^O" cddotdot
+
+
+
+fzfhistory() {
+    BUFFER="$(history -n 0 | fzf --tac --no-multi --height="$(($LINES/4))" --query="$BUFFER")"
+    zle reset-prompt
+}
+zle -N fzfhistory
+bindkey "^R" fzfhistory
+bindkey -M vicmd "^R" fzfhistory
