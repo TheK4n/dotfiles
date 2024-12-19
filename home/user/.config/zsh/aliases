@@ -1,8 +1,6 @@
 # vim: ft=zsh
 
 
-alias zshrc='source "${ZDOTDIR}/.zshrc"'
-
 _d() { true ; }
 _f() { true ; }
 
@@ -54,9 +52,10 @@ alias pd='popd'
 
 # shorts
 alias c='clear'
-alias h='history 0'
+alias h='history -d -D 0'
 alias j='jobs -l'
 
+alias zshrc='source "${ZDOTDIR}/.zshrc" >/dev/null'
 
 if command -v colordiff &>/dev/null; then
     alias diff='colordiff'
@@ -74,6 +73,13 @@ alias beeptime='beep -D 400 -l 400 -r "$(date +%I)" -f 440 -n -D 1000 -l 0 -n -D
 # vim
 alias vi='nvim'
 alias svi="sudo --preserve-env nvim"
+
+# git
+alias gs="git status"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias ga="git a"
+alias gcim="git cim"
 
 # net
 alias ports='ss -tlnp'
