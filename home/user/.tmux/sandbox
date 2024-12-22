@@ -9,21 +9,15 @@ random() {
 
 readonly SESSION_PREFIX="sandbox"
 
-
-RND="$(random)"
-SESSION="${SESSION_PREFIX}${RND}"
-
+SESSION="${SESSION_PREFIX}$(random)"
 while tmux has-session -t "${SESSION}" 2>/dev/null
 do
-    RND="$(random)"
-    SESSION="${SESSION_PREFIX}${RND}"
+    SESSION="${SESSION_PREFIX}$(random)"
 done
-
-readonly RND
 readonly SESSION
 
 
-WORKING_PROJECT="$(mktemp -td "${SESSION_PREFIX}${RND}.XXXX")"
+WORKING_PROJECT="$(mktemp -td "${SESSION}.XXXX")"
 readonly WORKING_PROJECT
 
 tmux new-session -s "${SESSION}" -d -c "${WORKING_PROJECT}"
