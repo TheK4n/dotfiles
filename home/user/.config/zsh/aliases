@@ -80,7 +80,11 @@ alias gs="git status"
 alias gd="git diff"
 alias gds="git diff --staged"
 alias ga="git a"
-alias gcim="git cim"
+alias gcim="noglob git cim"
+alias gps="git ps"
+alias ghs="git hs"
+alias glast="git last"
+alias glastd="git lastd"
 
 # net
 alias ports='ss -tlnp'
@@ -129,7 +133,7 @@ alias CAPS='xdotool key Caps_Lock'
 alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ██████████\n"; done'
 
 
-alias gbuild='_a() { go build $@ -o . ./...}; _a'
+alias gobuild='_a() { go build $@ -o . ./...}; _a'
 
 
 # clipboard
@@ -183,7 +187,8 @@ alias -g GP="GOPROXY=direct"
 
 alias -g DN=">/dev/null"
 alias -g 2DN="2>/dev/null"
-alias -g BG="DN 2DN &"  # background
+alias -g ADN="&>/dev/null"
+alias -g BG="&>/dev/null &"  # background
 
 alias -g RED='2> >(while read line; do printf "\033[0;31m${line}\033[0m\n"; done)'
 
