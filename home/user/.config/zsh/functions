@@ -147,3 +147,7 @@ weather() {
     local city="${1}"
     curl "wttr.in/${city}" 2>/dev/null | head -n -1
 }
+
+gobuild() {
+    go build $@ -o . ./...
+}
