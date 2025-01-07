@@ -85,6 +85,7 @@ alias gps="git ps"
 alias ghs="git hs"
 alias glast="git last"
 alias glastd="git lastd"
+alias gdf="git df"
 
 # net
 alias ports='ss -tlnp'
