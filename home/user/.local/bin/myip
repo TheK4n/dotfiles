@@ -1,6 +1,12 @@
 #!/bin/sh
 
 
-curl ipinfo.io/ip
-echo
-dig +short myip.opendns.com @resolver1.opendns.com
+TAB="$(printf -- '\t')"
+
+{
+    printf "%s\t" "curl ipinfo.io/ip"
+    curl ipinfo.io/ip 2>/dev/null
+    echo
+    printf "%s\t" "dig +short myip.opendns.com @resolver1.opendns.com"
+    dig +short myip.opendns.com @resolver1.opendns.com 2>/dev/null
+} | column -t -s "${TAB}"
