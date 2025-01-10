@@ -1,4 +1,4 @@
 #!/bin/sh
 
-mkdir -p "$SANDBOX_PATH/.config/ranger/plugins"
-git clone https://github.com/alexanderjeurissen/ranger_devicons "$SANDBOX_PATH/.config/ranger/plugins/ranger_devicons"
+mkdir -p "${SANDBOX_PATH}/.config/ranger/plugins"
+git clone https://github.com/alexanderjeurissen/ranger_devicons "${SANDBOX_PATH}/.config/ranger/plugins/ranger_devicons"

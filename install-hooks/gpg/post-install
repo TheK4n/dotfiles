@@ -1,4 +1,5 @@
 #!/bin/sh
 
-cat "$SUB/.gnupg/gpg.conf" >> "$HOME/.gnupg/gpg.conf"
-echo -e "default-cache-ttl 1\nmax-cache-ttl 1" > "$HOME/.gnupg/gpg-agent.conf"; echo RELOADAGENT | gpg-connect-agent
+cat "${SUB}/.gnupg/gpg.conf" >> "${HOME}/.gnupg/gpg.conf"
+printf "%s\n%s" "default-cache-ttl 1" "max-cache-ttl 1" > "${HOME}/.gnupg/gpg-agent.conf"
+echo RELOADAGENT | gpg-connect-agent

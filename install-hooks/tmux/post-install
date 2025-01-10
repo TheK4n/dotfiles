@@ -1,4 +1,4 @@
 #!/bin/sh
 
 command -v systemctl >/dev/null && systemctl --user enable --now tmux
-git clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm" | true
+git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm" | true

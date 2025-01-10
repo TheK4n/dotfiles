@@ -1,11 +1,13 @@
 #!/bin/sh
 
-sub="$HOME/.local/share/fonts"
+set -e
 
-mkdir -p "$sub"
-cd "$sub"
+sub="${HOME}/.local/share/fonts"
+
+mkdir -p "${sub}"
+cd "${sub}"
 wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'
-unzip FiraCode.zip -d "$sub"
+unzip FiraCode.zip -d "${sub}"
 git clone 'https://github.com/powerline/fonts.git' --depth=1
 cd fonts
 ./install.sh
