@@ -2,11 +2,19 @@
 
 
 TAB="$(printf -- '\t')"
+readonly TAB
+
+
+execute_and_format_result() {
+    cmd="${1}"
+
+    ip="$(${cmd} 2>/dev/null)"
+
+    printf "%s\t%s\n" "${ip}" "${cmd}"
+}
+
 
 {
-    printf "%s\t" "curl ipinfo.io/ip"
-    curl ipinfo.io/ip 2>/dev/null
-    echo
-    printf "%s\t" "dig +short myip.opendns.com @resolver1.opendns.com"
-    dig +short myip.opendns.com @resolver1.opendns.com 2>/dev/null
+    execute_and_format_result "curl ipinfo.io/ip"
+    execute_and_format_result "dig +short myip.opendns.com @resolver1.opendns.com"
 } | column -t -s "${TAB}"
