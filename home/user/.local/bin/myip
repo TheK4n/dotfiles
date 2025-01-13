@@ -6,7 +6,7 @@ readonly TAB
 
 
 execute_and_format_result() {
-    cmd="${1}"
+    cmd="${@}"
 
     ip="$(${cmd} 2>/dev/null)"
 
@@ -15,6 +15,6 @@ execute_and_format_result() {
 
 
 {
-    execute_and_format_result "curl ipinfo.io/ip"
-    execute_and_format_result "dig +short myip.opendns.com @resolver1.opendns.com"
+    execute_and_format_result curl ipinfo.io/ip
+    execute_and_format_result dig +short myip.opendns.com @resolver1.opendns.com
 } | column -t -s "${TAB}"
