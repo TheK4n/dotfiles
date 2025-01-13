@@ -23,6 +23,19 @@ bindkey -M viins '\e.' insert-last-word  # M-.
 bindkey '^[[Z' reverse-menu-complete  # S-Tab
 
 
+bindkey -M viins '`' autosuggest-accept
+bindkey -M vicmd '`' autosuggest-accept
+
+bindkey -M viins '^?' backward-delete-char
+bindkey -M vicmd '^?' backward-delete-char
+
+bindkey -M viins '^W' backward-delete-word
+bindkey -M vicmd '^W' backward-delete-word
+
+bindkey -M viins '^H' backward-delete-char
+bindkey -M vicmd '^H' backward-delete-char
+
+
 insert-sudo() {
     local sudo_template="${SUDO:=sudo} "
     local template_len="${#sudo_template}"
@@ -46,13 +59,6 @@ zle -N insert-sudo
 
 bindkey -M vicmd '^S' insert-sudo  # C-s
 bindkey -M viins '^S' insert-sudo  # C-s
-
-bindkey '`' autosuggest-accept
-bindkey '^?' backward-delete-char
-bindkey '^W' backward-delete-word
-
-bindkey -M vicmd '^H' backward-delete-char
-
 
 gitstatusquiet() {
     echo
