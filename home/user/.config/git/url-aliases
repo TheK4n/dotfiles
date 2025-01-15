@@ -34,8 +34,8 @@
     pushInsteadOf = "git@gitlab.com:"
     pushInsteadOf = "gl:"
 
-[url "https://github.com/"]
-    insteadOf = "git@github.com:"
+; [url "https://github.com/"]
+;     insteadOf = "git@github.com:"
 
-[url "https://gitlab.com/"]
-    insteadOf = "git@gitlab.com:"
+; [url "https://gitlab.com/"]
+;     insteadOf = "git@gitlab.com:"
