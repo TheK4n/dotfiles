@@ -48,3 +48,6 @@ bindkey -M menuselect '^e' undo
 bindkey -M menuselect '^[' cancel
 bindkey -M menuselect '^M' check-command
 bindkey -M menuselect '^I' accept-and-infer-next-history
+
+
+compdef _directories mcd

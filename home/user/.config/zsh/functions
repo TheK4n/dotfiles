@@ -96,7 +96,7 @@ cleanup-directory() {
 }
 
 cleanup-downloads() {
-    local -r downloads_directory="${HOME}/downloads"
+    local -r downloads_directory="${XDG_DOWNLOAD_DIR}"
     local -r log_file="${downloads_directory}/cleanup.log"
 
     touch "${log_file}"
