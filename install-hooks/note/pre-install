@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -eu
+
+tempdir="$(mktemp -d)"
+readonly tempdir
+
+(
+    cd "${tempdir}"
+    git clone https://github.com/thek4n/note.git .
+    make install
+)
+
+rm -rf "${tempdir}"

@@ -3,6 +3,7 @@ colors:.config/terminal-colors.d
 less:.lesskey .infokey
 tmux:.config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_list_sessions.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_kill_sessions.sh
 t:
+note:
 zsh:.config/zsh .zshenv .inputrc %colors
 alacritty:.config/alacritty
 nvim:.config/nvim .editorconfig .editrc .local/bin/vim_askpass_helper
@@ -21,4 +22,4 @@ ipython:.ipython/profile_default/ipython_config.py
 gdb:.config/gdb
 sandbox:
 utils: .local/bin/myip .local/bin/genpass .local/bin/gensalt .local/bin/django-create-project .local/bin/mirror-site .local/bin/split-file .local/bin/extract .local/bin/destroy
-all:%less %t %tmux %zsh %nvim %git"
+all:%less %t %note %tmux %zsh %nvim %git"
