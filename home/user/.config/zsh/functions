@@ -42,11 +42,15 @@ va() {
 }
 
 mcd() {
+    local dir
+
     if [ -z "${1}" ]; then
-        cd "$(mktemp -td "${USER:-user}.XXXX")"
+        dir="$(mktemp -ut "${USER:-user}.XXXX")"
     else
-        mkdir -p "${1}" && cd "${1}"
+        dir="${1}"
     fi
+
+    mkdir -p "${dir}" && cd "${dir}"
 }
 
 open() {
