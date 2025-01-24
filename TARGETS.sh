@@ -1,7 +1,7 @@
 readonly TARGETS="\
 colors:.config/terminal-colors.d
 less:.lesskey .infokey
-tmux:.config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_list_sessions.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_kill_sessions.sh
+tmux:.config/tmux .tmux .config/systemd/user/tmux.service .local/bin/tmux_start_session.sh .local/bin/tmux_list_sessions.sh .local/bin/tmux_attach_session.sh .local/bin/tmux_kill_sessions.sh .local/bin/tmux_start_projects.sh
 t:
 note:
 zsh:.config/zsh .zshenv .inputrc %colors
