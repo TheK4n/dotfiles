@@ -26,7 +26,7 @@ if [ ! -d "${project_dir}" ]; then
 fi
 
 
-session="$(basename "${project_dir}")"
+session="$(basename "${project_dir}" | sed 's/\./_/g')"
 
 if ! tmux has-session -t "${session}" 2>/dev/null; then
     tmux new-session -d -n 1 -c "${project_dir}" -s "$(basename "${project_dir}")"
