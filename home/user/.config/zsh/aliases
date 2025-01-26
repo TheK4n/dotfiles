@@ -134,6 +134,9 @@ alias CAPS='xdotool key Caps_Lock'
 alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ██████████\n"; done'
 
 
+alias pastewww='curl --data-binary @- paste.thek4n.ru/'
+
+
 # clipboard
 if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     if [ -n "${DISPLAY}" ]; then
