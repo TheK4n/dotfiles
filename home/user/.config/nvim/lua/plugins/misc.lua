@@ -84,18 +84,6 @@ return {
         end
     },
     {
-        'ggandor/leap.nvim',
-        keys = {
-            {"J", "<Plug>(leap-forward-to)"},
-            {"K", "<Plug>(leap-backward-to)"},
-        },
-        config = function()
-            require('leap').opts.safe_labels = {}
-            vim.keymap.set("v", "J", "<Plug>(leap-forward-to)")
-            vim.keymap.set("v", "K", "<Plug>(leap-backward-to)")
-        end,
-    },
-    {
         'chentoast/marks.nvim',
         config = function()
             require("marks").setup()
