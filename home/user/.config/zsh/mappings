@@ -93,7 +93,17 @@ bindkey -M vicmd "^O" cddotdot
 
 
 fzfhistory() {
-    LBUFFER="$(history -n 0 | fzf --tac --no-multi --no-sort --height="$(($LINES/4))" --query="$BUFFER")"
+    LBUFFER="$( \
+        history -n 0 | \
+        fzf \
+            --ignore-case \
+            --scheme=history \
+            --tac \
+            --no-multi \
+            --no-sort \
+            --height="$(($LINES/4))" \
+            --query="$BUFFER" \
+    )"
     zle reset-prompt
 }
 zle -N fzfhistory
