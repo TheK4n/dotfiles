@@ -12,7 +12,7 @@ ${FZF_DEFAULT_OPTS}
 "
 
 
-project_dir="$(find "${HOME}" -maxdepth 3 -type d -not -path '*/.*' | sed "s%^${HOME}%~%" | fzf | sed "s%^~%${HOME}%")"
+project_dir="$(find "${HOME}" -xdev -maxdepth 3 -type d -not -path '*/.*' | sed "s%^${HOME}%~%" | fzf | sed "s%^~%${HOME}%")"
 readonly project_dir
 
 
