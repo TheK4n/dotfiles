@@ -52,8 +52,6 @@ export GOCACHE="${TMPDIR}/go-cache-$(id -u)"
 export GOPATH="${HOME}/.cache/go"
 export GOBIN="${HOME}/.local/bin"
 
-export GOPROXY=off
-
 
 export XDG_DESKTOP_DIR="${HOME}/desktop"
 export XDG_DOCUMENTS_DIR="${HOME}/documents"
