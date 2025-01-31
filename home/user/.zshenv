@@ -37,6 +37,8 @@ ctrl-p:preview-up,\
 ctrl-n:preview-down,\
 ctrl-u:clear-query,\
 ctrl-o:toggle,\
+ctrl-u:preview-top,\
+ctrl-g:preview-bottom,\
 tab:replace-query\
 "
 
