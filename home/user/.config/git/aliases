@@ -24,6 +24,7 @@
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
     pr = "pull --rebase"
+    s = status
     st = status
     br = branch
     bm = branch --merged
