@@ -76,16 +76,12 @@ alias vi='nvim'
 alias svi="sudo --preserve-env nvim"
 
 # git
-alias gs="git status"
-alias gd="git diff"
-alias gds="git diff --staged"
-alias ga="git a"
+for al in s d di co col ds a u ps pl hs last lastd df amend br
+do
+    alias "g${al}"="git ${al}"
+done
+
 alias gcim="noglob git cim"
-alias gps="git ps"
-alias ghs="git hs"
-alias glast="git last"
-alias glastd="git lastd"
-alias gdf="git df"
 
 # net
 alias ports='ss -tlnp'
