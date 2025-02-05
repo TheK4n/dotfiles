@@ -47,4 +47,4 @@ dist/
 .autoenv_leave.zsh
 
 *.tar
-*.tar.gz
+*.gz
