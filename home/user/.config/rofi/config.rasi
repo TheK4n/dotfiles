@@ -2,5 +2,9 @@ configuration {
     show-icons: true;
     terminal: "alacritty";
     font: "xft:FiraCode 12";
+    kb-accept-entry: "Ctrl+m";
+    kb-row-up: "Ctrl+k";
+    kb-row-down: "Ctrl+j";
+    kb-remove-to-eol: "";
 }
 @theme "Arc-Dark"
