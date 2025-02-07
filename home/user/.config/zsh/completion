@@ -49,5 +49,9 @@ bindkey -M menuselect '^[' cancel
 bindkey -M menuselect '^M' check-command
 bindkey -M menuselect '^I' accept-and-infer-next-history
 
+setopt AUTO_PARAM_SLASH
+setopt COMPLETE_IN_WORD
+unsetopt menucomplete
+
 
 compdef _directories mcd

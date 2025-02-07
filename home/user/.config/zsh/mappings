@@ -60,18 +60,6 @@ zle -N insert-sudo
 bindkey -M vicmd '^S' insert-sudo  # C-s
 bindkey -M viins '^S' insert-sudo  # C-s
 
-gitstatusquiet() {
-    echo
-    git status
-    echo
-    ls
-    echo
-    zle reset-prompt
-}
-zle -N gitstatusquiet
-bindkey "^L" gitstatusquiet
-bindkey -M vicmd "^L" gitstatusquiet
-
 
 popdquiet() {
     popd &>/dev/null
