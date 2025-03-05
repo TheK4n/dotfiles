@@ -40,6 +40,7 @@ a.out
 
 build/
 dist/
+node_modules/
 
 .tns
 
@@ -48,3 +49,4 @@ dist/
 
 *.tar
 *.gz
+
