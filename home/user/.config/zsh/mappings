@@ -7,6 +7,17 @@ bindkey -v
 bindkey -M visual 'i' vi-insert
 bindkey -M visual 'a' vi-add-next
 
+
+# Yank to the system clipboard
+function vi-yank-xclip {
+    zle vi-yank
+    echo -n "$CUTBUFFER" | copy  # alias 'copy' from earlier loaded file
+}
+
+zle -N vi-yank-xclip
+bindkey -M visual 'y' vi-yank-xclip
+
+
 bindkey ' ' magic-space
 
 bindkey '^K' up-line-or-history  # C-k

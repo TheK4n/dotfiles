@@ -136,7 +136,7 @@ alias pastewww='curl --data-binary @- paste.thek4n.ru/'
 # clipboard
 if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     if [ -n "${DISPLAY}" ]; then
-        alias copy='xclip -selection clipboard -i'
+        alias copy='sed -z "$ s/\n$//" | xclip -selection clipboard -i'
         alias paste='xclip -selection clipboard -o'
     else
         alias copy='read -rd "EOF" TTYCLIPBOARD'
