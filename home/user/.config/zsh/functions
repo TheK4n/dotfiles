@@ -153,5 +153,6 @@ weather() {
 }
 
 gobuild() {
-    go build $@ -o . ./...
+    mkdir ./bin
+    go build $@ -o ./bin ./...
 }
