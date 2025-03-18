@@ -9,7 +9,8 @@ set $mod Mod4
 
 # screensaver
 set $i3lock_cmd "i3lock -enf -c 1e1e1e"
-exec --no-startup-id xset +dpms dpms 600 0 0
+exec --no-startup-id xset s off
+exec --no-startup-id xset +dpms dpms 600 600 600
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
 
 # hide cursor
