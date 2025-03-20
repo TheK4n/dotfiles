@@ -130,7 +130,8 @@ alias CAPS='xdotool key Caps_Lock'
 alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ██████████\n"; done'
 
 
-alias pastewww='curl --data-binary @- paste.thek4n.ru/'
+alias paste.thek4n.ru='curl --data-binary @- paste.thek4n.ru/ 2>/dev/null | tee /dev/stderr | copy'
+alias pastewww='paste.thek4n.ru'
 
 
 # clipboard
