@@ -114,8 +114,9 @@ alias vd='deactivate'
 
 
 # docker
-alias dcu='docker-compose up -d'
-alias dcd='docker-compose down'
+alias dcu='docker compose up'
+alias dcd='docker compose down'
+alias dcl='docker compose logs -f'
 alias drmc='docker container prune'
 alias drmi='docker image prune'
 
