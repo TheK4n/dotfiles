@@ -76,7 +76,7 @@ alias vi='nvim'
 alias svi="sudo --preserve-env nvim"
 
 # git
-for al in s d di co col ds a u ps pl hs last lastd df amend br fuck
+for al in s d di co col ds a u ps pl pr hs last lastd df amend br fuck
 do
     alias "g${al}"="git ${al}"
 done
