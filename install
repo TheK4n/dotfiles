@@ -19,7 +19,7 @@ export SUB
 
 
 _die() {
-    echo "$(basename "${0}"): ${1}" >&2
+    printf '%s: %s\n' "$(basename "${0}")" "${1}" >&2
     exit "${2}"
 }
 
@@ -54,7 +54,7 @@ map_key_exists() (
 _link_files_in_sandbox() (
     for targetfile in "$@"
     do
-        echo "installing: ${targetfile}"
+        printf 'installing: %s\n' "${targetfile}"
         if [ "$(string_get_first_char "${targetfile}")" = "%" ]; then
             files="$(map_get_value "${TARGETS}" "$(string_exclude_first_char "${targetfile}")")"
             #shellcheck disable=SC2086
@@ -97,7 +97,7 @@ _execute_hook_if_executable() (
 
     hook_path="${DOTFILES_ROOT}/install-hooks/${target}/${hook_name}"
     if [ -x "${hook_path}" ]; then
-        echo "Executing ${hook_name} for target '${target}'"
+        printf 'Executing %s for target "%s"\n' "${hook_name}" "${target}"
         "${hook_path}"
     fi
 )
@@ -160,14 +160,13 @@ is_target_installed() (
             is_target_installed "$(string_exclude_first_char "${targetfile}")" || not_fully_installed=true
         else
             if [ ! -e "${TARGET_PATH}/${targetfile}" ]; then
-                echo "${targetfile} not linked"
+                printf '%s not linked\n' "${targetfile}"
                 not_fully_installed=true
             fi
         fi
     done
     if ${not_fully_installed}; then
-        echo "Target '${1}' not fully installed"
-        echo
+        printf 'Target "%s" not fully installed\n\n' "${target}"
         return 1
     fi
     return 0
@@ -179,7 +178,7 @@ find_targets_that_depend_on() (
         files="$(map_get_value "${TARGETS}" "${target}")"
 
         if map_key_exists "${TARGETS}" "%${1}"; then
-            echo "${target}"
+            printf '%s\n' "${target}"
         fi
     done
 )
