@@ -57,6 +57,7 @@ _link_files_in_sandbox() (
         echo "installing: ${targetfile}"
         if [ "$(string_get_first_char "${targetfile}")" = "%" ]; then
             files="$(map_get_value "${TARGETS}" "$(string_exclude_first_char "${targetfile}")")"
+            #shellcheck disable=SC2086
             _link_files_in_sandbox ${files}
         else
             if [ ! "$(dirname "${targetfile}")" = "." ]; then
@@ -140,6 +141,7 @@ install_target() (
 
     execute_pre_hook "${target}"
     recursive_execute_pre_hooks "${target}"
+    #shellcheck disable=SC2086
     _link_files_in_sandbox ${files}
     __install_from_sandbox
     recursive_execute_post_hooks "${target}"
