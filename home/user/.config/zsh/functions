@@ -87,29 +87,51 @@ showtips() {
 }
 
 cleanup-directory() {
-    local -r directory="${1}"
+    local -r directory="$(realpath "${1}")"
+    local -r age="+21" # Notation: +n  => "At least n days"
 
     if [ ! -d "${directory}" ]; then
         echo "Directory '${directory}' not found" >&2
         return 1
     fi
 
-    age="+21" # Notation: +n  => "At least n days"
-    echo "Deleting files not accessed for a ${age} days:"
-    find "${directory}" -atime "${age}" -exec rm -fv {} \;
+    if [ -n "${DRYRUN}" ]; then
+        echo "Deleting files not accessed for a ${age} days:"
+        find "${directory}" -atime "${age}"
 
-    echo "Deleting empty directories:"
-    find "${directory}" -type d -empty -print -delete
+        echo "Deleting empty directories:"
+        find "${directory}" -type d -empty -print
+    else
+        echo "Deleting files not accessed for a ${age} days:"
+        find "${directory}" -atime "${age}" | xargs -r rm -fv
+
+        echo "Deleting empty directories:"
+        find "${directory}" -type d -empty -print | xargs -r rmdir
+    fi
 }
 
-cleanup-downloads() {
-    local -r downloads_directory="${XDG_DOWNLOAD_DIR}"
-    local -r log_file="${downloads_directory}/cleanup.log"
+cleanup-directory-log() {
+    local -r directory="$(realpath "${1}")"
+    if [ ! -d "${directory}" ]; then
+        echo "Directory '${directory}' not found" >&2
+        return 1
+    fi
+
+    local log_file="${directory}/cleanup.log"
+
+    if [ -n "${DRYRUN}" ]; then
+        log_file="/dev/null"
+    fi
 
     touch "${log_file}"
 
     echo "$(date -Iseconds) : Start cleanup" >> "${log_file}"
-    cleanup-directory "${downloads_directory}" | tee -a "${log_file}"
+    cleanup-directory "${directory}"  | tee -a "${log_file}"
+}
+
+cleanup-downloads() {
+    local -r downloads_directory="${XDG_DOWNLOAD_DIR}"
+    cleanup-directory-log "${downloads_directory}"
 }
 
 _bak() {
