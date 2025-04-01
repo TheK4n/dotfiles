@@ -1,0 +1,7 @@
+#!/bin/sh
+
+temp_dir="$(mktemp -d)"
+
+chromium --proxy-server=socks5://localhost:1080 --user-data-dir="${temp_dir}" --new-window --proxy-bypass-list='10.0.0.0/8,192.168.0.0/16'
+
+rm -r "${temp_dir}"

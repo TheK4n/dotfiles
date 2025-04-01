@@ -21,5 +21,6 @@ docker:.docker/cli-plugins
 ipython:.ipython/profile_default/ipython_config.py
 gdb:.config/gdb
 sandbox:
-utils: .local/bin/myip .local/bin/genpass .local/bin/gensalt .local/bin/django-create-project .local/bin/mirror-site .local/bin/split-file .local/bin/extract .local/bin/destroy
+utils:.local/bin/myip .local/bin/genpass .local/bin/gensalt .local/bin/django-create-project .local/bin/mirror-site .local/bin/split-file .local/bin/extract .local/bin/destroy
+chromium:.local/bin/pchromium .local/share/applications/pchromium.desktop
 all:%less %t %note %tmux %zsh %nvim %git"
