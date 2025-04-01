@@ -99,7 +99,7 @@ fzfhistory() {
             --scheme=history \
             --tac \
             --no-multi \
-            --no-sort \
+            --tiebreak=begin,index \
             --height="$(($LINES/4))" \
             --query="$BUFFER" \
     )"
