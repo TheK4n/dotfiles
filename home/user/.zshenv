@@ -51,6 +51,7 @@ if [ -d "${HOME}/.local/bin" ] ; then
 fi
 
 export GOCACHE="${TMPDIR}/go-cache-$(id -u)"
+export PPROF_TMPDIR="${TMPDIR}/go-pprof-$(id -u)"
 export GOPATH="${HOME}/.cache/go"
 export GOBIN="${HOME}/.local/bin"
 
