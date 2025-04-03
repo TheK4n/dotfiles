@@ -37,6 +37,7 @@ CMakeFiles
 *.o
 a.out
 *.exe
+*.ipk
 
 build/
 dist/
