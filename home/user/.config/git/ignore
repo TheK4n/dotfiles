@@ -50,4 +50,5 @@ node_modules/
 
 *.tar
 *.gz
+*.zip
 
