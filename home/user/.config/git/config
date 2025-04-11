@@ -3,7 +3,6 @@
     editor = "$EDITOR"
     pager = "$PAGER -+C -F"
     fileMode = true
-    hooksPath = ~/.config/git/hooks
     whitespace = fix,trailing-space,cr-at-eol
     autocrlf = input
 
