@@ -9,6 +9,7 @@ readonly project_name="${1}"
 mkdir "${project_name}"
 cd "${project_name}"
 python3 -m virtualenv venv
+#shellcheck disable=SC1091
 . venv/bin/activate
 pip install django
 django-admin startproject core .
