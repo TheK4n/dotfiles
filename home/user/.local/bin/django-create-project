@@ -11,6 +11,10 @@ cd "${project_name}"
 python3 -m virtualenv venv
 #shellcheck disable=SC1091
 . venv/bin/activate
-pip install django
+pip install django django-types
 django-admin startproject core .
 git init
+mkdir requirements
+echo 'django' > requirements/prod.txt
+echo '-r prod.txt' > requirements/dev.txt
+echo 'django-types' >> requirements/dev.txt
