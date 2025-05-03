@@ -131,26 +131,28 @@ alias CAPS='xdotool key Caps_Lock'
 alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ██████████\n"; done'
 
 
-alias paste.thek4n.ru='curl --data-binary @- paste.thek4n.ru/ 2>/dev/null | tee /dev/stderr | copy'
+alias paste.thek4n.ru='curl --data-binary @- paste.thek4n.ru/ 2>/dev/null'
 alias pastewww='paste.thek4n.ru'
 
 
 # clipboard
 if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     if [ -n "${DISPLAY}" ]; then
-        alias copy='sed -z "$ s/\n$//" | xclip -selection clipboard -i'
+        alias _copy='sed -z "$ s/\n$//" | xclip -selection clipboard -i'
         alias paste='xclip -selection clipboard -o'
     else
-        alias copy='read -rd "EOF" TTYCLIPBOARD'
+        alias _copy='read -rd "EOF" TTYCLIPBOARD'
         alias paste='echo "$TTYCLIPBOARD"'
     fi
 elif [[ "${OSTYPE}" == "linux-android"* ]]; then
-    alias copy='termux-clipboard-set'
+    alias _copy='termux-clipboard-set'
     alias paste='termux-clipboard-get'
 elif [[ "${OSTYPE}" == "darwin" ]]; then
-    alias copy='pbcopy'
+    alias _copy='pbcopy'
     alias paste='pbpaste'
 fi
+
+alias copy='tee /dev/stderr | _copy'
 
 alias ssh='TERM=xterm-256color ssh'
 alias sshn='ssh -S none'
