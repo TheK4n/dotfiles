@@ -12,6 +12,7 @@
     dws = diff --word-diff=color --staged
     co = checkout
     col = checkout @{-1}
+    cob = checkout -b
     ci = commit
     cia = commit --all
     amend = commit --amend --no-edit
