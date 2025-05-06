@@ -11,6 +11,7 @@ _sod() {
         local filename
         for filename in $(ls "${dir_to_source}" | sort -n)
         do
+            # shellcheck disable=SC1090
             source "${dir_to_source}/${filename}"
         done
     fi

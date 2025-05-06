@@ -195,4 +195,4 @@ alias -g RED='2> >(while read line; do printf "\033[0;31m${line}\033[0m\n"; done
 
 alias -g BEEP='&& beep -f 800 -l 250 -n -f 1000 -l 500 || beep -f 800 -l 250 -n -f 500 -l 500'
 
-alias -g PROXY="http_proxy='socks5://localhost:1080'"
+alias -g PROXY='http_proxy="socks5://${SOCKS5_SERVER:-localhost}"'

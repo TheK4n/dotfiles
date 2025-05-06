@@ -5,6 +5,10 @@ home/user/.config/nvim/spell
 
 home/user/.config/zsh/zshrc.d/*
 !home/user/.config/zsh/zshrc.d/00_zhashd.sh
+
+home/user/.zshenv.d/*
+!home/user/.zshenv.d/.gitkeep
+
 home/user/.config/zsh/.zcalc_history
 
 .zcompdump

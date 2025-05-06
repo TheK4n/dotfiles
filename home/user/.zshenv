@@ -64,3 +64,19 @@ export XDG_PICTURES_DIR="${HOME}/pictures"
 export XDG_PUBLICSHARE_DIR="${HOME}/public"
 export XDG_TEMPLATES_DIR="${HOME}/templates"
 export XDG_VIDEOS_DIR="${HOME}/videos"
+
+
+_sod() {
+    local -r dir_to_source="${1}"
+
+    if [ -d "${dir_to_source}" ] && [ -n "$(ls "${dir_to_source}")" ]; then
+        local filename
+        for filename in $(ls "${dir_to_source}" | sort -n)
+        do
+            # shellcheck disable=SC1090
+            source "${dir_to_source}/${filename}"
+        done
+    fi
+}
+
+_sod "${HOME}/.zshenv.d"
