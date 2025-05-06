@@ -11,7 +11,7 @@
     logOutputEncoding = utf-8
 
 [init]
-    defaultBranch = master
+    defaultBranch = main
 
 [push]
     default = current
