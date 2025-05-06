@@ -1,5 +1,5 @@
 # screen layout
-exec --no-startup-id ~/.screenlayout/default.sh
+exec --no-startup-id ~/.screenlayout/default
 
 for_window [tiling] border pixel 3
 smart_borders on
