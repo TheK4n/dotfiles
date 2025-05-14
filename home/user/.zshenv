@@ -43,7 +43,7 @@ tab:replace-query\
 "
 
 export BROWSERCLI=w3m
-test -z "${BROWSER}" && BROWSER=chromium
+test -z "${BROWSER}" && BROWSER=firefox
 export BROWSER
 
 if [ -d "${HOME}/.local/bin" ] ; then
