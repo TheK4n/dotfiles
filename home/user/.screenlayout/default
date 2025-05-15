@@ -1,5 +1,10 @@
 #!/bin/sh
-xrandr --output DVI-D-0 --off \
-    --output HDMI-0 --mode 1920x1080 --pos 0x-1080 --rotate normal \
-    --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
-    --output DP-1 --off
+
+readonly PRIMARY="DP-0"
+readonly RESOLUTION="1920x1080"
+
+xrandr \
+    --output "${PRIMARY}" --primary --mode "${RESOLUTION}" -r 60 --pos 0x0 --rotate normal \
+    --output HDMI-0 --mode "${RESOLUTION}" -r 60 --right-of "${PRIMARY}" --rotate normal \
+    --output DP-1 --off \
+    --output DVI-D-0 --off
