@@ -8,6 +8,7 @@ readonly NOTIFY_TIME_ERROR_MS=5000
 readonly NOTIFY_LABEL="Screenshot"
 readonly SCREENSHOTS_DIR="${SCREENSHOTS_DIR:-${HOME}/Pictures/screenshots}"
 readonly TIMESTAMP_FORMAT="%H-%M-%S_%Y-%m-%d"
+readonly NOOPENGL="${NOOPENGL:-false}"
 
 
 mkdir -p "${SCREENSHOTS_DIR}"
@@ -27,18 +28,27 @@ _notify_error() {
                 "Error: ${1}"
 }
 
+_maim() {
+    maim_args="--quality 10"
+    if ${NOOPENGL}; then
+        maim_args="${maim_args} --noopengl"
+    fi
+
+    #shellcheck disable=SC2086
+    maim ${maim_args} "${@}"
+}
+
 _capture_select() {
-    maim --select
+    _maim --select
 }
 
 _capture_entire() {
-    maim
+    _maim
 }
 
 _capture_window() {
-    maim --window "$(xdotool getactivewindow)"
+    _maim --window "$(xdotool getactivewindow)"
 }
-
 
 _copy_to_clipboard() {
     xclip -selection clipboard -t image/png
