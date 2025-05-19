@@ -1,0 +1,49 @@
+# Общие настройки
+command=$SCRIPT_DIR/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+# Цвета (в формате #RRGGBB)
+color=#FFFFFF
+
+# Интервал обновления (в секундах)
+interval=5
+
+# Блоки (модули)
+
+[time]
+command=date '+%H:%M:%S %d.%m.%Y'
+label=
+interval=5
+color=#f1fa8c
+
+[memory]
+command=free -h | awk '/^Mem/ {print $3 "/" $2}' | sed 's/i//g'
+label=
+interval=5
+color=#50fa7b
+
+[cpu_usage]
+command=top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
+label=
+interval=5
+color=#ff79c6
+
+[disk]
+command=df -h / | awk '/\// {print $4}'
+label=
+interval=30
+color=#8be9fd
+
+[network]
+command=echo "$(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2) $(ip -o -4 addr show | awk '{print $4}' | cut -d/ -f1 | head -1)"
+label=
+interval=10
+color=#bd93f9
+
+[volume]
+command=amixer get Master | awk -F'[][]' '/%/ {print $2}' | head -n 1
+label=
+interval=1
+signal=10  # Для обновления по сигналу (например, после изменения громкости)
+

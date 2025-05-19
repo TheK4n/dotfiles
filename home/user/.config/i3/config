@@ -221,7 +221,7 @@ bar {
     output primary
     output nonprimary
     tray_output primary
-    status_command exec ~/.local/bin/i3status_wrapper
+    status_command i3blocks
 }
 
 bindsym Print exec --no-startup-id screenshot select copy
