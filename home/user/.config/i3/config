@@ -1,4 +1,4 @@
-# screen layout
+# Screen layout
 exec --no-startup-id ~/.screenlayout/default
 
 for_window [tiling] border pixel 3
@@ -7,19 +7,26 @@ smart_borders on
 set $mod Mod4
 
 
-# screensaver
+# Screensaver
 set $i3lock_cmd "i3lock -enf -c 1e1e1e"
 exec --no-startup-id xset s off
 exec --no-startup-id xset +dpms dpms 600 600 600
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
 
-# hide cursor
+
+# Notifications
+#systemctl --user enable --now dbus.service
+exec --no-startup-id dunst
+
+
+# Hide cursor
 exec --no-startup-id unclutter -idle 0.3 -root
+
 
 exec_always --no-startup-id xset r rate 250 100
 exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle -option ctrl:nocaps
 
-# wallpapers
+# Wallpapers
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id hsetroot
 exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
@@ -27,7 +34,7 @@ exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
 set $font_size 11
 font xft:FiraCode $font_size
 
-# Use pactl to adjust volume in PulseAudio.
+# use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
@@ -166,41 +173,41 @@ bindsym $mod+Shift+u workspace next
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym $mod+r mode "default"
-        bindsym p mode "resize_precise"
+    bindsym $mod+r mode "default"
+    bindsym p mode "resize_precise"
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 mode "resize_precise" {
-        bindsym h resize shrink width 1 px or 1 ppt
-        bindsym j resize grow height 1 px or 1 ppt
-        bindsym k resize shrink height 1 px or 1 ppt
-        bindsym l resize grow width 1 px or 1 ppt
+    bindsym h resize shrink width 1 px or 1 ppt
+    bindsym j resize grow height 1 px or 1 ppt
+    bindsym k resize shrink height 1 px or 1 ppt
+    bindsym l resize grow width 1 px or 1 ppt
 
-        bindsym $mod+r mode "default"
-        bindsym p mode "resize"
+    bindsym $mod+r mode "default"
+    bindsym p mode "resize"
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 set $exitmode "Power: [e]xit, [r]eboot, [s]hutdown, s[u]spend, [l]ock, [b]lack"
 mode $exitmode {
-        bindsym e exit
-        bindsym r exec reboot
-        bindsym s exec shutdown -h now
-        bindsym u exec systemctl suspend; mode "default"
-        bindsym l exec $i3lock_cmd; mode "default"
-        bindsym b exec magick canvas:none PNG:- | feh -YF -; mode "default"
+    bindsym e exit
+    bindsym r exec reboot
+    bindsym s exec shutdown -h now
+    bindsym u exec systemctl suspend; mode "default"
+    bindsym l exec $i3lock_cmd; mode "default"
+    bindsym b exec magick canvas:none PNG:- | feh -YF -; mode "default"
 
-        bindsym Escape mode "default"
-        bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
 }
 bindsym $mod+x mode $exitmode
 
@@ -211,21 +218,19 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 bar {
-        output primary
-        output nonprimary
-        tray_output primary
-        status_command exec ~/.local/bin/i3status_wrapper
+    output primary
+    output nonprimary
+    tray_output primary
+    status_command exec ~/.local/bin/i3status_wrapper
 }
 
-## Clipboard Screenshots
-bindsym Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
-bindsym Ctrl+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym Print exec --no-startup-id screenshot select copy
+bindsym $mod+Print exec --no-startup-id screenshot window copy
+bindsym Ctrl+Print exec --no-startup-id screenshot entire copy
 
-# Screenshots
-bindsym Shift+Print exec --no-startup-id maim "$SCREENSHOTS_DIR/$(date +'%d-%m-%Y-%T').png"
-bindsym Shift+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "$SCREENSHOTS_DIR/$(date +'%d-%m-%Y-%T').png"
-bindsym Shift+Ctrl+Print exec --no-startup-id maim --select "$SCREENSHOTS_DIR/$(date +'%d-%m-%Y-%T').png"
+bindsym Shift+Print exec --no-startup-id screenshot select save
+bindsym Shift+$mod+Print exec --no-startup-id screenshot window save
+bindsym Shift+Ctrl+Print exec --no-startup-id screenshot entire save
 
 
 # default workspaces for monitors in setup
