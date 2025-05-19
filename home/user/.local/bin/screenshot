@@ -1,107 +1,123 @@
 #!/bin/sh
 
-
 set -eu
-
 
 readonly LOG_FILE="${HOME}/.screenshots.log"
 readonly NOTIFY_TIME_MS=3000
 readonly NOTIFY_TIME_ERROR_MS=5000
 readonly NOTIFY_LABEL="Screenshot"
 readonly SCREENSHOTS_DIR="${SCREENSHOTS_DIR:-${HOME}/Pictures/screenshots}"
+readonly TIMESTAMP_FORMAT="%H-%M-%S_%Y-%m-%d"
+
+
+mkdir -p "${SCREENSHOTS_DIR}"
 
 
 _notify() {
-    notify-send --urgency normal --expire-time "${NOTIFY_TIME_MS}" "${NOTIFY_LABEL}" "${1}"
+    notify-send --urgency normal \
+                --expire-time "${NOTIFY_TIME_MS}" \
+                "${NOTIFY_LABEL}" \
+                "${1}"
 }
 
 _notify_error() {
-    notify-send --urgency critical --expire-time "${NOTIFY_TIME_ERROR_MS}" "${NOTIFY_LABEL}" "Error: ${1}"
+    notify-send --urgency critical \
+                --expire-time "${NOTIFY_TIME_ERROR_MS}" \
+                "${NOTIFY_LABEL}" \
+                "Error: ${1}"
 }
 
-_make_screen_select() {
-    #shellcheck disable=SC2317
+_capture_select() {
     maim --select
 }
 
-_make_screen_entire() {
-    #shellcheck disable=SC2317
+_capture_entire() {
     maim
 }
 
-_make_screen_current_window() {
-    #shellcheck disable=SC2317
+_capture_window() {
     maim --window "$(xdotool getactivewindow)"
 }
 
-_copy_image_from_stdin_to_clipboard() {
-    #shellcheck disable=SC2317
+
+_copy_to_clipboard() {
     xclip -selection clipboard -t image/png
 }
 
-_save_image_from_stdin_to_file() {
-    #shellcheck disable=SC2317
+_save_to_file() {
     cat > "${1}"
 }
 
+_process_screenshot() {
+    capture_func="${1}"
+    output_func="${2}"
+    success_msg="${3}"
+    error_msg="${4}"
+    output_arg="${5:-}"
 
-select_save() {
-    screenshot_file="${SCREENSHOTS_DIR}/$(date +'%d-%m-%Y-%T').png"
-    msg="Selection screenshot save to ${screenshot_file}"
-    if _make_screen_select | _save_image_from_stdin_to_file "${screenshot_file}"; then
-        _notify "${msg}"
+    if [ -n "${output_arg}" ]; then
+        if ! ${capture_func} | ${output_func} "${output_arg}"; then
+            _notify_error "${error_msg}"
+            return 1
+        fi
     else
-        _notify_error "${msg}"
+        if ! ${capture_func} | ${output_func}; then
+            _notify_error "${error_msg}"
+            return 1
+        fi
     fi
+
+    _notify "${success_msg}"
+    return 0
 }
 
-select_copy() {
-    msg="Selection screenshot copy to clipboard"
-    if _make_screen_select | _copy_image_from_stdin_to_clipboard; then
-        _notify "${msg}"
-    else
-        _notify_error "${msg}"
-    fi
+_select_save() {
+    filename="${SCREENSHOTS_DIR}/selection_$(date +"${TIMESTAMP_FORMAT}").png"
+    _process_screenshot _capture_select \
+                        _save_to_file \
+                        "Selection saved to ${filename}" \
+                        "Failed to save selection screenshot" \
+                        "${filename}"
 }
 
-window_save() {
-    screenshot_file="${SCREENSHOTS_DIR}/$(date +'%d-%m-%Y-%T').png"
-    msg="Current window screenshot save to ${screenshot_file}"
-    if _make_screen_current_window | _save_image_from_stdin_to_file  "${screenshot_file}"; then
-        _notify "${msg}"
-    else
-        _notify_error "${msg}"
-    fi
+_select_copy() {
+    _process_screenshot _capture_select \
+                       _copy_to_clipboard \
+                       "Selection copied to clipboard" \
+                       "Failed to copy selection to clipboard"
 }
 
-window_copy() {
-    msg="Current window screenshot save to clipboard"
-    if _make_screen_current_window | _copy_image_from_stdin_to_clipboard; then
-        _notify "${msg}"
-    else
-        _notify_error "${msg}"
-    fi
+_window_save() {
+    filename="${SCREENSHOTS_DIR}/window_$(date +"${TIMESTAMP_FORMAT}").png"
+    _process_screenshot _capture_window \
+                       _save_to_file \
+                       "Current window saved to ${filename}" \
+                       "Failed to save Current window screenshot" \
+                       "${filename}"
 }
 
-entire_save() {
-    screenshot_file="${SCREENSHOTS_DIR}/$(date +'%d-%m-%Y-%T').png"
-    msg="Entire display screenshot save to ${screenshot_file}"
-    if _make_screen_entire | _save_image_from_stdin_to_file "${screenshot_file}"; then
-        _notify "${msg}"
-    else
-        _notify_error "${msg}"
-    fi
+_window_copy() {
+    _process_screenshot _capture_window \
+                       _copy_to_clipboard \
+                       "Current window copied to clipboard" \
+                       "Failed to copy current window to clipboard"
 }
 
-entire_copy() {
-    msg="Entire display screenshot save to clipboard"
-    if _make_screen_entire | _copy_image_from_stdin_to_clipboard; then
-        _notify "${msg}"
-    else
-        _notify_error "${msg}"
-    fi
+_entire_save() {
+    filename="${SCREENSHOTS_DIR}/screen_$(date +"${TIMESTAMP_FORMAT}").png"
+    _process_screenshot _capture_entire \
+                       _save_to_file \
+                       "Entire screen saved to ${filename}" \
+                       "Failed to save entire screen" \
+                       "${filename}"
 }
 
+_entire_copy() {
+    _process_screenshot _capture_entire \
+                       _copy_to_clipboard \
+                       "Entire screen copied to clipboard" \
+                       "Failed to copy entire screen to clipboard"
+}
 
 main() {
     if [ $# -ne 2 ]; then
@@ -113,12 +129,12 @@ main() {
     readonly action="${2}"
 
     case "${target}-${action}" in
-        select-save) select_save &>> "${LOG_FILE}" ;;
-        select-copy) select_copy &>> "${LOG_FILE}" ;;
-        window-save) window_save &>> "${LOG_FILE}" ;;
-        window-copy) window_copy &>> "${LOG_FILE}" ;;
-        entire-save) entire_save &>> "${LOG_FILE}" ;;
-        entire-copy) entire_copy &>> "${LOG_FILE}" ;;
+        select-save) _select_save &>> "${LOG_FILE}" ;;
+        select-copy) _select_copy &>> "${LOG_FILE}" ;;
+        window-save) _window_save &>> "${LOG_FILE}" ;;
+        window-copy) _window_copy &>> "${LOG_FILE}" ;;
+        entire-save) _entire_save &>> "${LOG_FILE}" ;;
+        entire-copy) _entire_copy &>> "${LOG_FILE}" ;;
         *)
             echo "Invalid options: target=${target}, action=${action}"
             echo "Available targets: select, window, entire"
