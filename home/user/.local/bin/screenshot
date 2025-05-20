@@ -39,7 +39,7 @@ _notify_error() {
 _maim() {
     local maim_args=(--quality 10)
     if ${NOOPENGL}; then
-        maim_args=(${maim_args} --noopengl)
+        maim_args+=--noopengl
     fi
 
     maim ${maim_args} "${@}"
