@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-set -eu
+set -euo pipefail
 
 readonly LOG_FILE="${HOME}/.screenshots.log"
 readonly NOTIFY_TIME_MS=3000
 readonly NOTIFY_TIME_ERROR_MS=5000
+readonly CODE_CANCELED=22
 readonly NOTIFY_LABEL="Screenshot"
 readonly SCREENSHOTS_DIR="${SCREENSHOTS_DIR:-${HOME}/Pictures/screenshots}"
 readonly TIMESTAMP_FORMAT="%H-%M-%S_%Y-%m-%d"
@@ -29,17 +30,25 @@ _notify_error() {
 }
 
 _maim() {
-    maim_args="--quality 10"
+    local maim_args=(--quality 10)
     if ${NOOPENGL}; then
-        maim_args="${maim_args} --noopengl"
+        maim_args=(${maim_args} --noopengl)
     fi
 
-    #shellcheck disable=SC2086
     maim ${maim_args} "${@}"
 }
 
 _capture_select() {
-    _maim --select
+    local -r pipe="$(mktemp)"
+    _maim --select 2>"${pipe}"
+    local -r code="$?"
+    if grep -F "Selection was cancelled by keystroke or right-click." <"${pipe}"; then
+        rm "${pipe}"
+        return "${CODE_CANCELED}"
+    fi
+    cat "${pipe}" 1>&2
+    rm "${pipe}"
+    return "${code}"
 }
 
 _capture_entire() {
@@ -59,22 +68,19 @@ _save_to_file() {
 }
 
 _process_screenshot() {
-    capture_func="${1}"
-    output_func="${2}"
-    success_msg="${3}"
-    error_msg="${4}"
-    output_arg="${5:-}"
+    local -r capture_func="${1}"
+    local -r output_func="${2}"
+    local -r success_msg="${3}"
+    local -r error_msg="${4}"
+    local -r output_arg="${5:-}"
 
-    if [ -n "${output_arg}" ]; then
-        if ! ${capture_func} | ${output_func} "${output_arg}"; then
-            _notify_error "${error_msg}"
-            return 1
+    if ! ${capture_func} | ${output_func} "${output_arg}"; then
+        if (( ${pipestatus[1]} == "${CODE_CANCELED}" )); then
+            _notify "Selection was cancelled by keystroke or right-click."
+            return 0
         fi
-    else
-        if ! ${capture_func} | ${output_func}; then
-            _notify_error "${error_msg}"
-            return 1
-        fi
+        _notify_error "${error_msg}"
+        return 1
     fi
 
     _notify "${success_msg}"
@@ -82,7 +88,7 @@ _process_screenshot() {
 }
 
 _select_save() {
-    filename="${SCREENSHOTS_DIR}/selection_$(date +"${TIMESTAMP_FORMAT}").png"
+    local -r filename="${SCREENSHOTS_DIR}/selection_$(date +"${TIMESTAMP_FORMAT}").png"
     _process_screenshot _capture_select \
                         _save_to_file \
                         "Selection saved to ${filename}" \
@@ -98,7 +104,7 @@ _select_copy() {
 }
 
 _window_save() {
-    filename="${SCREENSHOTS_DIR}/window_$(date +"${TIMESTAMP_FORMAT}").png"
+    local -r filename="${SCREENSHOTS_DIR}/window_$(date +"${TIMESTAMP_FORMAT}").png"
     _process_screenshot _capture_window \
                        _save_to_file \
                        "Current window saved to ${filename}" \
@@ -114,7 +120,7 @@ _window_copy() {
 }
 
 _entire_save() {
-    filename="${SCREENSHOTS_DIR}/screen_$(date +"${TIMESTAMP_FORMAT}").png"
+    local -r filename="${SCREENSHOTS_DIR}/screen_$(date +"${TIMESTAMP_FORMAT}").png"
     _process_screenshot _capture_entire \
                        _save_to_file \
                        "Entire screen saved to ${filename}" \
@@ -135,8 +141,8 @@ main() {
         exit 1
     fi
 
-    readonly target="${1}"
-    readonly action="${2}"
+    local -r target="${1}"
+    local -r action="${2}"
 
     case "${target}-${action}" in
         select-save) _select_save &>> "${LOG_FILE}" ;;
