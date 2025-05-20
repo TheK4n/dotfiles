@@ -22,6 +22,13 @@ _notify() {
                 "${1}"
 }
 
+_notify_low() {
+    notify-send --urgency low \
+                --expire-time "${NOTIFY_TIME_MS}" \
+                "${NOTIFY_LABEL}" \
+                "${1}"
+}
+
 _notify_error() {
     notify-send --urgency critical \
                 --expire-time "${NOTIFY_TIME_ERROR_MS}" \
@@ -76,7 +83,7 @@ _process_screenshot() {
 
     if ! ${capture_func} | ${output_func} "${output_arg}"; then
         if (( ${pipestatus[1]} == "${CODE_CANCELED}" )); then
-            _notify "Selection was cancelled by keystroke or right-click."
+            _notify_low "Selection was cancelled by keystroke or right-click."
             return 0
         fi
         _notify_error "${error_msg}"
