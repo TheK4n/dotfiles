@@ -3,42 +3,51 @@
 set -euo pipefail
 
 readonly LOG_FILE="${HOME}/.screenshots.log"
-readonly NOTIFY_TIME_MS=3000
-readonly NOTIFY_TIME_ERROR_MS=5000
+readonly NOTIFY_TIME_LOW_MS=1500
+readonly NOTIFY_TIME_NORMAL_MS=3000
+readonly NOTIFY_TIME_CRITICAL_MS=5000
 readonly CODE_CANCELED=22
 readonly NOTIFY_LABEL="Screenshot"
 readonly SCREENSHOTS_DIR="${SCREENSHOTS_DIR:-${HOME}/Pictures/screenshots}"
 readonly TIMESTAMP_FORMAT="%H-%M-%S_%Y-%m-%d"
-readonly NOOPENGL="${NOOPENGL:-false}"
+readonly NOOPENGL="${NOOPENGL:-}"
+readonly NONOTIFY="${NONOTIFY:-}"
 
 
 mkdir -p "${SCREENSHOTS_DIR}"
 
 
 _notify() {
-    notify-send --urgency normal \
-                --expire-time "${NOTIFY_TIME_MS}" \
+    local -r level="${1}"
+    local -r notify_time_ms="${2}"
+    local -r msg="${3}"
+
+    if [ -n "${NONOTIFY}" ]; then
+        return 0
+    fi
+
+    notify-send --urgency "${level}" \
+                --expire-time "${notify_time_ms}" \
                 "${NOTIFY_LABEL}" \
-                "${1}"
+                "${msg}"
 }
 
 _notify_low() {
-    notify-send --urgency low \
-                --expire-time "${NOTIFY_TIME_MS}" \
-                "${NOTIFY_LABEL}" \
-                "${1}"
+    _notify low "${NOTIFY_TIME_LOW_MS}" "${1}"
 }
 
+_notify_normal() {
+    _notify normal "${NOTIFY_TIME_NORMAL_MS}" "${1}"
+}
+
+
 _notify_error() {
-    notify-send --urgency critical \
-                --expire-time "${NOTIFY_TIME_ERROR_MS}" \
-                "${NOTIFY_LABEL}" \
-                "Error: ${1}"
+    _notify critical "${NOTIFY_TIME_CRITICAL_MS}" "Error: ${1}"
 }
 
 _maim() {
     local maim_args=(--quality 10)
-    if ${NOOPENGL}; then
+    if [ -n "${NOOPENGL}" ]; then
         maim_args+=--noopengl
     fi
 
@@ -90,7 +99,7 @@ _process_screenshot() {
         return 1
     fi
 
-    _notify "${success_msg}"
+    _notify_normal "${success_msg}"
     return 0
 }
 
