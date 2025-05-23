@@ -232,6 +232,7 @@ bindsym Shift+Print exec --no-startup-id screenshot select save
 bindsym Shift+$mod+Print exec --no-startup-id screenshot window save
 bindsym Shift+Ctrl+Print exec --no-startup-id screenshot entire save
 
+bindsym $mod+s exec --no-startup-id i3_swap_workspaces
 
 # default workspaces for monitors in setup
 workspace $ws1 output primary

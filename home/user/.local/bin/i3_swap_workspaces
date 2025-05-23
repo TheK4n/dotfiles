@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+set -eu
+
+
+current_monitor=$(i3-msg -t get_workspaces | jq '.[] | select(.focused).output' | tr -d '"')
+other_monitor=$(i3-msg -t get_outputs | jq -r ".[] | select(.active and .name != \"${current_monitor}\").name" | head -n 1)
+
+if [ -z "${other_monitor}" ]; then
+    echo "No other active monitor found."
+    exit 1
+fi
+
+current_workspace=$(i3-msg -t get_workspaces | jq '.[] | select(.focused).name' | tr -d '"')
+other_workspace=$(i3-msg -t get_workspaces | jq -r ".[] | select(.visible and .output == \"${other_monitor}\").name" | head -n 1)
+
+if [ -n "${other_workspace}" ]; then
+    # Swap workspaces
+    i3-msg "workspace ${other_workspace}; move workspace to output ${current_monitor}"
+    i3-msg "workspace ${current_workspace}; move workspace to output ${other_monitor}"
+    i3-msg "workspace ${other_workspace}"
+else
+    # Just move current workspace if target is empty
+    i3-msg "move workspace to output ${other_monitor}"
+fi
