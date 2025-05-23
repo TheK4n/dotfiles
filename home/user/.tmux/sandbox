@@ -10,7 +10,7 @@ random() {
 readonly SESSION_PREFIX="sandbox"
 
 SESSION="${SESSION_PREFIX}$(random)"
-while tmux has-session -t "${SESSION}" 2>/dev/null
+while tmux has-session -t="${SESSION}" 2>/dev/null
 do
     SESSION="${SESSION_PREFIX}$(random)"
 done

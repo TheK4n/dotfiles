@@ -7,7 +7,7 @@ readonly SESSION=example-background-job
 readonly MAINW=1
 
 
-if tmux has-session -t "${SESSION}" 2>/dev/null; then
+if tmux has-session -t="${SESSION}" 2>/dev/null; then
     tmux kill-session -t "${SESSION}"
 fi
 

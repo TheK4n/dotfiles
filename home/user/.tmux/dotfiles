@@ -7,7 +7,7 @@ readonly MAINW=1
 
 readonly WORKING_PROJECT="${HOME}/dotfiles"
 
-if ! tmux has-session -t "${SESSION}"; then
+if ! tmux has-session -t="${SESSION}"; then
     tmux new-session -s "${SESSION}" -d -n "${MAINW}" -c "${WORKING_PROJECT}"
     tmux splitw -t "${SESSION}:${MAINW}" -d -b -h -l "${_tmux_other_pane_size}" -c '#{pane_current_path}'
     tmux send-keys -t "${SESSION}:${MAINW}.1" "git pull --rebase && git push" Enter
