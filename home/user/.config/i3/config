@@ -222,6 +222,10 @@ bar {
     output nonprimary
     tray_output primary
     status_command exec ~/.local/bin/i3status_wrapper
+
+    # disable scroll
+    bindsym button4 nop
+    bindsym button5 nop
 }
 
 bindsym Print exec --no-startup-id screenshot select copy
