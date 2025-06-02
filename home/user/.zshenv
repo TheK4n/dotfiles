@@ -23,6 +23,8 @@ if command -v "lesspipe.sh" &>/dev/null; then
     export LESSOPEN="| lesspipe.sh %s"
 fi
 
+export LC_TIME="ru_RU.UTF-8"
+
 
 export FZF_DEFAULT_OPTS="\
 --cycle
