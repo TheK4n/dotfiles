@@ -131,7 +131,7 @@ alias CAPS='xdotool key Caps_Lock'
 alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ██████████\n"; done'
 
 
-alias paste.thek4n.ru='curl --data-binary @- paste.thek4n.ru/ 2>/dev/null'
+alias paste.thek4n.ru='curl --data-binary @- https://paste.thek4n.ru/ 2>/dev/null'
 alias pastewww='paste.thek4n.ru'
 
 alias t='noglob t'
