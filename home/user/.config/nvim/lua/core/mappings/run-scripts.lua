@@ -2,12 +2,11 @@
 
 local function map_filetype(filetype, key, cmd)
     local function format_string()
-        local run_script_string = [[:e %% | :terminal %s <CR> :set nocursorline number norelativenumber <CR> G]]
+        local run_script_string = [[:terminal %s <CR> :set nocursorline number norelativenumber <CR> G]]
         local cmd_string = string.format(run_script_string, cmd)
 
-        local map = vim.keymap.set
         local opts = { noremap = true, silent = true }
-        map('n', key, cmd_string, opts)
+        vim.keymap.set('n', key, cmd_string, opts)
     end
 
 

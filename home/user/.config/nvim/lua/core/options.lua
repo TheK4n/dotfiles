@@ -144,19 +144,28 @@ vim.cmd.highlight({ "DiagnosticHint", "guifg=Grey" })
 opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 
 
+vim.o.viewdir = vim.fn.stdpath('cache')..'/view'
+vim.fn.mkdir(vim.o.viewdir, 'p')
 opt.viewoptions = "folds,cursor"
 
-vim.api.nvim_create_autocmd({"BufWinLeave", "BufLeave"}, {
+vim.api.nvim_create_autocmd("BufWinLeave", {
     pattern = {"?*"},
-    callback = function()
-        vim.cmd.mkview(1)
+    callback = function(args)
+        local bufname = vim.api.nvim_buf_get_name(args.buf)
+        if not bufname:match("^term://") then
+            vim.cmd.mkview(1)
+        end
+
     end
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = {"?*"},
-    callback = function()
-        vim.cmd("silent! loadview 1")
+    callback = function(args)
+        local bufname = vim.api.nvim_buf_get_name(args.buf)
+        if not bufname:match("^term://") then
+            vim.cmd([[silent! loadview 1]])
+        end
     end,
 })
 
