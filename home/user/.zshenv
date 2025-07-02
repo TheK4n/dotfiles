@@ -22,6 +22,7 @@ export LESS="-nMWiSRx4 --mouse -j2 -# 1 -+X -+F"
 if command -v "lesspipe.sh" &>/dev/null; then
     export LESSOPEN="| lesspipe.sh %s"
 fi
+export LESSCHARSET=utf-8
 
 export LC_TIME="ru_RU.UTF-8"
 
