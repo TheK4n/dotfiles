@@ -101,12 +101,6 @@ alias shutdown='sudo /sbin/shutdown now'
 
 alias meminfo='free -mlth'
 
-if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
-    alias wake='((speaker-test -t sine -f 400 &>/dev/null)& local pid=$! ;sleep 0.2s; kill -9 $pid) &>/dev/null'
-elif [[ "${OSTYPE}" == "linux-android"* ]]; then
-    alias wake='termux-notification --sound --vibrate 500,1000,200'
-fi
-
 # python
 alias pipir='pip install -r requirements.txt'
 alias pipar='pip list --not-required --format freeze | tee requirements.txt'
@@ -199,5 +193,12 @@ alias -g BG="&>/dev/null &"  # background
 alias -g RED='2> >(while read line; do printf "\033[0;31m${line}\033[0m\n"; done)'
 
 alias -g BEEP='&& beep -f 800 -l 250 -n -f 1000 -l 500 || beep -f 800 -l 250 -n -f 500 -l 500'
+
+if [[ "${OSTYPE}" == "linux-android"* ]]; then
+    alias -g BEEP='&& termux-notification --sound --vibrate 500,1000,200'
+fi
+
+alias -g WAKE='BEEP; notify-send --urgency normal Wake'
+
 
 alias -g PROXY='http_proxy="socks5://${SOCKS5_SERVER:-localhost}"'
