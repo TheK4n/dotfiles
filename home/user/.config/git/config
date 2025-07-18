@@ -5,10 +5,11 @@
     fileMode = true
     whitespace = fix,trailing-space,cr-at-eol
     autocrlf = input
+	quotepath = false
 
 [i18n]
     commitEncoding = utf-8
-    logOutputEncoding = utf-8
+	logOutputEncoding = utf-8
 
 [init]
     defaultBranch = main
