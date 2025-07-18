@@ -1,0 +1,28 @@
+#!/bin/sh
+
+
+_fzf_base() {
+    fzf -0 -m --bind load:last "${@}" | cut -d' ' -f2
+}
+
+fzf_get_selected_modified() {
+    _fzf_base -1 --border-label=' Modified ' --preview 'git diff --color=always {2}'
+}
+
+fzf_get_selected_untracked() {
+    _fzf_base --border-label=' Untracked ' --preview 'highlight -O xterm256 {2}'
+}
+
+gitadd() {
+     xargs git add
+}
+
+git_ls_files() {
+    git ls-files --exclude-standard -t "${@}"
+}
+
+modified_files="$(git_ls_files --modified)"
+printf "%s" "${modified_files}" | fzf_get_selected_modified | gitadd
+
+untracked_files="$(git_ls_files --others)"
+printf "%s" "${untracked_files}" | fzf_get_selected_untracked | gitadd

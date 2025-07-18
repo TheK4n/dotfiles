@@ -8,7 +8,7 @@ zsh:.config/zsh .zshenv .zshenv.d .inputrc %colors
 alacritty:.config/alacritty
 nvim:.config/nvim .editorconfig .editrc .local/bin/vim_askpass_helper
 ssh:
-git:.config/git
+git:.config/git .local/bin/ga
 ranger:.config/ranger
 gpg:
 i3:.xinitrc .xprofile .Xresources .config/i3 .config/i3status .local/bin/i3status_wrapper .config/rofi .config/picom .local/bin/slm .local/bin/slm_rofi.sh .local/bin/power_rofi.sh .local/bin/i3_switch_workspace.sh .config/mimeapps.list .local/bin/screenshot .local/bin/i3_swap_workspaces

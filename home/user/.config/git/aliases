@@ -2,7 +2,7 @@
 
 
 [alias]
-    a = "!git ls-files --exclude-standard --modified -t | fzf -1 -0 -m --bind load:last --preview 'git diff --color=always {2}' | cut -d' ' -f2 | xargs git add"
+    a = "!ga"
     u = "!git diff --name-only --cached | fzf -1 -0 -m --bind load:last --preview 'git diff --staged --color=always {1}' | xargs -r git restore --staged"
     msg = log -1 --pretty=%B
     d = diff
