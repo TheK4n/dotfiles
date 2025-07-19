@@ -171,6 +171,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+u workspace prev
 bindsym $mod+Shift+u workspace next
 
+workspace_auto_back_and_forth yes
+bindsym $mod+Tab workspace back_and_forth
+
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
