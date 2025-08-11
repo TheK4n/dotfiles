@@ -65,7 +65,7 @@ cpu_temperature 0 {
 }
 
 tztime local {
-    format = " %d.%m.%y %a  %H:%M"
+    format = "  %d.%m.%y %a   %H:%M"
 }
 
 volume master {
