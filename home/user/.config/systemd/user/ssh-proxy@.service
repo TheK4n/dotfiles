@@ -8,7 +8,10 @@ After=default.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/ssh -o ControlMaster=no -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -vCTN -D 127.0.0.1:1080 %i
-Restart=on-failure
+Restart=always
+RestartSec=3
+StartLimitInterval=0
+StartLimitBurst=0
 
 [Install]
 WantedBy=default.target
