@@ -2,6 +2,71 @@
 
 set -ue
 
-len="${1:-20}"
+LC_ALL=C
+DEFAULT_PASSWORD_LENGTH=20
 
-LC_ALL=C tr -dc 'A-Za-z0-9@#%^&*()_+=-{}[]:;<>,.?/' < /dev/urandom | head -c "${len}"| xargs echo
+simple() {
+    PASSWORD_LENGTH="${1:-$DEFAULT_PASSWORD_LENGTH}"
+    tr -dc 'A-Za-z0-9@#%^&*()_+=-{}[]:;<>,.?/' < /dev/urandom | head -c "${PASSWORD_LENGTH}" | xargs echo
+}
+
+_shuf_line() {
+    fold -w1 | shuf | tr -d '\n'
+}
+
+_gen_random_by_charset() {
+    length="${1}"
+    charset="${2}"
+
+    tr -dc "${charset}" < /dev/random | head -c "${length}"
+}
+
+_gen_random_lower() {
+    length="${1}"
+    _gen_random_by_charset "${length}" '[:lower:]'
+}
+
+_gen_random_upper() {
+    length="${1}"
+    _gen_random_by_charset "${length}" '[:upper:]'
+}
+
+_gen_random_digits() {
+    length="${1}"
+    _gen_random_by_charset "${length}" '[:digit:]'
+}
+
+_gen_random_special() {
+    length="${1}"
+    _gen_random_by_charset "${length}" '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~'\'''
+}
+
+protected() {
+    readonly symbols_count_of_each_type=5
+
+    password=""
+
+    password="${password}$(_gen_random_lower "${symbols_count_of_each_type}")"
+    password="${password}$(_gen_random_upper "${symbols_count_of_each_type}")"
+    password="${password}$(_gen_random_digits "${symbols_count_of_each_type}")"
+    password="${password}$(_gen_random_special "${symbols_count_of_each_type}")"
+
+    echo "${password}" | _shuf_line
+}
+
+if [ -z "${1+x}" ]; then
+    simple "${DEFAULT_PASSWORD_LENGTH}"
+    exit 0
+fi
+
+main() {
+    if [ "${1}" = "-p" ]; then
+        protected
+        exit 0
+    fi
+
+    simple "${1}"
+    exit 0
+}
+
+main "${@}"
