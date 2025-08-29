@@ -43,6 +43,7 @@
     dump = cat-file -p
     unstage = "reset HEAD --"
     count = "rev-list --count --all"
+    tags = "for-each-ref --sort=-creatordate --format '%(refname:strip=2)' refs/tags"
 
     # edit conflicted file on merge
     edit-unmerged = "!$EDITOR $(git ls-files --unmerged | cut -f2 | sort -u)"
