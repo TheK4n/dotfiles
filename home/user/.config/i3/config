@@ -208,7 +208,7 @@ mode $exitmode {
     bindsym s exec shutdown -h now
     bindsym u exec systemctl suspend; mode "default"
     bindsym l exec $i3lock_cmd; mode "default"
-    bindsym b exec magick canvas:none PNG:- | feh -YF -; mode "default"
+    bindsym b exec magick canvas:none PNG:- | feh -YFx -; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -254,5 +254,6 @@ workspace hide2 output nonprimary
 bindsym $mod+q exec --no-startup-id i3-msg workspace hide1; workspace hide2
 
 no_focus [title="^Peek preview$"]
+no_focus [class="feh"]
 
 include ~/.config/i3/config.d/*.conf

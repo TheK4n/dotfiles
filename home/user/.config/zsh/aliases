@@ -156,7 +156,7 @@ alias copy='tee /dev/stderr | _copy'
 alias ssh='TERM=xterm-256color ssh'
 alias sshn='ssh -S none'
 
-alias black='magick canvas:none PNG:- | feh -YF -'
+alias black='magick canvas:none PNG:- | feh -YFx -'
 
 # :)
 alias PINK='beep -f 233 -l 440 -n -f 349 -l 440 -n -f 196 -l 440 -n -f 330 -l 650'
