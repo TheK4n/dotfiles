@@ -97,16 +97,16 @@ cleanup-directory() {
 
     if [ -n "${DRYRUN}" ]; then
         echo "Deleting files not accessed for a ${age} days:"
-        find "${directory}" -atime "${age}"
+        find "${directory}" -mindepth 1 -atime "${age}" -not -type d -not -name cleanup.log
 
         echo "Deleting empty directories:"
-        find "${directory}" -type d -empty -print
+        find "${directory}" -mindepth 1 -type d -empty
     else
         echo "Deleting files not accessed for a ${age} days:"
-        find "${directory}" -atime "${age}" | xargs -r rm -fv
+        find "${directory}" -mindepth 1 -atime "${age}" -not -type d -not -name cleanup.log -print -delete
 
         echo "Deleting empty directories:"
-        find "${directory}" -type d -empty -print | xargs -r rmdir
+        find "${directory}" -mindepth 1 -type d -empty -print -delete
     fi
 }
 
