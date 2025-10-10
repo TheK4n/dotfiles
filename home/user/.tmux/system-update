@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -eux
+
+readonly SESSION='system-update'
+readonly MAINW=1
+
+readonly WORKING_PROJECT="${HOME}"
+
+if ! tmux has-session -t="${SESSION}"; then
+    tmux new-session -s "${SESSION}" -d -n "${MAINW}" -c "${WORKING_PROJECT}"
+    tmux splitw -t "${SESSION}:${MAINW}" -d -b -h -l "${_tmux_other_pane_size}" -c '#{pane_current_path}'
+    tmux send-keys -t "${SESSION}:${MAINW}.1" "sudo pacman -Syu --noconfirm"
+    tmux send-keys -t "${SESSION}:${MAINW}.2" '$EDITOR' Enter
+    sleep 0.5
+    tmux send-keys -t "${SESSION}:${MAINW}.2" ':Lazy' Enter
+fi
+
+tmux switch-client -t "${SESSION}"
