@@ -159,6 +159,10 @@ alias sshn='ssh -S none'
 alias black='magick canvas:none PNG:- | feh -YFx -'
 alias ex='extract'
 
+alias notes='note'
+alias ns='note sync'
+alias nfe='note fe'
+
 # :)
 alias PINK='beep -f 233 -l 440 -n -f 349 -l 440 -n -f 196 -l 440 -n -f 330 -l 650'
 
