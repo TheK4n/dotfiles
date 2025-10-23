@@ -1,49 +1,56 @@
-# Общие настройки
-command=$SCRIPT_DIR/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# Цвета (в формате #RRGGBB)
 color=#FFFFFF
 
-# Интервал обновления (в секундах)
 interval=5
 
-# Блоки (модули)
+[wireless]
+command=i3blocks_helper wireless
+interval=10
 
-[time]
-command=date '+%H:%M:%S %d.%m.%Y'
-label=
-interval=5
-color=#f1fa8c
+[ethernet]
+command=i3blocks_helper ethernet
+interval=10
+
+[diskroot]
+command=i3blocks_helper disk_root
+interval=30
+
+[diskhome]
+command=i3blocks_helper disk_home
+interval=30
 
 [memory]
-command=free -h | awk '/^Mem/ {print $3 "/" $2}' | sed 's/i//g'
-label=
+command=i3blocks_helper memory
 interval=5
-color=#50fa7b
 
 [cpu_usage]
-command=top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
-label=
+command=i3blocks_helper cpu_usage
 interval=5
-color=#ff79c6
 
-[disk]
-command=df -h / | awk '/\// {print $4}'
-label=
-interval=30
-color=#8be9fd
+[cpu_temp]
+command=i3blocks_helper cpu_temp
+interval=5
 
-[network]
-command=echo "$(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2) $(ip -o -4 addr show | awk '{print $4}' | cut -d/ -f1 | head -1)"
-label=
-interval=10
-color=#bd93f9
+[bluetooth]
+command=i3blocks_helper bluetooth_battery
+interval=5
+
+[battery]
+command=i3blocks_helper battery
+interval=5
 
 [volume]
-command=amixer get Master | awk -F'[][]' '/%/ {print $2}' | head -n 1
-label=
+command=i3blocks_helper volume
 interval=1
-signal=10  # Для обновления по сигналу (например, после изменения громкости)
+signal=10
 
+[pomodoro]
+command=pomodoro formatted
+interval=1
+signal=10
+
+[time]
+command=env LC_ALL=C date '+ %d.%m.%y %a   %H:%M'
+interval=5

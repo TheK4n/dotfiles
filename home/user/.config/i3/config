@@ -12,6 +12,7 @@ set $i3lock_cmd "i3lock -enf -c 1e1e1e"
 exec --no-startup-id xset s off
 exec --no-startup-id xset +dpms dpms 600 600 600
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
+exec --no-startup-id pomodoro daemon
 
 
 # Notifications
@@ -35,10 +36,10 @@ set $font_size 11
 font xft:FiraCode $font_size
 
 # use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+set $refresh_i3blocks killall -10 i3blocks
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3blocks
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3blocks
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3blocks
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
@@ -52,8 +53,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 bindsym $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0                        ## Hold to talk
 bindsym --release $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1              ## Release to mute
 
-bindsym $mod+Shift+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym $mod+Shift+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3blocks
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3blocks
 
 bindsym XF86PickupPhone exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0               ## Hold to talk
 bindsym --release XF86PickupPhone exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1     ## Release to mute
