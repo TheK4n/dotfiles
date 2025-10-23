@@ -1,0 +1,87 @@
+#!/bin/sh
+
+set -ue
+
+
+readonly EXIT_SUCCESS=0
+readonly EXIT_FAILURE=1
+
+
+cmd_wireless() {
+    return 0 # todo 
+}
+
+cmd_ethernet() {
+    return 0 # todo
+    echo "$(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2) $(ip -o -4 addr show | awk '{print $4}' | cut -d/ -f1 | head -1)"
+}
+
+cmd_battery() {
+    return 0 # todo
+}
+
+cmd_disk_root() {
+    df -h / | awk '/\// {print "/ "$2"/"$3}'
+}
+
+cmd_disk_home() {
+    res="$(df -h /home)"
+    if [ "$(echo "${res}" | awk '/\// {print $6}')" != "/home" ]; then
+        return 1
+    fi
+    df -h /home | awk '/\// {print " "$2"/"$3}'
+}
+
+cmd_memory() {
+    free -h | awk '/^Mem/ {print " "$3"/"$2}' | sed 's/i//g'
+}
+
+cmd_cpu_usage() {
+    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print " "100 - $1"%"}'
+}
+
+cmd_cpu_temp() {
+    temp_mC="$(cat /sys/class/thermal/thermal_zone0/temp)"
+    temp_C="$((temp_mC / 1000))"
+
+    if [ "${temp_C}" -gt 80 ]; then
+        echo " ${temp_C}°C"
+        exit 33 # bad
+    else
+        echo " ${temp_C}°C"
+    fi
+}
+
+cmd_time() {
+    LC_ALL=C date '+ %d.%m.%y %a   %H:%M'
+}
+
+cmd_volume() {
+    amixer get Master | awk -F'[][]' '/%/ {print " "$2}' | head -n 1
+}
+
+cmd_pomodoro() {
+    pomodoro formatted
+}
+
+cmd_bluetooth_battery() {
+    return 0
+}
+
+case "${1}" in
+    wireless) shift;           cmd_wireless          "$@" ;;
+    ethernet) shift;           cmd_ethernet          "$@" ;;
+    battery) shift;            cmd_battery           "$@" ;;
+    disk_root) shift;          cmd_disk_root         "$@" ;;
+    disk_home) shift;          cmd_disk_home         "$@" ;;
+    memory) shift;             cmd_memory            "$@" ;;
+    cpu_usage) shift;          cmd_cpu_usage         "$@" ;;
+    cpu_temp) shift;           cmd_cpu_temp          "$@" ;;
+    time) shift;               cmd_time              "$@" ;;
+    volume) shift;             cmd_volume            "$@" ;;
+    pomodoro) shift;           cmd_pomodoro          "$@" ;;
+    bluetooth_battery) shift;  cmd_bluetooth_battery "$@" ;;
+
+    *) exit "${EXIT_FAILURE}" ;;
+esac
+exit "${EXIT_SUCCESS}"

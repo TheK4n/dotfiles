@@ -1,0 +1,56 @@
+separator_block_width=15
+markup=none
+
+color=#FFFFFF
+
+interval=5
+
+[wireless]
+command=i3blocks_helper wireless
+interval=10
+
+[ethernet]
+command=i3blocks_helper ethernet
+interval=10
+
+[diskroot]
+command=i3blocks_helper disk_root
+interval=30
+
+[diskhome]
+command=i3blocks_helper disk_home
+interval=30
+
+[memory]
+command=i3blocks_helper memory
+interval=5
+
+[cpu_usage]
+command=i3blocks_helper cpu_usage
+interval=5
+
+[cpu_temp]
+command=i3blocks_helper cpu_temp
+interval=5
+
+[bluetooth]
+command=i3blocks_helper bluetooth_battery
+interval=5
+
+[battery]
+command=i3blocks_helper battery
+interval=5
+
+[volume]
+command=i3blocks_helper volume
+interval=1
+signal=10
+
+[pomodoro]
+command=pomodoro formatted
+interval=1
+signal=10
+
+[time]
+command=env LC_ALL=C date '+ %d.%m.%y %a   %H:%M'
+interval=5
