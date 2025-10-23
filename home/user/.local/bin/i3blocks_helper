@@ -21,7 +21,7 @@ cmd_battery() {
 }
 
 cmd_disk_root() {
-    df -h / | awk '/\// {print "/ "$2"/"$3}'
+    df -h / | awk '/\// {print "/ "$3"/"$2}'
 }
 
 cmd_disk_home() {
@@ -29,7 +29,7 @@ cmd_disk_home() {
     if [ "$(echo "${res}" | awk '/\// {print $6}')" != "/home" ]; then
         return 1
     fi
-    df -h /home | awk '/\// {print " "$2"/"$3}'
+    df -h /home | awk '/\// {print " "$3"/"$2}'
 }
 
 cmd_memory() {
@@ -61,7 +61,7 @@ cmd_volume() {
 }
 
 cmd_pomodoro() {
-    pomodoro formatted
+    pomodoro get
 }
 
 cmd_bluetooth_battery() {

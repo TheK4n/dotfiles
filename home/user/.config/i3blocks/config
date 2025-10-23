@@ -47,10 +47,10 @@ interval=1
 signal=10
 
 [pomodoro]
-command=pomodoro formatted
+command=i3blocks_helper pomodoro
 interval=1
 signal=10
 
 [time]
-command=env LC_ALL=C date '+ %d.%m.%y %a   %H:%M'
+command=i3blocks_helper time
 interval=5
