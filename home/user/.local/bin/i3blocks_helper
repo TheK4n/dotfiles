@@ -8,7 +8,7 @@ readonly EXIT_FAILURE=1
 
 
 cmd_wireless() {
-    return 0 # todo 
+    return 0  # todo 
 }
 
 cmd_ethernet() {
@@ -17,7 +17,7 @@ cmd_ethernet() {
 }
 
 cmd_battery() {
-    return 0 # todo
+    return 0  # todo
 }
 
 cmd_disk_root() {
@@ -26,7 +26,7 @@ cmd_disk_root() {
 
 cmd_disk_home() {
     res="$(df -h /home)"
-    if [ "$(echo "${res}" | awk '/\// {print $6}')" != "/home" ]; then
+    if [ "$(echo "${res}" | awk '/\// {print $6}')" = "/" ]; then
         return 1
     fi
     df -h /home | awk '/\// {print " "$3"/"$2}'
@@ -65,7 +65,15 @@ cmd_pomodoro() {
 }
 
 cmd_bluetooth_battery() {
-    return 0
+    for uuid in $(timeout 1 bluetoothctl devices | cut -f2 -d' ' 2>/dev/null)
+    do
+        device_info="$(timeout 1 bluetoothctl info "${uuid}")"
+
+        if echo "${device_info}" | grep -q 'Connected: yes\|Battery Percentage'; then
+            echo "${device_info}" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }'
+            break
+        fi
+    done
 }
 
 case "${1}" in
