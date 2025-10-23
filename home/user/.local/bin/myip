@@ -20,6 +20,6 @@ fi
 
 {
     execute_and_format_result curl ipinfo.io/ip
-    execute_and_format_result curl ip.thek4n.ru/
+    execute_and_format_result curl https://ip.thek4n.ru/
     execute_and_format_result dig +short myip.opendns.com @resolver1.opendns.com
 } | column -t -s "${TAB}"
