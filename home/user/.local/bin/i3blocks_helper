@@ -29,15 +29,15 @@ cmd_disk_home() {
     if [ "$(echo "${res}" | awk '/\// {print $6}')" = "/" ]; then
         return 1
     fi
-    df -h /home | awk '/\// {print " "$3"/"$2}'
+    df -h /home | awk '/\// {print "  "$3"/"$2}'
 }
 
 cmd_memory() {
-    free -h | awk '/^Mem/ {print " "$3"/"$2}' | sed 's/i//g'
+    free -h | awk '/^Mem/ {print "🎟 "$3"/"$2}' | sed 's/i//g'
 }
 
 cmd_cpu_usage() {
-    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print " "100 - $1"%"}'
+    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print "  "100 - $1"%"}'
 }
 
 cmd_cpu_temp() {
@@ -53,11 +53,11 @@ cmd_cpu_temp() {
 }
 
 cmd_time() {
-    LC_ALL=C date '+ %d.%m.%y %a   %H:%M'
+    LC_ALL=C date '+  %d.%m.%y %a     %H:%M'
 }
 
 cmd_volume() {
-    amixer get Master | awk -F'[][]' '/%/ {print " "$2}' | head -n 1
+    amixer get Master | awk -F'[][]' '/%/ {print "   "$2}' | head -n 1
 }
 
 cmd_pomodoro() {
