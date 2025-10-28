@@ -173,10 +173,27 @@ sha() {
 }
 
 weather() {
-    local city="${1}"
+    local -r city="${1}"
     curl "wttr.in/${city}" 2>/dev/null | head -n -1
 }
 
 gobuild() {
     go build $@ -o ./bin/ ./...
+}
+
+top-commands() {
+    local -r num_args="${1:-1}"
+
+    if ! [[ "${num_args}" =~ ^[1-9][0-9]*$ ]]; then
+        echo "error: usage: top-commands [N]" >&2
+        echo "error: N must be a positive non-zero integer." >&2
+        return 1
+    fi
+
+    fc -l -n 1 | awk 'NF' | awk -v n="$num_args" '{
+        end = (NF < n) ? NF : n
+        for (i = 1; i <= end; i++) {
+            printf "%s%s", $i, (i == end ? "\n" : OFS)
+        }
+    }' | sort | uniq -c | sort -nr | sed 's/^[[:space:]]*//'
 }
