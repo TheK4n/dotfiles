@@ -155,8 +155,12 @@ alias black='magick canvas:none PNG:- | feh -YFx -'
 alias ex='extract'
 
 alias notes='note'
+alias n='note'
 alias ns='note sync'
+alias ne='note edit'
 alias nfe='note fe'
+alias nfg='note fg'
+alias ng='note git'
 
 # :)
 alias PINK='beep -f 233 -l 440 -n -f 349 -l 440 -n -f 196 -l 440 -n -f 330 -l 650'
