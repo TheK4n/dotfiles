@@ -70,6 +70,8 @@ export XDG_VIDEOS_DIR="${HOME}/Videos"
 
 export SCREENSHOTS_DIR="${XDG_PICTURES_DIR}/screenshots"
 
+export OSTYPE
+
 
 _sod() {
     local -r dir_to_source="${1}"
