@@ -7,7 +7,7 @@ readonly tempdir
 
 (
     cd "${tempdir}"
-    git clone https://gitea.thek4n.ru/thek4n/note.git .
+    git clone https://gitea.thek4n.ru/thek4n/psw.git .
     sudo PREFIX=/usr make install
 )
 
