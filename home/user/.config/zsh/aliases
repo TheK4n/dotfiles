@@ -89,8 +89,7 @@ alias wget='wget -c'
 alias ip='ip -c'
 alias fastping='ping -c 100 -i 0.1'
 
-# starts web server
-alias www='python3 -m http.server 8080'
+alias serveit='python3 -m http.server 8080'
 
 # hardware
 alias reboot='sudo /sbin/reboot'
@@ -133,17 +132,17 @@ alias pastewww='paste.thek4n.ru'
 if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     if [ -n "${DISPLAY}" ]; then
         alias _copy='sed -z "$ s/\n$//" | xclip -selection clipboard -i'
-        alias paste='xclip -selection clipboard -o'
+        alias pasta='xclip -selection clipboard -o'
     else
         alias _copy='read -rd "EOF" TTYCLIPBOARD'
-        alias paste='echo "$TTYCLIPBOARD"'
+        alias pasta='echo "$TTYCLIPBOARD"'
     fi
 elif [[ "${OSTYPE}" == "linux-android"* ]]; then
     alias _copy='termux-clipboard-set'
-    alias paste='termux-clipboard-get'
+    alias pasta='termux-clipboard-get'
 elif [[ "${OSTYPE}" == "darwin" ]]; then
     alias _copy='pbcopy'
-    alias paste='pbpaste'
+    alias pasta='pbpaste'
 fi
 
 alias copy='tee /dev/stderr | _copy'

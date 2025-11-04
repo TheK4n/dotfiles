@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+trap 'exit 0' INT
+
+last_value=''
+
+while true
+do
+  value="$(xclip -selection clipboard -o)"
+
+  if [ "$last_value" != "$value" ]; then
+    echo "$value"
+    last_value="$value"
+  fi
+
+  sleep 0.1
+done

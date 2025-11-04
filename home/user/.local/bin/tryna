@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -u
+
+"${@}"
+#shellcheck disable=SC2181
+while [ ! "${?}" -eq 0 ]; do
+  sleep 0.5
+  "${@}"
+done
