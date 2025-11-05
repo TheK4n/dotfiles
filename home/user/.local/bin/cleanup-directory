@@ -1,0 +1,26 @@
+#!/bin/sh
+set -eu
+
+
+directory="$(realpath "${1}")"
+readonly directory
+readonly age="+21" # Notation: +n  => "At least n days"
+
+if [ ! -d "${directory}" ]; then
+    echo "Directory '${directory}' not found" >&2
+    return 1
+fi
+
+if [ -n "${DRYRUN}" ]; then
+    echo "Deleting files not accessed for a ${age} days:"
+    find "${directory}" -mindepth 1 -atime "${age}" -not -type d -not -name cleanup.log
+
+    echo "Deleting empty directories:"
+    find "${directory}" -mindepth 1 -type d -empty
+else
+    echo "Deleting files not accessed for a ${age} days:"
+    find "${directory}" -mindepth 1 -atime "${age}" -not -type d -not -name cleanup.log -print -delete
+
+    echo "Deleting empty directories:"
+    find "${directory}" -mindepth 1 -type d -empty -print -delete
+fi

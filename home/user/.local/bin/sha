@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+
+if [ -n "${2+x}" ]; then
+    shasum -a 256 "${@}"
+elif [ -n "${1+x}" ]; then
+    shasum -a 256 "${@}" | head -c 64
+else
+    shasum -a 256 | head -c 64
+fi

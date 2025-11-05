@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+if [ -z "${1}" ]; then
+    dir="$(mktemp -ut "${USER:-user}.XXXX")"
+else
+    dir="${1}"
+fi
+
+mkdir -p "${dir}" && cd "${dir}"

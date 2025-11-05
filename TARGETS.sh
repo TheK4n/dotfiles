@@ -25,5 +25,5 @@ gdb:.config/gdb
 sandbox:
 utils:.local/bin/myip .local/bin/genpass .local/bin/gensalt .local/bin/django-create-project .local/bin/mirror-site .local/bin/split-file .local/bin/extract .local/bin/destroy
 chromium:.local/bin/pchromium .local/share/applications/pchromium.desktop
-scripts:.local/bin/httpstatus .local/bin/bb .local/bin/emoji .local/bin/mksh .local/bin/nato .local/bin/pastas .local/bin/timer .local/bin/tryna .local/bin/trynafail
+scripts:.local/bin/httpstatus .local/bin/bb .local/bin/emoji .local/bin/mksh .local/bin/nato .local/bin/pastas .local/bin/timer .local/bin/tryna .local/bin/trynafail .local/bin/bak .local/bin/cleanup-directory .local/bin/cleanup-directory-log .local/bin/cleanup-downloads .local/bin/gobuild .local/bin/json .local/bin/mcd .local/bin/open .local/bin/py .local/bin/sha .local/bin/showtips .local/bin/weather
 all:%less %t %note %tmux %zsh %nvim %git"

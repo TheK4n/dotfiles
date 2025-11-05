@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+
+if [ -z "${*}" ] && [ -x "$(command -v ipython 2>/dev/null)" ]; then
+    ipython -i -c "q = exit"
+else
+    python3 "${@}"
+fi

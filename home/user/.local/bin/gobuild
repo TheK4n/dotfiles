@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+
+#shellcheck disable=SC2068
+go build $@ -o ./bin/ ./...

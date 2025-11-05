@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+
+if [ ! -e "${1}" ]; then
+    printf 'File %s not found' "${1}" >&2
+    exit 1
+fi
+setsid xdg-open "${1}" 1>/dev/null 2>&1

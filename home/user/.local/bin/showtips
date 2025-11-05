@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+
+readonly tips_dir="${HOME}/.tips"
+
+if [ ! -d "${tips_dir}" ]; then
+    mkdir "${tips_dir}" 2>/dev/null
+    git init "${tips_dir}"
+fi
+
+find "${tips_dir}" -mindepth 1 -maxdepth 1 -type f -exec cat {} \;

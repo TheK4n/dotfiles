@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+if [ -t 0 ]; then
+   echo "${@}" | python -m json.tool
+else
+   python -m json.tool
+fi

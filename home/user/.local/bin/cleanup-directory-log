@@ -1,0 +1,22 @@
+#!/bin/sh
+set -eu
+
+
+directory="$(realpath "${1}")"
+readonly directory
+
+if [ ! -d "${directory}" ]; then
+    echo "Directory '${directory}' not found" >&2
+    return 1
+fi
+
+readonly log_file="${directory}/cleanup.log"
+
+if [ -n "${DRYRUN}" ]; then
+    log_file="/dev/null"
+fi
+
+touch "${log_file}"
+
+echo "$(date -Iseconds) : Start cleanup" >> "${log_file}"
+cleanup-directory "${directory}"  | tee -a "${log_file}"
