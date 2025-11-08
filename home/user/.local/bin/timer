@@ -2,5 +2,5 @@
 
 set -eu
 
-sleep "${1}"
-notify-send -- 'Timer complete' "${1}"
+sleep "${@}"
+notify-send -- 'Timer complete' "${@}"
