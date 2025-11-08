@@ -51,6 +51,10 @@ command=i3blocks_helper pomodoro
 interval=1
 signal=10
 
+[language]
+command=i3blocks_helper language
+interval=1
+
 [time]
 command=i3blocks_helper time
 interval=30

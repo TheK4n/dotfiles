@@ -76,6 +76,22 @@ cmd_bluetooth_battery() {
     done
 }
 
+cmd_language() {
+    layout="$(xkblayout-state print %n)"
+
+    case "${layout}" in
+        English)
+            echo "🇬🇧 En"
+            ;;
+        Russian)
+            echo "🇷🇺 Ru"
+            ;;
+        *)
+            echo "🌐 ${layout}"
+            ;;
+    esac
+}
+
 case "${1}" in
     wireless) shift;           cmd_wireless          "$@" ;;
     ethernet) shift;           cmd_ethernet          "$@" ;;
@@ -89,6 +105,7 @@ case "${1}" in
     volume) shift;             cmd_volume            "$@" ;;
     pomodoro) shift;           cmd_pomodoro          "$@" ;;
     bluetooth_battery) shift;  cmd_bluetooth_battery "$@" ;;
+    language) shift;           cmd_language          "$@" ;;
 
     *) exit "${EXIT_FAILURE}" ;;
 esac
