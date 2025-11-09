@@ -25,7 +25,7 @@ exec --no-startup-id unclutter -idle 0.3 -root
 
 
 exec_always --no-startup-id xset r rate 250 100
-exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option ctrl:nocaps
+exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle -option ctrl:nocaps
 
 
 # Wallpapers
@@ -40,7 +40,7 @@ font xft:FiraCode $font_size
 set $refresh_i3blocks exec pkill -SIGRTMIN+10 i3blocks
 set $refresh_i3blocks_language exec pkill -SIGRTMIN+11 i3blocks
 
-bindsym $mod+space exec --no-startup-id switch-layout && $refresh_i3blocks_language
+# bindsym $mod+space exec --no-startup-id switch-layout && $refresh_i3blocks_language
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3blocks
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3blocks
