@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "here" > /tmp/test
+
+current=$(setxkbmap -query | grep layout | awk '{print $2}')
+
+if [ "${current}" = "us" ]; then
+    setxkbmap -model pc105 -option ctrl:nocaps ru
+else
+    setxkbmap -model pc105 -option ctrl:nocaps us
+fi
