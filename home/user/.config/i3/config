@@ -37,6 +37,7 @@ font xft:FiraCode $font_size
 
 # use pactl to adjust volume in PulseAudio.
 set $refresh_i3blocks exec pkill -SIGRTMIN+10 i3blocks
+set $refresh_i3blocks_language exec pkill -SIGRTMIN+11 i3blocks
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3blocks
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3blocks
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3blocks
