@@ -1,65 +1,66 @@
 #!/bin/sh
 set -eu
 
-statuses="100 Continue
-101 Switching Protocols
-102 Processing
-200 OK
-201 Created
-202 Accepted
-203 Non-Authoritative Information
-204 No Content
-205 Reset Content
-206 Partial Content
-207 Multi-Status
-208 Already Reported
-300 Multiple Choices
-301 Moved Permanently
-302 Found
-303 See Other
-304 Not Modified
-305 Use Proxy
-307 Temporary Redirect
-400 Bad Request
-401 Unauthorized
-402 Payment Required
-403 Forbidden
-404 Not Found
-405 Method Not Allowed
-406 Not Acceptable
-407 Proxy Authentication Required
-408 Request Timeout
-409 Conflict
-410 Gone
-411 Length Required
-412 Precondition Failed
-413 Request Entity Too Large
-414 Request-URI Too Large
-415 Unsupported Media Type
-416 Request Range Not Satisfiable
-417 Expectation Failed
-418 I'm a teapot
-420 Blaze it
-422 Unprocessable Entity
-423 Locked
-424 Failed Dependency
-425 No code
-426 Upgrade Required
-428 Precondition Required
-429 Too Many Requests
-431 Request Header Fields Too Large
-449 Retry with
-500 Internal Server Error
-501 Not Implemented
-502 Bad Gateway
-503 Service Unavailable
-504 Gateway Timeout
-505 HTTP Version Not Supported
+statuses="100 Continue - Разрешение клиенту на продолжение отправки.
+101 Switching Protocols - Переключение протоколов, исходя из указаний клиента.
+102 Processing - Зпрос помещен в обработку.
+200 OK - Успех и возврат запрошенных данных.
+201 Created - Запрос успешен и создан новый ресурс. URI нового ресурса в Location.
+202 Accepted - Запрос помещен в обработку.
+203 Non-Authoritative Information - Возвращаемая информация из ненадежных источников.
+204 No Content - Возврат без ответа в теле.
+205 Reset Content - Успех и сброс пользовательских данных.
+206 Partial Content - Возврат части сообщения.
+207 Multi-Status - Успех и возврат результатов более чем одной независимой операции в теле сообщения.
+208 Already Reported - Уже были отправлены результаты с ответом 207.
+300 Multiple Choices - В теле возвращается перечисление альтернативных результатов дял перенаправления.
+301 Moved Permanently - Окончательный перенос ресурса на другой URI.
+302 Found - Временный перенос ресурса на другой URI.
+303 See Other - Перенаправление только методом GET.
+304 Not Modified - Ресурс не был изменен с конкретного момента.
+305 Use Proxy - Запрос должен производиться через прокси-сервер.
+307 Temporary Redirect - Временный перенос ресурса на другой URI без изменения метода и тела запроса.
+308 Permanent Redirect - Постоянный перенос ресурса на другой URI без изменения метода и тела запроса.
+400 Bad Request - Ошибка синтаксиса в запросе.
+401 Unauthorized - Требуется аутентификация.
+402 Payment Required - Требуется оплата.
+403 Forbidden - Недостаточно прав.
+404 Not Found - Не найден.
+405 Method Not Allowed - Недопустимый метод для запрашиваемого URI.
+406 Not Acceptable - URI не поддерживает формат запроса.
+407 Proxy Authentication Required - Требуется авторизация на прокси сервере.
+408 Request Timeout - Истекло время ожидания окончания передачи данных клиента серверу.
+409 Conflict - Одновременно запросы на изменения ресурса от нескольких клиентов.
+410 Gone - Запрашиваемый ресурс существовал ранее, но был удален.
+411 Length Required - Треубется заголовок Content-Length.
+412 Precondition Failed - Условия If-Match не выполнены.
+413 Request Entity Too Large - Размер тела запроса слишком большой.
+414 Request-URI Too Large - URI запроса слишком длинный.
+415 Unsupported Media Type - Ресурс не может обработать указанный в запросе тип данных.
+416 Request Range Not Satisfiable - Переданный диапазон в заголовке Range некорректен.
+417 Expectation Failed - Значение Expect некорректное.
+418 I'm a teapot - Шутка).
+421 Misdirected Request - Произошло перенаправление на сервер, который не в состоянии вернуть ответ.
+422 Unprocessable Entity - Логическая ошибка содержимого запроса.
+423 Locked - Данный ресурс заблокирован.
+424 Failed Dependency - Зависимость ресурса заблокирована.
+425 Too Early -  Запрос слишком рискованно обрабатывать повторно, например при использовании механизма Early Data (0-RTT) в TLS.
+426 Upgrade Required - Сервер запрашивает обновление соеднинения до SSL, а клиент не поддерживает.
+428 Precondition Required - Клиент обязан передать заголовок If-Match.
+429 Too Many Requests - Клиент запрашивает ресурс слишком часто.
+431 Request Header Fields Too Large - Длина заголовков слишком большая.
+449 Retry with - Клиентом отправлено недостаточно информации.
+500 Internal Server Error - Внутренняя ошибка сервера.
+501 Not Implemented - Серверу неизвестен метод.
+502 Bad Gateway - Ошибка прокси-сервера, который получил некорректное ответное сообщение.
+503 Service Unavailable - Сервис временно недоступен.
+504 Gateway Timeout - Ошибка посредника.
+505 HTTP Version Not Supported - Неподдерживаемая версия протокола.
 506 Variant Also Negotiates
-507 Insufficient Storage
+507 Insufficient Storage - На сервере недостаточно места.
 509 Bandwidth Limit Exceeded
-510 Not Extended
-511 Network Authentication Required"
+510 Not Extended - Сервером неподдерживается расширение.
+511 Network Authentication Required - Прокси-сервер сообщает, что необходимо пройти авторизацию."
 
 if [ ${#} -eq 0 ]; then
   echo "${statuses}"
