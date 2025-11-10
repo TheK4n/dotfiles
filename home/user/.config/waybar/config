@@ -1,0 +1,13 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["clock", "battery", "cpu", "memory", "network", "pulseaudio", "backlight"],
+    "sway/workspaces": {
+        "disable-scroll": true
+    },
+    "clock": {
+        "format": "{  %d.%m.%y %a     %H:%M}"
+    }
+}
