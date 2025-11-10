@@ -11,7 +11,7 @@ if [ "${TTY}" = "/dev/tty1" ] && [ "${XDG_VTNR}" -eq 1 ] && [ -z "${DISPLAY}" ] 
 
 fi
 
-# if [ "${TTY}" = "/dev/tty1" ] && systemctl -q is-active graphical.target; then
+# if [ "${TTY}" = "/dev/tty1" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ -n "${XDG_VTNR}" ] && [ "${XDG_VTNR}" -eq 1 ] && systemctl -q is-active graphical.target; then
 #     wayland_dir="${XDG_STATE_HOME:-${HOME}/.local/state}/wayland"
 #     mkdir -p "${wayland_dir}"
 #     exec sway --unsupported-gpu >> "${wayland_dir}/sway.log" 2>&1

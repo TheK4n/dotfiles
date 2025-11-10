@@ -1,18 +1,22 @@
 # Screen layout
-exec --no-startup-id ~/.screenlayout/default
-
+# exec --no-startup-id ~/.screenlayout/default
+#
 for_window [tiling] border pixel 3
 smart_borders on
 
 set $mod Mod4
+#
+#
+# # Screensaver
+# set $i3lock_cmd "i3lock -enf -c 1e1e1e"
+# exec --no-startup-id xset s off
+# exec --no-startup-id xset +dpms dpms 600 600 600
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
+# exec --no-startup-id pomodoro daemon
+#
+exec --no-startup-id waybar
 
-
-# Screensaver
-set $i3lock_cmd "i3lock -enf -c 1e1e1e"
-exec --no-startup-id xset s off
-exec --no-startup-id xset +dpms dpms 600 600 600
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
-exec --no-startup-id pomodoro daemon
+bindsym $mod+Return exec alacritty
 
 
 # Notifications
@@ -24,9 +28,14 @@ exec --no-startup-id dunst
 exec --no-startup-id unclutter -idle 0.3 -root
 
 
-exec_always --no-startup-id xset r rate 250 100
-exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle -option ctrl:nocaps
-
+input * {
+    xkb_layout "us,ru"
+    xkb_options "grp:win_space_toggle"
+    xkb_options caps:ctrl_modifier
+    xkb_model "pc101"
+    repeat_delay 250
+    repeat_rate 100
+}
 
 # Wallpapers
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
@@ -36,15 +45,10 @@ exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
 set $font_size 11
 font xft:FiraCode $font_size
 
-# use pactl to adjust volume in PulseAudio.
-set $refresh_i3blocks exec pkill -SIGRTMIN+10 i3blocks
-set $refresh_i3blocks_language exec pkill -SIGRTMIN+11 i3blocks
 
-# bindsym $mod+space exec --no-startup-id switch-layout && $refresh_i3blocks_language
-
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3blocks
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3blocks
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3blocks
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
@@ -55,13 +59,13 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
 
-bindsym $mod+p exec pomodoro toggle && $refresh_i3blocks
+# bindsym $mod+p exec pomodoro toggle && $refresh_i3blocks
 
 bindsym $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0                        ## Hold to talk
 bindsym --release $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1              ## Release to mute
 
-bindsym $mod+Shift+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3blocks
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3blocks
+bindsym $mod+Shift+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 bindsym XF86PickupPhone exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0               ## Hold to talk
 bindsym --release XF86PickupPhone exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1     ## Release to mute
@@ -73,8 +77,8 @@ bindsym --release XF86Go exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym $mod+XF86AudioMicMute exec --no-startup-id pactl list short sources | awk '/input.*RUNNING/ {system("pactl set-source-mute " $1 " toggle")}'     ## Find and mute mics
 
 
-bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
-bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+# bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+# bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 focus_follows_mouse no
 mouse_warping none
@@ -84,8 +88,8 @@ popup_during_fullscreen smart
 bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec --no-startup-id rofi -show drun -m -1
-bindsym $mod+i exec --no-startup-id i3_switch_workspace.sh
-bindsym $mod+o exec --no-startup-id slm_rofi.sh
+# bindsym $mod+i exec --no-startup-id i3_switch_workspace.sh
+# bindsym $mod+o exec --no-startup-id slm_rofi.sh
 
 # change focus
 bindsym $mod+h focus left
@@ -178,7 +182,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+u workspace prev
 bindsym $mod+Shift+u workspace next
 
-workspace_auto_back_and_forth no
+# workspace_auto_back_and_forth no
 bindsym $mod+Tab workspace back_and_forth
 
 # resize window (you can also use the mouse for that)
@@ -225,19 +229,18 @@ bindsym $mod+x mode $exitmode
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-bar {
-    output primary
-    output nonprimary
-    tray_output primary
-
-    # disable scroll
-    bindsym button4 nop
-    bindsym button5 nop
-    status_command i3blocks
-}
+# bar {
+#     output primary
+#     output nonprimary
+#     tray_output primary
+#
+#     # disable scroll
+#     bindsym button4 nop
+#     bindsym button5 nop
+#     status_command i3blocks
+# }
 
 bindsym Print exec --no-startup-id screenshot select copy
 bindsym $mod+Print exec --no-startup-id screenshot window copy
@@ -247,9 +250,8 @@ bindsym Shift+Print exec --no-startup-id screenshot select save
 bindsym Shift+$mod+Print exec --no-startup-id screenshot window save
 bindsym Shift+Ctrl+Print exec --no-startup-id screenshot entire save
 
-bindsym $mod+s exec --no-startup-id i3_swap_workspaces
+# bindsym $mod+s exec --no-startup-id i3_swap_workspaces
 
-# default workspaces for monitors in setup
 workspace $ws1 output primary
 workspace $ws2 output primary
 workspace $ws3 output primary
@@ -263,4 +265,4 @@ bindsym $mod+q exec --no-startup-id i3-msg workspace hide1; workspace hide2
 no_focus [title="^Peek preview$"]
 no_focus [class="feh"]
 
-include ~/.config/i3/config.d/*.conf
+include ~/.config/sway/config.d/*.conf
