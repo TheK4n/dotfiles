@@ -13,7 +13,7 @@ git:.config/git .local/bin/ga
 ranger:.config/ranger
 gpg:
 i3:.xinitrc .xprofile .Xresources .config/i3 .config/i3blocks .config/rofi .config/picom .local/bin/slm .local/bin/slm_rofi.sh .local/bin/power_rofi.sh .local/bin/i3_switch_workspace.sh .config/mimeapps.list .local/bin/screenshot .local/bin/i3_swap_workspaces .local/bin/i3blocks_helper .local/bin/switch-layout %pomodoro
-sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .local/bin/screenshot .local/bin/i3blocks_helper .local/bin/layout_change_handler .Xresources %pomodoro
+sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .local/bin/screenshot .local/bin/i3blocks_helper .local/bin/layout_change_handler .config/swaylock .Xresources %pomodoro
 pomodoro:
 bat:.config/bat
 font:
