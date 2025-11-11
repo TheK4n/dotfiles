@@ -1,8 +1,6 @@
 set $mod Mod4
 
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1 Browser"
 set $ws2 "2  Code"
 set $ws3 "3  Code"
@@ -14,16 +12,14 @@ set $ws8 "8💬Social"
 set $ws9 "9🎵Music"
 set $ws10 "10🍿Media"
 
-workspace $ws1 output primary
-workspace $ws2 output primary
-workspace $ws3 output primary
-workspace $ws9 output nonprimary
-workspace $ws10 output nonprimary
+workspace $ws1 output DP-1
+workspace $ws2 output DP-1
+workspace $ws3 output DP-1
+workspace $ws9 output HDMI-A-1
+workspace $ws10 output HDMI-A-1
 
-workspace hide1 output primary
-workspace hide2 output nonprimary
-
-
+workspace hide1 output DP-1
+workspace hide2 output HDMI-A-1
 
 
 
@@ -68,8 +64,6 @@ bar {
 
 
 
-
-
 # Bindings
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
@@ -84,7 +78,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
 
-# bindsym $mod+p exec pomodoro toggle && $refresh_i3blocks
+# bindsym $mod+p exec pomodoro toggle
 
 bindsym $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0                        ## Hold to talk
 bindsym --release $mod+z exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1              ## Release to mute
@@ -103,7 +97,8 @@ bindsym $mod+XF86AudioMicMute exec --no-startup-id pactl list short sources | aw
 
 bindsym $mod+Return exec alacritty
 
-bindsym --to-code $mod+Shift+q kill
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r reload
 
 set $menu rofi -show drun -m -1
 bindsym --to-code $mod+d exec $menu
@@ -115,8 +110,6 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-# Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -127,27 +120,24 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
 
 bindsym $mod+Ctrl+Shift+l move workspace to output right
 bindsym $mod+Ctrl+Shift+h move workspace to output left
 bindsym $mod+Ctrl+Shift+k move workspace to output up
 bindsym $mod+Ctrl+Shift+j move workspace to output down
 
-# Alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
-# Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# Change container layout (tabbed, toggle split)
 bindsym $mod+t layout tabbed
 bindsym $mod+v layout toggle split
 bindsym $mod+a focus parent
 
-# Toggle tiling / floating
 bindsym $mod+Shift+slash floating toggle
 bindsym $mod+Shift+comma sticky toggle
 
@@ -248,20 +238,14 @@ bindsym $mod+slash focus mode_toggle
 
 
 
-
-
-
-
 # Screen layout
 # exec --no-startup-id ~/.screenlayout/default
 
 
-# # Screensaver
-# set $i3lock_cmd "i3lock -enf -c 1e1e1e"
-# exec --no-startup-id xset s off
-# exec --no-startup-id xset +dpms dpms 600 600 600
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
-# exec --no-startup-id pomodoro daemon
+exec swayidle -w \
+	timeout 1800 'swaylock -f' \
+	timeout 1805 'swaymsg "output * power off"' \
+		resume 'swaymsg "output * power on"'
 
 
 # Notifications
@@ -273,18 +257,10 @@ exec --no-startup-id dunst
 
 
 
-
-
-
-
-
-
 # Wallpapers
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
 # exec --no-startup-id hsetroot
 # exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
-
-
 
 
 
