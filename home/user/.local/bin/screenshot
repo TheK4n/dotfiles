@@ -45,18 +45,9 @@ _notify_error() {
     _notify critical "${NOTIFY_TIME_CRITICAL_MS}" "Error: ${1}"
 }
 
-_maim() {
-    local maim_args=(--quality 10)
-    if [ -n "${NOOPENGL}" ]; then
-        maim_args+=--noopengl
-    fi
-
-    maim ${maim_args} "${@}"
-}
-
 _capture_select() {
     local -r pipe="$(mktemp)"
-    _maim --select 2>"${pipe}"
+    grim -g "$(slurp)" - 2>"${pipe}"
     local -r code="$?"
     if grep -F "Selection was cancelled by keystroke or right-click." <"${pipe}"; then
         rm "${pipe}"
@@ -68,15 +59,15 @@ _capture_select() {
 }
 
 _capture_entire() {
-    _maim
+    grim -
 }
 
 _capture_window() {
-    _maim --window "$(xdotool getactivewindow)"
+    grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.type? == "con" and .focused == true) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" -
 }
 
 _copy_to_clipboard() {
-    xclip -selection clipboard -t image/png
+    wl-copy -t image/png
 }
 
 _save_to_file() {

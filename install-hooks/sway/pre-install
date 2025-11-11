@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "pacman -S sway waybar swayidle"
+echo "pacman -S sway waybar swayidle wl-clipboard ydotool grim slurp mako"

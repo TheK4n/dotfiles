@@ -77,10 +77,10 @@ cmd_bluetooth_battery() {
 }
 
 cmd_language() {
-    layout="$(xkblayout-state print %n)"
+    layout="$(swaymsg -t get_inputs | jq -r '.[] | select(.type == "keyboard") | .xkb_active_layout_name' | head -1)"
 
     case "${layout}" in
-        English)
+        "English (US)")
             echo "🇬🇧 En"
             ;;
         Russian)

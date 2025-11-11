@@ -14,7 +14,7 @@ fzf_get_selected_untracked() {
 }
 
 gitadd() {
-     xargs git add
+    xargs git add
 }
 
 git_ls_files() {
