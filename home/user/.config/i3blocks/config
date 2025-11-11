@@ -44,12 +44,12 @@ interval=30
 [volume]
 command=i3blocks_helper volume
 interval=1
-signal=10
+signal=3
 
 [pomodoro]
 command=i3blocks_helper pomodoro
 interval=1
-signal=10
+signal=2
 
 [language]
 command=i3blocks_helper language
