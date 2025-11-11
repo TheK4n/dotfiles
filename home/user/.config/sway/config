@@ -1,31 +1,34 @@
-# Screen layout
-# exec --no-startup-id ~/.screenlayout/default
-#
-for_window [tiling] border pixel 3
-smart_borders on
-
 set $mod Mod4
-#
-#
-# # Screensaver
-# set $i3lock_cmd "i3lock -enf -c 1e1e1e"
-# exec --no-startup-id xset s off
-# exec --no-startup-id xset +dpms dpms 600 600 600
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
-# exec --no-startup-id pomodoro daemon
-#
-exec --no-startup-id waybar
-
-bindsym $mod+Return exec alacritty
 
 
-# Notifications
-#systemctl --user enable --now dbus.service
-exec --no-startup-id dunst
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1 Browser"
+set $ws2 "2  Code"
+set $ws3 "3  Code"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8💬Social"
+set $ws9 "9🎵Music"
+set $ws10 "10🍿Media"
+
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws9 output nonprimary
+workspace $ws10 output nonprimary
+
+workspace hide1 output primary
+workspace hide2 output nonprimary
+
+
+
 
 
 # Hide cursor
-exec --no-startup-id unclutter -idle 0.3 -root
+seat seat0 hide_cursor 300
 
 
 input * {
@@ -37,15 +40,37 @@ input * {
     repeat_rate 100
 }
 
-# Wallpapers
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
-exec --no-startup-id hsetroot
-exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
 
 set $font_size 11
 font xft:FiraCode $font_size
 
+floating_modifier $mod
 
+focus_follows_mouse no
+mouse_warping none
+popup_during_fullscreen smart
+smart_borders on
+
+# kill focused window
+for_window [tiling] border pixel 3
+for_window [title="Picture-in-Picture"] sticky enable
+for_window [title="Picture-in-Picture"] border pixel 0
+
+
+no_focus [title="^Peek preview$"]
+no_focus [class="feh"]
+
+
+bar {
+    position bottom
+    status_command i3blocks
+}
+
+
+
+
+
+# Bindings
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -76,34 +101,28 @@ bindsym --release XF86Go exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 bindsym $mod+XF86AudioMicMute exec --no-startup-id pactl list short sources | awk '/input.*RUNNING/ {system("pactl set-source-mute " $1 " toggle")}'     ## Find and mute mics
 
+bindsym $mod+Return exec alacritty
 
-# bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
-# bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+bindsym --to-code $mod+Shift+q kill
 
-focus_follows_mouse no
-mouse_warping none
-popup_during_fullscreen smart
-
-# kill focused window
-bindsym $mod+Shift+q kill
-
-bindsym $mod+d exec --no-startup-id rofi -show drun -m -1
+set $menu rofi -show drun -m -1
+bindsym --to-code $mod+d exec $menu
 # bindsym $mod+i exec --no-startup-id i3_switch_workspace.sh
 # bindsym $mod+o exec --no-startup-id slm_rofi.sh
 
-# change focus
+# Change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# Move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
@@ -114,46 +133,52 @@ bindsym $mod+Ctrl+Shift+h move workspace to output left
 bindsym $mod+Ctrl+Shift+k move workspace to output up
 bindsym $mod+Ctrl+Shift+j move workspace to output down
 
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-
-# enter fullscreen mode for the focused container
+# Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (tabbed, toggle split)
+# Change container layout (tabbed, toggle split)
 bindsym $mod+t layout tabbed
 bindsym $mod+v layout toggle split
 bindsym $mod+a focus parent
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+slash floating toggle
 bindsym $mod+Shift+comma sticky toggle
 
-for_window [title="Picture-in-Picture"] sticky enable
-for_window [title="Picture-in-Picture"] border pixel 0
+bindsym Print exec --no-startup-id screenshot select copy
+bindsym $mod+Print exec --no-startup-id screenshot window copy
+bindsym Ctrl+Print exec --no-startup-id screenshot entire copy
 
-# change focus between tiling / floating windows
-bindsym $mod+slash focus mode_toggle
+bindsym Shift+Print exec --no-startup-id screenshot select save
+bindsym Shift+$mod+Print exec --no-startup-id screenshot window save
+bindsym Shift+Ctrl+Print exec --no-startup-id screenshot entire save
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# bindsym $mod+s exec --no-startup-id i3_swap_workspaces
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1 Browser"
-set $ws2 "2  Code"
-set $ws3 "3  Code"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8💬Social"
-set $ws9 "9🎵Music"
-set $ws10 "10🍿Media"
+
+bindsym $mod+q exec --no-startup-id i3-msg workspace hide1; workspace hide2
+
+
+set $exitmode "Power: [e]xit, [r]eboot, [s]hutdown, s[u]spend, [l]ock, [b]lack"
+mode $exitmode {
+    bindsym e exit
+    bindsym r exec reboot
+    bindsym s exec shutdown -h now
+    bindsym u exec systemctl suspend; mode "default"
+    bindsym l exec $i3lock_cmd; mode "default"
+    bindsym b exec magick canvas:none PNG:- | feh -YFx -; mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+x mode $exitmode
+
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -212,57 +237,56 @@ mode "resize_precise" {
     bindsym Escape mode "default"
 }
 
-set $exitmode "Power: [e]xit, [r]eboot, [s]hutdown, s[u]spend, [l]ock, [b]lack"
-mode $exitmode {
-    bindsym e exit
-    bindsym r exec reboot
-    bindsym s exec shutdown -h now
-    bindsym u exec systemctl suspend; mode "default"
-    bindsym l exec $i3lock_cmd; mode "default"
-    bindsym b exec magick canvas:none PNG:- | feh -YFx -; mode "default"
 
-    bindsym Escape mode "default"
-    bindsym Return mode "default"
-}
-bindsym $mod+x mode $exitmode
+# Change focus between tiling / floating windows
+bindsym $mod+slash focus mode_toggle
 
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
 
-# bar {
-#     output primary
-#     output nonprimary
-#     tray_output primary
-#
-#     # disable scroll
-#     bindsym button4 nop
-#     bindsym button5 nop
-#     status_command i3blocks
-# }
 
-bindsym Print exec --no-startup-id screenshot select copy
-bindsym $mod+Print exec --no-startup-id screenshot window copy
-bindsym Ctrl+Print exec --no-startup-id screenshot entire copy
 
-bindsym Shift+Print exec --no-startup-id screenshot select save
-bindsym Shift+$mod+Print exec --no-startup-id screenshot window save
-bindsym Shift+Ctrl+Print exec --no-startup-id screenshot entire save
 
-# bindsym $mod+s exec --no-startup-id i3_swap_workspaces
 
-workspace $ws1 output primary
-workspace $ws2 output primary
-workspace $ws3 output primary
-workspace $ws9 output nonprimary
-workspace $ws10 output nonprimary
 
-workspace hide1 output primary
-workspace hide2 output nonprimary
-bindsym $mod+q exec --no-startup-id i3-msg workspace hide1; workspace hide2
 
-no_focus [title="^Peek preview$"]
-no_focus [class="feh"]
+
+
+
+# Screen layout
+# exec --no-startup-id ~/.screenlayout/default
+
+
+# # Screensaver
+# set $i3lock_cmd "i3lock -enf -c 1e1e1e"
+# exec --no-startup-id xset s off
+# exec --no-startup-id xset +dpms dpms 600 600 600
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -enf -c 1e1e1e
+# exec --no-startup-id pomodoro daemon
+
+
+# Notifications
+#systemctl --user enable --now dbus.service
+exec --no-startup-id dunst
+
+
+
+
+
+
+
+
+
+
+
+
+# Wallpapers
+# exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
+# exec --no-startup-id hsetroot
+# exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
+
+
+
+
+
 
 include ~/.config/sway/config.d/*.conf
