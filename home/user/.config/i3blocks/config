@@ -53,8 +53,7 @@ signal=10
 
 [language]
 command=i3blocks_helper language
-interval=1
-signal=11
+signal=1
 
 [time]
 command=i3blocks_helper time
