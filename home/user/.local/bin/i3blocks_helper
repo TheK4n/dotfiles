@@ -57,7 +57,8 @@ cmd_time() {
 }
 
 cmd_volume() {
-    amixer get Master | awk -F'[][]' '/%/ {print "   "$2}' | head -n 1
+    value="$(pactl --format=json get-sink-volume @DEFAULT_SINK@ | jq --raw-output '.volume."front-left".value_percent')"
+    echo "  ${value}"
 }
 
 cmd_pomodoro() {

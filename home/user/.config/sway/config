@@ -12,10 +12,11 @@
 # exec --no-startup-id hsetroot
 # exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
 
+set $mod Mod4
 
+include ~/.config/sway/other.conf
 include ~/.config/sway/bindings.conf
 include ~/.config/sway/autostart.conf
 include ~/.config/sway/bar.conf
-include ~/.config/sway/other.conf
 
 include ~/.config/sway/config.d/*.conf
