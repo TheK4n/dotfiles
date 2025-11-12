@@ -131,8 +131,8 @@ alias pastewww='paste.thek4n.ru'
 # clipboard
 if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     if [ -n "${DISPLAY}" ]; then
-        alias _copy='sed -z "$ s/\n$//" | xclip -selection clipboard -i'
-        alias pasta='xclip -selection clipboard -o'
+        alias _copy='sed -z "$ s/\n$//" | wl-copy'
+        alias pasta='wl-paste'
     else
         alias _copy='read -rd "EOF" TTYCLIPBOARD'
         alias pasta='echo "$TTYCLIPBOARD"'

@@ -11,7 +11,7 @@ bindkey -M visual 'a' vi-add-next
 # Yank to the system clipboard
 function vi-yank-xclip {
     zle vi-yank
-    echo -n "$CUTBUFFER" | copy  # alias 'copy' from earlier loaded file
+    echo -n "$CUTBUFFER" | wl-copy  # alias 'copy' from earlier loaded file
 }
 
 zle -N vi-yank-xclip
