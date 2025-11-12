@@ -40,8 +40,5 @@ home/user/.tmux/*
 
 home/user/.config/git/local
 
-home/user/.config/i3/config.d/*
-!home/user/.config/i3/config.d/.gitkeep
-
 home/user/.config/sway/config.d/*
 !home/user/.config/sway/config.d/.gitkeep

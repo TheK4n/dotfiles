@@ -26,7 +26,7 @@ Config files for:
 * ssh
 * git
 * ranger
-* i3
+* sway
 * vim
 * nvim
 
