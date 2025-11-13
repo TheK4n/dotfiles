@@ -22,4 +22,5 @@ include ~/.config/sway/bindings.conf
 include ~/.config/sway/bar.conf
 include ~/.config/sway/autostart.conf
 
+include /etc/sway/config.d/*.conf
 include ~/.config/sway/config.d/*.conf
