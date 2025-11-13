@@ -132,7 +132,7 @@ alias pastewww='paste.thek4n.ru'
 if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
     if [ -n "${DISPLAY}" ]; then
         alias _copy='sed -z "$ s/\n$//" | wl-copy'
-        alias pasta='wl-paste'
+        alias pasta='wl-paste --no-newline --trim-newline'
     else
         alias _copy='read -rd "EOF" TTYCLIPBOARD'
         alias pasta='echo "$TTYCLIPBOARD"'
