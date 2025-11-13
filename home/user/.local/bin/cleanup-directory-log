@@ -12,7 +12,7 @@ fi
 
 readonly log_file="${directory}/cleanup.log"
 
-if [ -n "${DRYRUN}" ]; then
+if [ -n "${DRYRUN:-}" ]; then
     log_file="/dev/null"
 fi
 

@@ -11,7 +11,7 @@ if [ ! -d "${directory}" ]; then
     return 1
 fi
 
-if [ -n "${DRYRUN}" ]; then
+if [ -n "${DRYRUN:-}" ]; then
     echo "Deleting files not accessed for a ${age} days:"
     find "${directory}" -mindepth 1 -atime "${age}" -not -type d -not -name cleanup.log
 
