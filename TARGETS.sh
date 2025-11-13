@@ -12,7 +12,7 @@ ssh:
 git:.config/git .local/bin/ga
 ranger:.config/ranger
 gpg:
-sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .config/rofi .local/bin/screenshot .local/bin/i3blocks_helper .local/bin/layout_change_handler .config/swaylock .Xresources .local/bin/sway_swap_workspaces %pomodoro
+sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .config/rofi .local/bin/screenshot .local/bin/i3blocks_helper .local/bin/layout_change_handler .config/swaylock .Xresources .local/bin/sway_swap_workspaces .local/bin/slm .local/bin/slm_rofi %pomodoro
 pomodoro:
 bat:.config/bat
 font:

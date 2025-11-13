@@ -11,12 +11,7 @@ if [ ! -d "${LAYOUTS_DIR}" ]; then
 fi
 
 cmd_list() {
-    find "$LAYOUTS_DIR" -type f,l -exec basename {} \;
-}
-
-cmd_wallpaper() {
-    readonly wallpapers="${HOME}/.wallpaper"
-    feh --no-fehbg --bg-scale "$(find "${wallpapers}" | shuf -n 1)"
+    find "${LAYOUTS_DIR}" -type f,l -exec basename {} \;
 }
 
 cmd_load() {
@@ -25,18 +20,16 @@ cmd_load() {
     else
         "${LAYOUTS_DIR}/${1}"
     fi
-    cmd_wallpaper
 }
 
 cmd_help () {
-    echo "slm (ls|load|wallpaper)" >&2
+    echo "slm (ls|load)" >&2
 }
 
 
 case "${1}" in
     ls) shift;         cmd_list       "$@" ;;
     load) shift;       cmd_load       "$@" ;;
-    wallpaper) shift;  cmd_wallpaper  "$@" ;;
     *) shift;          cmd_help       "$@" ;;
 esac
 exit 0
