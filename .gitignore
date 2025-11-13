@@ -42,3 +42,6 @@ home/user/.config/git/local
 
 home/user/.config/sway/config.d/*
 !home/user/.config/sway/config.d/.gitkeep
+
+home/user/.config/sway/variables.d/*
+!home/user/.config/sway/variables.d/.gitkeep

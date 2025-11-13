@@ -1,17 +1,5 @@
 # Sway config sourcer
 
-
-
-# Screen layout
-# exec --no-startup-id ~/.screenlayout/default
-
-
-
-# Wallpapers
-# exec --no-startup-id nitrogen --restore; sleep 1; picom -b --config ~/.config/picom/picom.conf
-# exec --no-startup-id hsetroot
-# exec --no-startup-id feh --randomize --no-fehbg --bg-scale $HOME/.wallpaper/*
-
 set $mod Mod4
 
 set $ws1 "1 Browser"
@@ -25,6 +13,9 @@ set $ws8 "8💬Social"
 set $ws9 "9🎵Music"
 set $ws10 "10🍿Media"
 
+# set $primary DVI-I-1
+# set $secondary VGA-1
+include ~/.config/sway/variables.d/*.conf
 
 include ~/.config/sway/other.conf
 include ~/.config/sway/bindings.conf
