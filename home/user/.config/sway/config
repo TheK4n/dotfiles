@@ -1,5 +1,7 @@
 # Sway config sourcer
 
+exec swaylock -f
+
 set $mod Mod4
 
 set $ws1 "1 Browser"
@@ -13,8 +15,9 @@ set $ws8 "8💬Social"
 set $ws9 "9🎵Music"
 set $ws10 "10🍿Media"
 
-# set $primary DVI-I-1
-# set $secondary VGA-1
+# Example variables.d:
+#set $primary DVI-I-1
+#set $secondary VGA-1
 include ~/.config/sway/variables.d/*.conf
 
 include ~/.config/sway/other.conf
