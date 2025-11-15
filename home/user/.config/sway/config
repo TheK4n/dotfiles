@@ -15,9 +15,14 @@ set $ws8 "8💬Social"
 set $ws9 "9🎵Music"
 set $ws10 "10🍿Media"
 
+set $terminal alacritty
+set $browser firefox
+
 # Example variables.d:
 #set $primary DVI-I-1
 #set $secondary VGA-1
+#set $terminal alacritty
+#set $browser firefox
 include ~/.config/sway/variables.d/*.conf
 
 include ~/.config/sway/other.conf
