@@ -127,25 +127,7 @@ alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ███
 alias paste.thek4n.ru='curl --data-binary @- "https://paste.thek4n.ru/" 2>/dev/null'
 alias pastewww='paste.thek4n.ru'
 
-
-# clipboard
-if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
-    if [ -n "${DISPLAY}" ]; then
-        alias _copy='sed -z "$ s/\n$//" | wl-copy --trim-newline'
-        alias pasta='wl-paste --no-newline'
-    else
-        alias _copy='read -rd "EOF" TTYCLIPBOARD'
-        alias pasta='echo "$TTYCLIPBOARD"'
-    fi
-elif [[ "${OSTYPE}" == "linux-android"* ]]; then
-    alias _copy='termux-clipboard-set'
-    alias pasta='termux-clipboard-get'
-elif [[ "${OSTYPE}" == "darwin" ]]; then
-    alias _copy='pbcopy'
-    alias pasta='pbpaste'
-fi
-
-alias copy='tee /dev/stderr | _copy'
+alias copy='tee /dev/stderr | \copy'
 
 alias ssh='TERM=xterm-256color ssh'
 alias sshn='ssh -S none'

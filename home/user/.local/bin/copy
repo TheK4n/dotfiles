@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -eu
+
+
+case "${OSTYPE:-}" in
+    "linux-gnu"*)
+        if [ -n "${WAYLAND_DISPLAY}" ]; then
+            wl-copy --trim-newline
+            exit 0
+        elif [ -n "${DISPLAY}" ]; then
+            xclip -selection clipboard -in
+            exit 0
+        else
+            sed -z '$ s/\n$//' > "${HOME}/.ttyclipboard"
+            exit 0
+        fi
+    ;;
+    "linux-android"*)
+        termux-clipboard-set
+        exit 0
+    ;;
+    "darwin")
+        pbcopy
+        exit 0
+    ;;
+    *)
+        sed -z '$ s/\n$//' > "${HOME}/.ttyclipboard"
+        exit 0
+    ;;
+esac

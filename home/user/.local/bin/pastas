@@ -7,11 +7,11 @@ last_value=''
 
 while true
 do
-  value="$(xclip -selection clipboard -o)"
+  value="$(pasta)"
 
-  if [ "$last_value" != "$value" ]; then
-    echo "$value"
-    last_value="$value"
+  if [ "${last_value}" != "${value}" ]; then
+    echo "${value}"
+    last_value="${value}"
   fi
 
   sleep 0.1
