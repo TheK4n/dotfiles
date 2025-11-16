@@ -3,7 +3,7 @@ set -eu
 
 trap 'exit 0' INT
 
-last_value=''
+last_value="$(pasta)"
 
 while true
 do
