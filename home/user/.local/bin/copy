@@ -5,10 +5,10 @@ set -eu
 
 case "${OSTYPE:-}" in
     "linux-gnu"*)
-        if [ -n "${WAYLAND_DISPLAY}" ]; then
+        if [ -n "${WAYLAND_DISPLAY:-}" ]; then
             wl-copy --trim-newline
             exit 0
-        elif [ -n "${DISPLAY}" ]; then
+        elif [ -n "${DISPLAY:-}" ]; then
             xclip -selection clipboard -in
             exit 0
         else
