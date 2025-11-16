@@ -3,7 +3,7 @@ export ZCALC_HISTFILE="${HOME}/.zcalc_history"
 autoload -U zcalc
 
 function __calc {
-    zcalc -f -e "$*"
+    ZDOTDIR="${HOME}" zcalc -f -e "$*"
 }
 aliases[calc]='noglob __calc'
 aliases[=]='noglob __calc'
