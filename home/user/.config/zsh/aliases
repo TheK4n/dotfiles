@@ -113,6 +113,8 @@ alias drmc='docker container prune'
 alias drmi='docker image prune'
 alias dpsa='docker ps -a'
 
+alias gb='gobuild'
+
 
 # tmux
 alias dt='tmux detach'
