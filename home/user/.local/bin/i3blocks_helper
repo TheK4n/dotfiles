@@ -12,7 +12,7 @@ cmd_wireless() {
 }
 
 cmd_ethernet() {
-    return 0 # todo
+    return 0  # todo
     echo "$(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2) $(ip -o -4 addr show | awk '{print $4}' | cut -d/ -f1 | head -1)"
 }
 
@@ -45,10 +45,9 @@ cmd_cpu_temp() {
     temp_C="$((temp_mC / 1000))"
 
     if [ "${temp_C}" -gt 80 ]; then
-        echo " ${temp_C}°C"
-        exit 33 # bad
+        printf '<span foreground="red"> %s°C</span>\n' "${temp_C}"
     else
-        echo " ${temp_C}°C"
+        printf ' %s°C\n' "${temp_C}"
     fi
 }
 
@@ -58,7 +57,7 @@ cmd_time() {
 
 cmd_volume() {
     value="$(pactl --format=json get-sink-volume @DEFAULT_SINK@ | jq --raw-output '.volume."front-left".value_percent')"
-    echo "  ${value}"
+    printf '  %s\n' "${value}"
 }
 
 cmd_pomodoro() {
@@ -82,13 +81,13 @@ cmd_language() {
 
     case "${layout}" in
         "English (US)")
-            echo "🇬🇧 En"
+            printf '🇬🇧 En\n'
             ;;
         Russian)
-            echo "🇷🇺 Ru"
+            printf '🇷🇺 Ru\n'
             ;;
         *)
-            echo "🌐 ${layout}"
+            printf '🌐 %s\n' "${layout}"
             ;;
     esac
 }
