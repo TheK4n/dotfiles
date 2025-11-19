@@ -3,6 +3,7 @@
 echo "wg0 status: $(systemctl is-active wg-quick@wg0.service)"
 
 if ! systemctl is-active wg-quick@wg0.service 1>/dev/null; then
+    #shellcheck disable=SC2016
     echo 'Executing this command may fix wireguard: "sudo apt update && sudo apt install linux-headers-$(uname -r) && sudo reboot"'
 fi
 
