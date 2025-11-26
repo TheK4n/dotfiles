@@ -8,12 +8,7 @@ readonly EXIT_FAILURE=1
 
 
 cmd_wireless() {
-    return 0  # todo 
-}
-
-cmd_ethernet() {
-    return 0  # todo
-    echo "$(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2) $(ip -o -4 addr show | awk '{print $4}' | cut -d/ -f1 | head -1)"
+    echo " $(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2) $(ip -o -4 addr show | grep wlp | awk '{print $4}' | cut -d/ -f1 | head -1)"
 }
 
 cmd_battery() {
