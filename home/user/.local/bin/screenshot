@@ -47,9 +47,9 @@ _notify_error() {
 
 _capture_select() {
     local -r pipe="$(mktemp)"
-    grim -g "$(slurp)" - 2>"${pipe}"
+    grim -g "$(slurp 2>"${pipe}")" -
     local -r code="$?"
-    if grep -F "Selection was cancelled by keystroke or right-click." <"${pipe}"; then
+    if grep -F "selection cancelled" <"${pipe}"; then
         rm "${pipe}"
         return "${CODE_CANCELED}"
     fi
@@ -83,7 +83,7 @@ _process_screenshot() {
 
     if ! ${capture_func} | ${output_func} "${output_arg}"; then
         if (( ${pipestatus[1]} == "${CODE_CANCELED}" )); then
-            _notify_low "Selection was cancelled by keystroke or right-click."
+            _notify_low "Selection was cancelled by keystroke."
             return 0
         fi
         _notify_error "${error_msg}"
