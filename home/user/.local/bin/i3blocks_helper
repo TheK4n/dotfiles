@@ -17,7 +17,20 @@ cmd_ethernet() {
 }
 
 cmd_battery() {
-    return 0  # todo
+    charging_status="$(cat /sys/class/power_supply/BAT0/status)"
+    percent="$(cat /sys/class/power_supply/BAT0/capacity)"
+
+    if [ "${percent}" -lt 35 ]; then
+        emoji_status="🪫"
+    else
+        emoji_status="🔋"
+    fi
+
+    if [ "${charging_status}" = "Charging" ]; then
+        emoji_status="🔌"
+    fi
+
+    printf "%s %s%%\n" "${emoji_status}" "${percent}"
 }
 
 cmd_disk_root() {
