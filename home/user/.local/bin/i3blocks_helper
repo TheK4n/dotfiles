@@ -8,7 +8,14 @@ readonly EXIT_FAILURE=1
 
 
 cmd_wireless() {
-    echo " $(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2) $(ip -o -4 addr show | grep wlp | awk '{print $4}' | cut -d/ -f1 | head -1)"
+    wifiname="$(LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)"
+    wifi_ip=$(ip -o -4 addr show | grep wlp | awk '{print $4}' | cut -d/ -f1 | head -1)
+
+    if [ -z "${wifiname}" ] || [ -z "${wifi_ip}" ]; then
+        return 0
+    fi
+
+    printf ' %s %s\n' "${wifiname}" "${wifi_ip}"
 }
 
 cmd_battery() {
