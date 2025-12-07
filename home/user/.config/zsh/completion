@@ -27,6 +27,7 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate _prefix _list
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*:*:(eza|ls):*' file-sort modification
 
 zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
 zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
