@@ -15,6 +15,9 @@ return {
         cmd = {
             "Telescope"
         },
+        previewers = {
+            buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker
+        },
         keys = {
             { '<Leader>fb', '<cmd>Telescope buffers<CR>' },
             { '<Leader>ff', '<cmd>Telescope find_files<CR>' },
