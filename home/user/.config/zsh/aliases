@@ -89,7 +89,7 @@ alias wget='wget -c'
 alias ip='ip -c'
 alias fastping='ping -c 100 -i 0.1'
 
-alias serveit='python3 -m http.server 8080'
+alias www='serveit'
 
 # hardware
 alias reboot='sudo /sbin/reboot'

@@ -1,0 +1,41 @@
+#!/bin/sh
+set -eu
+
+PROGRAM="$(basename "${0}")"
+
+has_h=0
+for arg in "${@}"; do
+    case "${arg}" in
+        -h)
+            has_h=1
+            break
+            ;;
+        --help)
+            has_h=1
+            break
+            ;;
+    esac
+done
+
+if [ "${has_h}" -eq 1 ]; then
+    TAB=$(printf '\t')
+    printf 'Usage: %s\tListen on localhost:8080\nUsage: %s PORT\tListen on localhost:PORT\nUsage: %s HOST PORT\tListen on HOST:PORT\n' "${PROGRAM}" "${PROGRAM}" "${PROGRAM}" | column -t -s "${TAB}"
+    exit 0
+fi
+
+HOST="localhost"
+PORT="8080"
+
+if [ ${#} -gt 1 ]; then
+    HOST="${1:-localhost}"
+    PORT="${2:-8080}"
+else
+    HOST="localhost"
+    PORT="${1:-8080}"
+fi
+
+readonly HOST
+readonly PORT
+
+
+python3 -m http.server -b "${HOST}" "${PORT}"
