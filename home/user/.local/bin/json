@@ -2,7 +2,7 @@
 set -eu
 
 if [ -t 0 ]; then
-   echo "${@}" | python -m json.tool
+   echo "${@}" | python3 -m json.tool --no-ensure-ascii
 else
-   python -m json.tool
+   python3 -m json.tool --no-ensure-ascii
 fi
