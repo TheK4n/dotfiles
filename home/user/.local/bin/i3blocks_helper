@@ -107,6 +107,10 @@ cmd_language() {
     esac
 }
 
+cmd_userhost() {
+    printf "%s@%s\n" "${USER}" "${HOST:-${HOSTNAME:-}}"
+}
+
 case "${1}" in
     wireless) shift;           cmd_wireless          "$@" ;;
     ethernet) shift;           cmd_ethernet          "$@" ;;
@@ -121,6 +125,7 @@ case "${1}" in
     pomodoro) shift;           cmd_pomodoro          "$@" ;;
     bluetooth_battery) shift;  cmd_bluetooth_battery "$@" ;;
     language) shift;           cmd_language          "$@" ;;
+    userhost) shift;           cmd_userhost          "$@" ;;
 
     *) exit "${EXIT_FAILURE}" ;;
 esac

@@ -55,6 +55,10 @@ signal=2
 command=i3blocks_helper language
 signal=1
 
+[userhost]
+command=i3blocks_helper userhost
+signal=1
+
 [time]
 command=i3blocks_helper time
 interval=30
