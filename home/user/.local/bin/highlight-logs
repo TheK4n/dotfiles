@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+ESC=$(printf '\033')
+
+RESET="${ESC}[0m"
+COLOR_ERROR="${ESC}[1;31m"
+COLOR_WARN="${ESC}[1;33m"
+COLOR_INFO="${ESC}[1;32m"
+COLOR_DEBUG="${ESC}[1;36m"
+
+sed -e "s/ERROR/${COLOR_ERROR}&${RESET}/g" \
+    -e "s/WARNING/${COLOR_WARN}&${RESET}/g" \
+    -e "s/INFO/${COLOR_INFO}&${RESET}/g" \
+    -e "s/DEBUG/${COLOR_DEBUG}&${RESET}/g"
