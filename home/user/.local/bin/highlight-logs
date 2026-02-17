@@ -8,12 +8,14 @@ COLOR_ERROR="${ESC}[1;31m"
 COLOR_WARN="${ESC}[1;33m"
 COLOR_INFO="${ESC}[1;32m"
 COLOR_DEBUG="${ESC}[1;36m"
-
+COLOR_TRACE="${ESC}[1;37m"
 
 
 sed -E \
+    -e "s/\bFATAL\b/${COLOR_ERROR}&${RESET}/" \
     -e "s/\bERROR\b/${COLOR_ERROR}&${RESET}/" \
     -e "s/\bWARN\b/${COLOR_WARN}&${RESET}/" \
     -e "s/\bWARNING\b/${COLOR_WARN}&${RESET}/" \
     -e "s/\bINFO\b/${COLOR_INFO}&${RESET}/" \
-    -e "s/\bDEBUG\b/${COLOR_DEBUG}&${RESET}/"
+    -e "s/\bDEBUG\b/${COLOR_DEBUG}&${RESET}/" \
+    -e "s/\bTRACE\b/${COLOR_TRACE}&${RESET}/"
