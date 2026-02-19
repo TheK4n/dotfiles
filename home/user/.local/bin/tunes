@@ -5,6 +5,9 @@ ACTION="${1:-}"
 PROG="$(basename "${0}")"
 SOCKET_PATH="/tmp/mpv-${USER}.sock"
 
+#shellcheck disable=SC2064
+trap "rm -f '${SOCKET_PATH}'" INT HUP EXIT
+
 send_cmd() {
   echo "{ \"command\": ${1} }" | socat - "${SOCKET_PATH}"
 }
@@ -17,7 +20,7 @@ play_playlist() {
         playlist="${HOME}/Music"
     fi
 
-    exec mpv --input-ipc-server="${SOCKET_PATH}" --shuffle --no-video --ytdl-format=worstaudio "${@}" -- "${playlist}"
+    mpv --input-ipc-server="${SOCKET_PATH}" --shuffle --no-video --ytdl-format=worstaudio "${@}" -- "${playlist}"
 }
 
 tune_radio() {
@@ -71,7 +74,7 @@ play_radio() {
       exit 1
     fi
 
-    exec mpv --really-quiet "${url}"
+    mpv --input-ipc-server="${SOCKET_PATH}" --no-video "${url}"
 }
 
 cmd_run() {
