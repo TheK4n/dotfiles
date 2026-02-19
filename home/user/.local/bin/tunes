@@ -1,4 +1,11 @@
 #!/bin/sh
 set -eu
 
-exec mpv --no-video --ytdl-format=worstaudio "${@}"
+playlist="${1:-}"
+shift || true
+
+if [ -z "${playlist}" ]; then
+    playlist="${HOME}/Music"
+fi
+
+exec mpv --shuffle --no-video --ytdl-format=worstaudio "${@}" -- "${playlist}"

@@ -1,16 +1,18 @@
 #!/bin/sh
 set -eu
 
-if [ "${1}" = lofi ]; then
+channel="${1:-}"
+
+if [ "${channel}" = lofi ]; then
   url='https://live.hunter.fm/lofi_low'
-elif [ "${1}" = trance ]; then
+elif [ "${channel}" = trance ]; then
   url='http://ubuntu.hbr1.com:19800/trance.ogg'
-elif [ "${1}" = salsa ]; then
+elif [ "${channel}" = salsa ]; then
   url='https://latinasalsa.ice.infomaniak.ch/latinasalsa.mp3'
-elif [ "${1}" = kfai ]; then
+elif [ "${channel}" = kfai ]; then
   url='https://kfai.broadcasttool.stream/kfai-1'
 else
-  echo "don't know ${1}" 1>&2
+  echo "don't know \"${channel}\": lofi/trance/salsa/kfai" 1>&2
   exit 1
 fi
 
