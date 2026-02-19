@@ -6,59 +6,59 @@ color=#FFFFFF
 interval=5
 
 [wireless]
-command=i3blocks_helper wireless
+command=~/.config/i3blocks/scripts/builder.sh wireless
 interval=10
 
 [ethernet]
-command=i3blocks_helper ethernet
+command=~/.config/i3blocks/scripts/builder.sh ethernet
 interval=10
 
 [diskroot]
-command=i3blocks_helper disk_root
+command=~/.config/i3blocks/scripts/builder.sh disk_root
 interval=30
 
 [diskhome]
-command=i3blocks_helper disk_home
+command=~/.config/i3blocks/scripts/builder.sh disk_home
 interval=30
 
 [memory]
-command=i3blocks_helper memory
+command=~/.config/i3blocks/scripts/builder.sh memory
 interval=5
 
 [cpu_usage]
-command=i3blocks_helper cpu_usage
+command=~/.config/i3blocks/scripts/builder.sh cpu_usage
 interval=5
 
 [cpu_temp]
-command=i3blocks_helper cpu_temp
+command=~/.config/i3blocks/scripts/builder.sh cpu_temp
 interval=5
 
 [bluetooth]
-command=i3blocks_helper bluetooth_battery
+command=~/.config/i3blocks/scripts/builder.sh bluetooth_battery
 interval=5
 
 [battery]
-command=i3blocks_helper battery
+command=~/.config/i3blocks/scripts/builder.sh battery
 interval=30
 
 [volume]
-command=i3blocks_helper volume
+command=~/.config/i3blocks/scripts/builder.sh volume
 interval=1
 signal=1
 
 [pomodoro]
-command=i3blocks_helper pomodoro
+command=~/.config/i3blocks/scripts/builder.sh pomodoro
 interval=1
 signal=2
 
 [language]
-command=i3blocks_helper language
+command=~/.config/i3blocks/scripts/builder.sh language
 signal=1
 
 [userhost]
-command=i3blocks_helper userhost
+command=~/.config/i3blocks/scripts/builder.sh userhost
 signal=1
 
 [time]
-command=i3blocks_helper time
+command=~/.config/i3blocks/scripts/builder.sh time
 interval=30

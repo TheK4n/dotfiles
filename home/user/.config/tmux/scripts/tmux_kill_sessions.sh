@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-readonly tmux_list_sessions_script="${HOME}/.local/bin/tmux_list_sessions.sh"
+readonly tmux_list_sessions_script="${HOME}/.config/tmux/scripts/tmux_list_sessions.sh"
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
@@ -16,7 +16,7 @@ ${FZF_DEFAULT_OPTS}
 ctrl-x:execute\(tmux\ kill-session\ -t\ {1}\)+reload\(${tmux_list_sessions_script}\)\
 "
 
-sessions_to_kill="$(~/.local/bin/tmux_list_sessions.sh | fzf | awk '{printf $1"\n"}')"
+sessions_to_kill="$(~/.config/tmux/scripts/tmux_list_sessions.sh | fzf | awk '{printf $1"\n"}')"
 readonly sessions_to_kill
 
 if [ -n "${sessions_to_kill}" ]; then

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-readonly tmux_list_sessions_script="${HOME}/.local/bin/tmux_list_sessions.sh"
+readonly tmux_list_sessions_script="${HOME}/.config/tmux/scripts/tmux_list_sessions.sh"
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
