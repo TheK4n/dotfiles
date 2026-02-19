@@ -5,13 +5,10 @@ ACTION="${1:-}"
 PROG="$(basename "${0}")"
 SOCKET_PATH="/tmp/mpv-${USER}.sock"
 
-#shellcheck disable=SC2064
-trap "rm -f '${SOCKET_PATH}'" INT HUP EXIT
 
 send_cmd() {
   echo "{ \"command\": ${1} }" | socat - "${SOCKET_PATH}"
 }
-
 
 play_playlist() {
     playlist="${1:-}"
@@ -20,7 +17,55 @@ play_playlist() {
         playlist="${HOME}/Music"
     fi
 
+    #shellcheck disable=SC2064
+    trap "rm -f '${SOCKET_PATH}'" INT HUP EXIT
+
     mpv --input-ipc-server="${SOCKET_PATH}" --shuffle --no-video --ytdl-format=worstaudio "${@}" -- "${playlist}"
+}
+
+play_radio() {
+    channel="${1:-}"
+
+    if [ "${channel}" = lofi ]; then
+      url='https://radiorecord.hostingradio.ru/lofi96.aacp'
+    elif [ "${channel}" = fallout ]; then
+      url='http://fallout.fm:8000/falloutfm1.ogg'
+    elif [ "${channel}" = wasteland ]; then
+      url='http://wasteland.su:8080/radio'
+    elif [ "${channel}" = retrofm ]; then
+      url='http://hls-01-retro.emgsound.ru/12/128/playlist.m3u8'
+    elif [ "${channel}" = rusradio ]; then
+      url='https://rusradio.hostingradio.ru/rusradio128.mp3'
+    elif [ "${channel}" = rock ]; then
+      url='https://radiorecord.hostingradio.ru/rock96.aacp'
+    elif [ "${channel}" = phonk ]; then
+      url='https://radiorecord.hostingradio.ru/phonk96.aacp'
+    elif [ "${channel}" = dorognoe ]; then
+      url='https://dorognoe.hostingradio.ru:8000/dorognoe'
+    else
+      echo "${PROG} run radio: don't know \"${channel}\": lofi/fallout/wasteland/retrofm/rusradio/rock/phonk/dorognoe" 1>&2
+      exit 1
+    fi
+
+    #shellcheck disable=SC2064
+    trap "rm -f '${SOCKET_PATH}'" INT HUP EXIT
+
+    mpv --input-ipc-server="${SOCKET_PATH}" --no-video "${url}"
+}
+
+cmd_run() {
+    case "${1:-}" in
+      music) shift;
+        play_playlist "${@}"
+        ;;
+      radio) shift;
+        play_radio "${@}"
+        ;;
+      help|""|*)
+        echo "Usage: ${PROG} run {music PLAYLIST|radio CHANNEL}"
+        echo "Example: ${PROG} run music"
+        ;;
+    esac
 }
 
 tune_radio() {
@@ -50,49 +95,6 @@ tune_radio() {
     send_cmd "[\"loadfile\", \"${url}\", \"replace\"]"
 }
 
-play_radio() {
-    channel="${1:-}"
-
-    if [ "${channel}" = lofi ]; then
-      url='https://radiorecord.hostingradio.ru/lofi96.aacp'
-    elif [ "${channel}" = fallout ]; then
-      url='http://fallout.fm:8000/falloutfm1.ogg'
-    elif [ "${channel}" = wasteland ]; then
-      url='http://wasteland.su:8080/radio'
-    elif [ "${channel}" = retrofm ]; then
-      url='http://hls-01-retro.emgsound.ru/12/128/playlist.m3u8'
-    elif [ "${channel}" = rusradio ]; then
-      url='https://rusradio.hostingradio.ru/rusradio128.mp3'
-    elif [ "${channel}" = rock ]; then
-      url='https://radiorecord.hostingradio.ru/rock96.aacp'
-    elif [ "${channel}" = phonk ]; then
-      url='https://radiorecord.hostingradio.ru/phonk96.aacp'
-    elif [ "${channel}" = dorognoe ]; then
-      url='https://dorognoe.hostingradio.ru:8000/dorognoe'
-    else
-      echo "${PROG} run radio: don't know \"${channel}\": lofi/fallout/wasteland/retrofm/rusradio/rock/phonk/dorognoe" 1>&2
-      exit 1
-    fi
-
-    mpv --input-ipc-server="${SOCKET_PATH}" --no-video "${url}"
-}
-
-cmd_run() {
-    case "${1:-}" in
-      music) shift;
-        play_playlist "${@}"
-        ;;
-      radio) shift;
-        play_radio "${@}"
-        ;;
-      help|"")
-        echo "Usage: ${PROG} run {music PLAYLIST|radio CHANNEL}"
-        echo "Example: ${PROG} run music"
-        ;;
-    esac
-}
-
-
 case "${ACTION}" in
   next|n) shift;
     send_cmd '["playlist-next"]'
@@ -112,7 +114,7 @@ case "${ACTION}" in
   radio) shift;
     tune_radio "${@}"
     ;;
-  help|"")
+  help|""|*)
     echo "Usage: ${PROG} {next|prev|pause|run|radio CHANNEL}"
     echo "Example: ${PROG} next"
     ;;
