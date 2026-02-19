@@ -37,6 +37,8 @@ home/user/.tmux/*
 !home/user/.tmux/ssh
 !home/user/.tmux/example-background-job
 !home/user/.tmux/system-update
+!home/user/.tmux/music
+!home/user/.tmux/landing
 
 home/user/.config/git/local
 

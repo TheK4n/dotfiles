@@ -4,16 +4,26 @@ set -eu
 channel="${1:-}"
 
 if [ "${channel}" = lofi ]; then
-  url='https://live.hunter.fm/lofi_low'
-elif [ "${channel}" = trance ]; then
-  url='http://ubuntu.hbr1.com:19800/trance.ogg'
-elif [ "${channel}" = salsa ]; then
-  url='https://latinasalsa.ice.infomaniak.ch/latinasalsa.mp3'
-elif [ "${channel}" = kfai ]; then
-  url='https://kfai.broadcasttool.stream/kfai-1'
+  url='https://radiorecord.hostingradio.ru/lofi96.aacp'
+elif [ "${channel}" = fallout ]; then
+  url='http://fallout.fm:8000/falloutfm1.ogg'
+elif [ "${channel}" = wasteland ]; then
+  url='http://wasteland.su:8080/radio'
+elif [ "${channel}" = retrofm ]; then
+  url='http://hls-01-retro.emgsound.ru/12/128/playlist.m3u8'
+elif [ "${channel}" = rusradio ]; then
+  url='https://rusradio.hostingradio.ru/rusradio128.mp3'
+elif [ "${channel}" = rock ]; then
+  url='https://radiorecord.hostingradio.ru/rock96.aacp'
+elif [ "${channel}" = phonk ]; then
+  url='https://radiorecord.hostingradio.ru/phonk96.aacp'
+elif [ "${channel}" = dorognoe ]; then
+  url='https://dorognoe.hostingradio.ru:8000/dorognoe'
 else
-  echo "don't know \"${channel}\": lofi/trance/salsa/kfai" 1>&2
+  echo "don't know \"${channel}\": lofi/fallout/wasteland/retrofm/rusradio/rock/phonk/dorognoe" 1>&2
   exit 1
 fi
 
 exec mpv --really-quiet "${url}"
+
+# https://gist.github.com/ergoz/e7837a54956116167db93b016dbd51a9
