@@ -9,6 +9,7 @@ ExecStart=/usr/bin/tmux -D -L %u
 ExecStop=/usr/bin/tmux -L %u kill-server
 ExecReload=/usr/bin/tmux -L %u source-file %h/.config/tmux/tmux.conf
 Restart=on-failure
+ExecStartPost=/usr/bin/tmux -L %u new-session -d -s landing 'sh -c "tmux rename-window -t 1 landing; tmux set-option remain-on-exit on; figlet -ct -f big Landing; trap : INT; while true; do sleep 3600; done"'
 
 [Install]
 WantedBy=default.target
