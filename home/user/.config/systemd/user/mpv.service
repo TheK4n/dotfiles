@@ -1,0 +1,18 @@
+[Unit]
+Description=MPV Audio Player Service
+Documentation=man:mpv(1)
+After=sound.target graphical-session.target
+Wants=sound.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/mpv-service.sh
+Restart=on-failure
+RestartSec=5
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/bus
+Environment=XDG_RUNTIME_DIR=%t
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

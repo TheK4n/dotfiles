@@ -14,12 +14,11 @@ usage() {
 Usage: ${PROG} <command> [args]
 
 Commands:
-  run music [PATH]       Play local music (default: ~/Music)
-  run radio <CHANNEL>    Start a radio station
-  radio <CHANNEL>        Switch current playing instance to a radio station
+  radio <CHANNEL>        Switch to a radio station
+  local, music [PATH]    Switch to local music playlist (default: ~/Music)
   next, n                Next track
   prev, p                Previous track
-  pause, space           Toggle pause
+  pause, stop, toggle, s Toggle pause
   help                   Show this message
 
 Radio Channels:
@@ -50,32 +49,6 @@ send_cmd() {
     printf '{ "command": %s }\n' "${1}" | socat - "${SOCKET_PATH}" >/dev/null
 }
 
-launch_mpv() {
-    rm -f "${SOCKET_PATH}"
-
-    trap 'rm -f "${SOCKET_PATH}"' INT HUP EXIT TERM
-
-    exec mpv --input-ipc-server="${SOCKET_PATH}" --no-video --ytdl-format=worstaudio "${@}"
-}
-
-
-play_playlist() {
-    playlist="${1:-${HOME}/Music}"
-    shift || true
-
-    launch_mpv --shuffle "$@" -- "${playlist}"
-}
-
-play_radio() {
-    channel="${1:-}"
-    if [ -z "${channel}" ]; then
-        die "Radio channel required. Usage: ${PROG} run radio <channel>"
-    fi
-
-    url="$(get_radio_url "${channel}")"
-    launch_mpv "${url}"
-}
-
 tune_radio() {
     channel="${1:-}"
     if [ -z "${channel}" ]; then
@@ -84,7 +57,34 @@ tune_radio() {
 
     url="$(get_radio_url "${channel}")"
     send_cmd "[\"loadfile\", \"${url}\", \"replace\"]"
-    echo "📻 Switched to: ${channel}"
+    echo "📻 Switched to radio: ${channel}"
+}
+
+play_local_playlist() {
+    playlist_path="${1:-${HOME}/Music}"
+
+    if [ ! -e "${playlist_path}" ]; then
+        die "Path not found: ${playlist_path}"
+    fi
+
+    if command -v realpath >/dev/null 2>&1; then
+        playlist_path="$(realpath "${playlist_path}")"
+    fi
+
+    escaped_path=$(printf '%s' "${playlist_path}" | sed 's/\\/\\\\/g; s/"/\\"/g')
+    send_cmd '["set", "pause", "yes"]'
+    sleep 0.1
+    send_cmd "[\"loadfile\", \"${escaped_path}\", \"replace\"]"
+    sleep 0.1
+    send_cmd '["set", "pause", "yes"]'
+    sleep 0.1
+    send_cmd '["playlist-shuffle"]'
+    sleep 0.1
+    send_cmd '["playlist-next"]'
+    sleep 0.1
+    send_cmd '["set", "pause", "no"]'
+
+    echo "🎵 Switched to local playlist: ${playlist_path}"
 }
 
 handle_control() {
@@ -98,7 +98,7 @@ handle_control() {
             send_cmd '["playlist-prev"]'
             echo "⬅️ Prev"
             ;;
-        pause|space)
+        pause|stop|toggle|t|s)
             send_cmd '["cycle", "pause"]'
             echo "⏯️ Pause toggled"
             ;;
@@ -113,19 +113,13 @@ ACTION="${1:-}"
 shift 2>/dev/null || true
 
 case "${ACTION}" in
-    run)
-        subcmd="${1:-help}"
-        shift || true
-        case "${subcmd}" in
-            music) play_playlist "$@" ;;
-            radio) play_radio "$@" ;;
-            *) usage; exit 1 ;;
-        esac
-        ;;
-    radio)
+    radio|tune)
         tune_radio "$@"
         ;;
-    next|n|prev|p|pause|space)
+    local|music|m)
+        play_local_playlist "$@"
+        ;;
+    next|n|prev|p|pause|stop|toggle|t|s)
         handle_control "${ACTION}"
         ;;
     help|"")
