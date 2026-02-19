@@ -15,7 +15,7 @@ set $ws8 "8💬Social"
 set $ws9 "9🎵Music"
 set $ws10 "10🍿Media"
 
-set $terminal alacritty
+set $terminal ~/.config/sway/scripts/auto-alacritty.sh
 set $browser firefox
 
 # Example variables.d:
