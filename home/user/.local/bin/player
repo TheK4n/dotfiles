@@ -1,0 +1,139 @@
+#!/bin/sh
+set -eu
+
+PROG="$(basename "${0}")"
+SOCKET_PATH="/tmp/mpv-${USER}.sock"
+
+die() {
+    echo "Error: $*" >&2
+    exit 1
+}
+
+usage() {
+    cat <<EOF
+Usage: ${PROG} <command> [args]
+
+Commands:
+  run music [PATH]       Play local music (default: ~/Music)
+  run radio <CHANNEL>    Start a radio station
+  radio <CHANNEL>        Switch current playing instance to a radio station
+  next, n                Next track
+  prev, p                Previous track
+  pause, space           Toggle pause
+  help                   Show this message
+
+Radio Channels:
+  lofi, fallout, wasteland, retrofm, rusradio, rock, phonk, dorognoe
+EOF
+}
+
+get_radio_url() {
+    channel="${1:-}"
+    case "${channel}" in
+        lofi)      echo 'https://radiorecord.hostingradio.ru/lofi96.aacp' ;;
+        fallout)   echo 'http://fallout.fm:8000/falloutfm1.ogg' ;;
+        wasteland) echo 'http://wasteland.su:8080/radio' ;;
+        retrofm)   echo 'http://hls-01-retro.emgsound.ru/12/128/playlist.m3u8' ;;
+        rusradio)  echo 'https://rusradio.hostingradio.ru/rusradio128.mp3' ;;
+        rock)      echo 'https://radiorecord.hostingradio.ru/rock96.aacp' ;;
+        phonk)     echo 'https://radiorecord.hostingradio.ru/phonk96.aacp' ;;
+        dorognoe)  echo 'https://dorognoe.hostingradio.ru:8000/dorognoe' ;;
+        *)         die "Unknown radio channel '${channel}'. Available: lofi/fallout/wasteland/retrofm/rusradio/rock/phonk/dorognoe" ;;
+    esac
+}
+
+send_cmd() {
+    if [ ! -S "${SOCKET_PATH}" ]; then
+        die "MPV socket not found at '${SOCKET_PATH}'. Is mpv running?"
+    fi
+
+    printf '{ "command": %s }\n' "${1}" | socat - "${SOCKET_PATH}" >/dev/null
+}
+
+launch_mpv() {
+    rm -f "${SOCKET_PATH}"
+
+    trap 'rm -f "${SOCKET_PATH}"' INT HUP EXIT TERM
+
+    exec mpv --input-ipc-server="${SOCKET_PATH}" --no-video --ytdl-format=worstaudio "${@}"
+}
+
+
+play_playlist() {
+    playlist="${1:-${HOME}/Music}"
+    shift || true
+
+    launch_mpv --shuffle "$@" -- "${playlist}"
+}
+
+play_radio() {
+    channel="${1:-}"
+    if [ -z "${channel}" ]; then
+        die "Radio channel required. Usage: ${PROG} run radio <channel>"
+    fi
+
+    url="$(get_radio_url "${channel}")"
+    launch_mpv "${url}"
+}
+
+tune_radio() {
+    channel="${1:-}"
+    if [ -z "${channel}" ]; then
+        die "Radio channel required. Usage: ${PROG} radio <channel>"
+    fi
+
+    url="$(get_radio_url "${channel}")"
+    send_cmd "[\"loadfile\", \"${url}\", \"replace\"]"
+    echo "📻 Switched to: ${channel}"
+}
+
+handle_control() {
+    action="${1}"
+    case "${action}" in
+        next|n)
+            send_cmd '["playlist-next"]'
+            echo "➡️ Next"
+            ;;
+        prev|p)
+            send_cmd '["playlist-prev"]'
+            echo "⬅️ Prev"
+            ;;
+        pause|space)
+            send_cmd '["cycle", "pause"]'
+            echo "⏯️ Pause toggled"
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+}
+
+ACTION="${1:-}"
+shift 2>/dev/null || true
+
+case "${ACTION}" in
+    run)
+        subcmd="${1:-help}"
+        shift || true
+        case "${subcmd}" in
+            music) play_playlist "$@" ;;
+            radio) play_radio "$@" ;;
+            *) usage; exit 1 ;;
+        esac
+        ;;
+    radio)
+        tune_radio "$@"
+        ;;
+    next|n|prev|p|pause|space)
+        handle_control "${ACTION}"
+        ;;
+    help|"")
+        usage
+        ;;
+    *)
+        echo "Unknown command: ${ACTION}" >&2
+        usage
+        exit 1
+        ;;
+esac
