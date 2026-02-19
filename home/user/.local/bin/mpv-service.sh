@@ -12,4 +12,4 @@ cleanup() {
 }
 trap cleanup EXIT TERM INT
 
-exec mpv --idle --no-video --input-ipc-server="${SOCKET_PATH}" --ytdl-format=worstaudio
+exec mpv --really-quiet --idle --no-video --input-ipc-server="${SOCKET_PATH}" --ytdl-format=worstaudio
