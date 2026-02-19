@@ -145,6 +145,9 @@ alias nfe='note fe'
 alias nfg='note fg'
 alias ng='note git'
 
+
+alias p='player'
+
 # :)
 alias PINK='beep -f 233 -l 440 -n -f 349 -l 440 -n -f 196 -l 440 -n -f 330 -l 650'
 
