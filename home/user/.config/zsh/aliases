@@ -137,6 +137,7 @@ alias sshn='ssh -S none'
 alias black='magick canvas:none PNG:- | feh --class black -YFx -'
 alias ex='extract'
 
+# Notes
 alias notes='note'
 alias n='note'
 alias ns='note sync'
@@ -144,6 +145,13 @@ alias ne='note edit'
 alias nfe='note fe'
 alias nfg='note fg'
 alias ng='note git'
+
+
+# Cargo
+alias cr='cargo run'
+alias cb='cargo build'
+alias cbr='cargo build --release'
+alias ct='cargo test'
 
 
 alias p='player'
