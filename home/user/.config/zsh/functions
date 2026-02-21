@@ -24,7 +24,7 @@ va() {
             return 0
         fi
         echo "va: error: virtual environment ${1} not found, use 'python3 -m venv ${1}'" >&2
-        return 1
+        return 1$
     fi
 
     if [[ -f "./venv/bin/activate" ]]; then
@@ -60,4 +60,18 @@ top-commands() {
             printf "%s%s", $i, (i == end ? "\n" : OFS)
         }
     }' | sort | uniq -c | sort -nr | sed 's/^[[:space:]]*//'
+}
+
+ci() {
+    # Create cargo project (cargo init)
+    if [[ -v 1 ]]; then
+        cargo init "${1}" && cd "${1}"
+        return "${?}"
+    fi
+
+    local -r mktemp_template='thek4n-rust-XXXXXX'
+    local temp
+    temp="$(mktemp -dt "${mktemp_template}")" && \
+    cd "${temp}" && \
+    cargo init .
 }
