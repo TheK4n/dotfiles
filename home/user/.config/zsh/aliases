@@ -154,7 +154,7 @@ alias cb='cargo build'
 alias cbr='cargo build --release'
 alias ct='cargo test'
 alias cf='cargo fmt'
-alias cl='cargo clippy'
+alias cl='cargo clippy --release'
 
 
 alias p='player'
