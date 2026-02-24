@@ -80,15 +80,8 @@ cmd_pomodoro() {
 }
 
 cmd_bluetooth_battery() {
-    for uuid in $(timeout 1 bluetoothctl devices | cut -f2 -d' ' 2>/dev/null)
-    do
-        device_info="$(timeout 1 bluetoothctl info "${uuid}")"
-
-        if echo "${device_info}" | grep -q 'Connected: yes\|Battery Percentage'; then
-            echo "${device_info}" | grep 'Battery Percentage' | awk -F '[()]' '{ print "🎧🔋"$2"%" }'
-            break
-        fi
-    done
+    device="$(upower -e | grep headset | head -1)"
+    upower -i "${device}" | grep percentage | awk '{ print "🎧🔋"$2"" }'
 }
 
 cmd_language() {
