@@ -62,16 +62,13 @@ top-commands() {
     }' | sort | uniq -c | sort -nr | sed 's/^[[:space:]]*//'
 }
 
-ci() {
-    # Create cargo project (cargo init)
+cargo-init() {
     if [[ -v 1 ]]; then
-        cargo init "${1}" && cd "${1}"
+        cargo init "${1}" && cd "${1}" && \
         return "${?}"
     fi
 
-    local -r mktemp_template='thek4n-rust-XXXXXX'
-    local temp
-    temp="$(mktemp -dt "${mktemp_template}")" && \
-    cd "${temp}" && \
-    cargo init .
+    local -r temp="/tmp/thek4n-rust-${RANDOM}"
+    mkdir "${temp}" && cd "${temp}" && cargo init . && \
+    return "${?}"
 }
