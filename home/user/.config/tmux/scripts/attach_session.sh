@@ -1,7 +1,8 @@
 #!/bin/sh
 
 
-readonly tmux_list_sessions_script="${HOME}/.config/tmux/scripts/tmux_list_sessions.sh"
+readonly tmux_list_sessions_script="${HOME}/.config/tmux/scripts/list_sessions.sh"
+readonly tmux_kill_session_script="${HOME}/.config/tmux/scripts/kill_session.sh"
 
 export FZF_DEFAULT_OPTS="\
 ${FZF_DEFAULT_OPTS}
@@ -14,7 +15,7 @@ ${FZF_DEFAULT_OPTS}
 --preview-window=follow
 --preview='tmux capture-pane -p -e -t {1}'
 --bind
-ctrl-x:execute\(tmux\ kill-session\ -t\ {1}\)+reload\(${tmux_list_sessions_script}\),\
+ctrl-x:execute\(${tmux_kill_session_script}\ {1}\)+reload\(${tmux_list_sessions_script}\),\
 load:reload\(${tmux_list_sessions_script}\;sleep\ 1\)\
 "
 
