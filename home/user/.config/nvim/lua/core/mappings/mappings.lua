@@ -26,8 +26,8 @@ map('n', '<Leader>hc', create_function_tabdo('set cursorline!'),
     {desc = "Toggle line highlighting"})
 
 map('n', '<Leader>h/',
-    function() vim.opt.hlsearch = not vim.opt.hlsearch["_value"] end,
-    {desc = "Toggle search highlighting"})
+    function() vim.fn.setreg('/', '') end,
+    {desc = "Clear search"})
 
 
 -- enable search highlight in search mode
