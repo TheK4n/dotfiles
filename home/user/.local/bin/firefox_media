@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+
+firefox --new-instance -P media --name firefox_media

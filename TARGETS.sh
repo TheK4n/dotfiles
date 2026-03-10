@@ -12,7 +12,7 @@ ssh:
 git:.config/git .local/bin/ga
 ranger:.config/ranger
 gpg:
-sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .config/rofi .local/bin/screenshot .config/swaylock .Xresources .local/bin/slm .local/bin/slm_rofi %copypasta %pomodoro
+sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .config/rofi .local/bin/screenshot .config/swaylock .Xresources .local/bin/slm .local/bin/slm_rofi .local/bin/firefox_media %copypasta %pomodoro
 pomodoro:
 bat:.config/bat
 font:
