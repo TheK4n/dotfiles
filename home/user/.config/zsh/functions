@@ -63,12 +63,10 @@ top-commands() {
 }
 
 cargo-init() {
-    if [[ -v 1 ]]; then
-        cargo init "${1}" && cd "${1}" && \
-        return "${?}"
+    if [[ ! -v 1 ]]; then
+        return 1
     fi
 
-    local -r temp="/tmp/thek4n-rust-${RANDOM}"
-    mkdir "${temp}" && cd "${temp}" && cargo init . && \
+    cargo init "${1}" && cd "${1}" && \
     return "${?}"
 }

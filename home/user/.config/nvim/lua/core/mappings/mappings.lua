@@ -44,6 +44,9 @@ map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
 
 
 map('n', '~', 'vg~', {desc = "Toggle character case"})
+map('n', 'Ё', 'vg~', {desc = "Toggle character case"})
+
+map('v', 'Ё', '~', {desc = "Toggle character case"})
 
 
 map('n',
