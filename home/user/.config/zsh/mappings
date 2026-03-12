@@ -93,27 +93,21 @@ bindkey -M vicmd "^O" cddotdot
 
 fzfhistory() {
     local cmd
-    # fc -l 1 выводит всю историю с номерами.
-    # Мы используем процесс-подстановку <(...) чтобы передать вывод fc напрямую в fzf.
-    # Сед (sed) убирает номера строк в начале, оставляя только текст команды.
-    # Важно: fc корректно обрабатывает многострочные команды, не разрывая их.
-
     cmd=$(fc -l 1 | \
-        sed 's/^[ ]*[0-9]*[ ]*//' | \
+        sed 's/^[ ]*[0-9]*[ ]*//'  | \
         fzf \
             --ignore-case \
             --scheme=history \
             --no-multi \
+            --tac \
             --tiebreak=begin,index \
-            --height="$(($LINES/4))" \
-            --query="$BUFFER" \
-            --preview="echo {}" \
-            --preview-window=wrap:30%:50%)
+            --height="$((${LINES}/4))" \
+            --query="${BUFFER}" \
+            --preview="echo {} | sed 's/\\\n/\\n/g' | highlight -O ansi -S zsh" \
+            --preview-window=wrap:30%:50% | sed 's/\\n/\n/g')
 
-    if [[ -n "$cmd" ]]; then
-        # Очищаем буфер и вставляем выбранную команду
-        BUFFER=$cmd
-        # Перемещаем курсор в конец строки (опционально, но удобно)
+    if [[ -n "${cmd}" ]]; then
+        BUFFER="${cmd}"
         CURSOR=$#BUFFER
     fi
 
