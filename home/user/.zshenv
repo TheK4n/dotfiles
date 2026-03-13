@@ -55,6 +55,10 @@ if [ -d "${HOME}/.local/bin" ] ; then
     export PATH="${HOME}/.local/bin:${PATH}"
 fi
 
+if [ -d "${HOME}/.cargo/bin" ] ; then
+    export PATH="${HOME}/.cargo/bin:${PATH}"
+fi
+
 export GOCACHE="${TMPDIR}/go-cache-$(id -u)"
 export PPROF_TMPDIR="${TMPDIR}/go-pprof-$(id -u)"
 export GOPATH="${HOME}/.cache/go"
