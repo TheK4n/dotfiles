@@ -11,6 +11,10 @@
     dno = diff --name-only
     dw = diff --word-diff=color
     dws = diff --word-diff=color --staged
+    sw = switch
+    swl = switch -
+    swb = switch -c
+    swc = switch -c
     co = checkout
     col = checkout @{-1}
     cob = checkout -b
