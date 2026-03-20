@@ -2,9 +2,27 @@ export ZCALC_HISTFILE="${HOME}/.zcalc_history"
 
 autoload -U zcalc
 
-function __calc {
-    ZDOTDIR="${HOME}" zcalc -f -e "$*"
+function __format_number() {
+    local num="${1}"
+    local res
+
+    num="$(echo "${num}" |  sed 's/\.$//')"
+    res="${num}"
+
+    if [[ "${num}" =~ ^[-]?[0-9]+$ ]]; then
+        res="$(LC_NUMERIC='en_US.UTF-8' printf "%'.20f\n" "${num}" | sed "s/,/_/g")"
+    fi
+
+    echo "${res}" | sed 's/\.\([0-9]*[1-9]\)0*$/.\1/; s/\.0*$//'
 }
+
+function __calc {
+    local result
+    result="$(ZDOTDIR="${HOME}" zcalc -f -e "$*" 2>/dev/null)"
+
+    __format_number "${result}"
+}
+
 aliases[calc]='noglob __calc'
 aliases[=]='noglob __calc'
 
@@ -13,7 +31,7 @@ function accept-line() {
     if [[ ${BUFFER} =~ '^[ ]?\(?[-+]?[0-9]+[^a-zA-Z]+' ]]; then
         echo
         test "${BUFFER[1]}" != " " && print -S -- "${BUFFER}"  # saving the command to history
-        __calc "${BUFFER}" | sed 's/\.$//'
+        __calc "${BUFFER}"
         BUFFER=
     fi
 
