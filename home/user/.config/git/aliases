@@ -28,6 +28,7 @@
     cim = "!_m() { git commit -m \"$*\"; }; _m"
     cima = "!_m() { git commit -am \"$*\"; }; _m"
     ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+    pst = "!git push origin --tags"
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
     pr = "pull --rebase"
     s = status
