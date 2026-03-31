@@ -52,7 +52,7 @@ bindkey -M menuselect '^k' vi-up-line-or-history
 bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -M menuselect '^l' vi-forward-char
 bindkey -M menuselect '^e' undo
-bindkey -M menuselect '^[' undo
+bindkey -M menuselect '^[' accept
 bindkey -M menuselect '^M' check-command
 bindkey -M menuselect '^I' accept-and-infer-next-history
 bindkey '^l' menu-select
@@ -63,3 +63,30 @@ unsetopt menucomplete
 
 
 compdef _directories mcd
+
+
+_gcim_completion() {
+  local -a commit_types
+
+  commit_types=(
+    'fix:Fix errors'
+    'feat:New features'
+    'chore:Routine chore'
+    'docs:Documentation changes'
+    'style:Code style'
+    'refactor:Refactoring'
+    'perf:Performance improvements'
+    'test:Add tests'
+    'revert:Revert changes'
+    'ci:CI/CD changes'
+    'build:Build system changes'
+  )
+  _describe 'commit message' commit_types -S ''
+}
+
+function gcima() {
+    noglob git cim "${*}"
+}
+compdef _gcim_completion gcima
+
+alias gcim='noglob gcima'

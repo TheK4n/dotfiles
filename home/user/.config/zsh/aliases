@@ -81,7 +81,6 @@ do
     alias "g${al}"="git ${al}"
 done
 
-alias gcim="noglob git cim"
 
 # net
 alias ports='ss -tlnp'
