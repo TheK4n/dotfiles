@@ -84,9 +84,9 @@ _gcim_completion() {
   _describe 'commit message' commit_types -S ''
 }
 
-function gcima() {
+function _gcim() {
     noglob git cim "${*}"
 }
-compdef _gcim_completion gcima
+compdef _gcim_completion _gcim
 
-alias gcim='noglob gcima'
+alias gcim='noglob _gcim'
