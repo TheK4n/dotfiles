@@ -81,7 +81,7 @@ _gcim_completion() {
     'ci:CI/CD changes'
     'build:Build system changes'
   )
-  _describe 'commit message' commit_types -S ''
+  _describe 'commit message type in format CT1: "type(optional-scope): description"' commit_types -S ''
 }
 
 function _gcim() {
