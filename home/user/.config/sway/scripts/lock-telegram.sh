@@ -1,9 +1,16 @@
 #!/bin/bash
 
-TELEGRAM_WINDOW=$(swaymsg -t get_tree | jq -r '.. | select(.app_id? == "org.telegram.desktop") | .id' | head -n 1)
+TELEGRAM_WINDOW="$(
+    swaymsg -t get_tree | \
+    jq -r '.. | select(.app_id? == "org.telegram.desktop") | .id' | \
+    head -n 1
+)"
+
+readonly TELEGRAM_WINDOW
+
 
 if [ -z "${TELEGRAM_WINDOW}" ]; then
-    echo "Telegram_not_found!"
+    echo "Error: Telegram not found"
     exit 0
 fi
 
