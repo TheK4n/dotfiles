@@ -3,6 +3,9 @@
 
 if \
   [ "$(tty)" != "/dev/tty3" ] && \
+  [ "$(tty)" != "/dev/tty4" ] && \
+  [ "$(tty)" != "/dev/tty5" ] && \
+  [ "$(tty)" != "/dev/tty6" ] && \
   command -v tmux &>/dev/null && \
   [ -z "${TMUX}" ]            && \
   tmux -N -L "${USER}" list-sessions &>/dev/null
