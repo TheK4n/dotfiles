@@ -1,0 +1,20 @@
+#!/bin/sh
+set -eu
+
+prefix="${HOME}/Games"
+mkdir "${prefix}" || true
+
+cd "${prefix}"
+wget -c -O "${prefix}/starsector.zip" "https://f005.backblazeb2.com/file/fractalsoftworks/release/starsector_linux-0.98a-RC8.zip"
+unzip "${prefix}/starsector.zip"
+
+
+wget -c -O "${prefix}/starsector-rusificator.zip.gz" "https://paste.thek4n.ru/c7aLRZlxGak6LB/"
+gzip -f -d "${prefix}/starsector-rusificator.zip.gz" > "${prefix}/starsector-rusificator.zip" || true
+unzip -o "${prefix}/starsector-rusificator.zip" || true
+
+
+cd "${prefix}/starsector/mods/"
+wget -c -O "${prefix}/starsector/mods/Unthemed Weapons Collection.zip.gz" "https://paste.thek4n.ru/hczMvglofkfW7d/"
+gzip -f -d "${prefix}/starsector/mods/Unthemed Weapons Collection.zip.gz" > "${prefix}/starsector/mods/Unthemed Weapons Collection.zip" || true
+unzip "${prefix}/starsector/mods/Unthemed Weapons Collection.zip" || true
