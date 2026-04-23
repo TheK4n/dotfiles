@@ -125,6 +125,9 @@ vim.g.t_EI = [[\e[1 q]]
 local parsers_dir = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/parser"
 vim.opt.runtimepath:prepend(parsers_dir)
 
+-- Column
+opt.cc = "80"
+
 
 vim.g.netrw_banner = 0 -- hide banner
 vim.g.highlighturl_enabled = true -- highlight URLs by default

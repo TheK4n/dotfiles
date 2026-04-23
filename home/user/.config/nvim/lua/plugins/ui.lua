@@ -116,22 +116,6 @@ return {
         end
     },
     {
-        'lukas-reineke/virt-column.nvim',
-        lazy = false,
-        config = function()
-            require("virt-column").setup({
-                virtcolumn = '80'
-            })
-        end
-    },
-    {
-        'norcalli/nvim-colorizer.lua',
-        lazy = false,
-        config = function()
-            require('colorizer').setup()
-        end
-    },
-    {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             require("ibl").setup({
