@@ -9,12 +9,10 @@ wget -c -O "${prefix}/starsector.zip" "https://f005.backblazeb2.com/file/fractal
 unzip "${prefix}/starsector.zip"
 
 
-wget -c -O "${prefix}/starsector-rusificator.zip.gz" "https://paste.thek4n.ru/c7aLRZlxGak6LB/"
-gzip -f -d "${prefix}/starsector-rusificator.zip.gz" > "${prefix}/starsector-rusificator.zip" || true
-unzip -o "${prefix}/starsector-rusificator.zip" || true
+wget -c -O "${prefix}/starsector-rusificator.zip" "https://paste.thek4n.ru/lvsaHLOAmFfqnv/"
+unzip -o "${prefix}/starsector-rusificator.zip"
 
 
 cd "${prefix}/starsector/mods/"
-wget -c -O "${prefix}/starsector/mods/Unthemed Weapons Collection.zip.gz" "https://paste.thek4n.ru/hczMvglofkfW7d/"
-gzip -f -d "${prefix}/starsector/mods/Unthemed Weapons Collection.zip.gz" > "${prefix}/starsector/mods/Unthemed Weapons Collection.zip" || true
-unzip "${prefix}/starsector/mods/Unthemed Weapons Collection.zip" || true
+wget -c -O "${prefix}/starsector/mods/Unthemed Weapons Collection.zip" "https://paste.thek4n.ru/pGbkhFFgGcSysm/"
+unzip "${prefix}/starsector/mods/Unthemed Weapons Collection.zip"
