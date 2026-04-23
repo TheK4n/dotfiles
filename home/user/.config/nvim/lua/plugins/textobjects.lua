@@ -10,8 +10,4 @@ return {
     {
         'chaoren/vim-wordmotion',
     },
-    {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    },
 }
