@@ -1,12 +1,3 @@
-local border_opts = {
-    border = "rounded",
-    winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-    max_width = 50,
-    min_width = 50,
-    max_height = math.floor(vim.o.lines * 0.4),
-    min_height = 3,
-}
-
 local function has_words_before()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -43,13 +34,69 @@ local function setup_cmp()
             ),
             ['<C-k>'] = cmp.mapping.select_prev_item({ behaviour = cmp.SelectBehavior.Select }),
             ['<C-j>'] = cmp.mapping.select_next_item({ behaviour = cmp.SelectBehavior.Select }),
-            ['<C-p>'] = cmp.mapping.scroll_docs(4),
-            ['<C-n>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-p>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-n>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.abort(),
         }),
         window = {
-            completion = cmp.config.window.bordered(border_opts),
-            documentation = cmp.config.window.bordered(border_opts),
+            completion = {
+                border = "rounded",
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+                scrollbar = true,
+                col_offset = 0,
+                side_padding = 1,
+            },
+            documentation = {
+                border = "rounded",
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+                max_width = 60,
+                max_height = 20,
+                scrollbar = true,
+            },
+        },
+        formatting = {
+            format = function(entry, vim_item)
+                local kind_icons = {
+                    Text = "",
+                    Method = "󰆧",
+                    Function = "󰊕",
+                    Constructor = "",
+                    Field = "󰇢",
+                    Variable = "󰂡",
+                    Class = "󰠱",
+                    Interface = "",
+                    Module = "",
+                    Property = "󰜢",
+                    Unit = "",
+                    Value = "󰎠",
+                    Enum = "",
+                    Keyword = "󰌋",
+                    Snippet = "",
+                    Color = "󰏘",
+                    File = "󰈙",
+                    Reference = "",
+                    Folder = "󰉋",
+                    EnumMember = "",
+                    Constant = "󰏿",
+                    Struct = "",
+                    Event = "",
+                    Operator = "󰆕",
+                    TypeParameter = "󰅲",
+                }
+                vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind] or '󰠱', vim_item.kind)
+
+                local source_names = {
+                    nvim_lsp = "LSP",
+                    luasnip = "Snippet",
+                    buffer = "Buffer",
+                    tmux = "Tmux",
+                    dotenv = "Env",
+                    path = "Path",
+                }
+                vim_item.menu = string.format("[%s]", source_names[entry.source.name] or entry.source.name)
+
+                return vim_item
+            end,
         },
         sorting = {
             priority_weight = 1.0,
