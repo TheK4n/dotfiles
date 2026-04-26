@@ -137,52 +137,52 @@ return {
             vim.diagnostic.config({ virtual_text = true })
         end,
     },
-    {
-        'zbirenbaum/copilot.lua',
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                    debounce = 75,
-                    keymap = {
-                        accept = "<C-l>",
-                        accept_word = false,
-                        accept_line = "<C-y>", -- принять строку
-                        next = "<M-]>",       -- следующее предложение
-                        prev = "<M-[>",       -- предыдущее предложение
-                        dismiss = "<C-b>",    -- отклонить
-                    },
-                },
-                panel = {
-                    enabled = true,
-                    auto_refresh = false,
-                    keymap = {
-                        jump_prev = "[[",
-                        jump_next = "]]",
-                        accept = "<CR>",
-                        refresh = "gr",
-                        open = "<M-CR>"
-                    },
-                },
-                filetypes = {
-                    yaml = true,
-                    markdown = true,
-                    help = false,
-                    gitcommit = true,
-                    gitrebase = false,
-                    hgcommit = false,
-                    svn = false,
-                    cvs = false,
-                    ["."] = false,
-                },
-                copilot_node_command = 'node',
-                server_opts_overrides = {},
-            })
-        end,
-    },
+    -- {
+    --     'zbirenbaum/copilot.lua',
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup({
+    --             suggestion = {
+    --                 enabled = true,
+    --                 auto_trigger = true,
+    --                 debounce = 75,
+    --                 keymap = {
+    --                     accept = "<C-l>",
+    --                     accept_word = false,
+    --                     accept_line = "<C-y>", -- принять строку
+    --                     next = "<M-]>",       -- следующее предложение
+    --                     prev = "<M-[>",       -- предыдущее предложение
+    --                     dismiss = "<C-b>",    -- отклонить
+    --                 },
+    --             },
+    --             panel = {
+    --                 enabled = true,
+    --                 auto_refresh = false,
+    --                 keymap = {
+    --                     jump_prev = "[[",
+    --                     jump_next = "]]",
+    --                     accept = "<CR>",
+    --                     refresh = "gr",
+    --                     open = "<M-CR>"
+    --                 },
+    --             },
+    --             filetypes = {
+    --                 yaml = true,
+    --                 markdown = true,
+    --                 help = false,
+    --                 gitcommit = true,
+    --                 gitrebase = false,
+    --                 hgcommit = false,
+    --                 svn = false,
+    --                 cvs = false,
+    --                 ["."] = false,
+    --             },
+    --             copilot_node_command = 'node',
+    --             server_opts_overrides = {},
+    --         })
+    --     end,
+    -- },
     -- {
     --     'zbirenbaum/copilot-cmp',
     --     dependencies = { 'zbirenbaum/copilot.lua' },
