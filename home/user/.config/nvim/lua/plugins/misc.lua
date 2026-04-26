@@ -25,9 +25,24 @@ return {
     },
     {
         "romus204/tree-sitter-manager.nvim",
+        priority = 1,
         config = function()
             require("tree-sitter-manager").setup({
-                -- ensure_installed = {"python", "lua", "vim", "html", "rust", "markdown", "markdown_inline", "regex"},
+                ensure_installed = {
+                    "python", "lua", "vim", "rust", "go", "c", "cpp",
+                    "html", "markdown", "markdown_inline", "css", "scss", "javascript", "jsx",
+                    "mermaid",
+                    "nginx",
+                    "gomod", "gosum",
+                    "regex", "kconfig",
+                    "yaml", "proto",
+                    "just", "make",
+                    "zsh", "bash",
+                    "devicetree",
+                    "ssh_config",
+                    "diff", "dockerfile", "editorconfig",
+                    "git_config", "gitattributes", "gitcommit", "gitignore",
+                },
                 auto_install = true,
             })
         end
