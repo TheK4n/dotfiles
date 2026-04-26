@@ -92,6 +92,7 @@ opt.undoreload = 1000
 
 local prefix = vim.fn.expand("~/.local/state/nvim")
 
+
 opt.undodir = { prefix .. "/undo//" }
 opt.backupdir = { prefix .. "/backup//" }
 opt.directory = { prefix .. "/swap//" }
@@ -173,3 +174,4 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 
 vim.opt.foldcolumn = "1"
+vim.diagnostic.config({ virtual_text = true })

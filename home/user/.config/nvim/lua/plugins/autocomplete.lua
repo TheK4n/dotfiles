@@ -130,13 +130,6 @@ return {
         },
         config = setup_cmp,
     },
-    {
-        'neovim/nvim-lspconfig',
-        event = "InsertEnter",
-        config = function()
-            vim.diagnostic.config({ virtual_text = true })
-        end,
-    },
     -- {
     --     'zbirenbaum/copilot.lua',
     --     cmd = "Copilot",
