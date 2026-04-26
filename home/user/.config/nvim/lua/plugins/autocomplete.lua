@@ -64,6 +64,7 @@ local function setup_cmp()
         },
         sources = cmp.config.sources({
             { name = 'nvim_lsp', priority = 1500 },
+            -- { name = 'copilot', priority = 1400 },
             { name = 'luasnip', priority = 1250 },
             { name = 'buffer', priority = 1000 },
             { name = 'tmux', priority = 750 },
@@ -124,6 +125,8 @@ return {
             'lukas-reineke/cmp-under-comparator',
             'SergioRibera/cmp-dotenv',
             'andersevenrud/cmp-tmux',
+            'zbirenbaum/copilot-cmp',
+            'zbirenbaum/copilot.lua',
         },
         config = setup_cmp,
     },
@@ -134,4 +137,64 @@ return {
             vim.diagnostic.config({ virtual_text = true })
         end,
     },
+    {
+        'zbirenbaum/copilot.lua',
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true,
+                    debounce = 75,
+                    keymap = {
+                        accept = "<C-l>",
+                        accept_word = false,
+                        accept_line = "<C-y>", -- принять строку
+                        next = "<M-]>",       -- следующее предложение
+                        prev = "<M-[>",       -- предыдущее предложение
+                        dismiss = "<C-b>",    -- отклонить
+                    },
+                },
+                panel = {
+                    enabled = true,
+                    auto_refresh = false,
+                    keymap = {
+                        jump_prev = "[[",
+                        jump_next = "]]",
+                        accept = "<CR>",
+                        refresh = "gr",
+                        open = "<M-CR>"
+                    },
+                },
+                filetypes = {
+                    yaml = true,
+                    markdown = true,
+                    help = false,
+                    gitcommit = true,
+                    gitrebase = false,
+                    hgcommit = false,
+                    svn = false,
+                    cvs = false,
+                    ["."] = false,
+                },
+                copilot_node_command = 'node',
+                server_opts_overrides = {},
+            })
+        end,
+    },
+    -- {
+    --     'zbirenbaum/copilot-cmp',
+    --     dependencies = { 'zbirenbaum/copilot.lua' },
+    --     config = function()
+    --         require("copilot_cmp").setup({
+    --             method = "getCompletionsCycle",
+    --             formatters = {
+    --                 label = require("copilot_cmp.format").format_label_text,
+    --                 kind = require("copilot_cmp.format").format_kind,
+    --                 documentation = require("copilot_cmp.format").format_documentation,
+    --             },
+    --         })
+    --     end,
+    -- },
 }
