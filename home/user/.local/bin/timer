@@ -3,4 +3,6 @@
 set -eu
 
 sleep "${@}"
+
 notify-send -t 0 -- 'Timer complete' "${*}"
+beep -f 800 -l 250 -n -f 1000 -l 500
