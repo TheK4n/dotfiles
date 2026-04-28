@@ -1,0 +1,13 @@
+profile home_one {
+    output DP-1 mode 1920x1080 position 0,0
+}
+
+profile home {
+    output DP-1 mode 1920x1080 position 0,0
+    output HDMI-A-1 mode 1920x1080 position 450,-1080
+}
+
+profile office {
+    output DVI-I-1 mode 1920x1080 position 0,0
+    output VGA-1 mode 1920x1080 position 0,1080
+}
