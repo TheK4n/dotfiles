@@ -3,4 +3,4 @@
 set -eu
 
 sleep "${@}"
-notify-send -- 'Timer complete' "${*}"
+notify-send -t 0 -- 'Timer complete' "${*}"
