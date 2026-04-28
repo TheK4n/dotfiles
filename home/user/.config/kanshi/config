@@ -1,10 +1,22 @@
+output "LG Electronics LG TV 0x01010101" {
+    mode 1920x1080
+    scale 1
+    alias $HOME_TV
+}
+
+output "LG Electronics MP59G 0x000732C8" {
+    mode 1920x1080
+    scale 1
+    alias $HOME_MONITOR
+}
+
 profile home_one {
-    output DP-1 mode 1920x1080 position 0,0
+    output $HOME_MONITOR position 0,0 enable
 }
 
 profile home {
-    output DP-1 mode 1920x1080 position 0,0
-    output HDMI-A-1 mode 1920x1080 position 450,-1080
+    output $HOME_MONITOR position 0,0 enable
+    output $HOME_TV position 450,-1080 enable
 }
 
 profile office {
