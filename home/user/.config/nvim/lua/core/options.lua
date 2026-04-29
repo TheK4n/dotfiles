@@ -173,5 +173,21 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local file = vim.fn.expand("<afile>")
+    local dir = vim.fn.fnamemodify(file, ":h")
+
+    if vim.fn.isdirectory(dir) == 0 then
+      local success = pcall(vim.fn.mkdir, dir, "p")
+      if not success then
+        vim.notify("Cannot create directory: " .. dir, vim.log.levels.ERROR)
+        return false
+      end
+    end
+  end,
+})
+
 vim.opt.foldcolumn = "1"
 vim.diagnostic.config({ virtual_text = true })
