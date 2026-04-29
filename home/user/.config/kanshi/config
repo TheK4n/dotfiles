@@ -1,3 +1,6 @@
+
+### Home configuration
+
 output "LG Electronics LG TV 0x01010101" {
     mode 1920x1080
     scale 1
@@ -19,7 +22,26 @@ profile home {
     output $HOME_TV position 450,-1080 enable
 }
 
+
+### Office configuration
+
+output "ViewSonic Corporation VA2445 SERIES TSQ142000090" {
+    mode 1920x1080
+    scale 1
+    alias $OFFICE_MAIN
+}
+
+output "ViewSonic Corporation VA2445 SERIES TSQ142000093" {
+    mode 1920x1080
+    scale 1
+    alias $OFFICE_SECOND
+}
+
 profile office {
-    output DVI-I-1 mode 1920x1080 position 0,0
-    output VGA-1 mode 1920x1080 position 1920,0
+    output $OFFICE_MAIN position 0,0
+    output $OFFICE_SECOND position 1920,0
+}
+
+profile office_one {
+    output $OFFICE_MAIN position 0,0 enable
 }
