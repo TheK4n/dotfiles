@@ -5,17 +5,18 @@ exec swaylock -f
 set $mod Mod4
 
 set $ws1 "1 Browser"
-set $ws2 "2  Code"
+set $ws2 "2  Terminal"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8💬Social"
-set $ws9 "9🎵Music"
+set $ws9 "9  Terminal"
 set $ws10 "10🍿Media"
 
-set $terminal ~/.config/sway/scripts/auto-alacritty.sh
+set $terminal1 ~/.config/sway/scripts/auto-alacritty.sh "Alacritty1"
+set $terminal2 ~/.config/sway/scripts/auto-alacritty.sh "Alacritty2"
 set $browser firefox
 
 # Example variables.d:
