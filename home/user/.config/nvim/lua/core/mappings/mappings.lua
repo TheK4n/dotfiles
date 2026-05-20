@@ -88,6 +88,12 @@ map("n", '<Leader>qq', '<cmd>bd!<CR>',
 map("n", '<Leader>qa', '<cmd>qa!<CR>',
     {desc = "Exit without saving"})
 
+map("n", '<Leader>cq', '<cmd>cq 233<CR>',
+    {desc = "Exit without saving"})
+
+
+vim.api.nvim_create_user_command('Q', 'cq 233', {})
+
 
 map("n", '<Leader>he', '<cmd>set list!<CR>',
     {desc = "Show hidden symbols"})
