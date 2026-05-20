@@ -14,6 +14,12 @@ then
         exec tmux -N -L "${USER}" new-session
     fi
     exec tmux -N -L "${USER}" new-session -A
+elif \
+  [ -n "${TERMUX_VERSION}" ] && \
+  command -v tmux &>/dev/null && \
+  [ -z "${TMUX}" ]
+then
+    exec tmux new-session
 fi
 
 if [ -f "${ZDOTDIR}/sourcer" ]; then

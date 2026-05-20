@@ -145,6 +145,7 @@ alias nfe='note fe'
 alias nfg='note fg'
 alias ng='note git'
 alias sn='mdpreview --browser --host localhost --port 0 "$(note --prefix)"'
+alias nr="trynafail note random"
 
 
 # Cargo
