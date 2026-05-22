@@ -128,6 +128,8 @@ alias colors='for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i} - ███
 alias paste.thek4n.ru='curl --data-binary @- "https://paste.thek4n.ru/" 2>/dev/null'
 alias pastewww='paste.thek4n.ru'
 
+alias cleanup-downloads='cleanup-directory-log "${XDG_DOWNLOAD_DIR}"'
+
 alias copy='tee /dev/stderr | \copy'
 
 alias ssh='TERM=xterm-256color ssh'
