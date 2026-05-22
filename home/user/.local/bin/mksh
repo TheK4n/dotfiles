@@ -1,6 +1,4 @@
-#!/bin/sh
-
-set -eu
+#!/bin/sh -eu
 
 if [ ! ${#} -eq 1 ]; then
   echo 'mksh takes one argument' 1>&2
@@ -10,8 +8,7 @@ elif [ -e "${1}" ]; then
   exit 1
 fi
 
-echo '#!/bin/sh
-set -eu
+echo '#!/bin/sh -eu
 
 ' > "${1}"
 
