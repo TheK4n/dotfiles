@@ -1,9 +1,5 @@
 #!/bin/sh -eu
 
-readonly name="${1}"; shift
-
-mkdir -p "${name}" && cd "${name}"
-
 readonly user_agent="Mozilla/5.0 ..."
 wget \
     --page-requisites \
@@ -21,4 +17,4 @@ wget \
     --user-agent "${user_agent}" \
     --reject '*.woff*,*.ttf,*.eot,*.js' \
     --tries 10 \
-    "$@"
+    "${1}"

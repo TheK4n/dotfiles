@@ -5,11 +5,11 @@ _fzf_base() {
 }
 
 fzf_get_selected_modified() {
-    _fzf_base -1 --border-label=' Modified ' --preview 'git diff --color=always -- "$(echo {+} | sed "s/^[^ ]* //")"'
+    _fzf_base -1 --border-label=' Modified ' --preview 'git diff --color=always -- "$(echo {} | sed "s/^[^ ]* //")"'
 }
 
 fzf_get_selected_untracked() {
-    _fzf_base --border-label=' Untracked ' --preview 'highlight -O xterm256 -- "$(echo {+} | sed "s/^[^ ]* //")"'
+    _fzf_base --border-label=' Untracked ' --preview 'highlight -O xterm256 -- "$(echo {} | sed "s/^[^ ]* //")"'
 }
 
 gitadd() {
@@ -21,11 +21,11 @@ git_ls_files() {
 }
 
 modified_files="$(git_ls_files --modified)"
-if [ -n "$modified_files" ]; then
+if [ -n "${modified_files}" ]; then
     printf "%s\n" "${modified_files}" | fzf_get_selected_modified | gitadd
 fi
 
 untracked_files="$(git_ls_files --others)"
-if [ -n "$untracked_files" ]; then
+if [ -n "${untracked_files}" ]; then
     printf "%s\n" "${untracked_files}" | fzf_get_selected_untracked | gitadd
 fi

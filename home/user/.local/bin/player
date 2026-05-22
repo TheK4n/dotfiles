@@ -26,6 +26,7 @@ EOF
 }
 
 get_radio_url() {
+    # https://gist.github.com/ergoz/e7837a54956116167db93b016dbd51a9
     channel="${1:-}"
     case "${channel}" in
         lofi)      echo 'https://radiorecord.hostingradio.ru/lofi96.aacp' ;;
