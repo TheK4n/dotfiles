@@ -1,5 +1,4 @@
-#!/bin/sh
-set -eu
+#!/bin/sh -eu
 
 if [ -t 0 ]; then
    echo "${@}" | python3 -m json.tool --no-ensure-ascii

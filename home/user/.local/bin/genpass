@@ -1,6 +1,4 @@
-#!/bin/sh
-
-set -ue
+#!/bin/sh -eu
 
 LC_ALL=C
 DEFAULT_PASSWORD_LENGTH=20

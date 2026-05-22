@@ -1,5 +1,4 @@
-#!/bin/sh
-set -eu
+#!/bin/sh -eu
 
 readonly downloads_directory="${XDG_DOWNLOAD_DIR}"
 cleanup-directory-log "${downloads_directory}"

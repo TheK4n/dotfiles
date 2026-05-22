@@ -1,6 +1,4 @@
-#!/usr/bin/env zsh
-
-set -euo pipefail
+#!/usr/bin/env -S zsh -euo pipefail
 
 readonly LOG_FILE="${HOME}/.screenshots.log"
 readonly NOTIFY_TIME_LOW_MS=1500

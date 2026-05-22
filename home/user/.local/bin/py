@@ -1,6 +1,4 @@
-#!/bin/sh
-set -eu
-
+#!/bin/sh -eu
 
 if [ -z "${*}" ] && [ -x "$(command -v ipython 2>/dev/null)" ]; then
     ipython -i -c "q = exit"

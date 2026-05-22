@@ -1,7 +1,4 @@
-#!/bin/sh
-
-set -eu
-
+#!/bin/sh -eu
 
 if [ ! -e "${1}" ]; then
     echo "file '${1}' not found" >&2

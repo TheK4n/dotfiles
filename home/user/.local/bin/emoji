@@ -1,5 +1,4 @@
-#!/bin/sh
-set -eu
+#!/bin/sh -eu
 
 emoji="😀 grinning cheerful cheery face grin grinning face happy laugh nice smile smiling teeth
 😃 smiley awesome face grin happy mouth open smile smiling smiling face with open mouth teeth yay

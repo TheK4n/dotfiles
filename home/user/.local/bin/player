@@ -1,5 +1,4 @@
-#!/bin/sh
-set -eu
+#!/bin/sh -eu
 
 PROG="$(basename "${0}")"
 SOCKET_PATH="/tmp/mpv-${USER}.sock"

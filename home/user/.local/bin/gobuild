@@ -1,4 +1,3 @@
-#!/bin/sh
-set -eu
+#!/bin/sh -eu
 
 go build -v "${@}" -o ./bin/ ./...

@@ -1,5 +1,4 @@
-#!/bin/sh
-set -eu
+#!/bin/sh -eu
 
 cd "${HOME}/Games/starsector"
 ./starsector.sh

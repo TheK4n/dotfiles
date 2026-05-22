@@ -1,5 +1,3 @@
-#!/bin/sh
-
-set -ue
+#!/bin/sh -eu
 
 dd if=/dev/urandom count=16 2>/dev/null | sha256sum | head -c 64

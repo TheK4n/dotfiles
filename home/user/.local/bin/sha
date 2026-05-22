@@ -1,6 +1,4 @@
-#!/bin/sh
-set -eu
-
+#!/bin/sh -eu
 
 if [ -n "${2+x}" ]; then
     shasum -a 256 "${@}"

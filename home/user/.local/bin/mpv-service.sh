@@ -1,5 +1,4 @@
-#!/bin/sh
-set -eu
+#!/bin/sh -eu
 
 SOCKET_PATH="/tmp/mpv-${USER}.sock"
 
