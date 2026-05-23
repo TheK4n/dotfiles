@@ -2,6 +2,7 @@
 
 PROG="$(basename "${0}")"
 SOCKET_PATH="/tmp/mpv-${USER}.sock"
+CHANNELS="lofi, fallout, retrofm, rusradio, rock, phonk, dorognoe, christmas"
 
 die() {
     echo "Error: $*" >&2
@@ -21,7 +22,7 @@ Commands:
   help                   Show this message
 
 Radio Channels:
-  lofi, fallout, wasteland, retrofm, rusradio, rock, phonk, dorognoe
+  ${CHANNELS}
 EOF
 }
 
@@ -31,13 +32,15 @@ get_radio_url() {
     case "${channel}" in
         lofi)      echo 'https://radiorecord.hostingradio.ru/lofi96.aacp' ;;
         fallout)   echo 'http://fallout.fm:8000/falloutfm1.ogg' ;;
-        wasteland) echo 'http://wasteland.su:8080/radio' ;;
         retrofm)   echo 'http://hls-01-retro.emgsound.ru/12/128/playlist.m3u8' ;;
         rusradio)  echo 'https://rusradio.hostingradio.ru/rusradio128.mp3' ;;
         rock)      echo 'https://radiorecord.hostingradio.ru/rock96.aacp' ;;
         phonk)     echo 'https://radiorecord.hostingradio.ru/phonk96.aacp' ;;
         dorognoe)  echo 'https://dorognoe.hostingradio.ru:8000/dorognoe' ;;
-        *)         die "Unknown radio channel '${channel}'. Available: lofi/fallout/wasteland/retrofm/rusradio/rock/phonk/dorognoe" ;;
+        christmas) echo 'http://relay4.181.fm:8124/' ;;
+        *)         die "Unknown radio channel '${channel}'.
+
+Available: ${CHANNELS}" ;;
     esac
 }
 
@@ -52,7 +55,9 @@ send_cmd() {
 tune_radio() {
     channel="${1:-}"
     if [ -z "${channel}" ]; then
-        die "Radio channel required. Usage: ${PROG} radio <channel>"
+        die "Radio channel required. Usage: ${PROG} radio <channel>
+
+Available: ${CHANNELS}"
     fi
 
     url="$(get_radio_url "${channel}")"
