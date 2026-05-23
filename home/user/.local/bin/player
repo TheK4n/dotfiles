@@ -2,7 +2,7 @@
 
 PROG="$(basename "${0}")"
 SOCKET_PATH="/tmp/mpv-${USER}.sock"
-CHANNELS="lofi, fallout, retrofm, rusradio, rock, phonk, dorognoe, christmas"
+CHANNELS="lofi, lofigirl, fallout, retrofm, rusradio, rock, phonk, dorognoe, christmas"
 
 die() {
     echo "Error: $*" >&2
@@ -31,6 +31,7 @@ get_radio_url() {
     channel="${1:-}"
     case "${channel}" in
         lofi)      echo 'https://radiorecord.hostingradio.ru/lofi96.aacp' ;;
+        lofigirl)  echo 'https://play.streamafrica.net/lofiradio' ;;
         fallout)   echo 'http://fallout.fm:8000/falloutfm1.ogg' ;;
         retrofm)   echo 'http://hls-01-retro.emgsound.ru/12/128/playlist.m3u8' ;;
         rusradio)  echo 'https://rusradio.hostingradio.ru/rusradio128.mp3' ;;
@@ -62,6 +63,7 @@ Available: ${CHANNELS}"
 
     url="$(get_radio_url "${channel}")"
     send_cmd "[\"loadfile\", \"${url}\", \"replace\"]"
+    send_cmd '["set", "pause", "no"]'
     echo "📻 Switched to radio: ${channel}"
 }
 
