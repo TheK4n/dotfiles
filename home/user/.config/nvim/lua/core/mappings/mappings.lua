@@ -22,7 +22,7 @@ local function create_function_tabdo(command)
     end
 end
 
-map('n', '<Leader>hc', create_function_tabdo('set cursorline!'),
+map('n', '<Leader>hl', create_function_tabdo('set cursorline!'),
     {desc = "Toggle line highlighting"})
 
 map('n', '<Leader>cs',
@@ -41,7 +41,7 @@ map('v', '<C-f>', '"fy:set hlsearch<CR>/\\V<C-r>f\\C<CR>')
 -- copy word under cursor to search line
 map('n', '<C-f>', ':set hlsearch<CR>/\\V<C-r><C-w>\\C<CR>')
 
-map('n', '<Leader>hl', create_function_tabdo('lua toggle_number_style()'),
+map('n', '<Leader>hn', create_function_tabdo('lua toggle_number_style()'),
     {desc = "Toggle line number style"})
 
 
