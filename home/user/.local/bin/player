@@ -14,7 +14,7 @@ usage() {
 Usage: ${PROG} <command> [args]
 
 Commands:
-  radio <CHANNEL>        Switch to a radio station
+  radio, r <CHANNEL>     Switch to a radio station
   local, music [PATH]    Switch to local music playlist (default: ~/Music)
   next, n                Next track
   prev, p                Previous track
@@ -120,11 +120,11 @@ ACTION="${1:-}"
 shift 2>/dev/null || true
 
 case "${ACTION}" in
-    radio|tune)
-        tune_radio "$@"
+    radio|tune|r)
+        tune_radio "${@}"
         ;;
     local|music|m)
-        play_local_playlist "$@"
+        play_local_playlist "${@}"
         ;;
     next|n|prev|p|pause|stop|toggle|t|s)
         handle_control "${ACTION}"
