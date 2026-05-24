@@ -11,4 +11,12 @@ cleanup() {
 }
 trap cleanup EXIT TERM INT
 
-exec mpv --really-quiet --idle --no-video --input-ipc-server="${SOCKET_PATH}" --ytdl-format=worstaudio
+exec mpv \
+    --really-quiet \
+    --idle \
+    --no-video --force-window=no \
+    --input-ipc-server="${SOCKET_PATH}" \
+    --ao='pipewire' \
+    --demuxer-max-bytes=50MiB \
+    --demuxer-max-back-bytes=10MiB \
+    --audio-buffer=0.5
