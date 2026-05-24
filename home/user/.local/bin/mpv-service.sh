@@ -16,7 +16,6 @@ exec mpv \
     --idle \
     --no-video --force-window=no \
     --input-ipc-server="${SOCKET_PATH}" \
-    --ao='pipewire' \
     --demuxer-max-bytes=50MiB \
     --demuxer-max-back-bytes=10MiB \
     --audio-buffer=0.5
