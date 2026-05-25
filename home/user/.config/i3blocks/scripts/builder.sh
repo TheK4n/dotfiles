@@ -81,7 +81,7 @@ cmd_pomodoro() {
 
 cmd_bluetooth_battery() {
     device="$(upower -e | grep headset | head -1)"
-    upower -i "${device}" | grep percentage | awk '{ print "🎧🔋"$2"" }'
+    upower -i "${device}" | grep percentage | awk '{ print "🎧"$2"" }'
 }
 
 cmd_language() {

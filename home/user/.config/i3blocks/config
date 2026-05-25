@@ -37,10 +37,6 @@ interval=5
 command=~/.config/i3blocks/scripts/builder.sh bluetooth_battery
 interval=5
 
-[battery]
-command=~/.config/i3blocks/scripts/builder.sh battery
-interval=30
-
 [volume]
 command=~/.config/i3blocks/scripts/builder.sh volume
 interval=1
@@ -58,6 +54,10 @@ signal=1
 [userhost]
 command=~/.config/i3blocks/scripts/builder.sh userhost
 signal=1
+
+[battery]
+command=~/.config/i3blocks/scripts/builder.sh battery
+interval=30
 
 [time]
 command=~/.config/i3blocks/scripts/builder.sh time
