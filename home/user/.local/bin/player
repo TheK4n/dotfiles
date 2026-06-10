@@ -14,12 +14,12 @@ usage() {
 Usage: ${PROG} <command> [args]
 
 Commands:
-  radio, r <CHANNEL>     Switch to a radio station
-  local, music [PATH]    Switch to local music playlist (default: ~/Music)
-  next, n                Next track
-  prev, p                Previous track
-  pause, stop, toggle, s Toggle pause
-  help                   Show this message
+  radio, r <CHANNEL>          Switch to a radio station
+  local, music [PATH]         Switch to local music playlist (default: ~/Music)
+  next, n                     Next track
+  prev, last, l               Previous track
+  pause, stop, toggle, s, p   Toggle pause
+  help                        Show this message
 
 Radio Channels:
   ${CHANNELS}
@@ -101,11 +101,11 @@ handle_control() {
             send_cmd '["playlist-next"]'
             echo "➡️ Next"
             ;;
-        prev|p)
+        prev|last|l)
             send_cmd '["playlist-prev"]'
             echo "⬅️ Prev"
             ;;
-        pause|stop|toggle|t|s)
+        pause|stop|toggle|t|s|p)
             send_cmd '["cycle", "pause"]'
             echo "⏯️ Pause toggled"
             ;;
@@ -126,7 +126,7 @@ case "${ACTION}" in
     local|music|m)
         play_local_playlist "${@}"
         ;;
-    next|n|prev|p|pause|stop|toggle|t|s)
+    next|n|prev|p|pause|stop|toggle|t|s|last)
         handle_control "${ACTION}"
         ;;
     help|"")
