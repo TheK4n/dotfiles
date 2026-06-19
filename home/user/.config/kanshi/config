@@ -19,7 +19,7 @@ profile home_one {
 
 profile home {
     output $HOME_MONITOR position 0,0 enable
-    output $HOME_TV position 450,-1080 enable
+    output $HOME_TV position 0,-1080 enable
 }
 
 
