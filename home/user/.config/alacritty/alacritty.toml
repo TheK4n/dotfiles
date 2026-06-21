@@ -4,7 +4,7 @@ TERM = "xterm-256color"
 WINIT_X11_SCALE_FACTOR = "1"
 
 [font]
-size = 11
+size = 10
 
 [font.normal]
 family = "FiraCode Nerd Font Mono"
