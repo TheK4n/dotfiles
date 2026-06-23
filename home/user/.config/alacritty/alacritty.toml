@@ -1,10 +1,12 @@
+[general]
+live_config_reload = true
+import = [
+    "config.d/size.toml",
+]
 
 [env]
 TERM = "xterm-256color"
 WINIT_X11_SCALE_FACTOR = "1"
-
-[font]
-size = 10
 
 [font.normal]
 family = "FiraCode Nerd Font Mono"
@@ -23,7 +25,7 @@ mods = "Control|Shift"
 hide_when_typing = true
 
 [scrolling]
-history = 3000
+history = 1000
 multiplier = 3
 
 [window]
@@ -33,6 +35,3 @@ opacity = 0.92
 [window.dimensions]
 columns = 150
 lines = 42
-
-[general]
-live_config_reload = true

@@ -47,3 +47,6 @@ home/user/.config/sway/config.d/*
 
 home/user/.config/sway/variables.d/*
 !home/user/.config/sway/variables.d/.gitkeep
+
+home/user/.config/alacritty/config.d/*
+!home/user/.config/alacritty/config.d/.gitkeep
