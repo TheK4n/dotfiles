@@ -1,25 +1,23 @@
-#!/bin/sh
-
-
-TAB="$(printf -- '\t')"
-readonly TAB
+#!/bin/sh -m
 
 
 execute_and_format_result() {
-    cmd="${@}"
+    cmd="${*}"
 
-    ip="$(${cmd} 2>/dev/null)"
+    #shellcheck disable=SC2086
+    ip="$(timeout 3 ${cmd} 2>/dev/null)"
 
-    printf "%s\t%s\n" "${ip}" "${cmd}"
+    printf "%s\t\t\033[0;90m%s\033[0m\n" "${ip}" "${cmd}"
 }
 
 if [ "${1}" = '--short' ]; then
-    curl ip.thek4n.ru
+    curl -L ip.thek4n.ru
     exit "${?}"
 fi
 
-{
-    execute_and_format_result curl ipinfo.io/ip
-    execute_and_format_result curl https://ip.thek4n.ru/
-    execute_and_format_result dig +short myip.opendns.com @resolver1.opendns.com
-} | column -t -s "${TAB}"
+execute_and_format_result curl ipinfo.io/ip &
+execute_and_format_result curl https://ip.thek4n.ru/ &
+execute_and_format_result dig +short myip.opendns.com @resolver1.opendns.com &
+
+sleep 0.7
+exit 0
