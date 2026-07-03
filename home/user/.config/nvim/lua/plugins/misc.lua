@@ -32,6 +32,7 @@ return {
                     "python", "lua", "vim", "rust", "go", "c", "cpp",
                     "html", "markdown", "markdown_inline", "css", "scss", "javascript", "jsx",
                     "mermaid",
+                    "sql",
                     "nginx",
                     "gomod", "gosum",
                     "regex", "kconfig",
