@@ -51,6 +51,29 @@ map('n', 'Ё', 'vg~', {desc = "Toggle character case"})
 map('v', 'Ё', '~', {desc = "Toggle character case"})
 
 
+map({'n', 'i'}, "<C-s>", "<cmd>w<CR>", {desc = "Save file"})
+
+map("n",
+    "<C-n>",
+    function()
+        if vim.g.l == nil or vim.g.l <= 0 then
+            vim.g.l = 1
+        end
+
+        local _, prevcol = unpack(vim.api.nvim_win_get_cursor(0))
+
+        vim.api.nvim_put({tostring(vim.g.l) .. '. '}, 'c', false, true)
+
+
+        vim.g.l = vim.g.l + 1
+
+        local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+        vim.fn.cursor(row + 1, prevcol)
+    end,
+    {desc = "Insert numeral list marker (:let l=1)"}
+)
+
+
 map('n',
     '.',
     function()
