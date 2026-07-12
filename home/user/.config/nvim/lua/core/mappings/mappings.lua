@@ -56,21 +56,21 @@ map({'n', 'i'}, "<C-s>", "<cmd>w<CR>", {desc = "Save file"})
 map("n",
     "<C-n>",
     function()
-        if vim.g.l == nil or vim.g.l <= 0 then
-            vim.g.l = 1
+        if vim.b.l == nil or vim.b.l <= 0 then
+            vim.b.l = 1
         end
 
         local _, prevcol = unpack(vim.api.nvim_win_get_cursor(0))
 
-        vim.api.nvim_put({tostring(vim.g.l) .. '. '}, 'c', false, true)
+        vim.api.nvim_put({tostring(vim.b.l) .. '. '}, 'c', false, true)
 
 
-        vim.g.l = vim.g.l + 1
+        vim.b.l = vim.b.l + 1
 
         local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
         vim.fn.cursor(row + 1, prevcol)
     end,
-    {desc = "Insert numeral list marker (:let l=1)"}
+    {desc = "Insert numeral list marker (:let b:l=1)"}
 )
 
 
