@@ -29,7 +29,7 @@ fi
 session="$(basename "${project_dir}" | sed 's/\./_/g')"
 
 if ! tmux has-session -t="${session}" 2>/dev/null; then
-    tmux new-session -d -n 1 -c "${project_dir}" -s "$(basename "${project_dir}")"
+    tmux new-session -d -n 1 -c "${project_dir}" -s "${session}"
 fi
 
 tmux switch-client -t "${session}"
