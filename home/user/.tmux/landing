@@ -12,4 +12,4 @@ if ! tmux has-session -t="${SESSION}"; then
     tmux rename-window -t="${SESSION}:1" "${MAINW}"
 fi
 
-tmux switch-client -t "${SESSION}"
+tmux switch-client -t "${SESSION}" -c "$(tmux display -p '#{client_tty}')"

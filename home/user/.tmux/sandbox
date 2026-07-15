@@ -21,4 +21,4 @@ WORKING_PROJECT="$(mktemp -td "${SESSION}.XXXX")"
 readonly WORKING_PROJECT
 
 tmux new-session -s "${SESSION}" -d -c "${WORKING_PROJECT}"
-tmux switch-client -t "${SESSION}"
+tmux switch-client -t "${SESSION}" -c "$(tmux display -p '#{client_tty}')"

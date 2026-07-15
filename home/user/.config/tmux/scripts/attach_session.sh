@@ -23,5 +23,5 @@ session_to_attach="$("${tmux_list_sessions_script}" | fzf | awk '{printf $1}')"
 readonly session_to_attach
 
 if [ -n "${session_to_attach}" ]; then
-    tmux switch-client -t "${session_to_attach}"
+    tmux switch-client -t "${session_to_attach}" -c "$(tmux display -p '#{client_tty}')"
 fi
