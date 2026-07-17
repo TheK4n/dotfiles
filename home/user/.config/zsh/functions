@@ -70,3 +70,10 @@ cargo-init() {
     cargo init "${1}" && cd "${1}" && \
     return "${?}"
 }
+
+yacd() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    yazi "${@}" --cwd-file="${tmp}"
+    cd "$(cat "${tmp}")"
+    rm -f "${tmp}" >/dev/null
+}

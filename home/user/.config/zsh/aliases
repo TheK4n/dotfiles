@@ -75,6 +75,10 @@ alias beeptime='beep -D 400 -l 400 -r "$(date +%I)" -f 440 -n -D 1000 -l 0 -n -D
 alias vi='nvim'
 alias svi="sudo --preserve-env nvim"
 
+# Yazi
+alias ya='YAZI_ORIGINAL_CWD="${PWD}" \yazi'
+alias yazi='ya'
+
 # git
 for al in s d di co col cob ds u ps pst pl pr hs last lastd df amend br fuck sw swl swc swb
 do
