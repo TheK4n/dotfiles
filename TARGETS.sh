@@ -11,6 +11,7 @@ nvim:.config/nvim .editorconfig .editrc .local/bin/vim_askpass_helper
 ssh:
 git:.config/git .local/bin/ga
 ranger:.config/ranger
+yazi:.config/yazi
 gpg:
 sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .config/rofi .local/bin/screenshot .config/swaylock .Xresources .config/kanshi .local/bin/firefox_media %copypasta %pomodoro
 pomodoro:
@@ -28,4 +29,4 @@ scripts:.local/bin/httpstatus .local/bin/apco .local/bin/bb .local/bin/emoji .lo
 music:.local/bin/mpv-service.sh .config/systemd/user/mpv.service .local/bin/player
 copypasta:.local/bin/copy .local/bin/pasta
 starsector:.java/.userPrefs/com/fs/starfarer/prefs.xml .local/share/applications/starsector.desktop .local/bin/starsector
-all:%less %t %note %tmux %zsh %nvim %git"
+all:%less %t %note %tmux %zsh %nvim %git %yazi"
