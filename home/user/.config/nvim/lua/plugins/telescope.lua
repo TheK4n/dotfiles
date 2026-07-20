@@ -31,6 +31,7 @@ return {
             local actions = require("telescope.actions")
 
             telescope.load_extension("fzf")
+            telescope.load_extension('zoxide')
 
             telescope.setup({
                 pickers = {
@@ -125,5 +126,9 @@ return {
                 }
             })
         end
+    },
+    {
+        'jvgrootveld/telescope-zoxide',
+        enabled = vim.fn.executable("zoxide") == 1,
     }
 }
