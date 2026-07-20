@@ -19,8 +19,8 @@ if command -v eza &>/dev/null; then
     alias ll='eza --group --long'
     alias la='eza --all'
     alias lla='eza --long --all --group'
-    alias l.='_d() ( cd "${1:-.}" && eza --list-dirs .* ; ); _d'
-    alias ll.='_d() ( cd "${1:-.}" && eza --long --group --all --list-dirs .* ; ); _d'
+    alias l.='_d() ( \cd "${1:-.}" && eza --list-dirs .* ; ); _d'
+    alias ll.='_d() ( \cd "${1:-.}" && eza --long --group --all --list-dirs .* ; ); _d'
 
     alias tree='eza --tree'
 fi
