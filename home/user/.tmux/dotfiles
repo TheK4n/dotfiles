@@ -12,8 +12,7 @@ if ! tmux has-session -t="${SESSION}"; then
     tmux splitw -t "${SESSION}:${MAINW}" -d -b -h -l "${_tmux_other_pane_size}" -c "${WORKING_PROJECT}"
     sleep 0.3
     tmux send-keys -t "${SESSION}:${MAINW}.1" "git pull --rebase && git push" Enter
-    tmux send-keys -t "${SESSION}:${MAINW}.2" '$EDITOR' Enter
-    tmux send-keys -t "${SESSION}:${MAINW}.2" ':Telescope find_files' Enter
+    tmux send-keys -t "${SESSION}:${MAINW}.2" 'ya' Enter
 fi
 
 tmux switch-client -t "${SESSION}" -c "$(tmux display -p '#{client_tty}')"
