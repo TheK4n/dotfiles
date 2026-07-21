@@ -25,6 +25,11 @@ if [ ! -d "${project_dir}" ]; then
     exit 1
 fi
 
+{
+    if command -v zoxide 1>/dev/null 2>&1; then
+        zoxide add "${project_dir}"
+    fi
+} &
 
 session="$(basename "${project_dir}" | sed 's/\./_/g')"
 
