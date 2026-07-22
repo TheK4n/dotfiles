@@ -1,5 +1,23 @@
 # vim: ft=zsh
 
+__ask_user() {
+    local answer
+    local question="${1}"
+    local default_value="${2}"
+    printf '%s' "${question} (default=${default_value}): " >&2
+    read -r answer
+
+    if [ -z "${answer}" ]; then
+        answer="${default_value}"
+    fi
+
+    echo "${answer}"
+}
+
+__is_yes() {
+    [[ "${1}" == [Yy]* ]]
+}
+
 mcd() {
     local dir
     if [ -z "${1}" ]; then
@@ -72,8 +90,13 @@ cargo-init() {
 }
 
 ya() {
+    local original_dir="${PWD}"
     local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-    YAZI_ORIGINAL_CWD="${PWD}" \yazi "${@}" --cwd-file="${tmp}"
-    \cd "$(cat "${tmp}")"
+    YAZI_ORIGINAL_CWD="${original_dir}" \yazi "${@}" --cwd-file="${tmp}"
+    local dir="$(cat "${tmp}")"
     rm -f "${tmp}" >/dev/null
+
+    if [ "${original_dir}" != "${dir}" ] && __is_yes "$(__ask_user "Change CWD to ${dir}? [y/N]" "N")"; then
+        \cd "${dir}"
+    fi
 }
