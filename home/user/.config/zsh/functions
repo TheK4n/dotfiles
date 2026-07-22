@@ -71,9 +71,9 @@ cargo-init() {
     return "${?}"
 }
 
-yacd() {
+ya() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-    yazi "${@}" --cwd-file="${tmp}"
+    YAZI_ORIGINAL_CWD="${PWD}" \yazi "${@}" --cwd-file="${tmp}"
     \cd "$(cat "${tmp}")"
     rm -f "${tmp}" >/dev/null
 }
