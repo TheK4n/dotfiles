@@ -11,8 +11,10 @@ ${FZF_DEFAULT_OPTS}
 --color='border:grey,label:grey'
 "
 
-
-project_dir="$(find "${HOME}" -xdev -maxdepth 3 -type d -not -path '*/.*' | sed "s%^${HOME}%~%" | fzf | sed "s%^~%${HOME}%")"
+project_dir="$( (
+  command -v zoxide 1>/dev/null && zoxide query -l | sed "s%^${HOME}%~%"
+  fd -t d -d 3 --hidden --exclude '.*' --xdev . "${HOME}" | sed "s%^${HOME}%~%"
+) | fzf --no-sync | sed "s%^~%${HOME}%")"
 readonly project_dir
 
 
