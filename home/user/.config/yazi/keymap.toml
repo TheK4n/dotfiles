@@ -1,0 +1,4 @@
+[[mgr.append_keymap]]
+on = [ "c", "e" ]
+run = "shell -- flipbit x %h"
+desc = "Toggle execution mode on file"

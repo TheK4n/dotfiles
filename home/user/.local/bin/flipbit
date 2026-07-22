@@ -1,0 +1,42 @@
+#!/bin/sh -eu
+# flipbit - Toggle (flips) bit on file for owner only
+
+if [ "${#}" -ne 2 ]; then
+    echo "Usage: ${0} [rwx] file"
+    exit 1
+fi
+
+mode="${1}"
+file="${2}"
+
+if [ ! -e "${file}" ]; then
+    echo "File not found"
+    exit 1
+fi
+
+# Get current permissions in octal format (3 digits: owner, group, other)
+perms=$(stat -c "%a" "${file}")
+
+# Extract owner permissions (first digit)
+owner_perm=$(echo "${perms}" | cut -c1)
+
+# Convert to decimal for bit manipulation
+owner_dec=$((owner_perm))
+
+# Toggle bits for owner only
+for char in $(echo "${mode}" | sed 's/./& /g'); do
+    case ${char} in
+        r) owner_dec=$((owner_dec ^ 4)) ;;
+        w) owner_dec=$((owner_dec ^ 2)) ;;
+        x) owner_dec=$((owner_dec ^ 1)) ;;
+    esac
+done
+
+# Keep group and other permissions unchanged
+group_perm=$(echo "${perms}" | cut -c2)
+other_perm=$(echo "${perms}" | cut -c3)
+
+# Construct new permissions
+new_perms="${owner_dec}${group_perm}${other_perm}"
+
+chmod "${new_perms}" "${file}"
