@@ -11,5 +11,3 @@ if ! tmux has-session -t="${SESSION}"; then
     tmux new-session -s "${SESSION}" -d -n "1" -c "${WORKING_PROJECT}" 'sh -c "tmux set-option -p remain-on-exit on; figlet -w 200 -c -f big Landing; trap : INT; while true; do sleep 3600; done"'
     tmux rename-window -t="${SESSION}:1" "${MAINW}"
 fi
-
-tmux switch-client -t "${SESSION}" -c "$(tmux display -p '#{client_tty}')"
