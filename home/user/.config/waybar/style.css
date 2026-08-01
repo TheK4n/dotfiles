@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 0) 80%);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -47,10 +47,8 @@ window#waybar.hidden {
 #custom-userhost,
 #custom-battery,
 #custom-time {
-    padding: 0 12px;
-    margin: 0 2px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
+    padding: 0 6px;
+    margin: 0 1px;
 }
 
 #custom-wireless {
