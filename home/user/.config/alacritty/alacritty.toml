@@ -30,7 +30,7 @@ multiplier = 3
 
 [window]
 dynamic_title = true
-opacity = 0.6
+opacity = 0.4
 
 [window.dimensions]
 columns = 150

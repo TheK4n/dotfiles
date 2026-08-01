@@ -4,17 +4,14 @@
     font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
     font-size: 14px;
     min-height: 0;
+    background: transparent;
 }
 
 window#waybar {
-    background: linear-gradient(to top, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 0) 80%);
+    background: rgba(0, 0, 0, 0.6);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
-}
-
-window#waybar.hidden {
-    opacity: 0.2;
 }
 
 #workspaces button {

@@ -1,10 +1,9 @@
 {
+    "title": "waybar",
     "layer": "top",
     "position": "bottom",
     "height": 30,
     "spacing": 4,
-    "exclusive": false,
-    "mode": "dock",
 
     "modules-left": [
         "sway/workspaces",
