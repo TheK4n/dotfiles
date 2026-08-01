@@ -9,10 +9,6 @@ interval=5
 command=~/.config/i3blocks/scripts/builder.sh wireless
 interval=10
 
-[ethernet]
-command=~/.config/i3blocks/scripts/builder.sh ethernet
-interval=10
-
 [diskroot]
 command=~/.config/i3blocks/scripts/builder.sh disk_root
 interval=30
