@@ -1,0 +1,27 @@
+[[plugin.deps]]
+use = "masaki39/git"
+rev = "2f72da1"
+hash = "ab9df3b5436af53de798d9d887bdadcd"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "bfdc423"
+hash = "46cbdc05596a3ecd730b288e28c7079d"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "bfdc423"
+hash = "7a4b4237223aaa94e589d1c01a23542a"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "bfdc423"
+hash = "187cc58ba7ac3befd49c342129e6f1b6"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "bfdc423"
+hash = "5b1c276b75cae91cbbdbe7863f39a540"
+
+[flavor]
+deps = []

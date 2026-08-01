@@ -50,3 +50,5 @@ home/user/.config/sway/variables.d/*
 
 home/user/.config/alacritty/config.d/*
 !home/user/.config/alacritty/config.d/.gitkeep
+
+home/user/.config/yazi/plugins/
