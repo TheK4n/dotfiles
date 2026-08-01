@@ -13,7 +13,7 @@ git:.config/git .local/bin/ga
 ranger:.config/ranger
 yazi:.config/yazi
 gpg:
-sway:.config/sway .config/i3blocks .config/mako .config/mimeapps.list .config/rofi .local/bin/screenshot .config/swaylock .Xresources .config/kanshi .local/bin/firefox_media %copypasta %pomodoro
+sway:.config/sway .config/waybar .config/mako .config/mimeapps.list .config/rofi .local/bin/screenshot .config/swaylock .Xresources .config/kanshi .local/bin/firefox_media %copypasta %pomodoro
 pomodoro:
 bat:.config/bat
 font:

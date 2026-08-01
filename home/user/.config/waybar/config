@@ -1,42 +1,95 @@
 {
     "layer": "bottom",
     "position": "bottom",
+    "height": 30,
+    "spacing": 4,
+
     "modules-left": [
         "sway/workspaces",
-        "sway/mode",
+        "sway/mode"
     ],
-    "modules-center": [],
+
     "modules-right": [
-        "sway/language",
-        "clock",
+        "custom/wireless",
+        "custom/bluetooth",
+        "custom/diskroot",
+        "custom/diskhome",
+        "custom/memory",
+        "custom/cpu_usage",
+        "custom/cpu_temp",
+        "custom/battery",
+        "custom/language",
+        "custom/pomodoro",
+        "custom/userhost",
+        "custom/volume",
+        "custom/time",
         "tray"
     ],
-    "sway/workspaces": {
-        "disable-scroll": true
+
+    "custom/wireless": {
+        "exec": "~/.config/waybar/scripts/builder.sh wireless",
+        "interval": 10,
+        "return-type": "text"
     },
-    "clock": {
-        "format": " {:%F %a  %H:%M}",
-        "format-alt": " {:%A, %B %d, %Y (%R)}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode"          : "year",
-            "mode-mon-col"  : 3,
-            "weeks-pos"     : "right",
-            "on-scroll"     : 1,
-            "format": {
-                "months":     "<span color='#ffead3'><b>{}</b></span>",
-                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-            }
-        },
-        "actions":  {
-            "on-click-right": "mode",
-            "on-scroll-up": "tz_up",
-            "on-scroll-down": "tz_down",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        }
+    "custom/diskroot": {
+        "exec": "~/.config/waybar/scripts/builder.sh disk_root",
+        "interval": 30,
+        "return-type": "text"
     },
+    "custom/diskhome": {
+        "exec": "~/.config/waybar/scripts/builder.sh disk_home",
+        "interval": 30,
+        "return-type": "text"
+    },
+    "custom/memory": {
+        "exec": "~/.config/waybar/scripts/builder.sh memory",
+        "interval": 5,
+        "return-type": "text"
+    },
+    "custom/cpu_usage": {
+        "exec": "~/.config/waybar/scripts/builder.sh cpu_usage",
+        "interval": 5,
+        "return-type": "text"
+    },
+    "custom/cpu_temp": {
+        "exec": "~/.config/waybar/scripts/builder.sh cpu_temp",
+        "interval": 5,
+        "return-type": "text"
+    },
+    "custom/bluetooth": {
+        "exec": "~/.config/waybar/scripts/builder.sh bluetooth_battery",
+        "interval": 5,
+        "return-type": "text"
+    },
+    "custom/volume": {
+        "exec": "~/.config/waybar/scripts/builder.sh volume",
+        "interval": 1,
+        "return-type": "text",
+        "signal": 1
+    },
+    "custom/pomodoro": {
+        "exec": "~/.config/waybar/scripts/builder.sh pomodoro",
+        "interval": 1,
+        "return-type": "text",
+        "signal": 2
+    },
+    "custom/language": {
+        "exec": "~/.config/waybar/scripts/builder.sh language",
+        "return-type": "text",
+        "signal": 3
+    },
+    "custom/userhost": {
+        "exec": "~/.config/waybar/scripts/builder.sh userhost",
+        "return-type": "text",
+    },
+    "custom/battery": {
+        "exec": "~/.config/waybar/scripts/builder.sh battery",
+        "interval": 30,
+        "return-type": "text"
+    },
+    "custom/time": {
+        "exec": "~/.config/waybar/scripts/builder.sh time",
+        "interval": 30,
+        "return-type": "text"
+    }
 }
