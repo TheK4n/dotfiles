@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-    background: rgba(0, 0, 0, 0);
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;

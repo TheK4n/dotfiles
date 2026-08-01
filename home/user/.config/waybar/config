@@ -1,8 +1,10 @@
 {
-    "layer": "bottom",
+    "layer": "top",
     "position": "bottom",
     "height": 30,
     "spacing": 4,
+    "exclusive": false,
+    "mode": "dock",
 
     "modules-left": [
         "sway/workspaces",
@@ -18,10 +20,10 @@
         "custom/cpu_usage",
         "custom/cpu_temp",
         "custom/battery",
-        "custom/language",
         "custom/pomodoro",
-        "custom/userhost",
         "custom/volume",
+        "custom/language",
+        "custom/userhost",
         "custom/time",
         "tray"
     ],
